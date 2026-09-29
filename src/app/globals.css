@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ───────── Design tokens (use as bg-brand-600, text-ink-900, etc.) ───────── */
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand-50: #eef5ff;
+  --color-brand-100: #d9e8ff;
+  --color-brand-200: #bcd7ff;
+  --color-brand-300: #8ebdff;
+  --color-brand-400: #5998ff;
+  --color-brand-500: #3372fb;
+  --color-brand-600: #1d53f0;
+  --color-brand-700: #1640dc;
+  --color-brand-800: #1935b2;
+  --color-brand-900: #1a328c;
+
+  --color-accent-400: #ff9a3d;
+  --color-accent-500: #ff7a14;
+  --color-accent-600: #f05e07;
+
+  --color-ink-950: #050b1f;
+  --color-ink-900: #0a1330;
+  --color-ink-800: #121d45;
+  --color-ink-700: #33405f;
+  --color-ink-500: #5b6785;
+  --color-ink-300: #aab3c8;
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+body { @apply bg-white text-ink-900 font-sans antialiased; }
+h1, h2, h3, h4 { @apply font-display tracking-tight; }
+
+/* ───────── Reusable component classes ───────── */
+@utility container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+@utility section { @apply py-20 md:py-28; }
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3.5 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-700;
+}
+@utility eyebrow-dark { @apply border-white/15 bg-white/5 text-brand-200; }
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500;
+}
+@utility btn-primary { @apply btn bg-accent-500 text-white shadow-lg shadow-accent-500/30 hover:-translate-y-0.5 hover:bg-accent-600; }
+@utility btn-brand { @apply btn bg-brand-600 text-white shadow-lg shadow-brand-600/25 hover:-translate-y-0.5 hover:bg-brand-700; }
+@utility btn-ghost { @apply btn border border-ink-900/15 text-ink-900 hover:border-brand-600 hover:text-brand-700; }
+@utility btn-ghost-dark { @apply btn border border-white/25 text-white hover:bg-white/10; }
+@utility card {
+  @apply rounded-2xl border border-ink-900/8 bg-white shadow-[0_1px_2px_rgba(10,19,48,0.04),0_8px_24px_-12px_rgba(10,19,48,0.12)] transition-all duration-300;
+}
+@utility card-hover { @apply hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_24px_48px_-20px_rgba(29,83,240,0.35)]; }
+@utility text-gradient { @apply bg-linear-to-r from-brand-500 via-brand-400 to-accent-400 bg-clip-text text-transparent; }
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.06) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+@utility bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgb(10 19 48 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(10 19 48 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+@utility mask-fade-x { mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
+
+/* ───────── Scroll reveal (driven by src/components/ui/ScrollAnimator.tsx) ─────────
+   Usage: <div data-reveal="up|down|left|right|zoom|fade" style={{"--d": "120ms"}}>
+   Content stays visible when JS is disabled or reduced motion is requested. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--d, 0ms);
+    will-change: opacity, transform;
+  }
+  [data-reveal="up"] { transform: translateY(40px); }
+  [data-reveal="down"] { transform: translateY(-40px); }
+  [data-reveal="left"] { transform: translateX(-48px); }
+  [data-reveal="right"] { transform: translateX(48px); }
+  [data-reveal="zoom"] { transform: scale(0.92); }
+  [data-reveal].is-visible { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee, .animate-float { animation: none !important; }
+}
+
+.marquee:hover .animate-marquee { animation-play-state: paused; }
+
+details > summary { list-style: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .faq-icon { transform: rotate(45deg); }
