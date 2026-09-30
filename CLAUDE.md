@@ -23,7 +23,13 @@ modern sections, scroll animations, top performance.
 FAQs, testimonials, blogs, footer links → edit this file only. Components just render it.
 Exports: `site` (name/phone/email/address/hours/rating/socials/url), `branches`, `regions`, `nav` (type `NavItem`: children = dropdown, `mega` = 2-col panel, `featured` = About photo panel, `skills` = AI panel, `columns` = Courses panel, `tiles` = Internship panel, `highlight` = AI pill),
 `heroStats`, `categories`, `courses` (type `Course`), `aiProgram`, `steps`, `whyUs`, `programs`,
-`placementStats`, `recruiters`, `technologies`, `testimonials`, `faqs`, `blogs`, `footerLinks`.
+`placementStats`, `recruiters`, `technologies`, `testimonials`, `faqs`, `blogs`, `footerLinks`,
+EXCEPTION: Courses-dropdown pages live in `src/data/course-pages/` (index.ts = groups + `courseCommon` shared blocks,
+types.ts = `CoursePage`, one file per group: programming / ai-data / marketing / cyber-cloud). Adding one: add an entry to
+the group file + point its `nav` Courses link at `/courses/<slug>` → page, sitemap, hub card are automatic.
+`aiCourses` (type `AiCourse`, one per AI-dropdown link → `/ai-courses/<slug>`), `aiMentors`, `aiCourseCommon` (batches, EMI,
+includes, certification, placement, shared FAQs), `aiTestimonials`.
+- Adding an AI course: add to `aiCourses` + a link in `nav` AI `skills` groups → page, metadata, sitemap, hub card are automatic.
 - `icon` fields are string names → must exist in the map in `src/components/ui/Icon.tsx` (add new ones there).
 - `courses[].category` must match a `categories[].id`.
 - Adding a branch to `branches` auto-creates `/branches/<slug>`, adds it to header dropdown, footer, sitemap, demo form.
@@ -35,6 +41,11 @@ src/app/
   page.tsx              HOME = ordered list of sections + JSON-LD (EducationalOrganization + FAQPage). Reorder sections here.
   globals.css           Design tokens (@theme colors brand/accent/ink, fonts, animations), @utility classes, scroll-reveal CSS
   branches/[slug]/page.tsx  SSG page per branch (generateStaticParams, dynamicParams=false) reusing home sections
+  ai-courses/page.tsx       AI hub (all AI course cards) — target of the AI pill + "Explore AI"
+  courses/page.tsx          Courses hub (grouped neumorphic cards) — target of "Browse all courses"
+  courses/[slug]/page.tsx   SSG page per Courses-dropdown link (27): NEUMORPHIC, light hero (no side card), NO pricing,
+                            17 sections + JSON-LD (Course w/o offers, BreadcrumbList, FAQPage)
+  ai-courses/[slug]/page.tsx SSG AI course page: 13 sections + JSON-LD (Course, BreadcrumbList, FAQPage). Spec: docs/ai-course-page.md
   sitemap.ts / robots.ts / not-found.tsx
 src/components/
   layout/  Header ("use client"): DARK navy sticky bar (bg-ink-950 + faint grid) matching the official techcadd header —
@@ -67,6 +78,19 @@ src/components/
   home/    Hero · TrustStrip · About · Categories · AiProgram · Courses(+CourseExplorer "use client" filter tabs)
            HowItWorks · WhyUs (bento) · Programs (industrial training/after 12th) · Placements · Branches
            Technologies · Testimonials · Faq (<details>, no JS) · Blog · DemoCta(+DemoForm "use client")
+  course/  AI course page sections, in order: CourseHero (single column, NO right-side card, breadcrumb, CSS-scroll parallax) · CourseNav ("use client",
+           sticky top-24 anchor nav + scroll-spy) · CourseOverview · CourseOutcomes · CourseCurriculum(+CurriculumTabs
+           "use client": ARIA tabs + <details class="accordion"> modules) · CourseTools · CourseAudience · CourseMentor ·
+           CourseBatches · CourseCertification · CourseStories · CourseFaq · RelatedCourses(+AiCourseCard stretched-link card)
+           · CourseEnrol(+EnquiryForm "use client": visible labels, inline validation, loading/error/success states).
+           CourseSection = wrapper (id, aria-labelledby="{id}-title", scroll-mt-16). Breadcrumb. helpers monogram/initials.
+  course-page/ Courses-dropdown page sections: CpHero · CpLearn (CpOverview, CpSyllabus = scroll-filled timeline, CpMethod =
+           self-drawing SVG loop) · CpShowcase (CpTools, CpProjects, CpAudience, CpCareers, CpMentor) · CpTrust (CpWhy +
+           comparison table, CpTracks = tracks table + batches, CpCertification, CpReviews, CpFaq, CpRelated/CpCourseCard,
+           CpEnrol) · SnapCarousel ("use client", scroll-snap + prev/next) · CpEnquiryForm ("use client", 5 fields).
+           Reuses course/CourseSection, course/CourseNav (variant="neu"), course/Breadcrumb (tone="light").
+src/lib/whatsapp.ts  waLink(text) → wa.me URL with pre-filled message
+docs/ai-course-page.md  Design spec for AI course pages (tokens, states, a11y acceptance criteria, QA checklist)
 ```
 Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categories` → `#ai-program` → `#courses`
 → `#how-it-works` → `#why-us` → `#programs` → `#placements` → `#branches` → `#technologies`
@@ -75,8 +99,24 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
 ## Design system
 - Colors: `brand-50…900` (blue, primary), `accent-400…600` (orange, CTAs), `ink-300…950` (navy text/dark bgs).
 - Utilities: `container-x`, `section` (vertical padding), `eyebrow` / `eyebrow-dark`, `btn-primary` (orange),
-  `btn-brand` (blue), `btn-ghost`, `btn-ghost-dark`, `card`, `card-hover`, `text-gradient`, `bg-grid` (dark bg), `bg-grid-light`, `mask-fade-x`.
+  `btn-brand` (blue), `btn-ghost`, `btn-ghost-dark`, `card`, `card-hover`, `text-gradient`, `bg-grid` (dark bg), `bg-grid-light`, `mask-fade-x`,
+  `link` / `link-dark` (inline text links), `defer-render` (content-visibility: auto for below-fold sections).
+- `btn` includes active (scale .98) + disabled/aria-disabled states. Global `:focus-visible` fallback ring (brand-500) in
+  `@layer base`; add class `on-dark` to dark/brand sections for white rings, `on-light` to white cards inside them.
+- `<details class="accordion">` animates height (::details-content + interpolate-size, instant where unsupported).
+- `.parallax` + `style={{"--parallax":"30%"}}` = CSS scroll-driven parallax (no JS, off for reduced motion).
+- AI course pages use GLASS + SOFT UI: light sections `bg-soft` + `<SoftBlobs/>` (CourseSection.tsx) behind `glass` cards
+  (`glass-hover`, `glass-sm` chips), `soft-inset` wells, `soft-icon`/`soft-icon-accent` tiles, `soft-active` selected state,
+  `btn-glass`; dark sections `glass-dark`. Shadows: `shadow-soft-sm/soft/soft-lg/soft-inset/glow/glass-dark` (@theme).
+- Courses-dropdown pages use NEUMORPHISM on `bg-neu` only: `neu` (raised; depth = --neu-k), `neu-sm`, `neu-inset`,
+  `neu-hover`, `neu-icon`, `neu-icon-brand`, `btn-neu`, `btn-neu-primary`; shadows `shadow-neu-sm/lg/inset/inset-sm/brand`.
+  Utilities that set radius/bg need `!` to override (e.g. `neu !rounded-full`).
+- CSS scroll-driven animations (globals.css, @supports + no-reduced-motion): `.extrude` (surface rises from the page as it
+  enters), `.timeline`/`.timeline-fill`/`.timeline-dot`, `.draw-path` (SVG pathLength=1), `.snap-focus` (carousel centre
+  card), `.hero-sink`, `.scroll-progress`. Extra data-reveal variants: `blur`, `flip`.
+- Hover transforms go on an inner element when the wrapper has `data-reveal` (else hover inherits the 800ms reveal transition).
 - Pattern: sections alternate white / `bg-brand-50/50` / dark `bg-ink-950` (Hero, AiProgram, Placements) for rhythm.
+- Soft UI (AI course pages only): `neu`/`neu-sm`/`neu-inset` (must sit on `bg-clay`), `neu-dark*` (on `bg-clay-dark`), `clay-icon(-accent)`, `clay-card`, `clay-white`, `clay-orb` (decor), `btn-clay-primary`/`btn-clay-brand`, `btn-neu`. `SoftBlobs` decor in CourseSection.
 - Section header: always `<SectionHeading eyebrow title text dark? align?>`; highlight words with `<span className="text-gradient">`.
 
 ## Animations (performance-critical — follow this)
@@ -86,7 +126,7 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
 - **Don't** put `data-reveal` on elements rendered after client state changes (e.g. filtered lists) — they'd stay
   hidden. Use the CSS keyframe `animate-[fadeUp_...]` instead (see CourseExplorer).
 - **Don't** put `data-reveal` on the Hero H1 (LCP).
-- Keep components as Server Components; only Header, ScrollAnimator, CourseExplorer, DemoForm are client.
+- Keep components as Server Components; only Header, ScrollAnimator, CourseExplorer, DemoForm, CourseNav, CurriculumTabs, EnquiryForm are client.
 
 ## Known placeholders / TODO (verify with client)
 - Stats (50,000+ alumni, 500+ partners, 92% placement, 18 LPA, etc.), testimonials, blog posts, recruiter names,
@@ -96,8 +136,17 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
 - DemoForm has no backend: opens WhatsApp with pre-filled text. For CRM, add `src/app/api/lead/route.ts` and fetch it.
 - Blog cards/"Download Curriculum" link to anchors; no blog/course detail pages yet.
 - Unused scaffold files in `/public` (next.svg, vercel.svg, etc.) can be deleted.
+- AI course pages show NO pricing (no fee/EMI/₹, no JSON-LD Offer) — fees go via counsellor. AI mentors (names/bios), AI student stories, batch timings are **sample content**. Tools use monogram
+  placeholders (no logo files yet).
+- Contrast: white text on `btn-primary` orange ≈2.6:1 (fails AA) and `text-gradient`'s orange tail on white — needs a
+  brand decision (see docs/ai-course-page.md §7 "Open accessibility issues").
 
 ## Changelog
+- 2026-09-30: Courses dropdown → 27 neumorphic SSG pages at /courses/[slug] + /courses hub (no pricing, no hero side card), scroll-driven animations, nav links + sitemap updated.
+- 2026-09-30: AI course pages + hub restyled with glassmorphism + Soft UI Evolution (content unchanged); removed orphaned neu/clay classes.
+- 2026-09-30: AI course pages restyled in soft UI (neumorphism + claymorphism): bg-clay sections, neu cards, clay icons/buttons, clay-dark tools/certification, decorative clay orbs in hero. Utilities in globals.css, rules in docs §3.5.
+- 2026-09-30: AI course pages — hero is single column (side card removed); all pricing removed (fee field, EMI, Offer schema); Batches section now "Next batch" card.
+- 2026-09-29: AI course pages (/ai-courses hub + 8 SSG course pages), AI dropdown links point to them; btn states, link utilities, focus fallback, accordion/parallax CSS; spec in docs/ai-course-page.md.
 - 2026-09-29: Columns dropdowns (Courses/After 12th/Resources) compacted; panel capped at viewport height (scrolls if needed). QuoteFooter smaller.
 - 2026-09-29: Resources dropdown in Courses style (4 grouped columns, NEW badges).
 - 2026-09-29: After 12th glass 3-column dropdown (3/6/9-month programs).

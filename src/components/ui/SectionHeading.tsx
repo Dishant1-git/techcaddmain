@@ -1,13 +1,14 @@
 import type { CSSProperties, ReactNode } from "react";
 
 export function SectionHeading({
-  eyebrow, title, text, dark = false, align = "center",
-}: { eyebrow: string; title: ReactNode; text?: string; dark?: boolean; align?: "center" | "left" }) {
+  eyebrow, title, text, dark = false, align = "center", id,
+}: { eyebrow: string; title: ReactNode; text?: string; dark?: boolean; align?: "center" | "left"; /** h2 id, for aria-labelledby */ id?: string }) {
   const center = align === "center";
   return (
     <div className={`${center ? "mx-auto text-center" : ""} max-w-3xl`}>
       <span data-reveal="up" className={`eyebrow ${dark ? "eyebrow-dark" : ""}`}>{eyebrow}</span>
       <h2
+        id={id}
         data-reveal="up"
         style={{ "--d": "80ms" } as CSSProperties}
         className={`mt-5 text-3xl font-extrabold leading-[1.1] sm:text-4xl lg:text-5xl ${dark ? "text-white" : "text-ink-900"}`}

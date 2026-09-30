@@ -27,7 +27,24 @@
   --color-ink-500: #5b6785;
   --color-ink-300: #aab3c8;
 
-  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  /* Soft UI Evolution + glassmorphism (AI course pages). Pale surface so frosted cards read clearly. */
+  --color-soft: #eef2fa;
+  --shadow-soft-sm: inset 0 1px 0 rgb(255 255 255 / 0.8), 0 1px 2px rgb(10 19 48 / 0.05), 0 6px 14px -6px rgb(10 19 48 / 0.12);
+  --shadow-soft: inset 0 1px 0 rgb(255 255 255 / 0.85), 0 2px 4px rgb(10 19 48 / 0.04), 0 18px 40px -18px rgb(10 19 48 / 0.22);
+  --shadow-soft-lg: inset 0 1px 0 rgb(255 255 255 / 0.9), 0 4px 8px rgb(10 19 48 / 0.04), 0 30px 60px -24px rgb(29 83 240 / 0.35);
+  --shadow-soft-inset: inset 0 2px 6px rgb(10 19 48 / 0.08), inset 0 -1px 0 rgb(255 255 255 / 0.7);
+  --shadow-glass-dark: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 20px 50px -25px rgb(0 0 0 / 0.8);
+  --shadow-glow: inset 0 1px 0 rgb(255 255 255 / 0.25), 0 10px 30px -8px rgb(29 83 240 / 0.6);
+
+  /* Neumorphism (Courses dropdown pages, /courses/[slug]). Every neu surface must sit on bg-neu. */
+  --color-neu: #e6ebf3;
+  --shadow-neu-sm: 5px 5px 10px #c3cad8, -5px -5px 10px #ffffff;
+  --shadow-neu-lg: 16px 16px 32px #bcc4d3, -16px -16px 32px #ffffff;
+  --shadow-neu-inset: inset 6px 6px 12px #c3cad8, inset -6px -6px 12px #ffffff;
+  --shadow-neu-inset-sm: inset 3px 3px 6px #c3cad8, inset -3px -3px 6px #ffffff;
+  --shadow-neu-brand: 6px 6px 14px rgb(29 83 240 / 0.35), -6px -6px 14px #ffffff, inset 0 1px 0 rgb(255 255 255 / 0.3);
+
+  --animate-marquee:marquee var(--marquee-duration, 40s) linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-pulse-ring: pulse-ring 2.4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
 }
@@ -43,6 +60,13 @@
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: none; }
 }
+@keyframes tabIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes parallax-y {
+  to { transform: translate3d(0, var(--parallax, 20%), 0); }
+}
 @keyframes pulse-ring {
   0% { transform: scale(1); opacity: 0.6; }
   100% { transform: scale(1.8); opacity: 0; }
@@ -52,6 +76,17 @@ html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 body { @apply bg-white text-ink-900 font-sans antialiased; }
 h1, h2, h3, h4 { @apply font-display tracking-tight; }
 
+/* Visible focus fallback for every interactive element (utilities override it). */
+@layer base {
+  :where(a, button, summary, select, [role="tab"], [tabindex]):focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 3px;
+  }
+}
+/* Dark / brand surfaces: white focus rings keep 3:1 contrast. `.on-light` resets inside white cards. */
+.on-dark :focus-visible { outline-color: #fff; }
+.on-dark .on-light :focus-visible { outline-color: var(--color-brand-500); }
+
 /* ───────── Reusable component classes ───────── */
 @utility container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
 @utility section { @apply py-20 md:py-28; }
@@ -60,7 +95,7 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
 }
 @utility eyebrow-dark { @apply border-white/15 bg-white/5 text-brand-200; }
 @utility btn {
-  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500;
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:translate-y-0 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-55 aria-disabled:pointer-events-none aria-disabled:opacity-55;
 }
 @utility btn-primary { @apply btn bg-accent-500 text-white shadow-lg shadow-accent-500/30 hover:-translate-y-0.5 hover:bg-accent-600; }
 @utility btn-brand { @apply btn bg-brand-600 text-white shadow-lg shadow-brand-600/25 hover:-translate-y-0.5 hover:bg-brand-700; }
@@ -70,6 +105,52 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
   @apply rounded-2xl border border-ink-900/8 bg-white shadow-[0_1px_2px_rgba(10,19,48,0.04),0_8px_24px_-12px_rgba(10,19,48,0.12)] transition-all duration-300;
 }
 @utility card-hover { @apply hover:-translate-y-1 hover:border-brand-200 hover:shadow-[0_24px_48px_-20px_rgba(29,83,240,0.35)]; }
+/* ───────── Glass + Soft UI (AI course pages) ─────────
+   glass = frosted card for bg-soft sections (needs <SoftBlobs/> behind it) · glass-dark = same on ink-950
+   soft-inset = pressed well inside a card · soft-icon = raised gradient icon tile · soft-active = selected state */
+@utility glass {
+  @apply rounded-[1.75rem] border border-white/70 bg-white/60 shadow-soft backdrop-blur-xl transition-[translate,box-shadow,border-color,background-color] duration-300;
+}
+@utility glass-sm { @apply rounded-2xl border border-white/70 bg-white/60 shadow-soft-sm backdrop-blur-md; }
+@utility glass-hover { @apply hover:-translate-y-1 hover:border-white hover:bg-white/80 hover:shadow-soft-lg; }
+@utility glass-dark {
+  @apply rounded-[1.75rem] border border-white/10 bg-white/[0.06] shadow-glass-dark backdrop-blur-xl transition-[translate,box-shadow,border-color,background-color] duration-300;
+}
+@utility soft-inset { @apply rounded-2xl border border-white/60 bg-brand-50/60 shadow-soft-inset; }
+@utility soft-icon {
+  @apply grid shrink-0 place-items-center rounded-2xl bg-linear-to-br from-brand-500 to-brand-700 text-white shadow-glow;
+}
+@utility soft-icon-accent {
+  @apply grid shrink-0 place-items-center rounded-2xl bg-linear-to-br from-accent-400 to-accent-600 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_10px_24px_-8px_rgb(240_94_7/0.55)];
+}
+@utility soft-active { @apply border border-brand-500/40 bg-linear-to-br from-brand-600 to-brand-800 text-white shadow-glow; }
+@utility btn-glass {
+  @apply btn border border-white/80 bg-white/60 text-ink-900 shadow-soft-sm backdrop-blur-md hover:-translate-y-0.5 hover:bg-white/90 hover:shadow-soft active:shadow-soft-inset;
+}
+/* ───────── Neumorphism (Courses dropdown pages) ─────────
+   neu = raised surface · neu-inset = pressed well · neu-hover = lifts on hover, presses on active
+   neu-icon = raised icon disc · neu-icon-brand = filled brand disc · btn-neu / btn-neu-primary = buttons.
+   `neu` depth scales with --neu-k (0 = flat, 1 = raised); the `extrude` scroll animation animates it,
+   so surfaces rise out of the background as they scroll into view. */
+@property --neu-k { syntax: "<number>"; inherits: true; initial-value: 1; }
+@utility neu {
+  @apply rounded-[1.75rem] border border-white/50 bg-neu transition-[translate,box-shadow,color,background-color] duration-300 ease-out;
+  box-shadow: calc(var(--neu-k) * 9px) calc(var(--neu-k) * 9px) calc(var(--neu-k) * 18px) #c3cad8,
+    calc(var(--neu-k) * -9px) calc(var(--neu-k) * -9px) calc(var(--neu-k) * 18px) #ffffff;
+}
+@utility neu-sm { @apply rounded-2xl border border-white/50 bg-neu shadow-neu-sm; }
+@utility neu-inset { @apply rounded-2xl bg-neu shadow-neu-inset; }
+@utility neu-hover { @apply hover:-translate-y-1 hover:shadow-neu-lg active:translate-y-0 active:shadow-neu-inset; }
+@utility neu-icon { @apply grid shrink-0 place-items-center rounded-2xl bg-neu text-brand-600 shadow-neu-sm; }
+@utility neu-icon-brand {
+  @apply grid shrink-0 place-items-center rounded-2xl bg-linear-to-br from-brand-500 to-brand-700 text-white shadow-neu-brand;
+}
+@utility btn-neu {
+  @apply btn bg-neu text-ink-900 shadow-neu-sm hover:-translate-y-0.5 hover:text-brand-700 hover:shadow-neu-lg active:shadow-neu-inset-sm;
+}
+@utility btn-neu-primary {
+  @apply btn bg-linear-to-br from-brand-500 to-brand-700 text-white shadow-neu-brand hover:-translate-y-0.5 hover:from-brand-600 hover:to-brand-800 active:shadow-[inset_3px_3px_8px_rgb(10_19_48/0.35)];
+}
 @utility text-gradient { @apply bg-linear-to-r from-brand-500 via-brand-400 to-accent-400 bg-clip-text text-transparent; }
 @utility bg-grid {
   background-image:
@@ -83,6 +164,15 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
     linear-gradient(to bottom, rgb(10 19 48 / 0.05) 1px, transparent 1px);
   background-size: 56px 56px;
 }
+/* Inline text link (body copy). Nav/cards use their own styles. */
+@utility link {
+  @apply font-semibold text-brand-700 underline decoration-brand-300 decoration-2 underline-offset-4 transition-colors hover:text-brand-800 hover:decoration-brand-600 active:text-brand-900 visited:text-brand-800;
+}
+@utility link-dark {
+  @apply font-semibold text-brand-200 underline decoration-brand-400/60 decoration-2 underline-offset-4 transition-colors hover:text-white hover:decoration-white visited:text-brand-300;
+}
+/* Skip rendering work for below-the-fold sections until they approach the viewport. */
+@utility defer-render { content-visibility: auto; contain-intrinsic-size: auto 900px; }
 @utility mask-fade-x { mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
 
 /* ───────── Scroll reveal (driven by src/components/ui/ScrollAnimator.tsx) ─────────
@@ -100,6 +190,9 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
   [data-reveal="left"] { transform: translateX(-48px); }
   [data-reveal="right"] { transform: translateX(48px); }
   [data-reveal="zoom"] { transform: scale(0.92); }
+  [data-reveal="blur"] { transform: translateY(16px); filter: blur(10px); transition-property: opacity, transform, filter; }
+  [data-reveal="flip"] { transform: perspective(900px) rotateX(-18deg) translateY(32px); transform-origin: top center; }
+  [data-reveal].is-visible { filter: none; }
   [data-reveal].is-visible { opacity: 1; transform: none; }
 }
 
@@ -113,3 +206,63 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
 details > summary { list-style: none; }
 details > summary::-webkit-details-marker { display: none; }
 details[open] .faq-icon { transform: rotate(45deg); }
+
+/* Smooth accordion height for <details class="accordion"> (progressive: instant where unsupported). */
+@media (prefers-reduced-motion: no-preference) {
+  :root { interpolate-size: allow-keywords; }
+  details.accordion::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition: block-size 0.35s cubic-bezier(0.22, 1, 0.36, 1), content-visibility 0.35s allow-discrete;
+  }
+  details.accordion[open]::details-content { block-size: auto; }
+}
+
+/* Hero parallax: CSS scroll-driven animation, zero JS. Set depth with style={{ "--parallax": "30%" }}. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .parallax {
+      animation: parallax-y linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+}
+
+/* ───────── Scroll-driven animations (Courses dropdown pages) ─────────
+   Pure CSS (no JS). Only where supported and motion is allowed — otherwise content is simply static & visible.
+   Never put these on the same element as data-reveal or a hover transform (use a wrapper). */
+@keyframes extrude {
+  from { --neu-k: 0; opacity: 0.15; transform: translateY(32px) scale(0.98); }
+  to { --neu-k: 1; opacity: 1; transform: none; }
+}
+@keyframes grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes dot-on {
+  from { background-color: var(--color-neu); color: var(--color-brand-700); }
+  to { background-color: var(--color-brand-600); color: #fff; }
+}
+@keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes center-focus {
+  entry 0% { transform: scale(0.95); opacity: 0.85; }
+  contain 50% { transform: none; opacity: 1; }
+  exit 100% { transform: scale(0.95); opacity: 0.85; }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Cards rise out of the surface as they enter; the neu shadow grows from flat to raised.
+       Range ends a fixed 200px after the top edge enters, so tall blocks (tables, forms) are fully visible fast. */
+    .extrude { animation: extrude linear both; animation-timeline: view(); animation-range: entry 0% entry 200px; }
+    /* Reading progress bar. */
+    .scroll-progress { transform-origin: left; animation: grow-x linear both; animation-timeline: scroll(root); }
+    /* Timeline line fills as the list scrolls through the viewport; dots light up as they pass the middle. */
+    .timeline { view-timeline-name: --timeline; }
+    .timeline-fill { transform-origin: top; animation: grow-y linear both; animation-timeline: --timeline; animation-range: cover 5% contain 60%; }
+    .timeline-dot { animation: dot-on linear both; animation-timeline: view(); animation-range: cover 30% cover 45%; }
+    /* SVG path draws itself (path needs pathLength="1" + stroke-dasharray="1"). */
+    .draw-path { animation: draw linear both; animation-timeline: view(); animation-range: entry 20% cover 55%; }
+    /* Horizontal carousels: the card in the middle is full size, neighbours shrink and fade. */
+    .snap-focus { animation: center-focus linear both; animation-timeline: view(inline); }
+  }
+}
