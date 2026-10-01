@@ -151,6 +151,82 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
 @utility btn-neu-primary {
   @apply btn bg-linear-to-br from-brand-500 to-brand-700 text-white shadow-neu-brand hover:-translate-y-0.5 hover:from-brand-600 hover:to-brand-800 active:shadow-[inset_3px_3px_8px_rgb(10_19_48/0.35)];
 }
+/* ───────── Internship & Training pages (/training) — SOFT UI EVOLUTION ─────────
+   Light source top-left. Surfaces sit on `bg-soft` (or white): su-card = raised (highlight edge + soft dual shadow),
+   su-inset = pressed well, su-hover = lift on hover / press on active. More contrast than classic neumorphism:
+   text is ink-900/700/500 only (≥ 5:1 on every su surface), borders stay visible, focus rings are never removed.
+   su-btn-accent = orange with ink text (white on orange fails AA). Dark sections use su-dark on ink-950. */
+:root {
+  --su-hi: inset 0 1px 0 rgb(255 255 255 / 0.95);
+  --su-raise: var(--su-hi), 0 1px 2px rgb(10 19 48 / 0.06), 0 12px 28px -12px rgb(10 19 48 / 0.22), -8px -8px 20px rgb(255 255 255 / 0.7);
+  --su-raise-sm: var(--su-hi), 0 1px 2px rgb(10 19 48 / 0.06), 0 6px 14px -6px rgb(10 19 48 / 0.2);
+  --su-raise-lg: var(--su-hi), 0 2px 4px rgb(10 19 48 / 0.05), 0 30px 56px -24px rgb(29 83 240 / 0.4), -10px -10px 26px rgb(255 255 255 / 0.8);
+  --su-press: inset 3px 3px 8px rgb(10 19 48 / 0.13), inset -3px -3px 8px rgb(255 255 255 / 0.9);
+  --su-brand: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 10px 24px -8px rgb(29 83 240 / 0.6);
+  --su-accent: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 10px 24px -8px rgb(240 94 7 / 0.5);
+}
+@utility su-card {
+  border-radius: 1.75rem;
+  border: 1px solid rgb(255 255 255 / 0.9);
+  background: linear-gradient(160deg, #fff 0%, #f5f7fc 100%);
+  box-shadow: var(--su-raise);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+@utility su-hover {
+  &:hover { transform: translateY(-4px); box-shadow: var(--su-raise-lg); }
+  &:active { transform: translateY(0); box-shadow: var(--su-press); }
+}
+@utility su-inset { border-radius: 1.25rem; background: #e9eef8; box-shadow: var(--su-press); }
+@utility su-icon {
+  display: grid; place-items: center; flex-shrink: 0; border-radius: 1rem; color: #fff;
+  background: linear-gradient(145deg, var(--color-brand-500), var(--color-brand-700));
+  box-shadow: var(--su-brand);
+}
+@utility su-icon-light {
+  display: grid; place-items: center; flex-shrink: 0; border-radius: 1rem; color: var(--color-brand-700);
+  border: 1px solid rgb(255 255 255 / 0.9); background: linear-gradient(145deg, #fff, #eaf0fb); box-shadow: var(--su-raise-sm);
+}
+@utility su-btn {
+  @apply btn text-white;
+  background: linear-gradient(145deg, var(--color-brand-500), var(--color-brand-700));
+  box-shadow: var(--su-brand);
+  &:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 16px 30px -10px rgb(29 83 240 / 0.7); }
+  &:active { transform: translateY(1px) scale(0.98); box-shadow: inset 2px 2px 6px rgb(10 19 48 / 0.35); }
+}
+@utility su-btn-accent {
+  @apply btn font-bold text-ink-950;
+  background: linear-gradient(145deg, var(--color-accent-400), var(--color-accent-500));
+  box-shadow: var(--su-accent);
+  &:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 16px 30px -10px rgb(240 94 7 / 0.6); }
+  &:active { transform: translateY(1px) scale(0.98); box-shadow: inset 2px 2px 6px rgb(10 19 48 / 0.3); }
+}
+@utility su-btn-ghost {
+  @apply btn text-ink-900;
+  border: 1px solid rgb(255 255 255 / 0.9);
+  background: linear-gradient(160deg, #fff, #f1f4fb);
+  box-shadow: var(--su-raise-sm);
+  &:hover { transform: translateY(-2px); color: var(--color-brand-700); box-shadow: var(--su-raise); }
+  &:active { transform: translateY(0) scale(0.98); box-shadow: var(--su-press); }
+}
+@utility su-chip {
+  @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-ink-700;
+  border: 1px solid rgb(255 255 255 / 0.9); background: linear-gradient(160deg, #fff, #f3f6fc); box-shadow: var(--su-raise-sm);
+}
+@utility su-chip-brand { @apply inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-800 ring-1 ring-brand-100; }
+@utility su-field {
+  @apply w-full rounded-2xl border border-transparent px-4 py-3.5 text-ink-900 outline-none transition-[box-shadow,background-color,border-color] duration-200 placeholder:text-ink-500 focus:border-brand-500 focus:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 disabled:cursor-not-allowed disabled:opacity-60;
+  background: #e9eef8;
+  box-shadow: var(--su-press);
+  &:focus { box-shadow: 0 0 0 4px rgb(51 114 251 / 0.18); }
+}
+@utility su-dark {
+  border-radius: 1.75rem;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0.02));
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 24px 48px -24px rgb(0 0 0 / 0.8);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, background-color 0.3s ease;
+  &:hover { transform: translateY(-4px); border-color: rgb(89 152 255 / 0.45); }
+}
 @utility text-gradient { @apply bg-linear-to-r from-brand-500 via-brand-400 to-accent-400 bg-clip-text text-transparent; }
 @utility bg-grid {
   background-image:
@@ -264,5 +340,91 @@ details[open] .faq-icon { transform: rotate(45deg); }
     .draw-path { animation: draw linear both; animation-timeline: view(); animation-range: entry 20% cover 55%; }
     /* Horizontal carousels: the card in the middle is full size, neighbours shrink and fade. */
     .snap-focus { animation: center-focus linear both; animation-timeline: view(inline); }
+  }
+}
+
+/* ───────── Scroll-driven animations (Internship & Training pages) ─────────
+   Pure CSS; only with animation-timeline support + no reduced motion — otherwise static and fully visible.
+   Never on an element that also has data-reveal or a hover transform (use a wrapper). Each effect ends within a
+   fixed distance so content is never left hidden. */
+@keyframes tr-rise { from { opacity: 0; transform: translateY(60px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes tr-left { from { opacity: 0; transform: translateX(-70px); } to { opacity: 1; transform: none; } }
+@keyframes tr-right { from { opacity: 0; transform: translateX(70px); } to { opacity: 1; transform: none; } }
+@keyframes tr-unfold { from { opacity: 0; transform: perspective(1100px) rotateX(24deg) translateY(40px); } to { opacity: 1; transform: none; } }
+@keyframes tr-fill { from { background-position: 100% 0; } to { background-position: 0 0; } }
+@keyframes tr-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes tr-grow-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes tr-sink { to { transform: scale(0.9); opacity: 0.55; } }
+@keyframes tr-float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes tr-sweep { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
+@keyframes tr-ring { from { stroke-dashoffset: var(--tr-c); } }
+@keyframes tr-pop { from { opacity: 0; transform: scale(0.85) translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* Readable fallback for .tr-fill: fully --tr-on by default; on scroll it fills from --tr-off.
+   Defaults suit light sections; on dark set style={{"--tr-on": "#fff", "--tr-off": "var(--color-ink-500)"}}. */
+.tr-fill {
+  background-image: linear-gradient(90deg, var(--tr-on, var(--color-ink-900)) 50%, var(--tr-off, var(--color-ink-300)) 50%);
+  background-size: 200% 100%;
+  background-position: 0 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .tr-rise { animation: tr-rise linear both; animation-timeline: view(); animation-range: entry 0% entry 260px; }
+    .tr-left { animation: tr-left linear both; animation-timeline: view(); animation-range: entry 0% entry 260px; }
+    .tr-right { animation: tr-right linear both; animation-timeline: view(); animation-range: entry 0% entry 260px; }
+    .tr-unfold { animation: tr-unfold linear both; animation-timeline: view(); animation-range: entry 0% entry 300px; transform-origin: 50% 0; }
+    /* Big statement: text fills with ink as it passes the middle of the screen. */
+    .tr-fill { animation: tr-fill linear both; animation-timeline: view(); animation-range: cover 20% cover 55%; }
+    /* Rails: .tr-rail names the timeline; .tr-rail-x / -y children draw as the block scrolls through. */
+    .tr-rail { view-timeline-name: --tr-rail; }
+    .tr-rail-x { transform-origin: left; animation: tr-grow-x linear both; animation-timeline: --tr-rail; animation-range: entry 60% cover 55%; }
+    .tr-rail-y { transform-origin: top; animation: tr-grow-y linear both; animation-timeline: --tr-rail; animation-range: cover 10% contain 80%; }
+    /* Sticky stacked cards: .tr-stack (the non-sticky list) names the timeline; each .tr-sink card (not the last) shrinks
+       back during its share of the list's exit-crossing — set --s / --e per card (i/n and (i+1)/n as %). */
+    .tr-stack { view-timeline-name: --tr-stack; }
+    .tr-sink { animation: tr-sink linear both; animation-timeline: --tr-stack; animation-range: exit-crossing var(--s) exit-crossing var(--e); transform-origin: 50% 0; }
+  }
+}
+/* ───────── After 12th pages (/after-12th) — neumorphism (bg-neu) + Soft UI Evolution (bg-soft) ─────────
+   Same rules as above: pure CSS, only with animation-timeline support + no reduced motion, never on an element that
+   also has data-reveal or a hover transform. a12-tilt-l/-r = card swings in from the side in 3D · a12-wipe = clip-path
+   curtain · a12-zoom = scales up from the surface · a12-drift = slow sideways parallax for decorative numerals. */
+@keyframes a12-tilt-l { from { opacity: 0; transform: perspective(1200px) rotateY(22deg) translateX(-56px); } to { opacity: 1; transform: none; } }
+@keyframes a12-tilt-r { from { opacity: 0; transform: perspective(1200px) rotateY(-22deg) translateX(56px); } to { opacity: 1; transform: none; } }
+/* Negative insets keep the element's outer shadow visible once the curtain is open. */
+@keyframes a12-wipe { from { clip-path: inset(-5rem 100% -5rem -5rem); opacity: 0.4; } to { clip-path: inset(-5rem); opacity: 1; } }
+@keyframes a12-zoom { from { opacity: 0; transform: scale(0.82); } to { opacity: 1; transform: none; } }
+@keyframes a12-drift { from { transform: translateX(-8%); } to { transform: translateX(8%); } }
+@keyframes a12-dial { from { stroke-dashoffset: var(--a12-c); } }
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .a12-tilt-l { animation: a12-tilt-l linear both; animation-timeline: view(); animation-range: entry 0% entry 280px; }
+    .a12-tilt-r { animation: a12-tilt-r linear both; animation-timeline: view(); animation-range: entry 0% entry 280px; }
+    .a12-wipe { animation: a12-wipe linear both; animation-timeline: view(); animation-range: entry 0% entry 320px; }
+    .a12-zoom { animation: a12-zoom linear both; animation-timeline: view(); animation-range: entry 0% entry 240px; }
+    .a12-drift { animation: a12-drift linear both; animation-timeline: view(); animation-range: cover; }
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero dial ring draws once on load (set --a12-c = circumference inline). */
+  .a12-dial { animation: a12-dial 1.4s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tr-float { animation: tr-float-y 6s ease-in-out infinite; }
+  .tr-pop { animation: tr-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  /* SVG ring draws from empty each time its panel is shown (set --tr-c = circumference inline). */
+  .tr-ring-draw { animation: tr-ring 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both; }
+  /* Light sweep across a primary CTA every few seconds. */
+  .tr-shine { position: relative; overflow: hidden; isolation: isolate; }
+  .tr-shine::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(100deg, transparent 30%, rgb(255 255 255 / 0.45) 50%, transparent 70%);
+    animation: tr-sweep 3.4s cubic-bezier(0.22, 1, 0.36, 1) 1.2s infinite;
   }
 }

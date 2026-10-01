@@ -27,6 +27,13 @@ Exports: `site` (name/phone/email/address/hours/rating/socials/url), `branches`,
 EXCEPTION: Courses-dropdown pages live in `src/data/course-pages/` (index.ts = groups + `courseCommon` shared blocks,
 types.ts = `CoursePage`, one file per group: programming / ai-data / marketing / cyber-cloud). Adding one: add an entry to
 the group file + point its `nav` Courses link at `/courses/<slug>` → page, sitemap, hub card are automatic.
+EXCEPTION 2: Internship & Training dropdown pages live in `src/data/training/` (index.ts = `trainingCommon` shared blocks:
+tracks/heroBadges/heroFacts/whatYouGet/credentials/stats/certificates/loop/why/comparison/modes/faqs; types.ts = `TrainingPage`;
+programs-a/b/c.ts = 12 programs). Adding one: add an entry + point its `nav` tile at `/training/<slug>` → page, sitemap, hub card automatic.
+EXCEPTION 3: After 12th dropdown pages live in `src/data/after-12th/` — a page = subject × duration. subjects-a/b.ts = 10 `A12Subject`s
+(each a 9-month roadmap: month = title/summary/6 topics/tools/skill/project, + statement, contrast, roles, faqs); index.ts = `a12Tiers`
+(3/4/6/9 months), `offered` (which subjects per duration), generated `a12Pages` (slug `<months>-month-<subject>`), `a12Common`, `a12Faqs()`.
+Adding one: add the subject slug to `offered` + a `nav` link at `/after-12th/<slug>` → page, sitemap, hub card automatic.
 `aiCourses` (type `AiCourse`, one per AI-dropdown link → `/ai-courses/<slug>`), `aiMentors`, `aiCourseCommon` (batches, EMI,
 includes, certification, placement, shared FAQs), `aiTestimonials`.
 - Adding an AI course: add to `aiCourses` + a link in `nav` AI `skills` groups → page, metadata, sitemap, hub card are automatic.
@@ -45,6 +52,10 @@ src/app/
   courses/page.tsx          Courses hub (grouped neumorphic cards) — target of "Browse all courses"
   courses/[slug]/page.tsx   SSG page per Courses-dropdown link (27): NEUMORPHIC, light hero (no side card), NO pricing,
                             17 sections + JSON-LD (Course w/o offers, BreadcrumbList, FAQPage)
+  training/page.tsx + [slug]/page.tsx  Internship & Training hub + 12 SSG slug pages (dynamicParams=false) in the SITE THEME
+                            (reference page supplied only the section list), NO pricing/salary, 21 sections + JSON-LD
+  after-12th/page.tsx + [slug]/page.tsx  After 12th hub (grouped by duration) + 29 SSG slug pages (dynamicParams=false):
+                            NEUMORPHISM (bg-neu) + SOFT UI (bg-soft) alternating, NO pricing/salary, 19 sections + JSON-LD
   ai-courses/[slug]/page.tsx SSG AI course page: 13 sections + JSON-LD (Course, BreadcrumbList, FAQPage). Spec: docs/ai-course-page.md
   sitemap.ts / robots.ts / not-found.tsx
 src/components/
@@ -89,6 +100,19 @@ src/components/
            comparison table, CpTracks = tracks table + batches, CpCertification, CpReviews, CpFaq, CpRelated/CpCourseCard,
            CpEnrol) · SnapCarousel ("use client", scroll-snap + prev/next) · CpEnquiryForm ("use client", 5 fields).
            Reuses course/CourseSection, course/CourseNav (variant="neu"), course/Breadcrumb (tone="light").
+  training/ Internship & Training sections in page order: TrHero (light bg-mesh, "program snapshot" bento; id tr-hero) ·
+           TrNav ("use client" sticky scroll-spy + progress line) · TrLearn (TrTracks → TrackPicker "use client" 3/6/9 ARIA
+           tabs + SVG ring, TrStats dark counter band, TrOverview + "What you get", TrSyllabus → PhaseTabs "use client"
+           vertical ARIA tabs + prev/next, TrWhyNow .tr-fill statement + 2 marquees, TrEligibility dark, TrTools) · TrProof
+           (TrCertification fanned mock-ups, TrScope #scope accordion on .tr-rail, TrProjects sticky stacked .tr-sink cards,
+           TrLoop, TrWhy bento, TrCompare table) · TrConnect (TrReviews + TrCarousel, TrModes, TrFaq → FaqSearch "use client"
+           filter/expand-all/empty state, TrStart banner, TrRelated/TrCard, TrEnquire + TrEnquiryForm "use client").
+  after-12th/ After 12th sections in page order: A12Hero (neu "duration dial" SVG ring; id a12-hero) · training/TrNav (label prop) ·
+           A12Learn (A12Overview month ladder, A12Skills #learn, A12Curriculum zig-zag .timeline, A12Modules → MonthExplorer
+           "use client" ARIA tabs, A12Tools dark, A12Eligibility, A12WhyNow .tr-fill + contrast rows, A12Advisor .a12-wipe slab) ·
+           A12Proof (A12Certification mock-up, A12Scope dark staircase, A12Projects carousel, A12Loop .tr-rail, A12Why bento) ·
+           A12Connect (A12Related/A12Card, A12Faq → training/FaqSearch, A12Enquire → training/TrEnquiryForm (context/placeholder
+           props), A12Start).
 src/lib/whatsapp.ts  waLink(text) → wa.me URL with pre-filled message
 docs/ai-course-page.md  Design spec for AI course pages (tokens, states, a11y acceptance criteria, QA checklist)
 ```
@@ -111,6 +135,13 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
 - Courses-dropdown pages use NEUMORPHISM on `bg-neu` only: `neu` (raised; depth = --neu-k), `neu-sm`, `neu-inset`,
   `neu-hover`, `neu-icon`, `neu-icon-brand`, `btn-neu`, `btn-neu-primary`; shadows `shadow-neu-sm/lg/inset/inset-sm/brand`.
   Utilities that set radius/bg need `!` to override (e.g. `neu !rounded-full`).
+- Internship & Training pages use the SITE THEME (white / `bg-brand-50/50` / `bg-ink-950` rhythm, `card`, SectionHeading) +
+  `tr-cta` (orange, ink text = AA), `tr-chip(-dark)`, `tr-icon(-soft)`, `tr-ring` (gradient hairline), `tr-dark-card`, `bg-mesh`.
+  Scroll-driven CSS: `.tr-rise/.tr-left/.tr-right/.tr-unfold`, `.tr-fill`, `.tr-rail` + `.tr-rail-x|y`, `.tr-stack` + `.tr-sink`
+  (--s/--e per card); keyframe classes `.tr-pop`, `.tr-float`, `.tr-shine`, `.tr-ring-draw`.
+- After 12th pages mix `neu*` (on `bg-neu` sections) and `su-*` Soft UI (on `bg-soft`/white) — never a neu surface on bg-soft or
+  vice versa. On bg-neu use `text-brand-700` for highlighted words (not `text-gradient`). Scroll-driven CSS: `.a12-tilt-l/-r`,
+  `.a12-wipe`, `.a12-zoom`, `.a12-drift`; on-load `.a12-dial` (--a12-c). Also reuses `.extrude`, `.timeline*`, `.tr-*`.
 - CSS scroll-driven animations (globals.css, @supports + no-reduced-motion): `.extrude` (surface rises from the page as it
   enters), `.timeline`/`.timeline-fill`/`.timeline-dot`, `.draw-path` (SVG pathLength=1), `.snap-focus` (carousel centre
   card), `.hero-sink`, `.scroll-progress`. Extra data-reveal variants: `blur`, `flip`.
@@ -142,6 +173,8 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
   brand decision (see docs/ai-course-page.md §7 "Open accessibility issues").
 
 ## Changelog
+- 2026-10-01: After 12th dropdown → 29 SSG pages at /after-12th/[slug] (subject × 3/4/6/9 months) + /after-12th hub, neumorphism + Soft UI, 19 sections (reference section list, no pricing), month explorer, a12-* scroll animations; sitemap updated. Roadmap content is SAMPLE — confirm with client.
+- 2026-09-30: Internship & Training dropdown → 12 SSG pages at /training/[slug] + /training hub, site theme, 21 sections (reference section list), track picker, phase tabs, searchable FAQ, stacked project cards, tr-* scroll animations; nav tiles + sitemap updated.
 - 2026-09-30: Courses dropdown → 27 neumorphic SSG pages at /courses/[slug] + /courses hub (no pricing, no hero side card), scroll-driven animations, nav links + sitemap updated.
 - 2026-09-30: AI course pages + hub restyled with glassmorphism + Soft UI Evolution (content unchanged); removed orphaned neu/clay classes.
 - 2026-09-30: AI course pages restyled in soft UI (neumorphism + claymorphism): bg-clay sections, neu cards, clay icons/buttons, clay-dark tools/certification, decorative clay orbs in hero. Utilities in globals.css, rules in docs §3.5.
