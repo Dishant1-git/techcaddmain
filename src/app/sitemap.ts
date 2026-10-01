@@ -7,6 +7,8 @@ import { a12Pages } from "@/data/after-12th";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: site.url, changeFrequency: "weekly", priority: 1 },
+    { url: `${site.url}/about`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${site.url}/about/mission-vision`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/ai-courses`, changeFrequency: "weekly", priority: 0.9 },
     ...aiCourses.map((c) => ({ url: `${site.url}/ai-courses/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.9 })),
     { url: `${site.url}/courses`, changeFrequency: "weekly", priority: 0.9 },

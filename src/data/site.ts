@@ -107,13 +107,13 @@ export const nav: NavItem[] = [
     label: "About Us",
     href: "/#about",
     children: [
-      { label: "About techcadd", href: "/#about" },
-      { label: "Mission and Vision", href: "/#why-us" },
+      { label: "About techcadd", href: "/about" },
+      { label: "Mission and Vision", href: "/about/mission-vision" },
       { label: "Our Founder", href: "/#about" },
     ],
     featured: [
-      { title: "About techcadd", href: "/#about", badge: "Story", meta: "Since 2007", image: navAboutImg, alt: "TechCADD students in a seminar hall" },
-      { title: "Mission and Vision", href: "/#why-us", badge: "Purpose", meta: "Our Direction", image: navMissionImg, alt: "Students at a TechCADD auditorium session" },
+      { title: "About techcadd", href: "/about", badge: "Story", meta: "Since 2007", image: navAboutImg, alt: "TechCADD students in a seminar hall" },
+      { title: "Mission and Vision", href: "/about/mission-vision", badge: "Purpose", meta: "Our Direction", image: navMissionImg, alt: "Students at a TechCADD auditorium session" },
       { title: "Our Founder", href: "/#about", badge: "Profile", meta: "Gourav Gupta", image: navFounderImg, alt: "Founder Gourav Gupta presenting a robot dog on stage" },
     ],
   },

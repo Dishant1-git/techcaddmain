@@ -35,6 +35,8 @@ EXCEPTION 3: After 12th dropdown pages live in `src/data/after-12th/` — a page
 (each a 9-month roadmap: month = title/summary/6 topics/tools/skill/project, + statement, contrast, roles, faqs); index.ts = `a12Tiers`
 (3/4/6/9 months), `offered` (which subjects per duration), generated `a12Pages` (slug `<months>-month-<subject>`), `a12Common`, `a12Faqs()`.
 Adding one: add the subject slug to `offered` + a `nav` link at `/after-12th/<slug>` → page, sitemap, hub card automatic.
+EXCEPTION 4: the About pages' content lives in `src/data/about.ts` (`about`: images, hero, teach, ecosystem, matters, audience, journey,
+difference, domains, approach, industry, recognition, timeline, belief, cta; `missionVision`: hero, mission, vision, future). Hero stats reuse `heroStats`.
 `aiCourses` (type `AiCourse`, one per AI-dropdown link → `/ai-courses/<slug>`), `aiMentors`, `aiCourseCommon` (batches, EMI,
 includes, certification, placement, shared FAQs), `aiTestimonials`.
 - Adding an AI course: add to `aiCourses` + a link in `nav` AI `skills` groups → page, metadata, sitemap, hub card are automatic.
@@ -49,6 +51,14 @@ src/app/
   page.tsx              HOME = ordered list of sections + JSON-LD (EducationalOrganization + FAQPage). Reorder sections here.
   globals.css           Design tokens (@theme colors brand/accent/ink, fonts, animations), @utility classes, scroll-reveal CSS
   branches/[slug]/page.tsx  SSG page per branch (generateStaticParams, dynamicParams=false) reusing home sections
+  about/page.tsx            "About techcadd" (About Us dropdown → /about): SITE THEME, 14 sections from components/about/
+                            AboutSections.tsx in page order — AboutHero (dark, team photo, heroStats bar) · AboutTeach (chips) · AboutEcosystem ·
+                            AboutMatters (.tr-fill statement) · AboutAudience (6 numbered cards) · AboutJourney (.tr-rail 4 steps) ·
+                            AboutDifference (dark bento) · AboutDomains · AboutApproach · AboutIndustry · AboutRecognition (dark) ·
+                            AboutTimeline (zig-zag .timeline, year cards) · AboutBelief · AboutCta (#get-started, reuses home/DemoForm). JSON-LD AboutPage + BreadcrumbList.
+  about/mission-vision/page.tsx  "Mission and Vision" (About Us dropdown): SITE THEME, 5 sections from components/about/MissionSections.tsx —
+                            MvHero (dark, jump links) · MvMission (#mission, 5 numbered pillars) · MvVision (#vision, "Future-ready by 2030"
+                            panel + goals) · MvFuture (#future, dark .tr-fill statement + fields) · about/AboutCta. Content: `missionVision` in data/about.ts.
   ai-courses/page.tsx       AI hub (all AI course cards) — target of the AI pill + "Explore AI"
   courses/page.tsx          Courses hub (grouped neumorphic cards) — target of "Browse all courses"
   courses/[slug]/page.tsx   SSG page per Courses-dropdown link (27): NEUMORPHIC, light hero (no side card), NO pricing,
@@ -174,7 +184,13 @@ Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-pr
 - Contrast: white text on `btn-primary` orange ≈2.6:1 (fails AA) and `text-gradient`'s orange tail on white — needs a
   brand decision (see docs/ai-course-page.md §7 "Open accessibility issues").
 
+- About page: journey timeline milestones (2007–2025) and recognition items (incl. "ISO 9001 Certified") are **sample content**.
+  "Our Founder" nav link still points at a home anchor (no page yet).
+
 ## Changelog
+- 2026-10-01: Mission and Vision page at /about/mission-vision (5 sections, site theme, reference section list); nav link + featured card + sitemap updated.
+- 2026-10-01: About page photos (7 event photos in src/assets/about/, mapped in `about.images`): hero right column, ecosystem 4-photo strip, why-it-matters banner, industry engagement.
+- 2026-10-01: About page at /about (14 sections, site theme, reference section list); "About techcadd" nav link + featured card point to it; sitemap updated.
 - 2026-10-01: Home #demo CTA redesigned LIGHT + centred: amber eyebrow, huge "Start building your career today." (amber "career"), separate white input pill + navy "Book Demo" pill, blue gradient "Call now" pill; perks list removed.
 - 2026-10-01: Footer redesigned: light, giant "techcadd." watermark, email pill, 3 link columns (Courses/Company/Support), legal links row (`footerLegal` — /privacy-policy, /terms, /cookie-policy, /refund-policy routes NOT built yet → 404).
 - 2026-10-01: Removed "Limited seats per batch" badges (home, course & AI course CTAs). Home #demo CTA rebuilt like techcaddjalandhar.com ("Ready to get started?", mobile-number + Book Demo → WhatsApp, Call now, 3 perks). Navbar AI pill: `.ai-glow` orbiting conic border + pulse, `.ai-star` twinkle (globals.css).
