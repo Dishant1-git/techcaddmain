@@ -19,13 +19,13 @@ const mobileLinks = (i: NavItem): NavLink[] =>
   i.children ?? i.skills?.groups.flatMap((g) => g.links) ?? i.columns?.columns.flatMap((c) => c.links) ?? i.tiles?.tiles ?? [];
 
 const itemBase =
-  "flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 text-[15px] font-medium transition-colors 2xl:px-3.5 2xl:text-[17px]";
+  "flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3 2xl:text-[16px]";
 
 /** Top-level menu label (link or dropdown trigger). The `highlight` item renders as the glowing AI pill. */
 function TopItem({ item, light }: { item: NavItem; light: boolean }) {
   const cls = item.highlight
-    ? `${itemBase} !px-5 border border-brand-400/60 bg-brand-600 font-semibold text-white shadow-[0_0_24px_-4px_rgba(51,114,251,0.8)] hover:bg-brand-500`
-    : `${itemBase} relative after:absolute after:inset-x-2.5 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100 2xl:after:inset-x-3.5 ${
+    ? `${itemBase} !px-4 border border-brand-400/60 bg-brand-600 font-semibold text-white shadow-[0_0_24px_-4px_rgba(51,114,251,0.8)] hover:bg-brand-500`
+    : `${itemBase} relative after:absolute after:inset-x-2 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100 2xl:after:inset-x-3 ${
         light ? "text-ink-700 hover:text-brand-700 group-hover:text-brand-700" : "text-white/85 hover:text-white group-hover:text-white"
       }`;
   return (
@@ -336,7 +336,7 @@ export function Header() {
         <div
           className={`pointer-events-auto relative isolate mx-auto flex items-center justify-between gap-4 transition-all duration-500 ease-out ${
             scrolled
-              ? "top-3 h-[4.5rem] max-w-[1760px] rounded-full border border-white/70 pl-6 pr-2.5 shadow-[0_16px_48px_-16px_rgba(5,11,31,0.55)] sm:pl-10"
+              ? "top-3 h-16 max-w-[1760px] rounded-full border border-white/70 pl-5 pr-2 shadow-[0_16px_48px_-16px_rgba(5,11,31,0.55)] sm:pl-8"
               : "top-0 h-24 max-w-[1800px] px-4 sm:px-6 lg:px-8"
           }`}
         >
@@ -347,7 +347,7 @@ export function Header() {
           />
           <Logo dark={!scrolled} />
 
-          <nav aria-label="Primary" className="hidden items-center gap-0.5 self-stretch xl:flex 2xl:gap-2">
+          <nav aria-label="Primary" className="hidden min-w-0 items-center gap-0 self-stretch xl:flex 2xl:gap-1.5">
             {nav.map((item) => (
               <div key={item.label} className={`group flex h-full items-center ${isWide(item) ? "" : "relative"}`}>
                 <TopItem item={item} light={scrolled} />
@@ -359,7 +359,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             <Link
               href="/#demo"
-              className="btn hidden whitespace-nowrap border border-brand-400/60 bg-brand-600 !px-6 !py-3 text-[15px] text-white shadow-[0_0_28px_-6px_rgba(51,114,251,0.9)] hover:-translate-y-0.5 hover:bg-brand-500 sm:inline-flex 2xl:!px-7 2xl:text-[17px]"
+              className="btn hidden whitespace-nowrap border border-brand-400/60 bg-brand-600 !px-5 !py-2.5 text-sm text-white shadow-[0_0_28px_-6px_rgba(51,114,251,0.9)] hover:-translate-y-0.5 hover:bg-brand-500 sm:inline-flex 2xl:!px-6 2xl:text-[15px]"
             >
               Book Demo
             </Link>

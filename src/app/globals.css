@@ -67,12 +67,20 @@
 @keyframes parallax-y {
   to { transform: translate3d(0, var(--parallax, 20%), 0); }
 }
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes orbit {
+  to { transform: rotate(360deg); }
+}
 @keyframes pulse-ring {
   0% { transform: scale(1); opacity: 0.6; }
   100% { transform: scale(1.8); opacity: 0; }
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+html, body { overflow-x: clip; }
 body { @apply bg-white text-ink-900 font-sans antialiased; }
 h1, h2, h3, h4 { @apply font-display tracking-tight; }
 
@@ -428,3 +436,8 @@ details[open] .faq-icon { transform: rotate(45deg); }
     animation: tr-sweep 3.4s cubic-bezier(0.22, 1, 0.36, 1) 1.2s infinite;
   }
 }
+
+/* Technologies orbit: rings rotate, logos counter-rotate; paused on hover, off for reduced motion */
+.orbit-spin { animation: orbit var(--dur, 80s) linear infinite var(--dir, normal); }
+.orbit:hover .orbit-spin { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) { .orbit-spin { animation: none; } }

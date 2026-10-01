@@ -597,10 +597,70 @@ export const recruiters = [
   "Cognizant", "Quark", "Trident Group", "Sonalika", "IDS Infotech", "Netsmartz", "Mohali IT Park",
 ];
 
-export const technologies = [
-  "Python", "JavaScript", "TypeScript", "React", "Next.js", "Node.js", "Java", "Spring Boot",
-  "MongoDB", "MySQL", "Power BI", "Tableau", "AWS", "Azure", "Docker", "Kubernetes",
-  "TensorFlow", "PyTorch", "LangChain", "Figma", "Photoshop", "AutoCAD", "SolidWorks", "Revit",
+/** Technologies section (orbit). `icon` = a `simple-icons` export name (e.g. "siPython");
+ *  brands missing from simple-icons use a coloured monogram: `mono` text + `color` hex. First 5 items = inner ring. */
+export type TechItem = { name: string; icon?: string; mono?: string; color?: string };
+export const techStack: { id: string; label: string; items: TechItem[] }[] = [
+  {
+    id: "programming", label: "Programming", items: [
+      { name: "Python", icon: "siPython" }, { name: "Go", icon: "siGo" }, { name: "Swift", icon: "siSwift" },
+      { name: "Rust", icon: "siRust" }, { name: "R", icon: "siR" },
+      { name: "C++", icon: "siCplusplus" }, { name: "C", icon: "siC" }, { name: "PHP", icon: "siPhp" },
+      { name: "Kotlin", icon: "siKotlin" }, { name: "Java", icon: "siOpenjdk" }, { name: "Linux", icon: "siLinux" },
+      { name: "JavaScript", icon: "siJavascript" }, { name: "TypeScript", icon: "siTypescript" },
+    ],
+  },
+  {
+    id: "frameworks", label: "Frameworks", items: [
+      { name: "React", icon: "siReact" }, { name: "Next.js", icon: "siNextdotjs" }, { name: "Node.js", icon: "siNodedotjs" },
+      { name: "Django", icon: "siDjango" }, { name: "Tailwind CSS", icon: "siTailwindcss" },
+      { name: "Angular", icon: "siAngular" }, { name: "Vue.js", icon: "siVuedotjs" }, { name: "Express", icon: "siExpress" },
+      { name: "Spring Boot", icon: "siSpringboot" }, { name: "Laravel", icon: "siLaravel" }, { name: "Flask", icon: "siFlask" },
+      { name: "WordPress", icon: "siWordpress" }, { name: "Shopify", icon: "siShopify" },
+    ],
+  },
+  {
+    id: "ai", label: "AI & ML", items: [
+      { name: "TensorFlow", icon: "siTensorflow" }, { name: "PyTorch", icon: "siPytorch" }, { name: "LangChain", icon: "siLangchain" },
+      { name: "Hugging Face", icon: "siHuggingface" }, { name: "Claude", icon: "siClaude" },
+      { name: "Scikit-learn", icon: "siScikitlearn" }, { name: "Keras", icon: "siKeras" }, { name: "Pandas", icon: "siPandas" },
+      { name: "NumPy", icon: "siNumpy" }, { name: "Jupyter", icon: "siJupyter" }, { name: "OpenCV", icon: "siOpencv" },
+      { name: "Gemini", icon: "siGooglegemini" }, { name: "Ollama", icon: "siOllama" },
+    ],
+  },
+  {
+    id: "cad", label: "CAD / CAM", items: [
+      { name: "AutoCAD", icon: "siAutocad" }, { name: "SolidWorks", mono: "SW", color: "#DA291C" },
+      { name: "Revit", mono: "Rv", color: "#186BFF" }, { name: "SketchUp", icon: "siSketchup" }, { name: "Blender", icon: "siBlender" },
+      { name: "Autodesk", icon: "siAutodesk" }, { name: "CATIA", mono: "C", color: "#005386" }, { name: "Ansys", icon: "siAnsys" },
+      { name: "Dassault Systèmes", icon: "siDassaultsystemes" }, { name: "Photoshop", mono: "Ps", color: "#31A8FF" },
+      { name: "Figma", icon: "siFigma" }, { name: "MATLAB", mono: "M", color: "#E16737" },
+    ],
+  },
+  {
+    id: "databases", label: "Databases", items: [
+      { name: "MySQL", icon: "siMysql" }, { name: "MongoDB", icon: "siMongodb" }, { name: "PostgreSQL", icon: "siPostgresql" },
+      { name: "Redis", icon: "siRedis" }, { name: "Firebase", icon: "siFirebase" },
+      { name: "SQLite", icon: "siSqlite" }, { name: "Oracle", mono: "O", color: "#F80000" }, { name: "Power BI", mono: "BI", color: "#F2C811" },
+      { name: "Tableau", mono: "T", color: "#E97627" }, { name: "Pandas", icon: "siPandas" },
+    ],
+  },
+  {
+    id: "devops", label: "DevOps", items: [
+      { name: "Docker", icon: "siDocker" }, { name: "Kubernetes", icon: "siKubernetes" }, { name: "Git", icon: "siGit" },
+      { name: "GitHub", icon: "siGithub" }, { name: "Jenkins", icon: "siJenkins" },
+      { name: "GitHub Actions", icon: "siGithubactions" }, { name: "Terraform", icon: "siTerraform" }, { name: "Ansible", icon: "siAnsible" },
+      { name: "Linux", icon: "siLinux" }, { name: "Kali Linux", icon: "siKalilinux" }, { name: "Wireshark", icon: "siWireshark" },
+    ],
+  },
+  {
+    id: "cloud", label: "Cloud", items: [
+      { name: "AWS", mono: "AWS", color: "#FF9900" }, { name: "Microsoft Azure", mono: "Az", color: "#0078D4" },
+      { name: "Google Cloud", icon: "siGooglecloud" }, { name: "Vercel", icon: "siVercel" }, { name: "Firebase", icon: "siFirebase" },
+      { name: "Cloudflare", icon: "siCloudflare" }, { name: "DigitalOcean", icon: "siDigitalocean" }, { name: "Netlify", icon: "siNetlify" },
+      { name: "Docker", icon: "siDocker" }, { name: "Kubernetes", icon: "siKubernetes" }, { name: "Terraform", icon: "siTerraform" },
+    ],
+  },
 ];
 
 export const testimonials = [

@@ -15,6 +15,7 @@ modern sections, scroll animations, top performance.
 - **Next.js 16.3 (App Router, Turbopack)**, React 19.2, TypeScript — read `node_modules/next/dist/docs/` before using new APIs (see AGENTS.md). `params` are Promises (`await params`), use `PageProps<"/route">` / `LayoutProps<"/">` global helpers.
 - **Tailwind CSS v4** — config lives in CSS (`src/app/globals.css` `@theme`), no tailwind.config file. Custom classes are declared with `@utility` (NOT `@layer components`) so they can be `@apply`-ed. Gradients: `bg-linear-to-r` (v4 name).
 - **lucide-react** icons (no brand icons in lucide → social SVGs are inline in `ui/SocialIcons.tsx`).
+- **simple-icons** brand logos for the Technologies orbit — resolved server-side in `Technologies.tsx` (only used paths reach the client). Brands missing from simple-icons (AWS, Azure, Power BI, Tableau, SolidWorks, Revit, Photoshop, Oracle, CATIA, MATLAB) use `mono` + `color` monogram in `techStack`.
 - No animation library. No images yet (all visuals are CSS gradients/SVG) → fast LCP.
 - Commands: `npm run dev` · `npm run build` · `npm run lint` · `npm start`.
 
@@ -23,7 +24,7 @@ modern sections, scroll animations, top performance.
 FAQs, testimonials, blogs, footer links → edit this file only. Components just render it.
 Exports: `site` (name/phone/email/address/hours/rating/socials/url), `branches`, `regions`, `nav` (type `NavItem`: children = dropdown, `mega` = 2-col panel, `featured` = About photo panel, `skills` = AI panel, `columns` = Courses panel, `tiles` = Internship panel, `highlight` = AI pill),
 `heroStats`, `categories`, `courses` (type `Course`), `aiProgram`, `steps`, `whyUs`, `programs`,
-`placementStats`, `recruiters`, `technologies`, `testimonials`, `faqs`, `blogs`, `footerLinks`,
+`placementStats`, `recruiters`, `techStack` (type `TechItem`), `testimonials`, `faqs`, `blogs`, `footerLinks`,
 EXCEPTION: Courses-dropdown pages live in `src/data/course-pages/` (index.ts = groups + `courseCommon` shared blocks,
 types.ts = `CoursePage`, one file per group: programming / ai-data / marketing / cyber-cloud). Adding one: add an entry to
 the group file + point its `nav` Courses link at `/courses/<slug>` → page, sitemap, hub card are automatic.
@@ -88,7 +89,7 @@ src/components/
            Marquee (pure CSS) · Icon · Logo (text wordmark "techcadd™" + tagline; `dark` prop for white) · SocialIcons (+ whatsappPath)
   home/    Hero · TrustStrip · About · Categories · AiProgram · Courses(+CourseExplorer "use client" filter tabs)
            HowItWorks · WhyUs (bento) · Programs (industrial training/after 12th) · Placements · Branches
-           Technologies · Testimonials · Faq (<details>, no JS) · Blog · DemoCta(+DemoForm "use client")
+           Technologies (+TechOrbit "use client": category tabs, 2 rotating logo rings, CSS tooltips; first 5 items = inner ring; rotation via `.orbit-spin` in globals.css, pauses on hover) · Testimonials · Faq (<details>, no JS) · Blog · DemoCta(+DemoForm "use client")
   course/  AI course page sections, in order: CourseHero (single column, NO right-side card, breadcrumb, CSS-scroll parallax) · CourseNav ("use client",
            sticky top-24 anchor nav + scroll-spy) · CourseOverview · CourseOutcomes · CourseCurriculum(+CurriculumTabs
            "use client": ARIA tabs + <details class="accordion"> modules) · CourseTools · CourseAudience · CourseMentor ·
@@ -157,7 +158,7 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
 - **Don't** put `data-reveal` on elements rendered after client state changes (e.g. filtered lists) — they'd stay
   hidden. Use the CSS keyframe `animate-[fadeUp_...]` instead (see CourseExplorer).
 - **Don't** put `data-reveal` on the Hero H1 (LCP).
-- Keep components as Server Components; only Header, ScrollAnimator, CourseExplorer, DemoForm, CourseNav, CurriculumTabs, EnquiryForm are client.
+- Keep components as Server Components; only Header, ScrollAnimator, CourseExplorer, DemoForm, TechOrbit, CourseNav, CurriculumTabs, EnquiryForm are client.
 
 ## Known placeholders / TODO (verify with client)
 - Stats (50,000+ alumni, 500+ partners, 92% placement, 18 LPA, etc.), testimonials, blog posts, recruiter names,
@@ -175,6 +176,9 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
 ## Changelog
 - 2026-10-01: After 12th dropdown → 29 SSG pages at /after-12th/[slug] (subject × 3/4/6/9 months) + /after-12th hub, neumorphism + Soft UI, 19 sections (reference section list, no pricing), month explorer, a12-* scroll animations; sitemap updated. Roadmap content is SAMPLE — confirm with client.
 - 2026-09-30: Internship & Training dropdown → 12 SSG pages at /training/[slug] + /training hub, site theme, 21 sections (reference section list), track picker, phase tabs, searchable FAQ, stacked project cards, tr-* scroll animations; nav tiles + sitemap updated.
+- 2026-09-30: Technologies section → "Technologies We Master" orbit: 7 category tabs, real brand logos (simple-icons), hover/focus tooltips.
+- 2026-09-29: Hero redesigned as IT-company style: "New" announcement pill, "Engineering the next generation of tech talent" H1, mono tech-stack chips, IDE window mockup (tabs, highlighted code, CI/CD "career-pipeline"), icon stats bar. Same colors.
+- 2026-09-29: Header compacted (smaller logo/nav/Book Demo, pill h-16) so it fits 1280px+ without overflow; `html, body { overflow-x: clip }` stops horizontal page scroll (clip, not hidden, keeps sticky header working).
 - 2026-09-30: Courses dropdown → 27 neumorphic SSG pages at /courses/[slug] + /courses hub (no pricing, no hero side card), scroll-driven animations, nav links + sitemap updated.
 - 2026-09-30: AI course pages + hub restyled with glassmorphism + Soft UI Evolution (content unchanged); removed orphaned neu/clay classes.
 - 2026-09-30: AI course pages restyled in soft UI (neumorphism + claymorphism): bg-clay sections, neu cards, clay icons/buttons, clay-dark tools/certification, decorative clay orbs in hero. Utilities in globals.css, rules in docs §3.5.
