@@ -1,5 +1,4 @@
 import { Hero } from "@/components/home/Hero";
-import { TrustStrip } from "@/components/home/TrustStrip";
 import { About } from "@/components/home/About";
 import { Categories } from "@/components/home/Categories";
 import { AiProgram } from "@/components/home/AiProgram";
@@ -43,7 +42,6 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <Hero />
-      <TrustStrip />
       <About />
       <Categories />
       <AiProgram />

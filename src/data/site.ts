@@ -693,35 +693,32 @@ export const blogs = [
 
 export const footerLinks = {
   Courses: [
-    { label: "Artificial Intelligence", href: "/#courses" },
-    { label: "Full-Stack Development", href: "/#courses" },
-    { label: "Data Science", href: "/#courses" },
-    { label: "Cybersecurity", href: "/#courses" },
-    { label: "Cloud & DevOps", href: "/#courses" },
-    { label: "Digital Marketing", href: "/#courses" },
-    { label: "CAD / CAM", href: "/#courses" },
-  ],
-  Programs: [
-    { label: "6 Weeks Industrial Training", href: "/#programs" },
-    { label: "6 Months Industrial Training", href: "/#programs" },
-    { label: "After 12th Courses", href: "/after-12th" },
-    { label: "Certificate Programs", href: "/#programs" },
-    { label: "Internship & Live Projects", href: "/#programs" },
+    { label: "Programming", href: "/courses" },
+    { label: "AI & Data", href: "/courses" },
+    { label: "Digital Marketing", href: "/courses" },
+    { label: "Cyber & Cloud", href: "/courses" },
   ],
   Company: [
     { label: "About Us", href: "/#about" },
-    { label: "Why TechCADD", href: "/#why-us" },
-    { label: "Placements", href: "/#placements" },
-    { label: "Student Reviews", href: "/#testimonials" },
-    { label: "Blogs", href: "/#blog" },
+    { label: "Mission & Vision", href: "/#why-us" },
+    { label: "Our Founder", href: "/#about" },
+    { label: "Contact Us", href: "/#demo" },
   ],
   Support: [
+    { label: "Placement Support", href: "/#placements" },
+    { label: "Student Reviews", href: "/#testimonials" },
     { label: "FAQs", href: "/#faq" },
-    { label: "Book Free Demo", href: "/#demo" },
-    { label: "Career Counselling", href: "/#demo" },
-    { label: "Our Branches", href: "/#branches" },
+    { label: "Enquire Now", href: "/#demo" },
   ],
 };
+
+/** Bottom-row legal links in the footer. TODO: these pages don't exist yet — create the routes before launch. */
+export const footerLegal = [
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms & Conditions", href: "/terms" },
+  { label: "Cookie Policy", href: "/cookie-policy" },
+  { label: "Refund Policy", href: "/refund-policy" },
+];
 
 /* ───────── AI course pages (/ai-courses/[slug]) — one entry per link in the AI nav dropdown ─────────
    Pricing is intentionally NOT shown on AI pages (counsellor shares it). Mentors and stories are SAMPLE content — confirm with the client before launch. */

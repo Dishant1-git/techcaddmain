@@ -1,19 +1,17 @@
+import Image from "next/image";
 import Link from "next/link";
 
+const fade = "h-8 w-auto transition-opacity duration-500";
+
 /**
- * Text wordmark "techcadd™" + tagline (matches the official header style).
- * Swap for <Image src="/logo.svg" .../> when the official logo file is added to /public.
+ * Official "techcadd." logo + tagline (files in /public/logo).
+ * Both colour versions are stacked and cross-faded so the header can switch on scroll; `dark` shows the white one.
  */
 export function Logo({ dark = false }: { dark?: boolean }) {
   return (
-    <Link href="/" aria-label="TechCADD home" className="inline-flex shrink-0 flex-col items-end leading-none">
-      <span className={`relative font-sans text-[1.6rem] font-extrabold tracking-[-0.04em] transition-colors duration-500 ${dark ? "text-white" : "text-brand-900"}`}>
-        techcadd
-        <sup className="absolute -right-2 top-1 text-[9px] font-medium tracking-normal">™</sup>
-      </span>
-      <span className={`-mt-0.5 whitespace-nowrap text-[6px] font-medium tracking-wide transition-colors duration-500 ${dark ? "text-white/80" : "text-brand-900/70"}`}>
-        Your Skill &amp; Technology Partner
-      </span>
+    <Link href="/" aria-label="TechCADD home" className="relative inline-flex shrink-0">
+      <Image src="/logo/tece_new_logo.png" alt="" width={900} height={231} sizes="125px" priority className={`${fade} ${dark ? "opacity-0" : "opacity-100"}`} />
+      <Image src="/logo/techcadd-logo-white.png" alt="" width={900} height={231} sizes="125px" priority className={`absolute inset-0 ${fade} ${dark ? "opacity-100" : "opacity-0"}`} />
     </Link>
   );
 }

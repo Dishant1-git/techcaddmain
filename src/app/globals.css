@@ -437,7 +437,33 @@ details[open] .faq-icon { transform: rotate(45deg); }
   }
 }
 
-/* Technologies orbit: rings rotate, logos counter-rotate; paused on hover, off for reduced motion */
+/* Technologies orbit: rings rotate continuously, logos counter-rotate; off for reduced motion */
 .orbit-spin { animation: orbit var(--dur, 80s) linear infinite var(--dir, normal); }
-.orbit:hover .orbit-spin { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) { .orbit-spin { animation: none; } }
+
+/* Navbar AI pill: a light streak orbits the border (animated conic gradient on the border box) + twinkling star.
+   Uses @property so the angle can animate; browsers without it just show a static gradient border. */
+@property --ai-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+@keyframes ai-orbit { to { --ai-angle: 360deg; } }
+@keyframes ai-glow-pulse {
+  0%, 100% { box-shadow: 0 0 18px -4px rgb(51 114 251 / 0.75); }
+  50% { box-shadow: 0 0 30px -2px rgb(51 114 251 / 0.95), 0 0 12px -2px rgb(255 255 255 / 0.35); }
+}
+@keyframes ai-twinkle {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  40% { transform: scale(1.35) rotate(18deg); opacity: 0.85; }
+  60% { transform: scale(0.85) rotate(-8deg); opacity: 1; }
+}
+.ai-glow {
+  --ai-bg: var(--color-brand-600);
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--ai-bg), var(--ai-bg)) padding-box,
+    conic-gradient(from var(--ai-angle), rgb(147 180 255 / 0.25) 0deg, #fff 50deg, var(--color-accent-400) 80deg, rgb(147 180 255 / 0.25) 130deg, rgb(147 180 255 / 0.25) 360deg) border-box;
+  box-shadow: 0 0 18px -4px rgb(51 114 251 / 0.75);
+}
+.ai-glow:hover, .group:hover > .ai-glow { --ai-bg: var(--color-brand-500); }
+@media (prefers-reduced-motion: no-preference) {
+  .ai-glow { animation: ai-orbit 3s linear infinite, ai-glow-pulse 3s ease-in-out infinite; }
+  .ai-star { animation: ai-twinkle 2.2s ease-in-out infinite; transform-origin: center; }
+}

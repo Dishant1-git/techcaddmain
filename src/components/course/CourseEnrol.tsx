@@ -14,8 +14,7 @@ export function CourseEnrol({ course }: { course: AiCourse }) {
       <div className="pointer-events-none absolute -bottom-16 -left-16 hidden size-48 rounded-full border border-white/20 bg-white/10 shadow-glass-dark backdrop-blur-md animate-float lg:block" aria-hidden />
       <div className="container-x relative grid items-center gap-14 lg:grid-cols-2">
         <div>
-          <span data-reveal="up" className="eyebrow eyebrow-dark">Limited seats per batch</span>
-          <h2 id="enrol-title" data-reveal="up" style={delay(1)} className="mt-5 text-3xl font-extrabold leading-[1.1] sm:text-4xl lg:text-5xl">
+          <h2 id="enrol-title" data-reveal="up" style={delay(1)} className="text-3xl font-extrabold leading-[1.1] sm:text-4xl lg:text-5xl">
             Start your {course.navLabel} journey <span className="text-accent-400">this month.</span>
           </h2>
           <p data-reveal="up" style={delay(2)} className="mt-5 max-w-lg text-lg text-brand-100">

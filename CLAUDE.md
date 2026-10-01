@@ -24,7 +24,7 @@ modern sections, scroll animations, top performance.
 FAQs, testimonials, blogs, footer links → edit this file only. Components just render it.
 Exports: `site` (name/phone/email/address/hours/rating/socials/url), `branches`, `regions`, `nav` (type `NavItem`: children = dropdown, `mega` = 2-col panel, `featured` = About photo panel, `skills` = AI panel, `columns` = Courses panel, `tiles` = Internship panel, `highlight` = AI pill),
 `heroStats`, `categories`, `courses` (type `Course`), `aiProgram`, `steps`, `whyUs`, `programs`,
-`placementStats`, `recruiters`, `techStack` (type `TechItem`), `testimonials`, `faqs`, `blogs`, `footerLinks`,
+`placementStats`, `recruiters`, `techStack` (type `TechItem`), `testimonials`, `faqs`, `blogs`, `footerLinks`, `footerLegal`,
 EXCEPTION: Courses-dropdown pages live in `src/data/course-pages/` (index.ts = groups + `courseCommon` shared blocks,
 types.ts = `CoursePage`, one file per group: programming / ai-data / marketing / cyber-cloud). Adding one: add an entry to
 the group file + point its `nav` Courses link at `/courses/<slug>` → page, sitemap, hub card are automatic.
@@ -61,7 +61,7 @@ src/app/
   sitemap.ts / robots.ts / not-found.tsx
 src/components/
   layout/  Header ("use client"): DARK navy sticky bar (bg-ink-950 + faint grid) matching the official techcadd header —
-           white "techcadd™" wordmark, menu from `nav` in site.ts (Home, About Us▾, AI✦▾ glowing blue pill, Courses▾ (mega 2-col),
+           white "techcadd™" wordmark, menu from `nav` in site.ts (Home, About Us▾, AI✦▾ blue pill with orbiting light border (`.ai-glow`) + twinkling star (`.ai-star`), Courses▾ (mega 2-col),
            Internship & Training▾, After 12th▾, Resources▾, Contact Us), blue glowing "Book Demo". Dropdowns are CSS-only
            (hover/focus-within). About Us uses `featured` → FeaturedPanel: full-header-width panel with ABOUT link list +
            "Talk to a counsellor" (left) and FEATURED 3 photo cards w/ badge + meta (right). Photos: src/assets/nav/*.jpg (static
@@ -84,12 +84,13 @@ src/components/
            floating frosted-white rounded-full pill (bg-white/90, blur, shadow), navy logo (`Logo dark={!scrolled}`), ink-700 links;
            AI pill + Book Demo stay blue. Outer height fixed at h-24 in both states → no layout jump. Full nav at xl+ (≥1280px); below that a dark drawer with <details> accordions + branch chips.
            TopBar.tsx (dark contact strip) exists but is NOT mounted (removed to match reference) — re-add in layout.tsx if wanted.
-           Footer (CTA strip, 5 columns from footerLinks, branch chips, rating, socials; id="contact") · FloatingActions (WhatsApp + call)
+           Footer (LIGHT bg-slate-50, giant watermark = /logo/techcadd-wordmark.png at 6% opacity; /logo/tece_new_logo.png + blurb + email pill + phone, 3 columns from
+           `footerLinks`, copyright + `footerLegal` links; id="contact"; no CTA strip/branch chips/socials) · FloatingActions (WhatsApp + call)
   ui/      ScrollAnimator ("use client", the ONLY global observer) · Counter · SectionHeading (+ `delay(i)` helper)
-           Marquee (pure CSS) · Icon · Logo (text wordmark "techcadd™" + tagline; `dark` prop for white) · SocialIcons (+ whatsappPath)
-  home/    Hero · TrustStrip · About · Categories · AiProgram · Courses(+CourseExplorer "use client" filter tabs)
+           Marquee (pure CSS) · Icon · Logo (official PNGs from /public/logo, navy + white stacked and cross-faded; `dark` prop shows white) · SocialIcons (+ whatsappPath)
+  home/    Hero · TrustStrip (alumni/recruiter marquee — NOT mounted on home, removed 2026-10-01) · About · Categories · AiProgram · Courses(+CourseExplorer "use client" filter tabs)
            HowItWorks · WhyUs (bento) · Programs (industrial training/after 12th) · Placements · Branches
-           Technologies (+TechOrbit "use client": category tabs, 2 rotating logo rings, CSS tooltips; first 5 items = inner ring; rotation via `.orbit-spin` in globals.css, pauses on hover) · Testimonials · Faq (<details>, no JS) · Blog · DemoCta(+DemoForm "use client")
+           Technologies (+TechOrbit "use client": category tabs, 2 rotating logo rings, CSS tooltips; first 5 items = inner ring; rotation via `.orbit-spin` in globals.css, never pauses) · Testimonials · Faq (<details>, no JS) · Blog(+BlogSlider "use client": infinite 1/2/3-up carousel, auto-advances one card every 3.5s, pauses on hover/focus, prev/next + dots) · DemoCta(+DemoForm "use client")
   course/  AI course page sections, in order: CourseHero (single column, NO right-side card, breadcrumb, CSS-scroll parallax) · CourseNav ("use client",
            sticky top-24 anchor nav + scroll-spy) · CourseOverview · CourseOutcomes · CourseCurriculum(+CurriculumTabs
            "use client": ARIA tabs + <details class="accordion"> modules) · CourseTools · CourseAudience · CourseMentor ·
@@ -117,7 +118,7 @@ src/components/
 src/lib/whatsapp.ts  waLink(text) → wa.me URL with pre-filled message
 docs/ai-course-page.md  Design spec for AI course pages (tokens, states, a11y acceptance criteria, QA checklist)
 ```
-Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categories` → `#ai-program` → `#courses`
+Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-program` → `#courses`
 → `#how-it-works` → `#why-us` → `#programs` → `#placements` → `#branches` → `#technologies`
 → `#testimonials` → `#faq` → `#blog` → `#demo` → footer `#contact`. Nav links use `/#id`.
 
@@ -158,7 +159,7 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
 - **Don't** put `data-reveal` on elements rendered after client state changes (e.g. filtered lists) — they'd stay
   hidden. Use the CSS keyframe `animate-[fadeUp_...]` instead (see CourseExplorer).
 - **Don't** put `data-reveal` on the Hero H1 (LCP).
-- Keep components as Server Components; only Header, ScrollAnimator, CourseExplorer, DemoForm, TechOrbit, CourseNav, CurriculumTabs, EnquiryForm are client.
+- Keep components as Server Components; only Header, ScrollAnimator, CourseExplorer, DemoForm, TechOrbit, BlogSlider, CourseNav, CurriculumTabs, EnquiryForm are client.
 
 ## Known placeholders / TODO (verify with client)
 - Stats (50,000+ alumni, 500+ partners, 92% placement, 18 LPA, etc.), testimonials, blog posts, recruiter names,
@@ -174,6 +175,11 @@ Home section order & anchor ids: Hero → TrustStrip → `#about` → `#categori
   brand decision (see docs/ai-course-page.md §7 "Open accessibility issues").
 
 ## Changelog
+- 2026-10-01: Home #demo CTA redesigned LIGHT + centred: amber eyebrow, huge "Start building your career today." (amber "career"), separate white input pill + navy "Book Demo" pill, blue gradient "Call now" pill; perks list removed.
+- 2026-10-01: Footer redesigned: light, giant "techcadd." watermark, email pill, 3 link columns (Courses/Company/Support), legal links row (`footerLegal` — /privacy-policy, /terms, /cookie-policy, /refund-policy routes NOT built yet → 404).
+- 2026-10-01: Removed "Limited seats per batch" badges (home, course & AI course CTAs). Home #demo CTA rebuilt like techcaddjalandhar.com ("Ready to get started?", mobile-number + Book Demo → WhatsApp, Call now, 3 perks). Navbar AI pill: `.ai-glow` orbiting conic border + pulse, `.ai-star` twinkle (globals.css).
+- 2026-10-01: Blog section → auto-sliding carousel (3 cards on desktop; one slides out left, next enters from right).
+- 2026-10-01: Removed TrustStrip ("Our alumni work at…" recruiter marquee) from the home page; component file kept.
 - 2026-10-01: After 12th dropdown → 29 SSG pages at /after-12th/[slug] (subject × 3/4/6/9 months) + /after-12th hub, neumorphism + Soft UI, 19 sections (reference section list, no pricing), month explorer, a12-* scroll animations; sitemap updated. Roadmap content is SAMPLE — confirm with client.
 - 2026-09-30: Internship & Training dropdown → 12 SSG pages at /training/[slug] + /training hub, site theme, 21 sections (reference section list), track picker, phase tabs, searchable FAQ, stacked project cards, tr-* scroll animations; nav tiles + sitemap updated.
 - 2026-09-30: Technologies section → "Technologies We Master" orbit: 7 category tabs, real brand logos (simple-icons), hover/focus tooltips.

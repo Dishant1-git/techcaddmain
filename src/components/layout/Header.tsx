@@ -24,14 +24,14 @@ const itemBase =
 /** Top-level menu label (link or dropdown trigger). The `highlight` item renders as the glowing AI pill. */
 function TopItem({ item, light }: { item: NavItem; light: boolean }) {
   const cls = item.highlight
-    ? `${itemBase} !px-4 border border-brand-400/60 bg-brand-600 font-semibold text-white shadow-[0_0_24px_-4px_rgba(51,114,251,0.8)] hover:bg-brand-500`
+    ? `${itemBase} ai-glow !px-4 font-semibold text-white`
     : `${itemBase} relative after:absolute after:inset-x-2 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100 2xl:after:inset-x-3 ${
         light ? "text-ink-700 hover:text-brand-700 group-hover:text-brand-700" : "text-white/85 hover:text-white group-hover:text-white"
       }`;
   return (
     <Link href={item.href} className={cls} aria-haspopup={hasMenu(item) ? "true" : undefined}>
       {item.label}
-      {item.highlight && <Sparkles className="size-4 fill-white" aria-hidden />}
+      {item.highlight && <Sparkles className="ai-star size-4 fill-white" aria-hidden />}
       {hasMenu(item) && <ChevronDown className="size-3.5 opacity-80 transition-transform duration-200 group-hover:rotate-180" aria-hidden />}
     </Link>
   );

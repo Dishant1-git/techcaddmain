@@ -331,8 +331,7 @@ export function CpEnrol({ course, courses }: { course: CoursePage; courses: stri
         <div className="extrude">
           <div className="neu grid items-center gap-12 !rounded-[2.5rem] p-6 sm:p-10 lg:grid-cols-2 lg:p-14">
             <div>
-              <span data-reveal="up" className="eyebrow !border-0 !bg-neu shadow-neu-inset-sm">Limited seats per batch</span>
-              <h2 id="enrol-title" data-reveal="up" style={delay(1)} className="mt-5 text-3xl font-extrabold leading-[1.1] text-ink-900 sm:text-4xl lg:text-5xl">
+              <h2 id="enrol-title" data-reveal="up" style={delay(1)} className="text-3xl font-extrabold leading-[1.1] text-ink-900 sm:text-4xl lg:text-5xl">
                 Start your {course.navLabel} journey <span className="text-gradient">this month.</span>
               </h2>
               <p data-reveal="up" style={delay(2)} className="mt-5 max-w-lg text-lg text-ink-700">

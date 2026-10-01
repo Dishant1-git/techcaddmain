@@ -1,51 +1,50 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Clock, Mail, MapPin, Phone, Star } from "lucide-react";
-import { branches, footerLinks, site } from "@/data/site";
-import { Logo } from "@/components/ui/Logo";
-import { SocialIcons } from "@/components/ui/SocialIcons";
+import { footerLegal, footerLinks, site } from "@/data/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer id="contact" className="relative overflow-hidden bg-ink-950 text-ink-300">
-      <div className="bg-grid absolute inset-0 opacity-40" aria-hidden />
-      <div className="absolute -top-40 left-1/2 size-[36rem] -translate-x-1/2 rounded-full bg-brand-600/20 blur-3xl" aria-hidden />
+    <footer id="contact" className="relative isolate overflow-hidden bg-slate-50 text-ink-700">
+      {/* Giant wordmark watermark */}
+      <Image
+        src="/logo/techcadd-wordmark.png"
+        alt=""
+        width={900}
+        height={192}
+        sizes="100vw"
+        className="pointer-events-none absolute inset-x-0 -bottom-[1.5vw] -z-10 h-auto w-full select-none px-[1vw] opacity-[0.06]"
+        aria-hidden
+      />
 
-      <div className="container-x relative">
-        {/* Newsletter / CTA strip */}
-        <div className="flex flex-col items-start justify-between gap-6 border-b border-white/10 py-12 md:flex-row md:items-center">
-          <div>
-            <h2 className="text-2xl font-bold text-white sm:text-3xl">Ready to build your tech career?</h2>
-            <p className="mt-2 text-ink-300">Talk to a TechCADD counsellor today — free career guidance, no obligation.</p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/#demo" className="btn-primary">Book Free Demo <ArrowRight className="size-4" aria-hidden /></Link>
-            <a href={site.phoneHref} className="btn-ghost-dark"><Phone className="size-4" aria-hidden /> Call Now</a>
-          </div>
-        </div>
-
-        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <Logo dark />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed">
-              {site.tagline}. Empowering students across Punjab, Chandigarh, Haryana, Himachal, J&amp;K and Delhi NCR with
-              industry-ready skills since 2007.
+      <div className="container-x">
+        <div className="grid gap-12 pb-20 pt-16 sm:grid-cols-3 lg:grid-cols-[4fr_1fr_2fr_2fr_2fr] lg:pb-28">
+          <div className="sm:col-span-3 lg:col-span-2 lg:pr-[20%]">
+            <Link href="/" aria-label="TechCADD home" className="inline-block">
+              <Image src="/logo/tece_new_logo.png" alt="techcadd — Your Skill & Technology Partner" width={900} height={231} sizes="208px" className="h-auto w-52" />
+            </Link>
+            <p className="mt-6 max-w-sm leading-relaxed">
+              An IT company and technology institute — AI, cloud, cybersecurity and full-stack engineering, plus the
+              training that builds the teams behind it.
             </p>
-            <ul className="mt-6 space-y-3 text-sm">
-              <li className="flex gap-3"><MapPin className="mt-0.5 size-4 shrink-0 text-accent-400" aria-hidden />{site.address}</li>
-              <li><a href={site.phoneHref} className="flex gap-3 hover:text-white"><Phone className="size-4 shrink-0 text-accent-400" aria-hidden />{site.phone}</a></li>
-              <li><a href={`mailto:${site.email}`} className="flex gap-3 hover:text-white"><Mail className="size-4 shrink-0 text-accent-400" aria-hidden />{site.email}</a></li>
-              <li className="flex gap-3"><Clock className="size-4 shrink-0 text-accent-400" aria-hidden />{site.hours}</li>
-            </ul>
+            <a
+              href={`mailto:${site.email}`}
+              className="mt-7 inline-flex items-center rounded-full bg-brand-900 px-8 py-4 font-semibold text-white shadow-xl shadow-brand-900/25 transition-colors hover:bg-brand-800"
+            >
+              {site.email}
+            </a>
+            <p className="mt-7">
+              <a href={site.phoneHref} className="text-ink-500 transition-colors hover:text-brand-700">{site.phone}</a>
+            </p>
           </div>
 
           {Object.entries(footerLinks).map(([heading, links]) => (
-            <div key={heading} className="lg:col-span-2">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-white">{heading}</h3>
-              <ul className="mt-5 space-y-3 text-sm">
+            <div key={heading}>
+              <h3 className="text-xl font-semibold text-ink-950">{heading}</h3>
+              <ul className="mt-8 space-y-6">
                 {links.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="transition-colors hover:text-white">{l.label}</Link>
+                    <Link href={l.href} className="transition-colors hover:text-brand-700">{l.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -53,23 +52,18 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Branch strip */}
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-3 border-t border-white/10 py-6 text-sm">
-          <span className="mr-2 font-semibold text-white">Our Branches:</span>
-          {branches.map((b) => (
-            <Link key={b.slug} href={`/branches/${b.slug}`} className="rounded-full border border-white/10 px-3 py-1 transition-colors hover:border-brand-400 hover:text-white">
-              {b.city}
-            </Link>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 py-6 text-sm md:flex-row">
-          <p>© {year} {site.legalName}. All rights reserved.</p>
-          <div className="flex items-center gap-2 text-white">
-            <Star className="size-4 fill-accent-400 text-accent-400" aria-hidden />
-            {site.rating.score}/5 Google Rating · {site.rating.reviews} reviews
-          </div>
-          <SocialIcons itemClass="bg-white/5 text-ink-300 hover:bg-brand-600 hover:text-white" />
+        <div className="border-t border-ink-950/10 pb-10 pt-8 text-sm text-ink-500">
+          <p>
+            © {year} {site.legalName}. Built in{" "}
+            <Link href="/branches/jalandhar" className="font-medium text-brand-600 hover:text-brand-700">Jalandhar</Link>.
+          </p>
+          <ul className="mt-5 flex flex-wrap gap-x-7 gap-y-2">
+            {footerLegal.map((l) => (
+              <li key={l.label}>
+                <Link href={l.href} className="transition-colors hover:text-brand-700">{l.label}</Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </footer>

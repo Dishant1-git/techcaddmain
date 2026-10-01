@@ -9,7 +9,7 @@ const INNER = 5; // first N items sit on the inner ring
 const RING = { inner: 27, outer: 45 }; // radius in % of the orbit box
 
 /** Category tabs + two slowly rotating rings of logos with hover/focus tooltips.
- *  Rotation pauses on hover and is disabled for reduced-motion users. */
+ *  Rotation never pauses; it is disabled for reduced-motion users. */
 export function TechOrbit({ tabs }: { tabs: OrbitTab[] }) {
   const [active, setActive] = useState(tabs[0].id);
   const tab = tabs.find((t) => t.id === active) ?? tabs[0];
@@ -103,7 +103,7 @@ function Logo({ item }: { item: OrbitItem }) {
     <div
       tabIndex={0}
       aria-label={item.name}
-      className="group/logo relative grid size-11 cursor-default place-items-center rounded-full border border-ink-900/5 bg-white shadow-[0_8px_24px_-10px_rgba(10,19,48,0.35)] outline-none transition-transform duration-300 hover:z-10 hover:scale-115 focus-visible:z-10 focus-visible:scale-115 focus-visible:ring-2 focus-visible:ring-brand-500 sm:size-14 lg:size-[4.5rem]"
+      className="group/logo relative grid size-11 cursor-default place-items-center rounded-full border border-ink-900/5 bg-white shadow-[0_8px_24px_-10px_rgba(10,19,48,0.35)] outline-none focus-visible:ring-2 focus-visible:ring-brand-500 sm:size-14 lg:size-[4.5rem]"
     >
       {item.path ? (
         <svg viewBox="0 0 24 24" className="size-5 sm:size-6 lg:size-8" fill={item.color} aria-hidden>
