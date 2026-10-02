@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   ArrowRight, Box, Brain, ChartColumn, ChevronDown, Cloud, CodeXml, MapPin, Megaphone, Menu, Monitor, Phone, Quote,
@@ -22,14 +23,14 @@ const itemBase =
   "flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3 2xl:text-[16px]";
 
 /** Top-level menu label (link or dropdown trigger). The `highlight` item renders as the glowing AI pill. */
-function TopItem({ item, light }: { item: NavItem; light: boolean }) {
+function TopItem({ item, light, active }: { item: NavItem; light: boolean; active: boolean }) {
   const cls = item.highlight
     ? `${itemBase} ai-glow !px-4 font-semibold text-white`
     : `${itemBase} relative after:absolute after:inset-x-2 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-current after:transition-transform after:duration-300 group-hover:after:scale-x-100 2xl:after:inset-x-3 ${
         light ? "text-ink-700 hover:text-brand-700 group-hover:text-brand-700" : "text-white/85 hover:text-white group-hover:text-white"
       }`;
   return (
-    <Link href={item.href} className={cls} aria-haspopup={hasMenu(item) ? "true" : undefined}>
+    <Link href={item.href} className={cls} aria-haspopup={hasMenu(item) ? "true" : undefined} aria-current={active ? "page" : undefined}>
       {item.label}
       {item.highlight && <Sparkles className="ai-star size-4 fill-white" aria-hidden />}
       {hasMenu(item) && <ChevronDown className="size-3.5 opacity-80 transition-transform duration-200 group-hover:rotate-180" aria-hidden />}
@@ -37,10 +38,17 @@ function TopItem({ item, light }: { item: NavItem; light: boolean }) {
   );
 }
 
+/** A top-level item counts as "active" if its own href matches, or (for Resources) the visitor is on a /guidance page. */
+function isActiveTop(item: NavItem, pathname: string) {
+  if (item.href === "/") return pathname === "/";
+  if (item.label === "Resources") return pathname.startsWith("/guidance");
+  return !item.href.includes("#") && pathname.startsWith(item.href);
+}
+
 /** Dropdown panel — CSS only (opens on hover and keyboard focus-within). */
-function Dropdown({ item }: { item: NavItem }) {
+function Dropdown({ item, activePath }: { item: NavItem; activePath: string }) {
   if (item.skills) return <SkillsPanel item={item} />;
-  if (item.columns) return <ColumnsPanel item={item} />;
+  if (item.columns) return <ColumnsPanel item={item} activePath={activePath} />;
   if (item.tiles) return <TilesPanel item={item} />;
   if (!item.children) return null;
   if (item.featured) return <FeaturedPanel item={item} />;
@@ -169,7 +177,7 @@ function TilesPanel({ item }: { item: NavItem }) {
 }
 
 /** Full-width numbered-columns panel + quote footer. Solid (Courses, 4 cols) or `variant: "glass"` (After 12th, 3 cols). */
-function ColumnsPanel({ item }: { item: NavItem }) {
+function ColumnsPanel({ item, activePath }: { item: NavItem; activePath: string }) {
   const p = item.columns!;
   const glass = p.variant === "glass";
   return (
@@ -198,21 +206,25 @@ function ColumnsPanel({ item }: { item: NavItem }) {
                 </>
               )}
               <ul className="mt-2.5">
-                {col.links.map((l) => (
-                  <li key={l.label}>
-                    <Link
-                      href={l.href}
-                      className={`flex items-center gap-2.5 rounded-lg px-2.5 text-ink-700 transition-colors hover:bg-brand-50 hover:text-brand-700 ${
-                        glass ? "py-1 text-[15px] 2xl:text-base" : "whitespace-nowrap py-1 text-[15px]"
-                      }`}
-                    >
-                      {l.label}
-                      {l.badge && (
-                        <span className="rounded-full bg-brand-100 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-700">{l.badge}</span>
-                      )}
-                    </Link>
-                  </li>
-                ))}
+                {col.links.map((l) => {
+                  const active = l.href === activePath;
+                  return (
+                    <li key={l.label}>
+                      <Link
+                        href={l.href}
+                        aria-current={active ? "page" : undefined}
+                        className={`flex items-center gap-2.5 rounded-lg px-2.5 transition-colors hover:bg-brand-50 hover:text-brand-700 ${
+                          active ? "bg-brand-50 font-semibold text-brand-700" : "text-ink-700"
+                        } ${glass ? "py-1 text-[15px] 2xl:text-base" : "whitespace-nowrap py-1 text-[15px]"}`}
+                      >
+                        {l.label}
+                        {l.badge && (
+                          <span className="rounded-full bg-brand-100 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-700">{l.badge}</span>
+                        )}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
@@ -305,6 +317,7 @@ function SkillsPanel({ item }: { item: NavItem }) {
 }
 
 export function Header() {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -350,8 +363,8 @@ export function Header() {
           <nav aria-label="Primary" className="hidden min-w-0 items-center gap-0 self-stretch xl:flex 2xl:gap-1.5">
             {nav.map((item) => (
               <div key={item.label} className={`group flex h-full items-center ${isWide(item) ? "" : "relative"}`}>
-                <TopItem item={item} light={scrolled} />
-                <Dropdown item={item} />
+                <TopItem item={item} light={scrolled} active={isActiveTop(item, pathname)} />
+                <Dropdown item={item} activePath={pathname} />
               </div>
             ))}
           </nav>
@@ -403,14 +416,26 @@ export function Header() {
                   </summary>
                   <div className="flex flex-col pb-3 pl-3">
                     {mobileLinks(item).map((c) => (
-                      <Link key={c.label} href={c.href} onClick={close} className="py-2 text-[15px] text-white/75 hover:text-white">
+                      <Link
+                        key={c.label}
+                        href={c.href}
+                        onClick={close}
+                        aria-current={c.href === pathname ? "page" : undefined}
+                        className={`py-2 text-[15px] hover:text-white ${c.href === pathname ? "font-semibold text-white" : "text-white/75"}`}
+                      >
                         {c.label}
                       </Link>
                     ))}
                   </div>
                 </details>
               ) : (
-                <Link key={item.label} href={item.href} onClick={close} className="border-b border-white/10 py-3.5 text-lg font-semibold">
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={close}
+                  aria-current={isActiveTop(item, pathname) ? "page" : undefined}
+                  className={`border-b border-white/10 py-3.5 text-lg font-semibold ${isActiveTop(item, pathname) ? "text-brand-400" : ""}`}
+                >
                   {item.label}
                 </Link>
               ),

@@ -19,7 +19,7 @@ modern sections, scroll animations, top performance.
 - No animation library. No images yet (all visuals are CSS gradients/SVG) → fast LCP.
 - Commands: `npm run dev` · `npm run build` · `npm run lint` · `npm start`.
 
-## Golden rule: content lives in ONE file
+## Golden rule: content lives in ONE file (plus one satellite for Guidance)
 **`src/data/site.ts`** = single source of truth. To change text, phone, courses, branches, stats,
 FAQs, testimonials, blogs, footer links → edit this file only. Components just render it.
 Exports: `site` (name/phone/email/address/hours/rating/socials/url), `branches`, `regions`, `nav` (type `NavItem`: children = dropdown, `mega` = 2-col panel, `featured` = About photo panel, `skills` = AI panel, `columns` = Courses panel, `tiles` = Internship panel, `highlight` = AI pill),
@@ -48,6 +48,14 @@ there, add `src/app/guidance/<slug>/page.tsx`, and point its 4 links in `site.ts
 - `icon` fields are string names → must exist in the map in `src/components/ui/Icon.tsx` (add new ones there).
 - `courses[].category` must match a `categories[].id`.
 - Adding a branch to `branches` auto-creates `/branches/<slug>`, adds it to header dropdown, footer, sitemap, demo form.
+
+**`src/data/guidance.ts`** is a deliberate second content file — same rule (components only render it),
+split out purely because the Guidance feature's copy (4 full landing pages) is too large for `site.ts` to
+stay readable. Exports `guidanceSummaries` (drives the home preview cards + hub's big cards) and one full
+content object per topic: `careerCounselling`, `mentorship`, `aiMarketing`, `freelancing`. Adding a 5th
+guidance topic means: add a summary to `guidanceSummaries`, add its content object, add a page at
+`src/app/guidance/<slug>/page.tsx`, and add its nav links in `site.ts`'s Resources▾Guidance column — none
+of this is generated from the array (unlike branches), it's wired by hand.
 
 ## File map
 ```
@@ -87,6 +95,16 @@ src/app/
                                           Client roadmap + Mistakes to Avoid + FAQ + CTA.
   sitemap.ts / robots.ts / not-found.tsx
 src/components/
+  guidance/  Shared building blocks for every /guidance/* page (data-driven from src/data/guidance.ts):
+             GuidanceHero (dark hero shell: breadcrumb, eyebrow, gradient-highlight h1, 2 CTAs, optional stat
+             row) · ServiceCard (compact "Explore More →" card, home preview) · GuidanceCard (large numbered
+             card w/ arrow, hub page) · FeatureGrid (flexible icon+title(+text) grid; `compact` = icon+title
+             chip, no body text — reused for "What You Get", "Career Paths", "Benefits", "Mistakes", etc.) ·
+             StepsTimeline (numbered circular-icon steps, same visual as home HowItWorks) · WorkflowStrip
+             (horizontal Research→Strategy→…→Optimization flow with arrows) · LogoGrid (initials-badge tiles
+             for AI tools / freelance platforms + a REQUIRED disclaimer prop — no real logos, no affiliation
+             claims) · MentorGrid (avatar-initials + rating + "View Profile") · GuidanceFaq (topic-scoped
+             accordion, same pattern as home Faq) · GuidanceCta (final banner, same gradient as home DemoCta).
   layout/  Header ("use client"): DARK navy sticky bar (bg-ink-950 + faint grid) matching the official techcadd header —
            white "techcadd™" wordmark, menu from `nav` in site.ts (Home, About Us▾, AI✦▾ blue pill with orbiting light border (`.ai-glow`) + twinkling star (`.ai-star`), Courses▾ (mega 2-col),
            Internship & Training▾, After 12th▾, Resources▾, Contact Us), blue glowing "Book Demo". Dropdowns are CSS-only
@@ -106,7 +124,9 @@ src/components/
            4×3 tile grid (icon square, label, optional badge e.g. "New") + shared QuoteFooter "See all training formats →".
            IMPORTANT: the scrolled pill's white bg + blur is a separate -z-10 layer inside the row (row has `isolate`), NOT a
            backdrop-filter on the row itself — nested backdrop-filters can't blur the page, which would break glass panels.
-           Regular top items get an animated underline while hovered/open (after: pseudo).
+           Regular top items get an animated underline while hovered/open (after: pseudo) — `isActiveTop()` also
+           keeps that underline (and dropdown-link highlight, via `activePath` threaded into ColumnsPanel) ON
+           for the current route via `usePathname()`, e.g. Resources stays highlighted on any `/guidance/*` page.
            Helpers in Header: hasMenu(), isWide(), mobileLinks() (drawer flattens skills groups). SCROLLED (>12px): outer bar turns transparent + pointer-events-none and the inner row becomes a
            floating frosted-white rounded-full pill (bg-white/90, blur, shadow), navy logo (`Logo dark={!scrolled}`), ink-700 links;
            AI pill + Book Demo stay blue. Outer height fixed at h-24 in both states → no layout jump. Full nav at xl+ (≥1280px); below that a dark drawer with <details> accordions + branch chips.

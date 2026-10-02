@@ -9,7 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-/** Maps icon names used in src/data/site.ts to components. Add new icons here. */
+/** Maps icon names used in src/data/site.ts (and src/data/guidance.ts) to components. Add new icons here. */
 const icons: Record<string, LucideIcon> = {
   Award, BadgeCheck, BookOpen, Box, BrainCircuit, Briefcase, Calendar, ChartBar, Clock, Cloud,
   Code2, Database, Eye, GraduationCap, Laptop, Layers, Megaphone, MessageSquare, PenTool, Rocket,
