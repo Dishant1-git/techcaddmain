@@ -78,7 +78,7 @@ export function A12Curriculum({ page }: { page: A12Page }) {
       <SectionHeading id="curriculum-title" eyebrow="Course curriculum" title={<>One module, one project, <span className="text-gradient">every month</span></>} />
       <ol className="timeline relative mt-16 space-y-8 lg:space-y-4">
         <li aria-hidden className="absolute bottom-4 left-5 top-4 w-1 rounded-full bg-[#dbe2f0] lg:left-1/2 lg:-ml-0.5">
-          <div className="timeline-fill size-full rounded-full bg-linear-to-b from-brand-500 to-accent-400" />
+          <div className="timeline-fill size-full rounded-full bg-accent-500" />
         </li>
         {page.months.map((m, i) => (
           <li key={m.title} className="relative grid pl-14 lg:grid-cols-2 lg:gap-16 lg:pl-0">

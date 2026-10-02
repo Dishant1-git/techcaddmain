@@ -79,7 +79,7 @@ export function PhaseTabs({ phases, syllabusHref }: { phases: Phase[]; syllabusH
           className="su-card tr-pop relative overflow-hidden p-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500 sm:p-9"
         >
           <div aria-hidden className="su-inset absolute inset-x-6 top-5 h-2 !rounded-full sm:inset-x-9">
-            <div className="h-full rounded-full bg-linear-to-r from-brand-500 to-accent-400 transition-[width] duration-700 ease-out" style={{ width: `${((i + 1) / phases.length) * 100}%` }} />
+            <div className="h-full rounded-full bg-accent-500 transition-[width] duration-700 ease-out" style={{ width: `${((i + 1) / phases.length) * 100}%` }} />
           </div>
           <p className="mt-4 text-sm font-semibold text-brand-700">Phase {i + 1} of {phases.length}</p>
           <h3 className="mt-2 text-2xl font-extrabold text-ink-900 sm:text-3xl">{p.title}</h3>

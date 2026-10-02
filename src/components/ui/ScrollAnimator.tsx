@@ -72,7 +72,7 @@ export function ScrollAnimator() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-linear-to-r from-brand-500 to-accent-500"
+      className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-accent-500"
       style={{ transform: "scaleX(var(--scroll-progress, 0))" }}
     />
   );

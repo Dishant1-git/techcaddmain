@@ -16,9 +16,9 @@
   --color-brand-800: #1935b2;
   --color-brand-900: #1a328c;
 
-  --color-accent-400: #ff9a3d;
-  --color-accent-500: #ff7a14;
-  --color-accent-600: #f05e07;
+  --color-accent-400: #ffd95a;
+  --color-accent-500: #fcc419;
+  --color-accent-600: #a16207; /* dark amber: readable accent TEXT on light backgrounds */
 
   --color-ink-950: #050b1f;
   --color-ink-900: #0a1330;
@@ -79,6 +79,18 @@
   100% { transform: scale(1.8); opacity: 0; }
 }
 
+/* Home hero ("career motherboard"): light pulses on the SVG traces, self-typing command, background scan beam. */
+@keyframes hero-trace { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes hero-type { from { width: 0; } }
+@keyframes hero-scan { from { transform: translateY(-100%); } to { transform: translateY(100%); } }
+.hero-trace { stroke-dasharray: 0.16 0.84; animation: hero-trace 2.8s linear infinite; }
+.hero-type { display: inline-block; overflow: hidden; white-space: nowrap; width: calc(var(--n) * 1ch); animation: hero-type 2.2s steps(var(--n)) 0.9s both; }
+.hero-scan { animation: hero-scan 9s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-trace, .hero-type, .hero-scan { animation: none; }
+  .hero-scan { display: none; }
+}
+
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 html, body { overflow-x: clip; }
 body { @apply bg-white text-ink-900 font-sans antialiased; }
@@ -105,7 +117,7 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
 @utility btn {
   @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500 active:translate-y-0 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-55 aria-disabled:pointer-events-none aria-disabled:opacity-55;
 }
-@utility btn-primary { @apply btn bg-accent-500 text-white shadow-lg shadow-accent-500/30 hover:-translate-y-0.5 hover:bg-accent-600; }
+@utility btn-primary { @apply btn bg-accent-500 text-ink-950 shadow-lg shadow-accent-500/30 hover:-translate-y-0.5 hover:bg-accent-400; }
 @utility btn-brand { @apply btn bg-brand-600 text-white shadow-lg shadow-brand-600/25 hover:-translate-y-0.5 hover:bg-brand-700; }
 @utility btn-ghost { @apply btn border border-ink-900/15 text-ink-900 hover:border-brand-600 hover:text-brand-700; }
 @utility btn-ghost-dark { @apply btn border border-white/25 text-white hover:bg-white/10; }
@@ -129,7 +141,7 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
   @apply grid shrink-0 place-items-center rounded-2xl bg-linear-to-br from-brand-500 to-brand-700 text-white shadow-glow;
 }
 @utility soft-icon-accent {
-  @apply grid shrink-0 place-items-center rounded-2xl bg-linear-to-br from-accent-400 to-accent-600 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_10px_24px_-8px_rgb(240_94_7/0.55)];
+  @apply grid shrink-0 place-items-center rounded-2xl bg-accent-500 text-ink-950 shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_10px_24px_-8px_rgb(252_196_25/0.55)];
 }
 @utility soft-active { @apply border border-brand-500/40 bg-linear-to-br from-brand-600 to-brand-800 text-white shadow-glow; }
 @utility btn-glass {
@@ -171,7 +183,7 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
   --su-raise-lg: var(--su-hi), 0 2px 4px rgb(10 19 48 / 0.05), 0 30px 56px -24px rgb(29 83 240 / 0.4), -10px -10px 26px rgb(255 255 255 / 0.8);
   --su-press: inset 3px 3px 8px rgb(10 19 48 / 0.13), inset -3px -3px 8px rgb(255 255 255 / 0.9);
   --su-brand: inset 0 1px 0 rgb(255 255 255 / 0.3), 0 10px 24px -8px rgb(29 83 240 / 0.6);
-  --su-accent: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 10px 24px -8px rgb(240 94 7 / 0.5);
+  --su-accent: inset 0 1px 0 rgb(255 255 255 / 0.5), 0 10px 24px -8px rgb(252 196 25 / 0.5);
 }
 @utility su-card {
   border-radius: 1.75rem;
@@ -235,7 +247,13 @@ h1, h2, h3, h4 { @apply font-display tracking-tight; }
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, background-color 0.3s ease;
   &:hover { transform: translateY(-4px); border-color: rgb(89 152 255 / 0.45); }
 }
-@utility text-gradient { @apply bg-linear-to-r from-brand-500 via-brand-400 to-accent-400 bg-clip-text text-transparent; }
+/* Highlighted heading words. Formerly a blue→orange gradient (hence the name); now a solid colour:
+   brand blue on light surfaces, accent yellow on dark ones. */
+@utility text-gradient { color: var(--color-brand-600); }
+.bg-ink-950 .text-gradient, .bg-ink-900 .text-gradient, .on-dark .text-gradient, .text-white .text-gradient { color: var(--color-accent-400); }
+.on-dark .on-light .text-gradient { color: var(--color-brand-600); }
+/* Yellow accent surfaces always carry dark text/icons (white on yellow is unreadable). Unlayered, so it beats text-white. */
+.bg-accent-500, .bg-accent-400 { color: var(--color-ink-950); }
 @utility bg-grid {
   background-image:
     linear-gradient(to right, rgb(255 255 255 / 0.06) 1px, transparent 1px),
@@ -313,6 +331,17 @@ details[open] .faq-icon { transform: rotate(45deg); }
   }
 }
 
+/* Home courses bento: cover photos drift slowly as the card crosses the viewport (zero JS). */
+@keyframes bento-pan { from { transform: scale(1.15) translateY(-5%); } to { transform: scale(1.15) translateY(5%); } }
+@keyframes prog-zoom { from { transform: scale(1.25); } to { transform: none; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .bento-pan { animation: bento-pan linear both; animation-timeline: view(); }
+    /* Home programs stack: each panel's photo settles from a slight zoom while the panel slides into view. */
+    .prog-zoom { animation: prog-zoom linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
+  }
+}
+
 /* ───────── Scroll-driven animations (Courses dropdown pages) ─────────
    Pure CSS (no JS). Only where supported and motion is allowed — otherwise content is simply static & visible.
    Never put these on the same element as data-reveal or a hover transform (use a wrapper). */
@@ -344,6 +373,8 @@ details[open] .faq-icon { transform: rotate(45deg); }
     .timeline { view-timeline-name: --timeline; }
     .timeline-fill { transform-origin: top; animation: grow-y linear both; animation-timeline: --timeline; animation-range: cover 5% contain 60%; }
     .timeline-dot { animation: dot-on linear both; animation-timeline: view(); animation-range: cover 30% cover 45%; }
+    /* Home "How it works": step progress bar grows as its card scrolls up the viewport. */
+    .hiw-bar { animation: grow-x linear both; animation-timeline: view(); animation-range: entry 100% cover 45%; }
     /* SVG path draws itself (path needs pathLength="1" + stroke-dasharray="1"). */
     .draw-path { animation: draw linear both; animation-timeline: view(); animation-range: entry 20% cover 55%; }
     /* Horizontal carousels: the card in the middle is full size, neighbours shrink and fade. */
@@ -450,9 +481,8 @@ details[open] .faq-icon { transform: rotate(45deg); }
   50% { box-shadow: 0 0 30px -2px rgb(51 114 251 / 0.95), 0 0 12px -2px rgb(255 255 255 / 0.35); }
 }
 @keyframes ai-twinkle {
-  0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
-  40% { transform: scale(1.35) rotate(18deg); opacity: 0.85; }
-  60% { transform: scale(0.85) rotate(-8deg); opacity: 1; }
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.55); opacity: 0.45; }
 }
 .ai-glow {
   --ai-bg: var(--color-brand-600);
@@ -465,7 +495,9 @@ details[open] .faq-icon { transform: rotate(45deg); }
 .ai-glow:hover, .group:hover > .ai-glow { --ai-bg: var(--color-brand-500); }
 @media (prefers-reduced-motion: no-preference) {
   .ai-glow { animation: ai-orbit 3s linear infinite, ai-glow-pulse 3s ease-in-out infinite; }
-  .ai-star { animation: ai-twinkle 2.2s ease-in-out infinite; transform-origin: center; }
+  /* Two sparkles pulse in opposite phase (see AiSpark in Header.tsx). */
+  .ai-star { animation: ai-twinkle 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .ai-star-2 { animation-delay: -1.2s; }
 }
 
 /* Career quiz: "Download PDF" prints only the result plan. */

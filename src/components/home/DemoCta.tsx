@@ -10,12 +10,12 @@ export function DemoCta() {
       <div className="bg-grid-light absolute inset-0 -z-10 opacity-60" aria-hidden />
 
       <div className="container-x text-center">
-        <p data-reveal="up" className="flex items-center justify-center gap-4 text-sm font-semibold uppercase tracking-[0.25em] text-amber-500">
+        <p data-reveal="up" className="flex items-center justify-center gap-4 text-sm font-semibold uppercase tracking-[0.25em] text-accent-600">
           <span className="h-px w-9 bg-ink-300" aria-hidden /> Ready to get started?
         </p>
         <h2 data-reveal="up" style={delay(1)} className="mx-auto mt-5 max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight text-ink-950 sm:text-6xl lg:text-7xl">
           Start building <br className="hidden sm:block" />
-          your <span className="text-amber-400">career</span> today.
+          your <span className="text-accent-500">career</span> today.
         </h2>
         <p data-reveal="up" style={delay(2)} className="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-ink-500 sm:text-xl">
           Talk to a counsellor today. One call is usually enough to know which track fits your degree, your schedule and

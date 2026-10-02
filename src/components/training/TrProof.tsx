@@ -124,7 +124,7 @@ export function TrLoop() {
       <SectionHeading id="loop-title" eyebrow="How every class runs" title={<>The <span className="text-gradient">working loop</span></>} text="Repeated for every module, so the job feels familiar before you get it." />
       <ol className="tr-rail relative mt-16 grid gap-12 md:grid-cols-3 md:gap-8">
         <span aria-hidden className="su-inset absolute left-[16.6%] right-[16.6%] top-9 hidden h-3 !rounded-full md:block" />
-        <span aria-hidden className="tr-rail-x absolute left-[16.6%] right-[16.6%] top-10 hidden h-1 rounded-full bg-linear-to-r from-brand-500 via-brand-400 to-accent-400 md:block" />
+        <span aria-hidden className="tr-rail-x absolute left-[16.6%] right-[16.6%] top-10 hidden h-1 rounded-full bg-accent-500 md:block" />
         {trainingCommon.loop.map((s, i) => (
           <li key={s.title} data-reveal="zoom" style={delay(i, 160)} className="relative text-center">
             <span className="su-card relative mx-auto grid size-20 place-items-center !rounded-full">

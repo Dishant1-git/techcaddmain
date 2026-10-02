@@ -22,6 +22,16 @@ const mobileLinks = (i: NavItem): NavLink[] =>
 const itemBase =
   "flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3 2xl:text-[16px]";
 
+/** AI pill mark: one large + one small four-point sparkle in accent yellow, pulsing in opposite phase (.ai-star in globals.css). */
+function AiSpark() {
+  return (
+    <svg viewBox="0 0 24 24" className="size-[1.15rem] fill-accent-400" aria-hidden>
+      <path className="ai-star" d="M10 3C10.6 7.6 12.4 9.4 17 10C12.4 10.6 10.6 12.4 10 17C9.4 12.4 7.6 10.6 3 10C7.6 9.4 9.4 7.6 10 3Z" />
+      <path className="ai-star ai-star-2" d="M19 14C19.3 16.3 20.2 17.2 22.5 17.5C20.2 17.8 19.3 18.7 19 21C18.7 18.7 17.8 17.8 15.5 17.5C17.8 17.2 18.7 16.3 19 14Z" />
+    </svg>
+  );
+}
+
 /** Top-level menu label (link or dropdown trigger). The `highlight` item renders as the glowing AI pill. */
 function TopItem({ item, light, active }: { item: NavItem; light: boolean; active: boolean }) {
   const cls = item.highlight
@@ -32,7 +42,7 @@ function TopItem({ item, light, active }: { item: NavItem; light: boolean; activ
   return (
     <Link href={item.href} className={cls} aria-haspopup={hasMenu(item) ? "true" : undefined} aria-current={active ? "page" : undefined}>
       {item.label}
-      {item.highlight && <Sparkles className="ai-star size-4 fill-white" aria-hidden />}
+      {item.highlight && <AiSpark />}
       {hasMenu(item) && <ChevronDown className="size-3.5 opacity-80 transition-transform duration-200 group-hover:rotate-180" aria-hidden />}
     </Link>
   );

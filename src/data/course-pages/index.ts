@@ -8,7 +8,10 @@ import type { CourseGroupId, CoursePage } from "./types";
 import { programmingCourses } from "./programming";
 import { aiDataCourses } from "./ai-data";
 import { marketingCourses } from "./marketing";
+import { marketingMoreCourses } from "./marketing-b";
 import { cyberCloudCourses } from "./cyber-cloud";
+import { cyberCloudMoreCourses } from "./cyber-cloud-b";
+import { moreCourses } from "./more";
 
 
 export type CourseGroup = {
@@ -102,6 +105,26 @@ export const courseGroups: CourseGroup[] = [
       expertise: ["Ethical hacking", "Network security", "AWS & Azure", "Linux", "DevOps"],
     },
   },
+  {
+    id: "more",
+    title: "More Courses",
+    text: "CADD, office, accounting and design",
+    icon: "Layers",
+    audience: [
+      { title: "Students after 10th & 12th", text: "Pick up a practical, job-oriented skill alongside or after school.", icon: "GraduationCap" },
+      { title: "Diploma, ITI & engineering students", text: "Add the design software your branch expects and complete industrial training.", icon: "BookOpen" },
+      { title: "Job seekers & office staff", text: "Build the computer, accounting or design skills employers ask for first.", icon: "Briefcase" },
+      { title: "Business owners & freelancers", text: "Manage your own accounts, drawings or creatives without depending on others.", icon: "Rocket" },
+    ],
+    mentor: {
+      name: "Harjit Sandhu",
+      role: "Senior CADD & Skills Mentor",
+      experience: "14+ years",
+      students: "4,000+",
+      bio: "Leads the CADD, accounting and design faculty. Every topic is taught on real drawings, case files and client briefs, so students practise exactly what a workplace will hand them.",
+      expertise: ["AutoCAD & Revit", "SolidWorks", "TallyPrime & GST", "Adobe Creative Suite", "MS Office"],
+    },
+  },
 ];
 
 /** Shared by every course page. */
@@ -163,7 +186,10 @@ export const courseCommon = {
   ],
 };
 
-export const coursePages: CoursePage[] = [...programmingCourses, ...aiDataCourses, ...marketingCourses, ...cyberCloudCourses];
+export const coursePages: CoursePage[] = [
+  ...programmingCourses, ...aiDataCourses, ...marketingCourses, ...marketingMoreCourses,
+  ...cyberCloudCourses, ...cyberCloudMoreCourses, ...moreCourses,
+];
 
 export type { CourseGroupId, CoursePage } from "./types";
 

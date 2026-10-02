@@ -60,7 +60,7 @@ export function TrNav({ items, label = "Training sections" }: { items: TrNavItem
             ))}
           </ul>
           <a href="#enquire" className="su-btn hidden shrink-0 !px-5 !py-2 md:inline-flex">Book Free Demo</a>
-          <div aria-hidden className="scroll-progress absolute inset-x-6 bottom-0 hidden h-[3px] rounded-full bg-linear-to-r from-brand-500 to-accent-400 supports-[animation-timeline:scroll()]:block" />
+          <div aria-hidden className="scroll-progress absolute inset-x-6 bottom-0 hidden h-[3px] rounded-full bg-accent-500 supports-[animation-timeline:scroll()]:block" />
         </div>
       </div>
     </nav>

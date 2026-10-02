@@ -23,7 +23,7 @@ export function CourseBatches({ course }: { course: AiCourse }) {
 
       <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div data-reveal="up" className="glass relative overflow-hidden p-6 sm:p-8">
-          <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-brand-600 via-brand-400 to-accent-400" aria-hidden />
+          <div className="absolute inset-x-0 top-0 h-1 bg-accent-500" aria-hidden />
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-500">Next batch</p>
           <p className="mt-2 font-display text-3xl font-extrabold text-ink-900">{aiCourseCommon.nextBatch}</p>
           <p className="mt-2 text-sm text-ink-500">Classroom and live online seats are limited per batch.</p>

@@ -8,6 +8,15 @@ import type { StaticImageData } from "next/image";
 import navAboutImg from "@/assets/nav/about-techcadd.jpg";
 import navMissionImg from "@/assets/nav/mission-vision.jpg";
 import navFounderImg from "@/assets/nav/our-founder.jpg";
+import bentoDevImg from "@/assets/courses/dev.jpg";
+import bentoAiImg from "@/assets/courses/ai.jpg";
+import bentoCyberImg from "@/assets/courses/cyber.jpg";
+import bentoStudentsImg from "@/assets/courses/students.jpg";
+import bentoTeamImg from "@/assets/courses/team.jpg";
+import progTrainingImg from "@/assets/programs/industrial-training.jpg";
+import progAfter12Img from "@/assets/programs/after-12th.jpg";
+import progCertImg from "@/assets/programs/certificate.jpg";
+import progInternImg from "@/assets/programs/internship.jpg";
 
 
 export const site = {
@@ -21,7 +30,7 @@ export const site = {
   phoneHref: "tel:+919888122254",
   whatsapp: "919888122254",
   email: "info@techcaddjalandhar.com",
-  address: "Crystal Plaza, 158, Model Town Rd, Jalandhar, Punjab 144003",
+  address: "2nd Floor, Crystal Plaza, SCS 78, Opposite PIMS Hospital, Jalandhar, Punjab 144001",
   hours: "Mon – Sat: 9:00 AM – 7:00 PM",
   rating: { score: "4.9", reviews: "750+" },
   socials: {
@@ -32,14 +41,59 @@ export const site = {
   },
 };
 
-export const branches = [
-  { city: "Jalandhar", state: "Punjab", slug: "jalandhar", hq: true },
-  { city: "Chandigarh", state: "Chandigarh (UT)", slug: "chandigarh" },
-  { city: "Mohali", state: "Punjab", slug: "mohali" },
-  { city: "Ludhiana", state: "Punjab", slug: "ludhiana" },
-  { city: "Amritsar", state: "Punjab", slug: "amritsar" },
-  { city: "Phagwara", state: "Punjab", slug: "phagwara" },
-  { city: "Hoshiarpur", state: "Punjab", slug: "hoshiarpur" },
+/** `text`/`areas` feed the home #branches card. `address`/`phone` were taken from each branch's own techcadd website
+ *  (Oct 2026) — confirm with the client. Both are optional: without them the card falls back to the city + main phone. */
+export type Branch = { city: string; state: string; slug: string; hq?: boolean; text: string; areas: string[]; address?: string; phone?: string };
+export const branches: Branch[] = [
+  {
+    city: "Jalandhar", state: "Punjab", slug: "jalandhar", hq: true,
+    text: "Our flagship campus with advanced labs, an AI studio and the central placement cell.",
+    areas: ["Model Town", "Kapurthala", "Nakodar", "Kartarpur"],
+    address: "2nd Floor, Crystal Plaza, SCS 78, Opposite PIMS Hospital, Jalandhar, Punjab 144001",
+    phone: "+91 98881 22254",
+  },
+  {
+    city: "Chandigarh", state: "Chandigarh (UT)", slug: "chandigarh",
+    text: "Classroom and weekend batches for students and working professionals across the Tricity.",
+    areas: ["Chandigarh", "Panchkula", "Zirakpur", "Manimajra"],
+    address: "SCO 118-120, 2nd Floor, Sector 34-A, Near Sector 34 Market, Chandigarh 160022",
+    phone: "+91 98881 22254",
+  },
+  {
+    city: "Mohali", state: "Punjab", slug: "mohali",
+    text: "Training beside Punjab's largest IT hub, with a strong focus on development, cloud and data roles.",
+    areas: ["Mohali", "Kharar", "Landran", "Banur"],
+    address: "Plot F-547, 3rd Floor, Industrial Area 8A, Sector 75, Sahibzada Ajit Singh Nagar (Mohali), Punjab 160055",
+    phone: "+91 98881 22442",
+  },
+  {
+    city: "Ludhiana", state: "Punjab", slug: "ludhiana",
+    text: "IT, CADD and accounting courses for students and the city's manufacturing and trading businesses.",
+    areas: ["Ludhiana", "Khanna", "Jagraon", "Doraha"],
+    address: "1st Floor, Sear Complex, 773/1, Opposite BSNL Exchange, Bharat Nagar Chowk, Ludhiana, Punjab 141001",
+    phone: "+91 98881 22667",
+  },
+  {
+    city: "Amritsar", state: "Punjab", slug: "amritsar",
+    text: "Job-ready IT, design and digital marketing programs for the Majha region.",
+    areas: ["Amritsar", "Tarn Taran", "Batala", "Ajnala"],
+    address: "3rd Floor, District Shopping Complex, SCO 28, B-Block, Ranjit Avenue, Amritsar, Punjab 143001",
+    phone: "+91 99152 22509",
+  },
+  {
+    city: "Phagwara", state: "Punjab", slug: "phagwara",
+    text: "Industrial training and certification courses for university and college students nearby.",
+    areas: ["Phagwara", "Goraya", "Phillaur", "Banga"],
+    address: "Opposite Bus Stand, near Vishal Mega Mart, above HDFC Bank, GT Road, Sondhi Chowk, Phagwara, Punjab 144401",
+    phone: "+91 97812 97802",
+  },
+  {
+    city: "Hoshiarpur", state: "Punjab", slug: "hoshiarpur",
+    text: "Computer, programming and design courses close to home for students of the Doaba region.",
+    areas: ["Hoshiarpur", "Dasuya", "Garhshankar", "Mukerian"],
+    address: "Shop No 4, City Center, near Bus Stand, Model Town, Hoshiarpur, Punjab 146001",
+    phone: "+91 62843 47710",
+  },
 ];
 
 /** States/regions we serve via branches + live online batches */
@@ -152,20 +206,20 @@ export const nav: NavItem[] = [
   },
   {
     label: "Courses",
-    href: "/#courses",
+    href: "/courses",
     columns: {
       columns: [
         {
           title: "Programming",
           text: "Core languages and full-stack engineering",
           links: [
-            { label: "Python", href: "/courses/python" },
+            { label: "Python", href: "/courses/python", badge: "Hot" },
             { label: "Java", href: "/courses/java" },
             { label: "C & C++", href: "/courses/c-cpp" },
-            { label: "Kotlin", href: "/courses/kotlin" },
+            { label: "Kotlin", href: "/courses/kotlin", badge: "Trending" },
             { label: "Web Designing", href: "/courses/web-designing" },
             { label: "Web Development", href: "/courses/web-development" },
-            { label: "MERN Stack", href: "/courses/mern-stack" },
+            { label: "MERN Stack", href: "/courses/mern-stack", badge: "Hot" },
             { label: "MEAN Stack", href: "/courses/mean-stack" },
             { label: "PHP Full Stack", href: "/courses/php-full-stack" },
             { label: "IT Foundation Programme", href: "/courses/it-foundation" },
@@ -175,11 +229,11 @@ export const nav: NavItem[] = [
           title: "AI & Data",
           text: "Models, analytics and decision intelligence",
           links: [
-            { label: "Artificial Intelligence", href: "/courses/artificial-intelligence" },
-            { label: "Machine Learning", href: "/courses/machine-learning" },
+            { label: "Artificial Intelligence", href: "/courses/artificial-intelligence", badge: "Hot" },
+            { label: "Machine Learning", href: "/courses/machine-learning", badge: "Hot" },
             { label: "Deep Learning", href: "/courses/deep-learning" },
-            { label: "Data Science", href: "/courses/data-science" },
-            { label: "Data Analytics", href: "/courses/data-analytics" },
+            { label: "Data Science", href: "/courses/data-science", badge: "Trending" },
+            { label: "Data Analytics", href: "/courses/data-analytics", badge: "Trending" },
             { label: "Power BI", href: "/courses/power-bi" },
             { label: "Tableau", href: "/courses/tableau" },
           ],
@@ -189,11 +243,12 @@ export const nav: NavItem[] = [
           text: "Growth, performance and commerce",
           links: [
             { label: "Digital Marketing", href: "/courses/digital-marketing" },
-            { label: "Social Media Marketing", href: "/courses/social-media-marketing" },
+            { label: "Social Media Marketing", href: "/courses/social-media-marketing", badge: "Trending" },
             { label: "Google Ads", href: "/courses/google-ads" },
             { label: "SEO", href: "/courses/seo" },
             { label: "WordPress", href: "/courses/wordpress" },
             { label: "Shopify", href: "/courses/shopify" },
+            { label: "Meta Ads", href: "/courses/meta-ads", badge: "New" },
           ],
         },
         {
@@ -201,9 +256,25 @@ export const nav: NavItem[] = [
           text: "Secure, resilient infrastructure",
           links: [
             { label: "Cybersecurity", href: "/courses/cybersecurity" },
-            { label: "Ethical Hacking", href: "/courses/ethical-hacking" },
+            { label: "Ethical Hacking", href: "/courses/ethical-hacking", badge: "Trending" },
             { label: "Cloud Computing", href: "/courses/cloud-computing" },
             { label: "Linux", href: "/courses/linux" },
+            { label: "Network Security", href: "/courses/network-security" },
+            { label: "SOC Analyst", href: "/courses/soc-analyst", badge: "New" },
+            { label: "AWS", href: "/courses/aws", badge: "Hot" },
+            { label: "Microsoft Azure", href: "/courses/microsoft-azure" },
+            { label: "DevOps", href: "/courses/devops", badge: "Trending" },
+          ],
+        },
+        {
+          title: "More Courses",
+          text: "CADD, office, accounting and design",
+          links: [
+            { label: "Civil & Architecture CAD", href: "/courses/civil-architecture-cad", badge: "New" },
+            { label: "Mechanical CAD & CAM", href: "/courses/mechanical-cad-cam" },
+            { label: "Basic Computer", href: "/courses/basic-computer" },
+            { label: "Accounting & Tally", href: "/courses/accounting-tally", badge: "Hot" },
+            { label: "Graphics & Video", href: "/courses/graphics-video" },
           ],
         },
       ],
@@ -345,6 +416,33 @@ export const nav: NavItem[] = [
   { label: "Contact Us", href: "/#contact" },
 ];
 
+/** Home #about section (components/home/About.tsx). Photos are the small nav crops — replace with full-size originals. */
+export const about = {
+  title: "Two decades of turning learners into professionals",
+  highlight: "learners into professionals",
+  text: "Founded in Jalandhar in 2007, TechCADD has grown into one of North India's most trusted names in IT, design and engineering education. We bring international-standard training to Punjab, Chandigarh Tricity and students across Haryana, Himachal, J&K and Delhi NCR.",
+  founded: "Est. 2007 · Jalandhar",
+  founder: "Founded by Gourav Gupta",
+  statement: "Global curriculum. Local mentorship.",
+  statementText: "Aligned with international certification standards, taught by mentors who know the North India job market.",
+  photos: [
+    { image: navAboutImg, alt: "TechCADD students in a seminar hall", caption: "Campus sessions" },
+    { image: navMissionImg, alt: "Students at a TechCADD auditorium session", caption: "Industry talks" },
+  ],
+  stats: [
+    { value: 20, suffix: "+", label: "Years shaping tech talent" },
+    { value: 50000, suffix: "+", label: "Alumni worldwide" },
+    { value: 60, suffix: "+", label: "Career courses" },
+    { value: 7, suffix: "", label: "Branches in North India" },
+  ],
+  pillars: [
+    { title: "Industry-designed curriculum", text: "Built with hiring managers and updated every quarter." },
+    { title: "Learning by doing", text: "Hands-on labs, live projects and internships in every program." },
+    { title: "Practitioner mentors", text: "Taught by professionals from top IT companies and startups." },
+    { title: "Connected placement cell", text: "Direct links to Mohali, Chandigarh and NCR IT hubs." },
+  ],
+};
+
 export const heroStats = [
   { value: 20, suffix: "+", label: "Years of Excellence" },
   { value: 50000, suffix: "+", label: "Students Trained" },
@@ -355,6 +453,8 @@ export const heroStats = [
 export const categories = [
   {
     id: "ai",
+    href: "/ai-courses",
+    stack: ["LLMs", "RAG", "Python", "Agents"],
     title: "Artificial Intelligence",
     icon: "BrainCircuit",
     blurb: "Generative AI, ML, LLM apps & prompt engineering.",
@@ -362,6 +462,8 @@ export const categories = [
   },
   {
     id: "dev",
+    href: "/courses",
+    stack: ["React", "Next.js", "Node", "Django"],
     title: "Full-Stack Development",
     icon: "Code2",
     blurb: "MERN, Next.js, Python-Django, Java & PHP.",
@@ -369,6 +471,8 @@ export const categories = [
   },
   {
     id: "data",
+    href: "/courses",
+    stack: ["SQL", "Pandas", "Power BI", "Tableau"],
     title: "Data Science & Analytics",
     icon: "ChartBar",
     blurb: "Python, SQL, Power BI, Tableau & statistics.",
@@ -376,6 +480,8 @@ export const categories = [
   },
   {
     id: "cyber",
+    href: "/courses",
+    stack: ["Kali", "VAPT", "SOC", "SIEM"],
     title: "Cybersecurity",
     icon: "ShieldCheck",
     blurb: "Ethical hacking, VAPT, SOC & network security.",
@@ -383,6 +489,8 @@ export const categories = [
   },
   {
     id: "cloud",
+    href: "/courses",
+    stack: ["AWS", "Docker", "K8s", "CI/CD"],
     title: "Cloud & DevOps",
     icon: "Cloud",
     blurb: "AWS, Azure, Docker, Kubernetes & CI/CD.",
@@ -390,6 +498,8 @@ export const categories = [
   },
   {
     id: "marketing",
+    href: "/courses",
+    stack: ["SEO", "Meta Ads", "GA4", "AI tools"],
     title: "Digital Marketing",
     icon: "Megaphone",
     blurb: "SEO, performance ads, social & AI marketing.",
@@ -397,6 +507,8 @@ export const categories = [
   },
   {
     id: "design",
+    href: "/courses",
+    stack: ["Figma", "Photoshop", "Motion", "UX"],
     title: "Graphic & UI/UX Design",
     icon: "PenTool",
     blurb: "Figma, Adobe suite, motion & product design.",
@@ -404,6 +516,8 @@ export const categories = [
   },
   {
     id: "cad",
+    href: "/courses",
+    stack: ["AutoCAD", "SolidWorks", "Revit", "CATIA"],
     title: "CAD / CAM & Engineering",
     icon: "Box",
     blurb: "AutoCAD, SolidWorks, Revit, CATIA & 3ds Max.",
@@ -548,41 +662,123 @@ export const steps = [
   { title: "Get Certified & Placed", text: "Earn a verifiable certificate, build your portfolio and get placement support.", icon: "Rocket" },
 ];
 
+/** Home #why-us intro paragraph + reasons (text = main copy, points = short tags under it). */
+export const whyUsIntro =
+  "Choosing an institute is a career decision, not a purchase. Here is what you actually get at TechCADD — the same standards at every branch, whether you study in a classroom or live online.";
+
 export const whyUs = [
-  { title: "20+ Years of Legacy", text: "A trusted name in North India since 2007 with 50,000+ alumni.", icon: "Award" },
-  { title: "Industry-Expert Mentors", text: "Learn from working professionals, not just trainers.", icon: "Users" },
-  { title: "100% Placement Assistance", text: "Resume building, mock interviews and 500+ hiring partners.", icon: "Briefcase" },
-  { title: "AI in Every Course", text: "Every curriculum is upgraded with AI tools used in real jobs.", icon: "Sparkles" },
-  { title: "Live Projects & Internships", text: "Work on real client projects and earn internship certificates.", icon: "Layers" },
-  { title: "Flexible Learning", text: "Weekday, weekend, classroom and live online batches.", icon: "Clock" },
+  {
+    title: "20+ Years of Legacy", icon: "Award",
+    text: "A trusted name in North India since 2007. More than 50,000 alumni have trained with us, and many now return as mentors, guest speakers and recruiters for the next batch.",
+    points: ["Established 2007", "50,000+ alumni", "7 branches"],
+  },
+  {
+    title: "Industry-Expert Mentors", icon: "Users",
+    text: "You learn from working professionals, not just trainers. Mentors bring the tools, code reviews and deadlines of real teams into the classroom, and stay available for doubt-clearing outside it.",
+    points: ["Working professionals", "Weekly code reviews", "1:1 doubt support"],
+  },
+  {
+    title: "100% Placement Assistance", icon: "Briefcase",
+    text: "Placement preparation starts in the first month, not the last. A dedicated cell handles resume building, LinkedIn and portfolio reviews, aptitude practice and mock interviews, then connects you with 500+ hiring partners.",
+    points: ["Resume & portfolio reviews", "Mock interviews", "500+ hiring partners"],
+  },
+  {
+    title: "AI in Every Course", icon: "Sparkles",
+    text: "Every curriculum is upgraded with the AI tools used in real jobs. Developers learn AI-assisted coding, marketers learn AI content and analytics, and designers learn generative workflows — as part of the course, not an add-on.",
+    points: ["AI-assisted coding", "Prompt engineering", "Updated every quarter"],
+  },
+  {
+    title: "Live Projects & Internships", icon: "Layers",
+    text: "You build things that work. Each program ends with capstone projects modelled on real client briefs, so you graduate with a portfolio, a Git history and an internship certificate to show employers.",
+    points: ["Capstone projects", "Portfolio you can demo", "Internship certificate"],
+  },
+  {
+    title: "Flexible Learning", icon: "Clock",
+    text: "Study around college or a job. Choose weekday or weekend batches, classroom or live online, and switch mode if your schedule changes. Missed a class? Catch up with your mentor before the next one.",
+    points: ["Weekday & weekend", "Classroom or live online", "Catch-up sessions"],
+  },
+  {
+    title: "Recognised Certification", icon: "ShieldCheck",
+    text: "Finish with a verifiable TechCADD certificate, and get guided preparation for the global vendor certifications that employers ask for in cloud, security, data and design roles.",
+    points: ["Verifiable certificate", "Vendor exam guidance", "Industrial training letters"],
+  },
+  {
+    title: "Counselling Before Enrolment", icon: "Target",
+    text: "We would rather you pick the right course than the longest one. A free counselling session maps your degree, interests and target role to a track, and a demo class lets you try it before you commit.",
+    points: ["Free career counselling", "Free demo class", "No registration fee"],
+  },
 ];
 
+/** Home #programs sticky stack (one full-width photo panel each). Photos are Unsplash stock in src/assets/programs — swap for real ones. */
 export const programs = [
   {
     title: "6 Weeks / 6 Months Industrial Training",
     text: "University-approved industrial training for B.Tech, BCA, MCA, Diploma & polytechnic students of PTU, GNDU, PU, LPU, CU and more.",
     icon: "GraduationCap",
     tag: "B.Tech / BCA / MCA",
+    points: ["6-week & 6-month tracks", "Project + training letter", "Viva & report guidance"],
+    href: "/training", cta: "Explore industrial training",
+    image: progTrainingImg, alt: "Trainer presenting to a classroom of students",
   },
   {
     title: "After 12th Career Programs",
     text: "Job-ready diploma programs in IT, design and digital marketing for students who want a career right after school.",
     icon: "BookOpen",
     tag: "10+2 Students",
+    points: ["3, 4, 6 & 9-month programs", "No coding background needed", "Portfolio by graduation"],
+    href: "/after-12th", cta: "Explore After 12th programs",
+    image: progAfter12Img, alt: "Students laughing together around a laptop",
   },
   {
     title: "Certificate Programs",
     text: "Short, skill-focused certifications for working professionals looking to upskill or switch careers fast.",
     icon: "BadgeCheck",
     tag: "Professionals",
+    points: ["Weekend & evening batches", "Classroom or live online", "Verifiable certificate"],
+    href: "/courses", cta: "Browse certificate courses",
+    image: progCertImg, alt: "Mentor pointing at a laptop screen",
   },
   {
     title: "Internship & Live Projects",
     text: "Paid and unpaid internships with real deliverables, mentor reviews and experience letters.",
     icon: "Briefcase",
     tag: "Freshers",
+    points: ["Real client-style briefs", "Mentor code reviews", "Experience letter"],
+    href: "/training", cta: "See internship formats",
+    image: progInternImg, alt: "Team of developers coding at a shared table",
   },
 ];
+
+/** Home #courses bento grid (components/home/Courses.tsx). Photos are Unsplash stock in src/assets/courses — swap for real campus photos. */
+export const courseBento = {
+  dev: {
+    title: "Full-Stack Development", text: "MERN, Next.js, Python-Django and Java — from first commit to cloud deploy.",
+    chip: { title: "MERN + Next.js", meta: "6 months" }, href: "/courses", image: bentoDevImg, alt: "Laptop showing JavaScript code",
+  },
+  tagline: { pill: "Your goal — our curriculum", text: "Great careers built on real projects" },
+  ai: {
+    title: "AI & Data Science", text: "Generative AI, machine learning and analytics on real datasets.",
+    href: "/ai-courses", image: bentoAiImg, alt: "3D letters AI on a digital surface",
+  },
+  cyber: {
+    title: "Cybersecurity & Cloud", text: "Ethical hacking, networking, AWS and DevOps with hands-on labs.",
+    href: "/courses", image: bentoCyberImg, alt: "Glowing circuit diagram",
+  },
+  marketing: {
+    title: "Digital Marketing", text: "SEO, ads and AI content tools", caption: "Live campaigns, real results", label: "Tracks", href: "/courses",
+  },
+  stats: [
+    { heading: "Hiring Partners", value: 500, suffix: "+", note: "Companies recruiting from our campuses" },
+    { heading: "Placement Rate", value: 92, suffix: "%", note: "Of eligible students placed*" },
+  ],
+  tools: { title: "Tools & Technologies", text: "The latest industry tools and frameworks in every course", href: "/#technologies" },
+  rating: { title: "Google Rating", note: "From student reviews", href: "/#testimonials", image: bentoStudentsImg, alt: "Students working together on laptops" },
+  flexible: { title: "Flexible Batches", text: "Classroom, live online and weekend batches that fit college or a job." },
+  support: {
+    title: "Dedicated Placement Support", pill: "Mock interviews included", text: "Resume building, interview prep and referrals until you are placed.",
+    href: "/#placements", image: bentoTeamImg, alt: "Mentor guiding a student at a computer",
+  },
+};
 
 export const placementStats = [
   { value: 92, suffix: "%", label: "Placement rate*" },

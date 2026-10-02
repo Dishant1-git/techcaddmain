@@ -6,11 +6,11 @@ import { BlogSlider } from "./BlogSlider";
 
 const gradients = [
   "from-brand-500 to-ink-900",
-  "from-accent-500 to-brand-700",
+  "from-brand-500 to-brand-800",
   "from-ink-800 to-brand-600",
   "from-brand-700 to-accent-500",
   "from-brand-600 to-brand-900",
-  "from-ink-900 to-accent-600",
+  "from-ink-900 to-brand-700",
 ];
 
 export function Blog() {

@@ -18,7 +18,7 @@ function Bar({ label, range, accent }: { label: string; range: [number, number];
         <span className="font-mono text-sm font-bold tabular-nums text-white">{fmt(range)}</span>
       </div>
       <div role="img" aria-label={`${label}: ${range[0]} to ${range[1]} lakh per annum`} className="relative mt-2 h-2.5 rounded-full bg-white/10">
-        <span aria-hidden className={`absolute inset-y-0 rounded-full transition-all duration-700 ${accent ? "bg-linear-to-r from-brand-500 to-accent-400" : "bg-brand-300/70"}`} style={{ left: `${left}%`, width: `${width}%` }} />
+        <span aria-hidden className={`absolute inset-y-0 rounded-full transition-all duration-700 ${accent ? "bg-accent-500" : "bg-brand-300/70"}`} style={{ left: `${left}%`, width: `${width}%` }} />
       </div>
     </div>
   );

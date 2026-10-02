@@ -1,7 +1,6 @@
 import { Briefcase, FileText, MessagesSquare, UserCheck } from "lucide-react";
-import { placementStats, recruiters } from "@/data/site";
+import { placementStats } from "@/data/site";
 import { Counter } from "@/components/ui/Counter";
-import { Marquee } from "@/components/ui/Marquee";
 import { SectionHeading, delay } from "@/components/ui/SectionHeading";
 
 const support = [
@@ -44,19 +43,7 @@ export function Placements() {
           ))}
         </div>
 
-        <div className="mt-16 space-y-4">
-          <Marquee duration="50s">
-            {recruiters.map((r) => (
-              <span key={r} className="whitespace-nowrap rounded-2xl border border-white/10 bg-white/[0.04] px-7 py-4 font-display text-lg font-bold text-ink-300">{r}</span>
-            ))}
-          </Marquee>
-          <Marquee duration="55s" reverse>
-            {[...recruiters].reverse().map((r) => (
-              <span key={r} className="whitespace-nowrap rounded-2xl border border-white/10 bg-white/[0.04] px-7 py-4 font-display text-lg font-bold text-ink-300">{r}</span>
-            ))}
-          </Marquee>
-        </div>
-        <p className="mt-8 text-center text-xs text-ink-500">*Based on eligible students of recent batches. Individual outcomes vary.</p>
+        <p className="mt-10 text-center text-xs text-ink-500">*Based on eligible students of recent batches. Individual outcomes vary.</p>
       </div>
     </section>
   );

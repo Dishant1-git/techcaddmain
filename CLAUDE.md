@@ -16,17 +16,17 @@ modern sections, scroll animations, top performance.
 - **Tailwind CSS v4** — config lives in CSS (`src/app/globals.css` `@theme`), no tailwind.config file. Custom classes are declared with `@utility` (NOT `@layer components`) so they can be `@apply`-ed. Gradients: `bg-linear-to-r` (v4 name).
 - **lucide-react** icons (no brand icons in lucide → social SVGs are inline in `ui/SocialIcons.tsx`).
 - **simple-icons** brand logos for the Technologies orbit — resolved server-side in `Technologies.tsx` (only used paths reach the client). Brands missing from simple-icons (AWS, Azure, Power BI, Tableau, SolidWorks, Revit, Photoshop, Oracle, CATIA, MATLAB) use `mono` + `color` monogram in `techStack`.
-- No animation library. No images yet (all visuals are CSS gradients/SVG) → fast LCP.
+- No animation library. Few images (logo PNGs in /public/logo, nav photos, home courses bento photos — all below the fold except the logo); other visuals are CSS gradients/SVG → fast LCP.
 - Commands: `npm run dev` · `npm run build` · `npm run lint` · `npm start`.
 
 ## Golden rule: content lives in ONE file (plus one satellite for Guidance)
 **`src/data/site.ts`** = single source of truth. To change text, phone, courses, branches, stats,
 FAQs, testimonials, blogs, footer links → edit this file only. Components just render it.
-Exports: `site` (name/phone/email/address/hours/rating/socials/url), `branches`, `regions`, `nav` (type `NavItem`: children = dropdown, `mega` = 2-col panel, `featured` = About photo panel, `skills` = AI panel, `columns` = Courses panel, `tiles` = Internship panel, `highlight` = AI pill),
-`heroStats`, `categories`, `courses` (type `Course`), `aiProgram`, `steps`, `whyUs`, `programs`,
-`placementStats`, `recruiters`, `techStack` (type `TechItem`), `testimonials`, `faqs`, `blogs`, `footerLinks`, `footerLegal`,
+Exports: `about` (home #about copy/stats/pillars/photos), `site` (name/phone/email/address/hours/rating/socials/url), `branches`, `regions`, `nav` (type `NavItem`: children = dropdown, `mega` = 2-col panel, `featured` = About photo panel, `skills` = AI panel, `columns` = Courses panel, `tiles` = Internship panel, `highlight` = AI pill),
+`heroStats`, `categories`, `courses` (type `Course`), `aiProgram`, `steps`, `whyUs` (+ `points` tags) & `whyUsIntro`, `programs`,
+`courseBento` (home #courses bento text/links/photos), `placementStats`, `recruiters`, `techStack` (type `TechItem`), `testimonials`, `faqs`, `blogs`, `footerLinks`, `footerLegal`,
 EXCEPTION: Courses-dropdown pages live in `src/data/course-pages/` (index.ts = groups + `courseCommon` shared blocks,
-types.ts = `CoursePage`, one file per group: programming / ai-data / marketing / cyber-cloud). Adding one: add an entry to
+types.ts = `CoursePage`, one file per group: programming / ai-data / marketing (+ marketing-b) / cyber-cloud (+ cyber-cloud-b) / more = "More Courses" group). Adding one: add an entry to
 the group file + point its `nav` Courses link at `/courses/<slug>` → page, sitemap, hub card are automatic.
 EXCEPTION 2: Internship & Training dropdown pages live in `src/data/training/` (index.ts = `trainingCommon` shared blocks:
 tracks/heroBadges/heroFacts/whatYouGet/credentials/stats/certificates/loop/why/comparison/modes/faqs; types.ts = `TrainingPage`;
@@ -73,7 +73,10 @@ src/app/
                             MvHero (dark, jump links) · MvMission (#mission, 5 numbered pillars) · MvVision (#vision, "Future-ready by 2030"
                             panel + goals) · MvFuture (#future, dark .tr-fill statement + fields) · about/AboutCta. Content: `missionVision` in data/about.ts.
   ai-courses/page.tsx       AI hub (all AI course cards) — target of the AI pill + "Explore AI"
-  courses/page.tsx          Courses hub (grouped neumorphic cards) — target of "Browse all courses"
+  courses/page.tsx          ALL-COURSES page (light slate, NOT neumorphic): hero + course-page/CourseSearch ("use client": sticky search box,
+                            "/" shortcut, category chips with live counts, empty state, professional cards). Target of the header
+                            "Courses" item + "Browse all courses". Items built server-side: one card per course page, More Courses
+                            catalog pages expanded to one card per course name; badges read from the Courses nav
   courses/[slug]/page.tsx   SSG page per Courses-dropdown link (27): NEUMORPHIC, light hero (no side card), NO pricing,
                             17 sections + JSON-LD (Course w/o offers, BreadcrumbList, FAQPage)
   training/page.tsx + [slug]/page.tsx  Internship & Training hub + 12 SSG slug pages (dynamicParams=false) in the SITE THEME
@@ -132,11 +135,11 @@ src/components/
            AI pill + Book Demo stay blue. Outer height fixed at h-24 in both states → no layout jump. Full nav at xl+ (≥1280px); below that a dark drawer with <details> accordions + branch chips.
            TopBar.tsx (dark contact strip) exists but is NOT mounted (removed to match reference) — re-add in layout.tsx if wanted.
            Footer (LIGHT bg-slate-50, giant watermark = /logo/techcadd-wordmark.png at 6% opacity; /logo/tece_new_logo.png + blurb + email pill + phone, 3 columns from
-           `footerLinks`, copyright + `footerLegal` links; id="contact"; no CTA strip/branch chips/socials) · FloatingActions (WhatsApp + call)
+           `footerLinks`, copyright + `footerLegal` links; id="contact"; no CTA strip/branch chips/socials) · FloatingActions (ScrollTop "use client" yellow back-to-top + WhatsApp + call)
   ui/      ScrollAnimator ("use client", the ONLY global observer) · Counter · SectionHeading (+ `delay(i)` helper)
            Marquee (pure CSS) · Icon · Logo (official PNGs from /public/logo, navy + white stacked and cross-faded; `dark` prop shows white) · SocialIcons (+ whatsappPath)
-  home/    Hero · TrustStrip (alumni/recruiter marquee — NOT mounted on home, removed 2026-10-01) · About · Categories · AiProgram · Courses(+CourseExplorer "use client" filter tabs)
-           HowItWorks · WhyUs (bento) · Programs (industrial training/after 12th) · Placements · Branches
+  home/    Hero (dark "career motherboard": SVG PCB traces with travelling light pulses `.hero-trace` from a rotating-border core chip to 6 floating track nodes built from `categories`; self-typing terminal strip `.hero-type`; `.hero-scan` beam; fadeUp entrances on all copy EXCEPT the H1; stack Marquee; stats bar removed 2026-10-02; `heroStats` still used by about/AboutSections) · TrustStrip (alumni/recruiter marquee — NOT mounted on home, removed 2026-10-01) · About (corporate layout from `about` in site.ts: editorial copy + Established/Leadership facts, navy statement card + 2 real campus photos, hairline stat band with Counters, 4 numbered pillars) · Categories ("console" hairline grid: numbered cells, mono ~/tracks/<id> paths, `stack` tags, cell inverts to navy on hover; links via `categories[].href`) · AiProgram · Courses (BENTO grid from `courseBento`: 3 cols × 4 rows at lg, `Tile` = data-reveal wrapper + hover-lift inner (overflow-clip), `Cover` photo with `.bento-pan` scroll drift, stat Counters; photos = Unsplash stock in src/assets/courses; CourseExplorer filter tabs file kept but NOT mounted)
+           HowItWorks (zig-zag `.timeline`: data-reveal left/right cards, scroll-filled centre line, `.timeline-dot` nodes, `.hiw-bar` progress bars, ghost numbers; no overflow-hidden on the section) · WhyUs (sticky intro + navy rating card left, numbered hairline reason rows right; hover slides row + fills icon) · Programs (DARK sticky stack: one full-width h-svh photo panel per `programs` entry, `sticky top-0`, next panel slides over with rounded top; `.prog-zoom` photo; counter + program index; universities strip; NO overflow-hidden on section/wrapper) · Placements · Branches (+BranchExplorer "use client": navy detail card on the left follows the branch hovered/focused/clicked in the numbered directory on the right — city, text, areas, address/phone with fallbacks; Live Online row; "Serving students across North India" regions block removed)
            Technologies (+TechOrbit "use client": category tabs, 2 rotating logo rings, CSS tooltips; first 5 items = inner ring; rotation via `.orbit-spin` in globals.css, never pauses) · Testimonials · Faq (<details>, no JS) · Blog(+BlogSlider "use client": infinite 1/2/3-up carousel, auto-advances one card every 3.5s, pauses on hover/focus, prev/next + dots) · DemoCta(+DemoForm "use client")
   course/  AI course page sections, in order: CourseHero (single column, NO right-side card, breadcrumb, CSS-scroll parallax) · CourseNav ("use client",
            sticky top-24 anchor nav + scroll-spy) · CourseOverview · CourseOutcomes · CourseCurriculum(+CurriculumTabs
@@ -182,8 +185,8 @@ Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-pr
 `<GuidanceSection/>` (`headingLevel` prop defaults to h2 here since Hero already owns the page's h1).
 
 ## Design system
-- Colors: `brand-50…900` (blue, primary), `accent-400…600` (orange, CTAs), `ink-300…950` (navy text/dark bgs).
-- Utilities: `container-x`, `section` (vertical padding), `eyebrow` / `eyebrow-dark`, `btn-primary` (orange),
+- Colors: `brand-50…900` (blue, primary), `accent-400…600` (YELLOW since 2026-10-02: 400/500 = fills & text on dark, always with ink text on top; 600 = dark amber for accent TEXT on light), `ink-300…950` (navy text/dark bgs).
+- Utilities: `container-x`, `section` (vertical padding), `eyebrow` / `eyebrow-dark`, `btn-primary` (yellow, ink text),
   `btn-brand` (blue), `btn-ghost`, `btn-ghost-dark`, `card`, `card-hover`, `text-gradient`, `bg-grid` (dark bg), `bg-grid-light`, `mask-fade-x`,
   `link` / `link-dark` (inline text links), `defer-render` (content-visibility: auto for below-fold sections).
 - `btn` includes active (scale .98) + disabled/aria-disabled states. Global `:focus-visible` fallback ring (brand-500) in
@@ -209,7 +212,7 @@ Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-pr
 - Hover transforms go on an inner element when the wrapper has `data-reveal` (else hover inherits the 800ms reveal transition).
 - Pattern: sections alternate white / `bg-brand-50/50` / dark `bg-ink-950` (Hero, AiProgram, Placements) for rhythm.
 - Soft UI (AI course pages only): `neu`/`neu-sm`/`neu-inset` (must sit on `bg-clay`), `neu-dark*` (on `bg-clay-dark`), `clay-icon(-accent)`, `clay-card`, `clay-white`, `clay-orb` (decor), `btn-clay-primary`/`btn-clay-brand`, `btn-neu`. `SoftBlobs` decor in CourseSection.
-- Section header: always `<SectionHeading eyebrow title text dark? align?>`; highlight words with `<span className="text-gradient">`.
+- Section header: always `<SectionHeading eyebrow title text dark? align?>`; highlight words with `<span className="text-gradient">` (name is historical: now SOLID brand blue on light, accent yellow inside `.text-white`/`.bg-ink-950`/`.on-dark`).
 
 ## Animations (performance-critical — follow this)
 - Scroll reveal: add `data-reveal="up|down|left|right|zoom|fade"` to any element; stagger with `style={delay(i)}`.
@@ -237,6 +240,23 @@ Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-pr
   "Our Founder" nav link still points at a home anchor (no page yet).
 
 ## Changelog
+- 2026-10-02: Accent colour orange → YELLOW (tokens in globals.css; `.bg-accent-400/500` force ink text); `text-gradient` and all blue→orange line gradients made solid; scroll-to-top button; navbar AI pill sparkle replaced (AiSpark SVG, yellow); regions block restored in #branches as a light panel (yellow = on campus, blue = live online).
+- 2026-10-02: Real branch addresses + phones added to `branches` (from each branch own techcadd website); `site.address` now the Crystal Plaza, Opposite PIMS Hospital address; branch card gained a Google Maps Get directions link.
+- 2026-10-02: #branches card is now interactive (BranchExplorer); `branches` typed `Branch` with `text`, `areas`, optional `address`/`phone` — only Jalandhar has an address; other branches need real addresses/phones from the client.
+- 2026-10-02: Home #branches redesigned (HQ card + branch directory); regions block removed (`regions` export in site.ts now unused).
+- 2026-10-02: Placements section: recruiter-name marquee rows removed (home + branch pages); stats, support cards and footnote kept.
+- 2026-10-02: Header "Courses" now links to /courses; /courses rebuilt as a searchable all-courses page (CourseSearch client component, redesigned cards, category filters).
+- 2026-10-02: The 5 "More Courses" slugs now render a CATALOG page (cards per course name from `src/data/course-pages/catalog.ts` → course-page/CpCatalog: CatalogHero + CatalogSections, then CpFaq + CpEnrol). Card with `href` opens an existing course page, otherwise a WhatsApp enquiry. more.ts still supplies title/tagline/FAQs/metadata; its syllabus/projects etc. are no longer rendered.
+- 2026-10-02: Courses dropdown → 5 columns with Hot/Trending/New badges; 11 new course pages (meta-ads; network-security, soc-analyst, aws, microsoft-azure, devops; new `more` group: civil-architecture-cad, mechanical-cad-cam, basic-computer, accounting-tally, graphics-video) → 38 course pages. New content + "More Courses" mentor are SAMPLE.
+- 2026-10-02: GuidanceSection (home #guidance + /guidance hub top) redesigned: sticky intro left, 2×2 numbered cards right (first = navy FREE feature card); no longer uses guidance/ServiceCard. Footer link columns now one row for any number of `footerLinks` groups (--cols).
+- 2026-10-02: Home #programs → dark sticky stacked full-width photo panels; `programs` gained points/href/cta/image/alt; stock photos in src/assets/programs.
+- 2026-10-02: #why-us content expanded: intro paragraph, longer copy + 3 tags per reason, 8 reasons (added Recognised Certification, Counselling Before Enrolment). New claims are SAMPLE — confirm with client.
+- 2026-10-02: Home #why-us redesigned: sticky left intro with rating/CTA card, 6 numbered reason rows (replaces bento cards). Hero stats bar removed.
+- 2026-10-02: Hero redesigned as an animated "career motherboard" (replaces the IDE window mock-up + floating placed/package chips); hero-* keyframes in globals.css.
+- 2026-10-02: Home #about redesigned corporate-style (editorial intro, statement card, campus photos, stat band, numbered pillars); content moved to `about` in site.ts.
+- 2026-10-02: Home #how-it-works → animated zig-zag journey timeline (scroll-filled line, nodes light up, progress bars grow, cards slide in), CTA to #demo.
+- 2026-10-02: Home #categories (Learning Tracks) redesigned IT-style: left heading + mono stat strip, joined hairline grid, hover-invert cells; `categories` gained `href` + `stack`.
+- 2026-10-02: Home #courses → bento grid (10 tiles: 3 course-track photo cards, AI brand card, stats, tools, rating, batches, placement support) with staggered reveals + `.bento-pan` scroll-driven photo drift; replaces the CourseExplorer filter list. Stock photos added in src/assets/courses.
 - 2026-09-30: Guidance feature built out in full: home "02 Guidance" preview section, a `/guidance` hub page
   ("Find the Guidance You Need" big-card grid) and 4 complete landing pages (career-counselling, mentorship,
   ai-marketing, freelancing), each with hero/why/feature-grids/steps/FAQ/final-CTA. New `src/data/guidance.ts`

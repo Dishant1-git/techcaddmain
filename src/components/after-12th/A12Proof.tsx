@@ -65,7 +65,7 @@ export function A12Scope({ page }: { page: A12Page }) {
       <ol className="tr-rail relative mt-16 grid gap-x-7 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
         {/* Pressed groove behind the number discs; fills left → right as the row scrolls in (lg+ only). */}
         <li aria-hidden className="neu-inset absolute left-[12.5%] right-[12.5%] top-8 hidden h-3 !rounded-full p-[3px] lg:block">
-          <div className="tr-rail-x size-full rounded-full bg-linear-to-r from-brand-500 to-accent-400" />
+          <div className="tr-rail-x size-full rounded-full bg-accent-500" />
         </li>
         {subject.roles.map((r, i) => (
           <li key={r.title} className="relative">
@@ -78,7 +78,7 @@ export function A12Scope({ page }: { page: A12Page }) {
                 <h3 className="mt-3 text-xl font-bold text-ink-900 transition-colors duration-300 group-hover:text-brand-700">{r.title}</h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-700">{r.text}</p>
                 <span aria-hidden className="neu-inset mt-6 block h-3 !rounded-full p-[3px]">
-                  <span className="block h-full rounded-full bg-linear-to-r from-brand-500 to-accent-400 transition-[width] duration-700 ease-out" style={{ width: `${((i + 1) / subject.roles.length) * 100}%` }} />
+                  <span className="block h-full rounded-full bg-accent-500 transition-[width] duration-700 ease-out" style={{ width: `${((i + 1) / subject.roles.length) * 100}%` }} />
                 </span>
               </article>
             </div>
@@ -130,7 +130,7 @@ export function A12Loop() {
       <SectionHeading id="loop-title" eyebrow="The working loop" title={<>Learn it. Build it. <span className="text-gradient">Make it yours.</span></>} text="Every topic in every month runs through the same three steps." />
       <ol className="tr-rail relative mt-16 grid gap-8 lg:grid-cols-3 lg:gap-10">
         <li aria-hidden className="absolute left-[16.6%] right-[16.6%] top-10 hidden h-1 rounded-full bg-[#dbe2f0] lg:block">
-          <div className="tr-rail-x size-full rounded-full bg-linear-to-r from-brand-500 to-accent-400" />
+          <div className="tr-rail-x size-full rounded-full bg-accent-500" />
         </li>
         {a12Common.loop.map((s, i) => (
           <li key={s.title} data-reveal="up" style={delay(i, 140)} className="relative text-center">

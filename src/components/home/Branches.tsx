@@ -1,73 +1,65 @@
-import Link from "next/link";
-import { ArrowUpRight, MapPin, Wifi } from "lucide-react";
-import { branches, regions } from "@/data/site";
-import { SectionHeading, delay } from "@/components/ui/SectionHeading";
+import { Globe, MapPin, Wifi } from "lucide-react";
+import { branches, regions, site } from "@/data/site";
+import { delay } from "@/components/ui/SectionHeading";
+import { BranchExplorer } from "./BranchExplorer";
 
+/** Branch network: heading + BranchExplorer (detail card on the left follows the branch picked in the directory on the right). */
 export function Branches() {
   return (
-    <section id="branches" className="section relative overflow-hidden bg-white">
-      <div className="bg-grid-light absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,#000_20%,transparent_70%)]" aria-hidden />
-      <div className="container-x relative">
-        <SectionHeading
-          eyebrow="North India Network"
-          title={<>Learn at a branch near you — <span className="text-gradient">or live online</span></>}
-          text="Seven campuses across Punjab & Chandigarh Tricity, plus live instructor-led batches for students across North India."
-        />
+    <section id="branches" className="section relative isolate bg-white">
+      <div className="bg-grid-light absolute inset-0 -z-10 opacity-50" aria-hidden />
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {branches.map((b, i) => (
-            <Link
-              key={b.slug}
-              href={`/branches/${b.slug}`}
-              data-reveal="zoom"
-              style={delay(i % 4, 70)}
-              className={`group relative overflow-hidden rounded-3xl p-6 transition-all duration-300 hover:-translate-y-1 ${
-                b.hq ? "bg-linear-to-br from-brand-600 to-brand-800 text-white sm:col-span-2 lg:row-span-2" : "card card-hover"
-              }`}
-            >
-              <MapPin className={`size-7 ${b.hq ? "text-accent-400" : "text-brand-600"}`} aria-hidden />
-              <h3 className={`mt-4 font-bold ${b.hq ? "text-3xl lg:text-5xl" : "text-xl text-ink-900"}`}>{b.city}</h3>
-              <p className={`mt-1 text-sm ${b.hq ? "text-brand-100" : "text-ink-500"}`}>{b.hq ? "Head Office · " : ""}{b.state}</p>
-              {b.hq && (
-                <p className="mt-6 max-w-sm text-brand-100 lg:mt-24">
-                  Our flagship campus with advanced labs, AI studio, and a dedicated placement cell.
-                </p>
-              )}
-              <ArrowUpRight
-                className={`absolute right-5 top-5 size-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 ${
-                  b.hq ? "text-white" : "text-ink-300 group-hover:text-brand-600"
-                }`}
-                aria-hidden
-              />
-            </Link>
-          ))}
-          <Link
-            href="/#demo"
-            data-reveal="zoom"
-            className="group flex items-center justify-between gap-4 rounded-3xl bg-linear-to-r from-accent-500 to-accent-600 p-6 text-white transition-transform hover:-translate-y-1 sm:col-span-2"
-          >
-            <div>
-              <Wifi className="size-7" aria-hidden />
-              <h3 className="mt-4 text-xl font-bold">Live Online Classes</h3>
-              <p className="mt-1 text-sm text-white/85">Join from anywhere in North India</p>
-            </div>
-            <ArrowUpRight className="size-6 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
-          </Link>
+      <div className="container-x">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-2xl">
+            <p data-reveal="up" className="flex items-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-600">
+              <span className="h-px w-8 bg-brand-600" aria-hidden /> North India network
+            </p>
+            <h2 data-reveal="up" style={delay(1)} className="mt-5 text-3xl font-extrabold leading-[1.1] text-ink-900 sm:text-4xl lg:text-5xl">
+              Learn at a branch near you — <span className="text-gradient">or live online</span>
+            </h2>
+          </div>
+          <p data-reveal="up" style={delay(2)} className="max-w-sm text-base leading-relaxed text-ink-500">
+            {branches.length} campuses across Punjab &amp; Chandigarh Tricity, plus live instructor-led batches for students
+            anywhere in North India.
+          </p>
         </div>
 
-        <div data-reveal="up" className="mt-12 rounded-3xl bg-ink-950 p-8 text-white sm:p-10">
-          <div className="flex items-center gap-3">
-            <span className="grid size-11 place-items-center rounded-xl bg-accent-500"><Wifi className="size-5" aria-hidden /></span>
-            <h3 className="text-xl font-bold sm:text-2xl">Serving students across North India</h3>
-          </div>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {regions.map((r) => (
-              <div key={r.name} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-                <p className="font-semibold">{r.name}</p>
-                <p className="mt-1 text-sm text-ink-300">{r.note}</p>
+        <BranchExplorer branches={branches} fallback={{ phone: site.phone, hours: site.hours }} />
+
+        {/* Regions served — light panel, high-contrast tiles */}
+        <div data-reveal="up" className="mt-8 rounded-3xl border border-ink-950/10 bg-slate-50 p-6 sm:p-9">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-4">
+              <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-accent-500"><Globe className="size-6" aria-hidden /></span>
+              <div>
+                <h3 className="text-xl font-bold text-ink-900 sm:text-2xl">Serving students across North India</h3>
+                <p className="mt-1 text-sm text-ink-500">Study on campus, or join the same batch live online from your state.</p>
               </div>
-            ))}
+            </div>
+            <ul className="flex shrink-0 gap-4 text-xs font-semibold text-ink-700" aria-label="Legend">
+              <li className="flex items-center gap-2"><span className="size-2.5 rounded-full bg-accent-500" aria-hidden /> On campus</li>
+              <li className="flex items-center gap-2"><span className="size-2.5 rounded-full bg-brand-600" aria-hidden /> Live online</li>
+            </ul>
           </div>
+
+          <ul className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {regions.map((r, i) => {
+              const campus = /branch|chandigarh/i.test(r.note);
+              return (
+                <li key={r.name} data-reveal="up" style={delay(i % 4, 60)}>
+                  <div className="relative h-full overflow-hidden rounded-2xl border border-ink-950/10 bg-white p-5 pl-6 transition-[translate,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_32px_-18px_rgba(15,23,42,0.35)]">
+                    <span className={`absolute inset-y-0 left-0 w-1.5 ${campus ? "bg-accent-500" : "bg-brand-600"}`} aria-hidden />
+                    <p className="text-lg font-bold text-ink-900">{r.name}</p>
+                    <p className="mt-1 flex items-center gap-2 text-sm font-medium text-ink-700">
+                      {campus ? <MapPin className="size-4 shrink-0 text-accent-600" aria-hidden /> : <Wifi className="size-4 shrink-0 text-brand-600" aria-hidden />}
+                      {r.note}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </div>
     </section>

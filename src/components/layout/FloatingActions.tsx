@@ -1,11 +1,13 @@
 import { Phone } from "lucide-react";
 import { site } from "@/data/site";
 import { whatsappPath } from "@/components/ui/SocialIcons";
+import { ScrollTop } from "./ScrollTop";
 
-/** Sticky WhatsApp + call buttons (bottom-right). */
+/** Sticky scroll-to-top + call (mobile) + WhatsApp buttons (bottom-right). */
 export function FloatingActions() {
   return (
-    <div className="fixed bottom-5 right-5 z-40 flex flex-col gap-3">
+    <div className="fixed bottom-5 right-5 z-40 flex flex-col items-center gap-3">
+      <ScrollTop />
       <a
         href={site.phoneHref}
         aria-label="Call TechCADD"

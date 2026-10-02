@@ -171,7 +171,7 @@ export function AboutJourney() {
       <SectionHeading id="learning-journey-title" eyebrow="From classroom to practical experience" title={<>Learn. Practice. Build. <span className="text-gradient">Grow.</span></>} text="The same four steps run through every course, so skills turn into experience." />
       <ol className="tr-rail relative mt-16 grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
         <span aria-hidden className="absolute left-[12.5%] right-[12.5%] top-10 hidden h-1 rounded-full bg-brand-100 lg:block" />
-        <span aria-hidden className="tr-rail-x absolute left-[12.5%] right-[12.5%] top-10 hidden h-1 rounded-full bg-linear-to-r from-brand-500 via-brand-400 to-accent-400 lg:block" />
+        <span aria-hidden className="tr-rail-x absolute left-[12.5%] right-[12.5%] top-10 hidden h-1 rounded-full bg-accent-500 lg:block" />
         {about.journey.map((s, i) => (
           <li key={s.title} data-reveal="zoom" style={delay(i, 140)} className="relative text-center">
             <span className="relative mx-auto grid size-20 place-items-center rounded-full border border-brand-100 bg-white text-brand-700 shadow-lg shadow-brand-600/10">
@@ -319,7 +319,7 @@ export function AboutTimeline() {
       <SectionHeading id="our-journey-title" eyebrow="Our journey" title={<>Building careers <span className="text-gradient">since 2007</span></>} text="The milestones that shaped TechCADD — from a single classroom in Jalandhar to learners across North India." />
       <ol className="timeline relative mx-auto mt-16 max-w-5xl space-y-10 md:space-y-14">
         <span aria-hidden className="absolute inset-y-0 left-[7px] w-0.5 -translate-x-1/2 rounded-full bg-brand-100 md:left-1/2" />
-        <span aria-hidden className="timeline-fill absolute inset-y-0 left-[7px] w-0.5 -translate-x-1/2 rounded-full bg-linear-to-b from-brand-500 to-accent-400 md:left-1/2" />
+        <span aria-hidden className="timeline-fill absolute inset-y-0 left-[7px] w-0.5 -translate-x-1/2 rounded-full bg-accent-500 md:left-1/2" />
         {about.timeline.map((m, i) => {
           const left = i % 2 === 0;
           return (

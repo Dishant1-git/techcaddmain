@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { footerLegal, footerLinks, site } from "@/data/site";
@@ -18,8 +19,8 @@ export function Footer() {
       />
 
       <div className="container-x">
-        <div className="grid gap-12 pb-20 pt-16 sm:grid-cols-3 lg:grid-cols-[4fr_1fr_2fr_2fr_2fr] lg:pb-28">
-          <div className="sm:col-span-3 lg:col-span-2 lg:pr-[20%]">
+        <div className="grid gap-12 pb-20 pt-16 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16 lg:pb-28">
+          <div>
             <Link href="/" aria-label="TechCADD home" className="inline-block">
               <Image src="/logo/tece_new_logo.png" alt="techcadd — Your Skill & Technology Partner" width={900} height={231} sizes="208px" className="h-auto w-52" />
             </Link>
@@ -38,6 +39,11 @@ export function Footer() {
             </p>
           </div>
 
+          {/* Link columns stay on one row from sm up, however many groups footerLinks has */}
+          <div
+            className="grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-[repeat(var(--cols),minmax(0,1fr))]"
+            style={{ "--cols": Object.keys(footerLinks).length } as CSSProperties}
+          >
           {Object.entries(footerLinks).map(([heading, links]) => (
             <div key={heading}>
               <h3 className="text-xl font-semibold text-ink-950">{heading}</h3>
@@ -50,6 +56,7 @@ export function Footer() {
               </ul>
             </div>
           ))}
+          </div>
         </div>
 
         <div className="border-t border-ink-950/10 pb-10 pt-8 text-sm text-ink-500">

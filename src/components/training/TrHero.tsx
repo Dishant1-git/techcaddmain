@@ -83,7 +83,7 @@ export function TrHero({ course }: { course: TrainingPage }) {
                     <span className="min-w-0 flex-1">
                       <span className="block truncate text-sm font-semibold text-ink-900">{p.title}</span>
                       <span aria-hidden className="mt-1.5 block h-1.5 overflow-hidden rounded-full bg-white/80">
-                        <span className="block h-full rounded-full bg-linear-to-r from-brand-500 to-accent-400" style={{ width: `${((i + 1) / course.phases.length) * 100}%` }} />
+                        <span className="block h-full rounded-full bg-accent-500" style={{ width: `${((i + 1) / course.phases.length) * 100}%` }} />
                       </span>
                     </span>
                   </li>

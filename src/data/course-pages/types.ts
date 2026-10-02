@@ -1,6 +1,6 @@
 import type { Course } from "../site";
 
-export type CourseGroupId = "programming" | "ai-data" | "marketing" | "cyber-cloud";
+export type CourseGroupId = "programming" | "ai-data" | "marketing" | "cyber-cloud" | "more";
 
 /** One page at /courses/<slug>. Pricing is intentionally NOT part of this type — never show fees on course pages. */
 export type CoursePage = {
