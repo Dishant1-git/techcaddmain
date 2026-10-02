@@ -91,6 +91,15 @@
   .hero-scan { display: none; }
 }
 
+/* Lead popup (<dialog class="lead-popup">): pop-in on open + waving hand. */
+@keyframes lead-pop { from { opacity: 0; transform: translateY(24px) scale(0.96); } to { opacity: 1; transform: none; } }
+@keyframes lead-wave { 0%, 60%, 100% { transform: rotate(0deg); } 10%, 30% { transform: rotate(16deg); } 20%, 40% { transform: rotate(-10deg); } 50% { transform: rotate(12deg); } }
+.lead-wave { display: inline-block; transform-origin: 70% 80%; }
+@media (prefers-reduced-motion: no-preference) {
+  .lead-popup[open] { animation: lead-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .lead-wave { animation: lead-wave 2.2s ease-in-out infinite; }
+}
+
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 html, body { overflow-x: clip; }
 body { @apply bg-white text-ink-900 font-sans antialiased; }

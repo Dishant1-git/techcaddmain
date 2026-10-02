@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { site } from "@/data/site";
+import { categories, site } from "@/data/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/layout/FloatingActions";
+import { LeadPopup } from "@/components/layout/LeadPopup";
 import { ScrollAnimator } from "@/components/ui/ScrollAnimator";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"], display: "swap" });
@@ -26,6 +27,16 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: `${site.name} — ${site.tagline}`, description: site.description },
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
+  // Files live in /public/favicons (src/app/favicon.ico is a copy of favicons/favicon.ico for the default /favicon.ico request).
+  icons: {
+    icon: [
+      { url: "/favicons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicons/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
+    ],
+    shortcut: "/favicons/favicon.ico",
+    apple: { url: "/favicons/apple-touch-icon.png", sizes: "180x180" },
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#050b1f" };
@@ -42,6 +53,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main id="main" className="flex-1">{children}</main>
         <Footer />
         <FloatingActions />
+        <LeadPopup
+          courses={[...categories.map((c) => c.title), "Industrial Training / Internship", "After 12th Program", "Not sure — need guidance"]}
+          contact={{ whatsapp: site.whatsapp, email: site.email, rating: site.rating }}
+        />
       </body>
     </html>
   );

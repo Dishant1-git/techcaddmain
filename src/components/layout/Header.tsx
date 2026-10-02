@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { openLeadPopup } from "./LeadPopup";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
@@ -380,12 +381,14 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/#demo"
+            <button
+              type="button"
+              onClick={openLeadPopup}
+              aria-haspopup="dialog"
               className="btn hidden whitespace-nowrap border border-brand-400/60 bg-brand-600 !px-5 !py-2.5 text-sm text-white shadow-[0_0_28px_-6px_rgba(51,114,251,0.9)] hover:-translate-y-0.5 hover:bg-brand-500 sm:inline-flex 2xl:!px-6 2xl:text-[15px]"
             >
               Book Demo
-            </Link>
+            </button>
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -462,7 +465,7 @@ export function Header() {
           </div>
 
           <div className="mt-auto space-y-3 pt-8">
-            <Link href="/#demo" onClick={close} className="btn-brand w-full">Book Demo</Link>
+            <button type="button" onClick={() => { close(); openLeadPopup(); }} aria-haspopup="dialog" className="btn-brand w-full">Book Demo</button>
             <a href={site.phoneHref} className="btn-ghost-dark w-full"><Phone className="size-4" aria-hidden /> {site.phone}</a>
           </div>
         </aside>

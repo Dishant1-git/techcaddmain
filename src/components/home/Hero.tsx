@@ -7,6 +7,8 @@ import { Marquee } from "@/components/ui/Marquee";
 
 const stack = ["Python", "React", "Next.js", "Node.js", "AWS", "Docker", "Kubernetes", "TensorFlow", "LangChain", "PostgreSQL", "Figma", "Kali Linux"];
 const command = "techcadd deploy --career";
+/** Typed, deleted and cycled in the H1 by ScrollAnimator ([data-type-words]); the first one is server-rendered (LCP). */
+const heroWords = ["tech talent", "AI engineers", "full-stack developers", "data analysts", "cloud engineers"];
 
 /** On-load entrance for everything except the H1 (LCP). Pure CSS, skipped for reduced motion. */
 const enter = "motion-safe:animate-[fadeUp_0.7s_cubic-bezier(0.22,1,0.36,1)_both]";
@@ -56,7 +58,8 @@ export function Hero() {
           </Link>
 
           <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.5rem] xl:text-[3.9rem]">
-            Engineering the next generation of <span className="text-gradient">tech talent</span>
+            Engineering the next generation of{" "}
+            <span className="text-gradient block min-h-[1.1em]" data-type-words={heroWords.join("|")}>{heroWords[0]}</span>
           </h1>
           <p style={at(150)} className={`${enter} mt-6 max-w-xl text-lg leading-relaxed text-ink-300`}>
             Industry-grade training in AI, Full-Stack, Cloud, Data &amp; Cybersecurity — built like a real software team with
