@@ -40,6 +40,11 @@ difference, domains, approach, industry, recognition, timeline, belief, cta; `mi
 `aiCourses` (type `AiCourse`, one per AI-dropdown link → `/ai-courses/<slug>`), `aiMentors`, `aiCourseCommon` (batches, EMI,
 includes, certification, placement, shared FAQs), `aiTestimonials`.
 - Adding an AI course: add to `aiCourses` + a link in `nav` AI `skills` groups → page, metadata, sitemap, hub card are automatic.
+EXCEPTION: the Resources▾Guidance feature's content (4 full landing pages) lives in `src/data/guidance.ts`, not `site.ts` —
+same rule (components only render it). Exports `guidanceSummaries` (home preview + hub cards) + one content object per
+topic: `careerCounselling`, `mentorship`, `aiMarketing`, `freelancing`. Adding a 5th topic: add a summary + content object
+there, add `src/app/guidance/<slug>/page.tsx`, and point its 4 links in `site.ts`'s Resources▾Guidance column at it by hand
+(unlike branches/courses, this wiring isn't generated from the array).
 - `icon` fields are string names → must exist in the map in `src/components/ui/Icon.tsx` (add new ones there).
 - `courses[].category` must match a `categories[].id`.
 - Adding a branch to `branches` auto-creates `/branches/<slug>`, adds it to header dropdown, footer, sitemap, demo form.
@@ -68,6 +73,18 @@ src/app/
   after-12th/page.tsx + [slug]/page.tsx  After 12th hub (grouped by duration) + 29 SSG slug pages (dynamicParams=false):
                             NEUMORPHISM (bg-neu) + SOFT UI (bg-soft) alternating, NO pricing/salary, 19 sections + JSON-LD
   ai-courses/[slug]/page.tsx SSG AI course page: 13 sections + JSON-LD (Course, BreadcrumbList, FAQPage). Spec: docs/ai-course-page.md
+  guidance/page.tsx         Hub page: <GuidanceSection headingLevel="h1"/> (own h1) + "Find the Guidance You Need"
+                             big-card grid (GuidanceCard × 4, from guidanceSummaries) + Testimonials + GuidanceCta.
+  guidance/career-counselling/page.tsx   Hero + Why + What You Get + Who Can Benefit + How It Works + Career
+                                          Paths (#career-paths anchor) + Why Choose Us (stats+trust) + FAQ + CTA.
+  guidance/mentorship/page.tsx           Hero + Why + What Your Mentor Helps With + Process + Categories +
+                                          Mentor profile grid (MentorGrid) + Testimonials + FAQ + CTA.
+  guidance/ai-marketing/page.tsx         Hero + What Is AI Marketing (#what-is anchor) + Capabilities + Tools
+                                          (LogoGrid, no-affiliation disclaimer) + Workflow (WorkflowStrip) +
+                                          Benefits + Use Cases + FAQ + CTA.
+  guidance/freelancing/page.tsx          Hero + Why + Skills (#skills anchor) + How It Works + Platforms
+                                          (LogoGrid, no-affiliation disclaimer) + Build Your Profile + First
+                                          Client roadmap + Mistakes to Avoid + FAQ + CTA.
   sitemap.ts / robots.ts / not-found.tsx
 src/components/
   layout/  Header ("use client"): DARK navy sticky bar (bg-ink-950 + faint grid) matching the official techcadd header —
@@ -125,12 +142,24 @@ src/components/
            A12Proof (A12Certification mock-up, A12Scope dark staircase, A12Projects carousel, A12Loop .tr-rail, A12Why bento) ·
            A12Connect (A12Related/A12Card, A12Faq → training/FaqSearch, A12Enquire → training/TrEnquiryForm (context/placeholder
            props), A12Start).
+  guidance/  Shared building blocks for every /guidance/* page (data-driven from src/data/guidance.ts), using the
+             ORIGINAL card/card-hover design system (not the glass/neu/soft-UI system above — Guidance matches the
+             home page, not the course pages): GuidanceHero (dark hero shell: breadcrumb, eyebrow, gradient-highlight
+             h1, 2 CTAs, optional stat row) · ServiceCard (compact "Explore More →" card, home preview) · GuidanceCard
+             (large numbered card w/ arrow, hub page) · FeatureGrid (flexible icon+title(+text) grid; `compact` =
+             icon+title chip, no body text) · StepsTimeline (numbered circular-icon steps, same visual as home
+             HowItWorks) · WorkflowStrip (horizontal Research→Strategy→…→Optimization flow with arrows) · LogoGrid
+             (initials-badge tiles for AI tools / freelance platforms + a REQUIRED disclaimer prop — no real logos,
+             no affiliation claims) · MentorGrid (avatar-initials + rating + "View Profile") · GuidanceFaq
+             (topic-scoped accordion, same pattern as home Faq) · GuidanceCta (final banner, same gradient as DemoCta).
 src/lib/whatsapp.ts  waLink(text) → wa.me URL with pre-filled message
 docs/ai-course-page.md  Design spec for AI course pages (tokens, states, a11y acceptance criteria, QA checklist)
 ```
 Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-program` → `#courses`
 → `#how-it-works` → `#why-us` → `#programs` → `#placements` → `#branches` → `#technologies`
-→ `#testimonials` → `#faq` → `#blog` → `#demo` → footer `#contact`. Nav links use `/#id`.
+→ `#testimonials` → `#guidance` → `#faq` → `#blog` → `#demo` → footer `#contact`. Nav links use `/#id`.
+`/guidance` and its 4 sub-pages are real routes (not anchors) — see the guidance/ rows above. `#guidance` hosts
+`<GuidanceSection/>` (`headingLevel` prop defaults to h2 here since Hero already owns the page's h1).
 
 ## Design system
 - Colors: `brand-50…900` (blue, primary), `accent-400…600` (orange, CTAs), `ink-300…950` (navy text/dark bgs).
@@ -188,6 +217,15 @@ Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-pr
   "Our Founder" nav link still points at a home anchor (no page yet).
 
 ## Changelog
+- 2026-09-30: Guidance feature built out in full: home "02 Guidance" preview section, a `/guidance` hub page
+  ("Find the Guidance You Need" big-card grid) and 4 complete landing pages (career-counselling, mentorship,
+  ai-marketing, freelancing), each with hero/why/feature-grids/steps/FAQ/final-CTA. New `src/data/guidance.ts`
+  content file + `src/components/guidance/*` shared component set (original card/card-hover system, not the
+  glass/neu styling introduced for the course pages). Resources▾Guidance nav links and footerLinks now point
+  at these real pages instead of home anchors; footer's
+  link grid moved off manual 12-col math onto a self-sizing grid to fit the new 5th "Guidance" column. Added
+  ~20 lucide icons to Icon.tsx (reusing overlapping ones already added for the course pages, e.g. Coffee/Cpu/
+  Globe/Palette/Search/Share2/Terminal/Workflow, rather than duplicating).
 - 2026-10-01: Mission and Vision page at /about/mission-vision (5 sections, site theme, reference section list); nav link + featured card + sitemap updated.
 - 2026-10-01: About page photos (7 event photos in src/assets/about/, mapped in `about.images`): hero right column, ecosystem 4-photo strip, why-it-matters banner, industry engagement.
 - 2026-10-01: About page at /about (14 sections, site theme, reference section list); "About techcadd" nav link + featured card point to it; sitemap updated.

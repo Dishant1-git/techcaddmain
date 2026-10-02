@@ -10,6 +10,7 @@ import { Placements } from "@/components/home/Placements";
 import { Branches } from "@/components/home/Branches";
 import { Technologies } from "@/components/home/Technologies";
 import { Testimonials } from "@/components/home/Testimonials";
+import { GuidanceSection } from "@/components/home/GuidanceSection";
 import { Faq } from "@/components/home/Faq";
 import { Blog } from "@/components/home/Blog";
 import { DemoCta } from "@/components/home/DemoCta";
@@ -53,6 +54,7 @@ export default function HomePage() {
       <Branches />
       <Technologies />
       <Testimonials />
+      <GuidanceSection />
       <Faq />
       <Blog />
       <DemoCta />

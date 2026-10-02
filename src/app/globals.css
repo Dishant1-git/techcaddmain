@@ -467,3 +467,10 @@ details[open] .faq-icon { transform: rotate(45deg); }
   .ai-glow { animation: ai-orbit 3s linear infinite, ai-glow-pulse 3s ease-in-out infinite; }
   .ai-star { animation: ai-twinkle 2.2s ease-in-out infinite; transform-origin: center; }
 }
+
+/* Career quiz: "Download PDF" prints only the result plan. */
+@media print {
+  body * { visibility: hidden; }
+  #career-plan, #career-plan * { visibility: visible; }
+  #career-plan { position: absolute; inset: 0 auto auto 0; width: 100%; margin: 0; }
+}

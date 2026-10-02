@@ -300,10 +300,10 @@ export const nav: NavItem[] = [
           title: "Career Tools",
           text: "Plan your path with smart, free tools",
           links: [
-            { label: "Find My Career Track", href: "/#demo", badge: "New" },
-            { label: "Training Matcher", href: "/#demo", badge: "New" },
-            { label: "Salary Estimator", href: "/#placements", badge: "New" },
-            { label: "Placements & Salaries", href: "/#placements", badge: "New" },
+            { label: "Find My Career Track", href: "/my-career", badge: "New" },
+            { label: "Training Matcher", href: "/training-matcher", badge: "New" },
+            { label: "Salary Estimator", href: "/salary-estimator", badge: "New" },
+            { label: "Placements & Salaries", href: "/placements", badge: "New" },
             { label: "Compare Courses", href: "/#courses" },
           ],
         },
@@ -311,10 +311,10 @@ export const nav: NavItem[] = [
           title: "Guidance",
           text: "Talk to people who've done it",
           links: [
-            { label: "Free Career Counselling", href: "/#demo" },
-            { label: "1:1 Mentorship", href: "/#demo" },
-            { label: "AI Marketing", href: "/#courses" },
-            { label: "Freelancing", href: "/#courses" },
+            { label: "Free Career Counselling", href: "/guidance/career-counselling" },
+            { label: "1:1 Mentorship", href: "/guidance/mentorship" },
+            { label: "AI Marketing", href: "/guidance/ai-marketing" },
+            { label: "Freelancing", href: "/guidance/freelancing" },
           ],
         },
         {
@@ -703,6 +703,12 @@ export const footerLinks = {
     { label: "Mission & Vision", href: "/#why-us" },
     { label: "Our Founder", href: "/#about" },
     { label: "Contact Us", href: "/#demo" },
+  ],
+  Guidance: [
+    { label: "Free Career Counselling", href: "/guidance/career-counselling" },
+    { label: "1:1 Mentorship", href: "/guidance/mentorship" },
+    { label: "AI Marketing", href: "/guidance/ai-marketing" },
+    { label: "Freelancing", href: "/guidance/freelancing" },
   ],
   Support: [
     { label: "Placement Support", href: "/#placements" },
