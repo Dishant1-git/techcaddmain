@@ -13,7 +13,7 @@ type Point = TitledText & { list?: string[]; /** Line after the list. */ after?:
 export type CourseCopy = {
   /** Page H1 (`title` + highlighted `highlight`, replacing "<course title> in Jalandhar") and the browser/SEO title (`meta`). */
   heading?: { title: string; highlight: string; meta: string };
-  overview?: { eyebrow: string; title: string };
+  overview?: { eyebrow: string; title: string; /** Set to keep the side card that lists `gains`, under this heading (otherwise the overview is full width). */ gainsTitle?: string };
   syllabus?: { eyebrow: string; title: string; text?: string; /** Line under the module list. */ note?: string };
   /** Replaces the group's "Who can join" cards and the eligibility line. */
   audience?: { eyebrow: string; title: string; intro: string; items: (TitledText & { icon: string })[]; need: string; /** "Is this course right for you?" card under the learner cards. */ fit?: { title: string; text: string; list: string[]; after?: string } };
@@ -22,11 +22,11 @@ export type CourseCopy = {
   /** "Why this program" section. */
   whyProgram?: { eyebrow: string; title: string; intro: string; points: Point[]; /** Closing line under the cards. */ outro?: string };
   /** Replaces the shared "Why TechCADD" cards and comparison table. */
-  whyUs?: { eyebrow: string; title: string; intro: string; points: Point[] };
+  whyUs?: { eyebrow: string; title: string; intro: string; points: Point[]; /** Closing line under the cards. */ outro?: string };
   /** Replaces the tool tiles with an Area → Tools table. */
   tools?: { title: string; /** Column headings; default Area / Tools. */ columns?: [string, string]; groups: { area: string; tools: string }[]; note?: string };
   /** Replaces the role cards. */
-  careers?: { eyebrow: string; title: string; intro: string; roles: string[]; jobsTitle: string; jobs: TitledText[]; outro?: string };
+  careers?: { eyebrow: string; title: string; intro: string; roles: string[]; /** Paragraph under the role chips. */ rolesNote?: string; jobsTitle: string; jobs: TitledText[]; outro?: string };
   /** Replaces the site-wide testimonials. */
   reviews?: { title: string; items: { name: string; role: string; place: string; /** Stars out of 5; omit when the review has no rating. */ rating?: number; text: string; /** Bold one-line summary above the review. */ headline?: string }[] };
   /** FAQ heading; the shared course FAQs are not appended when `copy` is set. */

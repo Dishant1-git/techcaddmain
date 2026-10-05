@@ -15,7 +15,7 @@ const logoRules: [RegExp, string][] = [
   [/web-development|javascript/, "siJavascript"], [/mern/, "siReact"], [/mean/, "siAngular"], [/php/, "siPhp"], [/\bjava\b/, "siOpenjdk"],
   [/machine-learning/, "siScikitlearn"], [/deep-learning/, "siTensorflow"], [/data-science/, "siJupyter"], [/data-analytics/, "siPandas"],
   [/power-bi/, "BI"], [/tableau/, "Tb"], [/artificial-intelligence/, "AI"],
-  [/^geo/, "GEO"], [/^aeo/, "AEO"], [/google-ads/, "siGoogleads"], [/meta-ads/, "siMeta"], [/social-media/, "siInstagram"], [/\bseo\b/, "siGooglesearchconsole"],
+  [/^ui-ux/, "siFigma"], [/^geo/, "GEO"], [/^aeo/, "AEO"], [/google-ads/, "siGoogleads"], [/meta-ads/, "siMeta"], [/social-media/, "siInstagram"], [/\bseo\b/, "siGooglesearchconsole"],
   [/wordpress/, "siWordpress"], [/shopify/, "siShopify"], [/digital-marketing/, "siGoogleanalytics"],
   [/ethical-hacking/, "siKalilinux"], [/cybersecurity/, "siHackthebox"], [/network-security/, "siCisco"], [/soc-analyst/, "siSplunk"],
   [/\baws\b/, "AWS"], [/azure/, "Az"], [/cloud-computing/, "siGooglecloud"], [/devops/, "siDocker"], [/linux/, "siLinux"],

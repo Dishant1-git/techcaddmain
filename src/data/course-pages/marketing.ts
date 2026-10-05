@@ -4,8 +4,10 @@ import { digitalMarketing } from "./digital-marketing";
 import { dropshippingEcommerce } from "./dropshipping-ecommerce";
 import { geo } from "./geo";
 import { googleAds } from "./google-ads";
+import { graphicDesigning } from "./graphic-designing";
 import { seo } from "./seo";
 import { socialMediaMarketing } from "./social-media-marketing";
+import { uiUxDesign } from "./ui-ux-design";
 
 export const marketingCourses: CoursePage[] = [
   digitalMarketing,
@@ -15,6 +17,8 @@ export const marketingCourses: CoursePage[] = [
   dropshippingEcommerce,
   geo,
   aeo,
+  graphicDesigning,
+  uiUxDesign,
   {
     slug: "wordpress",
     title: "WordPress Development Course",

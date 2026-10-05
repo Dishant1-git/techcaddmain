@@ -189,6 +189,7 @@ export function CpCareers({ course }: { course: CoursePage }) {
             </li>
           ))}
         </ul>
+        {copy.rolesNote && <p data-reveal="up" className="mx-auto mt-8 max-w-3xl text-center text-ink-700">{copy.rolesNote}</p>}
         <h3 data-reveal="up" className="mt-16 text-center text-2xl font-bold text-ink-900">{copy.jobsTitle}</h3>
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {copy.jobs.map((j, i) => (

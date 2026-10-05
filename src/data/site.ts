@@ -183,10 +183,10 @@ export const nav: NavItem[] = [
           title: "AI Fundamentals",
           icon: "Sparkles",
           links: [
-            { label: "Generative AI", href: "/ai-courses/generative-ai" },
+            { label: "Generative AI", href: "/courses/generative-ai" },
             { label: "Artificial Intelligence (AI)", href: "/ai-courses/artificial-intelligence" },
             { label: "Prompt Engineering", href: "/ai-courses/prompt-engineering" },
-            { label: "ChatGPT & AI Tools", href: "/ai-courses/chatgpt-ai-tools", hot: true },
+            { label: "ChatGPT & AI Tools", href: "/courses/chatgpt-ai-tools", hot: true },
           ],
         },
         {
@@ -230,6 +230,8 @@ export const nav: NavItem[] = [
           text: "Models, analytics and decision intelligence",
           links: [
             { label: "Artificial Intelligence", href: "/courses/artificial-intelligence", badge: "Hot" },
+            { label: "Generative AI", href: "/courses/generative-ai", badge: "New" },
+            { label: "ChatGPT & AI Tools", href: "/courses/chatgpt-ai-tools", badge: "New" },
             { label: "Machine Learning", href: "/courses/machine-learning", badge: "Hot" },
             { label: "Deep Learning", href: "/courses/deep-learning" },
             { label: "Data Science", href: "/courses/data-science", badge: "Trending" },
@@ -252,6 +254,8 @@ export const nav: NavItem[] = [
             { label: "Dropshipping & E-Commerce", href: "/courses/dropshipping-ecommerce" },
             { label: "GEO", href: "/courses/geo", badge: "New" },
             { label: "AEO", href: "/courses/aeo", badge: "New" },
+            { label: "Graphic Designing", href: "/courses/graphic-designing" },
+            { label: "UI/UX Design", href: "/courses/ui-ux-design" },
           ],
         },
         {

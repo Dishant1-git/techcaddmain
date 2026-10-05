@@ -15,7 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/about/founder`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/about/mission-vision`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/ai-courses`, changeFrequency: "weekly", priority: 0.9 },
-    ...aiCourses.map((c) => ({ url: `${site.url}/ai-courses/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.9 })),
+    // These two redirect to their /courses/<slug> page (already listed with the course pages).
+    ...aiCourses.filter((c) => !["generative-ai", "chatgpt-ai-tools"].includes(c.slug)).map((c) => ({ url: `${site.url}/ai-courses/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.9 })),
     { url: `${site.url}/courses`, changeFrequency: "weekly", priority: 0.9 },
     ...coursePages.map((c) => ({ url: `${site.url}/courses/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.9 })),
     { url: `${site.url}/training`, changeFrequency: "weekly", priority: 0.9 },

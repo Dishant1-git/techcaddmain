@@ -12,7 +12,7 @@ import { CourseSection } from "@/components/course/CourseSection";
 export function CpOverview({ course }: { course: CoursePage }) {
   const copy = course.copy?.overview;
   // Courses with their own long-form copy show the overview full width (no "What you'll gain" card).
-  const wide = !!copy;
+  const wide = !!copy && !copy.gainsTitle;
   return (
     <CourseSection id="overview" className="bg-neu" overflow="overflow-x-clip">
       <div className={wide ? "mx-auto max-w-4xl" : "grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16"}>
@@ -47,7 +47,7 @@ export function CpOverview({ course }: { course: CoursePage }) {
 
         {!wide && <div className="extrude h-fit">
           <aside aria-labelledby="gains-title" className="neu p-6 sm:p-8">
-            <h3 id="gains-title" className="text-lg font-bold text-ink-900">What you&apos;ll gain</h3>
+            <h3 id="gains-title" className="text-lg font-bold text-ink-900">{copy?.gainsTitle ?? <>What you&apos;ll gain</>}</h3>
             <ul className="mt-6 space-y-4">
               {course.gains.map((g, i) => (
                 <li key={g} data-reveal="left" style={delay(i, 80)} className="flex items-start gap-4">

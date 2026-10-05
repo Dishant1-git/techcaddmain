@@ -62,6 +62,7 @@ export function CpWhy({ course }: { course: CoursePage }) {
       <CourseSection id="why" className="bg-neu" overflow="overflow-x-clip">
         <SectionHeading id="why-title" eyebrow={copy.eyebrow} title={copy.title} text={copy.intro} />
         <Points points={copy.points} />
+        {copy.outro && <p data-reveal="up" className="mx-auto mt-10 max-w-3xl text-center text-lg text-ink-700">{copy.outro}</p>}
       </CourseSection>
     );
   }

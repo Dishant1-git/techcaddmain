@@ -111,7 +111,7 @@ export const courseCatalog: Record<string, CatalogSection[]> = {
       text: "Design for web, print and social media, and edit professional video.",
       items: [
         { name: "Web Designing", text: "Design and build responsive websites with HTML, CSS and modern layout tools.", href: "/courses/web-designing" },
-        { name: "Graphic Design", text: "Colour, typography and layout applied to branding, print and social media." },
+        { name: "Graphic Design", text: "Colour, typography and layout applied to branding, print and social media.", href: "/courses/graphic-designing" },
         { name: "Adobe Photoshop", text: "Photo editing, retouching, compositing and social media creatives." },
         { name: "Adobe Illustrator", text: "Logos, icons, illustrations and print-ready vector artwork." },
         { name: "CorelDRAW", text: "Vector design for printing: visiting cards, flex, packaging and signage." },

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { aiCourseCommon, aiCourses, aiMentors, site } from "@/data/site";
 import { CourseHero } from "@/components/course/CourseHero";
 import { CourseNav, type CourseNavItem } from "@/components/course/CourseNav";
@@ -15,6 +15,13 @@ import { CourseStories } from "@/components/course/CourseStories";
 import { CourseFaq } from "@/components/course/CourseFaq";
 import { RelatedCourses } from "@/components/course/RelatedCourses";
 import { CourseEnrol } from "@/components/course/CourseEnrol";
+
+/** AI courses whose page now lives under /courses (long-form copy in src/data/course-pages). The old URL redirects there,
+ *  so AI hub cards, related-course cards and old links all land on the new page. */
+const movedTo: Record<string, string> = {
+  "generative-ai": "/courses/generative-ai",
+  "chatgpt-ai-tools": "/courses/chatgpt-ai-tools",
+};
 
 /** One statically generated page per entry in `aiCourses` (src/data/site.ts). */
 export const dynamicParams = false;
@@ -52,6 +59,7 @@ const sections: CourseNavItem[] = [
 
 export default async function AiCoursePage({ params }: PageProps<"/ai-courses/[slug]">) {
   const { slug } = await params;
+  if (movedTo[slug]) redirect(movedTo[slug]);
   const course = aiCourses.find((c) => c.slug === slug);
   if (!course) notFound();
 
