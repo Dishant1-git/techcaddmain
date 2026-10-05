@@ -1,0 +1,336 @@
+/** Content for /faq — exactly 5 questions per category. Components only render this. */
+export type FaqEntry = { q: string; a: string };
+export type FaqCategory = { id: string; label: string; faqs: FaqEntry[] };
+
+export const faqCategories: FaqCategory[] = [
+  {
+    id: "digital-marketing",
+    label: "Digital Marketing",
+    faqs: [
+      { q: "Do I need a technical or coding background to learn digital marketing at techcadd?", a: "No. Digital marketing focuses on strategy, creativity and analytics rather than coding. Concepts are taught step by step with hands-on practice, so students from commerce, arts or science can follow comfortably." },
+      { q: "How long is the digital marketing course in Jalandhar?", a: "The core Digital Marketing Course runs 3 to 6 months depending on the batch you choose. The advanced AI-Powered Digital Marketing Course runs 6 to 9 months. Both include a live client project and an internship block." },
+      { q: "What is the difference between the two digital marketing courses?", a: "The core course teaches digital marketing from scratch: SEO, Google Ads, social media, content, email and analytics. The AI-Powered course is the advanced track for people who already know the basics and want generative content, answer-engine optimisation, automated campaigns and predictive analytics." },
+      { q: "Will I work on real campaigns or only theory?", a: "Real campaigns. You work on live ad accounts and real websites throughout the course, and finish with a client project and an internship block." },
+      { q: "What jobs can I apply for after the course?", a: "Common starting roles are Digital Marketing Executive, SEO Executive, Google Ads / PPC Specialist, Social Media Manager, Content Marketing Executive and Performance Marketing Analyst. Many students also freelance for local businesses." },
+    ],
+  },
+  {
+    id: "seo",
+    label: "SEO",
+    faqs: [
+      { q: "What is SEO in digital marketing?", a: "SEO (Search Engine Optimization) is the practice of improving a website and its content so it appears more prominently in organic search results. It includes keyword research, on-page and technical SEO, link building and local SEO." },
+      { q: "Do I need coding knowledge to learn SEO?", a: "No. Advanced programming is not required to start. A basic understanding of HTML, site structure, page speed and indexing is useful for technical SEO." },
+      { q: "How long does SEO take to show results?", a: "SEO usually takes time because search engines need to discover, evaluate and rank changes. Results vary with competition, website quality, industry and strategy." },
+      { q: "Can I earn through SEO freelancing?", a: "Yes. Freelancers offer keyword research, technical SEO, local SEO, content optimisation, link building and audits. Income depends on skills, experience and the ability to win clients." },
+      { q: "What will I learn in an SEO course?", a: "Keyword research, competitor analysis, on-page, technical and off-page SEO, local SEO, link building, content strategy, audits, Google Search Console, analytics and SEO tools, with practical assignments on real websites." },
+    ],
+  },
+  {
+    id: "google-ads",
+    label: "Google Ads",
+    faqs: [
+      { q: "How does Google Ads work?", a: "Advertisers choose targeting, create ads, set budgets and bidding strategies, and compete in an ad auction when users run relevant searches or interact with Google's advertising inventory." },
+      { q: "Is Google Ads free to use?", a: "Creating an account is free, but running advertisements costs money. You set a campaign budget and pay according to the bidding model you choose." },
+      { q: "How much money is good for Google Ads?", a: "It depends on your business and objective. A better question is how much you can profitably spend to acquire one customer. For testing, a small daily budget is a common starting point." },
+      { q: "What are the main types of Google Ads campaigns?", a: "Search, Display, Shopping, Video, Demand Gen, App and Performance Max. The right type depends on the campaign objective." },
+      { q: "What is Quality Score?", a: "Quality Score is a keyword-level diagnostic from 1 to 10 that indicates how relevant your ad and landing page are compared with other advertisers." },
+    ],
+  },
+  {
+    id: "meta-ads",
+    label: "Meta Ads",
+    faqs: [
+      { q: "How do Meta Ads actually work?", a: "Meta Ads run through an ad auction. You pick an objective, define an audience, set a budget and create the ad; Meta weighs bid, estimated action rate and ad quality, then delivers and reports results." },
+      { q: "How much do Meta Ads cost?", a: "There is no fixed price. Cost varies with audience, competition, objective, placement and budget. You control spend, for example a daily budget of ₹100, ₹500 or more." },
+      { q: "What is the Meta Pixel?", a: "The Meta Pixel is a data connection installed on a website to measure customer actions and support ad optimisation and audience building." },
+      { q: "What is the difference between Meta Pixel and Conversions API?", a: "The Pixel uses website-side tracking, while Conversions API is a server-side data connection. Businesses can use both to improve event measurement and data coverage." },
+      { q: "Which is better: Google Ads or Meta Ads?", a: "Neither is universally better. Google Ads captures existing demand from people actively searching; Meta Ads creates and stimulates demand. Many businesses get the best results using both." },
+    ],
+  },
+  {
+    id: "social-media-marketing",
+    label: "Social Media Marketing",
+    faqs: [
+      { q: "What is Social Media Marketing?", a: "Promoting products, services or brands through platforms such as Facebook, Instagram, LinkedIn and YouTube to reach and engage target audiences." },
+      { q: "Can I do social media marketing with no experience?", a: "Yes. Learn content creation, audience research, analytics and advertising, then practise on a personal page or a small business. A portfolio helps when applying for your first role." },
+      { q: "Can social media marketing help me become a freelancer?", a: "Yes. Account management, content planning, campaign management, advertising and reporting can all be offered as freelance services." },
+      { q: "Is social media marketing useful for small businesses?", a: "Yes. It helps small businesses increase local visibility, communicate with customers, showcase products and build an online community when used strategically." },
+      { q: "What tools are commonly used in social media marketing?", a: "Depending on the programme: graphic design, scheduling, analytics, content research, advertising, video creation and campaign reporting tools." },
+    ],
+  },
+  {
+    id: "graphic-designing",
+    label: "Graphic Designing",
+    faqs: [
+      { q: "Do I need a creative or design background?", a: "No. Beginners can join without any previous design experience. Training starts from the fundamentals and moves towards professional techniques." },
+      { q: "Which software is used in Graphic Designing?", a: "Popular software includes Adobe Photoshop, Illustrator, CorelDRAW and Canva." },
+      { q: "Do I need drawing skills to learn Graphic Designing?", a: "No. Drawing helps, but creativity and an understanding of design principles matter more." },
+      { q: "Can I become a freelancer after learning Graphic Designing?", a: "Yes. Designers offer logos, social media graphics, brochures, advertisements, presentations, thumbnails and branding to clients." },
+      { q: "What career opportunities are available in Graphic Designing?", a: "Graphic Designer, Logo Designer, Social Media Designer, Brand Designer, UI Designer or Freelance Designer." },
+    ],
+  },
+  {
+    id: "shopify",
+    label: "Shopify",
+    faqs: [
+      { q: "What is Shopify?", a: "Shopify is an e-commerce platform for creating, managing and operating online stores that sell products and services." },
+      { q: "Do I need coding knowledge to learn Shopify?", a: "No. Basic stores can be created without coding. HTML, CSS, Liquid and JavaScript help with advanced customisation." },
+      { q: "Can Shopify themes be customised?", a: "Yes. Store owners use the theme editor, while developers can make deeper changes with Shopify's development tools and Liquid." },
+      { q: "Can I earn money as a freelance Shopify expert?", a: "Yes. Freelancers offer store setup, theme customisation, product listing, optimisation, SEO, app integration and ongoing store management." },
+      { q: "Is Shopify still worth learning in 2026?", a: "Yes. It remains a popular e-commerce platform, and the skill supports careers in store management, development, freelancing and digital marketing." },
+    ],
+  },
+  {
+    id: "mern-stack",
+    label: "MERN Stack",
+    faqs: [
+      { q: "What is the MERN Stack?", a: "A full-stack web development stack consisting of MongoDB, Express.js, React.js and Node.js." },
+      { q: "Can beginners learn MERN Stack?", a: "Yes. Beginners can learn it with basic computer knowledge and a willingness to learn JavaScript and web development." },
+      { q: "What technologies will I learn in the course?", a: "HTML, CSS, JavaScript, React.js, Node.js, Express.js, MongoDB, REST APIs, Git and GitHub, authentication and deployment, along with modern AI development tools." },
+      { q: "Does the course include real-world projects?", a: "Yes. Practical assignments and live projects around real-world applications build a portfolio you can show employers." },
+      { q: "Does the MERN Stack Course provide placement support?", a: "Yes. It includes placement assistance, interview preparation and resume guidance for web and full-stack roles." },
+    ],
+  },
+  {
+    id: "php-full-stack",
+    label: "PHP Full Stack",
+    faqs: [
+      { q: "What is PHP Full Stack Development?", a: "Building complete web applications using PHP for the backend along with HTML, CSS and JavaScript on the frontend." },
+      { q: "Is PHP Full Stack Development good for beginners?", a: "Yes. Beginners can progress from basic PHP and databases to frameworks and complete full-stack projects." },
+      { q: "What is covered in the PHP Full Stack Course at techcadd?", a: "PHP, MySQL, HTML, CSS, JavaScript, Bootstrap and practical web development projects." },
+      { q: "What is Laravel and why should I learn it?", a: "Laravel is a popular PHP framework for secure, scalable web applications, with routing, authentication, database management and MVC architecture built in." },
+      { q: "What career opportunities are available after learning PHP Full Stack?", a: "PHP Developer, Full Stack Developer, Laravel Developer, Backend Developer, Web Developer and API Developer." },
+    ],
+  },
+  {
+    id: "python",
+    label: "Python",
+    faqs: [
+      { q: "Is Python suitable for beginners?", a: "Yes. Python's simple, readable syntax makes it one of the easiest languages to start with." },
+      { q: "Do I need programming experience to learn Python?", a: "No. Beginners can start with no prior programming experience." },
+      { q: "What are the uses of Python?", a: "Web development, data analysis, AI and machine learning, automation, software development and scripting." },
+      { q: "Can I get a job after learning Python?", a: "Python skills support roles such as Python Developer, Software Developer, Data Analyst, Automation Developer and Machine Learning Engineer, depending on your additional skills and experience." },
+      { q: "How long does it take to learn Python?", a: "The basics can be learned within a few weeks with regular practice. Overall time depends on your goals and practice." },
+    ],
+  },
+  {
+    id: "data-science",
+    label: "Data Science",
+    faqs: [
+      { q: "What is Data Science?", a: "A field that uses statistics, programming, machine learning and data analysis to extract insights from data and support better decisions." },
+      { q: "Can beginners learn Data Science?", a: "Yes. Start with Python and basic statistics, then move to data analysis, visualisation, machine learning and practical projects." },
+      { q: "What skills are required to learn Data Science?", a: "Basic programming, Python, statistics, data analysis, machine learning, databases and data visualisation." },
+      { q: "What tools are commonly used in Data Science?", a: "Python, Jupyter Notebook, NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, SQL and Power BI." },
+      { q: "What career opportunities are available after learning Data Science?", a: "Data Scientist, Data Analyst, Machine Learning Engineer, Business Intelligence Analyst and AI/ML Engineer, depending on skills and experience." },
+    ],
+  },
+  {
+    id: "machine-learning",
+    label: "Machine Learning",
+    faqs: [
+      { q: "Is Python required before joining a Machine Learning course?", a: "Basic Python helps, but beginners can learn the required Python fundamentals as part of a structured course." },
+      { q: "What will I learn in a Machine Learning course?", a: "Python, data preprocessing, exploratory analysis, supervised and unsupervised learning, regression, classification, clustering, feature engineering, model evaluation and ML projects." },
+      { q: "Can I learn Machine Learning without strong mathematics?", a: "You can start without advanced mathematics, but statistics, probability, linear algebra and basic calculus become more useful as you advance." },
+      { q: "What is the difference between Machine Learning and Data Science?", a: "Data Science is broader, covering data collection, cleaning, analysis and insight. Machine Learning focuses on algorithms that learn patterns from data to make predictions." },
+      { q: "Are there Machine Learning jobs for freshers?", a: "Freshers can pursue entry-level roles in ML, AI, data analysis, Python development and data science. Projects and a portfolio help considerably." },
+    ],
+  },
+  {
+    id: "generative-ai",
+    label: "Generative AI",
+    faqs: [
+      { q: "What is Generative AI?", a: "Technology that creates new content such as text, images, video, audio, presentations and code using AI models." },
+      { q: "What is Prompt Engineering?", a: "Writing clear, effective instructions to get better results from Generative AI tools." },
+      { q: "Is Generative AI training suitable for students and freshers?", a: "Yes. Beginners, students and freshers can explore it, subject to course requirements." },
+      { q: "Can Generative AI make mistakes?", a: "Yes. It can produce incorrect or misleading information, so important output should always be verified." },
+      { q: "What jobs can I get after a Generative AI course?", a: "AI Content Specialist, Prompt Engineer, AI Automation Assistant and AI Application Developer, depending on skills and qualifications." },
+    ],
+  },
+  {
+    id: "agentic-ai",
+    label: "Agentic AI",
+    faqs: [
+      { q: "What is Agentic AI?", a: "AI that can plan, make decisions, use tools and complete multi-step tasks with limited human intervention." },
+      { q: "How is Agentic AI different from Generative AI?", a: "Generative AI mainly creates content from prompts. Agentic AI goes further by planning and taking actions to accomplish a defined goal." },
+      { q: "How are AI Agents different from chatbots?", a: "Traditional chatbots mainly answer questions. AI Agents can plan tasks, take actions, use external tools and work through multiple steps." },
+      { q: "What skills are required to learn Agentic AI?", a: "Python, AI fundamentals, APIs, LLMs, prompt engineering, automation and problem-solving." },
+      { q: "Does Agentic AI require human supervision?", a: "It depends on the application. High-risk tasks usually need human oversight, while routine tasks can run autonomously." },
+    ],
+  },
+  {
+    id: "cloud-devops",
+    label: "Cloud & DevOps",
+    faqs: [
+      { q: "What is Cloud Computing?", a: "Delivery of servers, storage, databases, networking and software over the internet, so you don't maintain all the physical infrastructure yourself." },
+      { q: "Does techcadd offer Cloud Computing with DevOps?", a: "Yes. Cloud Computing & DevOps is a course area, with practical material covering Linux, Git/GitHub, Docker, AWS, CI/CD and deployment." },
+      { q: "Can beginners learn DevOps?", a: "Yes. Start with Linux, Git, networking and basic development, then progress to Docker, Kubernetes, CI/CD, cloud and automation." },
+      { q: "Which cloud platforms are covered?", a: "Mainly AWS and Microsoft Azure, including core compute, storage, networking, database and security services." },
+      { q: "Is Cloud Computing a good career?", a: "Yes. Businesses increasingly host applications and data in the cloud, creating roles such as Cloud Engineer, Cloud Administrator, DevOps Engineer and Cloud Support Engineer." },
+    ],
+  },
+  {
+    id: "cyber-security",
+    label: "Cyber Security",
+    faqs: [
+      { q: "Is an Ethical Hacking Course suitable for beginners?", a: "Yes. Beginners start with networking, Linux and security fundamentals before moving into penetration testing. The programme is open to learners from 12th onward." },
+      { q: "Is ethical hacking legal to learn?", a: "Yes, learning it is legal. Attacking systems without permission is not, so practise only in authorised labs or on systems where you have explicit permission." },
+      { q: "Does techcadd provide practical training in ethical hacking?", a: "Yes. Training is lab-based and includes Kali Linux, Nmap, Metasploit, Burp Suite, Wireshark, John the Ripper and Hydra." },
+      { q: "Do I need programming knowledge to learn Cyber Security?", a: "Programming isn't mandatory to start, but Python, Bash or JavaScript improves automation and testing skills." },
+      { q: "Does techcadd provide placement support after the course?", a: "Placement-related support includes CV guidance, mock interviews and hiring drives. It does not mean guaranteed employment." },
+    ],
+  },
+  {
+    id: "flutter",
+    label: "Flutter Development",
+    faqs: [
+      { q: "Can Flutter build both Android and iOS apps?", a: "Yes. Flutter is cross-platform and builds Android and iOS apps from a shared codebase." },
+      { q: "Is Dart required before learning Flutter?", a: "Dart is the language Flutter uses, but you needn't know it beforehand if the course includes Dart fundamentals." },
+      { q: "Do I need coding experience to join a Flutter course?", a: "Not necessarily. A structured course can start with programming fundamentals and Dart before moving to Flutter, APIs and databases." },
+      { q: "What will I learn in a Flutter Development course?", a: "Dart, widgets, layouts, navigation, state management, REST APIs, Firebase, authentication, databases, debugging, testing and deployment." },
+      { q: "Can I get a job after a Flutter course?", a: "It can prepare you for entry-level roles such as Junior Flutter Developer or Mobile App Developer. Projects, a portfolio and interview preparation matter too." },
+    ],
+  },
+  {
+    id: "accounting",
+    label: "Accounting & GST",
+    faqs: [
+      { q: "What is Tally Prime?", a: "Business accounting software used for accounting, invoicing, GST, inventory, payroll, banking and financial reporting." },
+      { q: "Do I need an accounting background to learn Tally Prime?", a: "No. Beginners can start with accounting fundamentals before practical Tally Prime operations." },
+      { q: "Is GST covered in a Tally Prime course?", a: "Yes. Practical GST training can include configuration, tax ledgers, GST invoices, taxable transactions and GST reports." },
+      { q: "What is the difference between CGST, SGST and IGST?", a: "CGST and SGST are charged together on intra-state transactions; IGST is charged on inter-state transactions." },
+      { q: "What job roles can I pursue after Tally Prime training?", a: "Tally Operator, Junior Accountant, Accounts Assistant, Accounts Executive, Billing Executive, GST Executive, Payroll Assistant and Inventory Accountant." },
+    ],
+  },
+  {
+    id: "cad-cam",
+    label: "CAD / CAM",
+    faqs: [
+      { q: "What is Mechanical CAD/CAM?", a: "Computer-Aided Design plus Computer-Aided Manufacturing: CAD creates drawings and 3D models, while CAM plans and generates CNC machining operations." },
+      { q: "What is the difference between CAD and CAM?", a: "CAD is for designing the product; CAM is for manufacturing it by generating toolpaths and machining operations." },
+      { q: "Which software is used in Mechanical CAD/CAM?", a: "AutoCAD, SolidWorks, Creo, Siemens NX, CATIA, Mastercam, WorkNC and Fusion 360." },
+      { q: "Is SolidWorks suitable for beginners and mechanical engineering students?", a: "Yes. It offers a structured workflow for sketches, features, parts, assemblies and drawings." },
+      { q: "Who can learn Mechanical CAD/CAM?", a: "Mechanical engineering students, diploma holders, B.Tech/BE engineers, production and manufacturing professionals, and beginners interested in design and CNC machining." },
+    ],
+  },
+  {
+    id: "c-cpp",
+    label: "C & C++",
+    faqs: [
+      { q: "Is C Programming suitable for beginners?", a: "Yes. C is an excellent first language because it builds core programming concepts and logical thinking." },
+      { q: "Do I need prior programming experience to learn C?", a: "No. The course begins with basic concepts and gradually moves to advanced topics." },
+      { q: "What is the difference between C and C++?", a: "C is primarily procedural, while C++ supports procedural, object-oriented and generic programming. Learning C first makes many C++ concepts easier." },
+      { q: "Can beginners learn C++?", a: "Yes, when the course starts with programming fundamentals and gradually moves towards OOP and advanced features." },
+      { q: "What career opportunities are available after learning C++?", a: "C++ Developer, Software Developer, Game Developer, Embedded Systems Developer and Systems Programmer." },
+    ],
+  },
+  {
+    id: "django",
+    label: "Django",
+    faqs: [
+      { q: "What is Django?", a: "A high-level, open-source Python web framework for building secure, scalable and maintainable web applications." },
+      { q: "What is Django ORM?", a: "The Object-Relational Mapper lets you query and manipulate database data using Python objects instead of writing SQL for every operation." },
+      { q: "What is the MVT architecture in Django?", a: "MVT stands for Model, View, Template: models manage data, views handle request and response logic, templates present information to users." },
+      { q: "Can React be used with Django?", a: "Yes. Django can serve as the backend/API layer while React handles the user interface." },
+      { q: "What career opportunities are available after learning Django?", a: "Django Developer, Python Developer, Full Stack Developer, Backend Developer, API Developer and Software Developer." },
+    ],
+  },
+  {
+    id: "android-ios",
+    label: "Android & iOS",
+    faqs: [
+      { q: "Which programming language is used for Android app development?", a: "Kotlin and Java. Kotlin is preferred for modern apps, while Java remains relevant for existing projects." },
+      { q: "Is a coding background required to learn Android development?", a: "No. Beginners can start with programming fundamentals, Kotlin and OOP before building real apps." },
+      { q: "Is Swift required for iOS app development?", a: "Swift is the primary language for modern iOS development and, with Xcode, gives a strong foundation." },
+      { q: "Do I need a Mac to learn iOS development?", a: "For practical development with Xcode and Apple's tools, macOS is generally required." },
+      { q: "Can I get a job after an app development course?", a: "It builds the foundation for entry-level roles, but a strong portfolio, practical experience and interview preparation decide the outcome." },
+    ],
+  },
+  {
+    id: "aws-azure",
+    label: "AWS & Azure",
+    faqs: [
+      { q: "AWS vs Azure: which should I learn first?", a: "Both are widely used and you can start with either. AWS suits a broad range of services; Azure is particularly relevant where the Microsoft ecosystem is used." },
+      { q: "Do I need coding knowledge to learn AWS or Azure?", a: "No. Basic Linux, networking, operating systems and scripting help, especially for cloud and DevOps roles." },
+      { q: "Which certification is suitable for beginners?", a: "AWS Certified Cloud Practitioner or Microsoft Azure Fundamentals (AZ-900) are foundational starting points." },
+      { q: "Is the certification exam included in the course fee?", a: "It depends on the course package. The official exam fee may be separate, so confirm inclusions before enrolling." },
+      { q: "Are there AWS or Azure jobs for freshers?", a: "Yes: Cloud Support Associate, Junior Cloud Engineer, Cloud Administrator and Technical Support Associate. Hands-on projects strengthen your profile." },
+    ],
+  },
+  {
+    id: "devops-tools",
+    label: "Docker, Kubernetes & Linux",
+    faqs: [
+      { q: "What is Docker?", a: "A platform for packaging and running applications in lightweight, isolated environments called containers." },
+      { q: "What is Kubernetes?", a: "An open-source container orchestration platform to deploy, manage, scale and automate containerised applications." },
+      { q: "What is Terraform?", a: "An Infrastructure as Code tool that defines, provisions and manages cloud infrastructure through configuration files." },
+      { q: "Can I learn Linux without an IT background?", a: "Yes. Start with Linux fundamentals and progress to administration with consistent hands-on practice." },
+      { q: "Do I need Docker knowledge before learning Kubernetes?", a: "Container concepts help, but you can learn Kubernetes fundamentals without being an advanced Docker user." },
+    ],
+  },
+  {
+    id: "network-security",
+    label: "Network Security",
+    faqs: [
+      { q: "Is Network Security a good course for beginners?", a: "Yes, if you first learn basic networking. A path from networking fundamentals to security concepts and labs works well." },
+      { q: "What will I learn in a Network Security course?", a: "Firewalls, VPNs, IDS/IPS, network attacks, secure protocols, authentication, access control, monitoring and vulnerability assessment." },
+      { q: "Is coding required to learn Network Security?", a: "Advanced programming isn't required, but basic Python scripting helps with automation and log analysis." },
+      { q: "What is the difference between Network Security and Cyber Security?", a: "Network Security protects network infrastructure and traffic. Cyber Security is broader, including application, endpoint, cloud and identity security." },
+      { q: "What jobs can I get after a Network Security course?", a: "Network Security Engineer, Security Analyst, Network Administrator, SOC Analyst and Cybersecurity Associate." },
+    ],
+  },
+  {
+    id: "deep-learning",
+    label: "Deep Learning & NLP",
+    faqs: [
+      { q: "What is Deep Learning?", a: "A branch of AI that uses multi-layered neural networks to learn patterns from large amounts of data." },
+      { q: "How is Deep Learning different from Machine Learning?", a: "Machine Learning often needs manual feature selection, while Deep Learning learns features automatically from raw data." },
+      { q: "What is Natural Language Processing (NLP)?", a: "A branch of AI that enables computers to understand, process and generate human language." },
+      { q: "What is Computer Vision?", a: "A branch of AI that enables computers to interpret images and videos." },
+      { q: "Is the NLP and Computer Vision course suitable for beginners?", a: "Yes. You start with fundamentals and move to advanced techniques through practical exercises and projects." },
+    ],
+  },
+  {
+    id: "ai-development",
+    label: "AI Apps, Chatbots & RAG",
+    faqs: [
+      { q: "What is RAG (Retrieval-Augmented Generation)?", a: "An AI technique that combines information retrieval with generative AI to produce more accurate, context-aware responses." },
+      { q: "What is AI Chatbot Development?", a: "Building intelligent chatbots that understand user queries, generate responses and automate conversations." },
+      { q: "What is AI API Development?", a: "Creating APIs that connect AI models and intelligent features with websites, mobile apps and business applications." },
+      { q: "What is n8n used for?", a: "Connecting apps, APIs, databases and AI tools to build automated workflows." },
+      { q: "What is a Multi-Agent AI system?", a: "A system where multiple specialised AI agents work together, each with its own role, to complete complex tasks." },
+    ],
+  },
+  {
+    id: "office-automation",
+    label: "Office Automation",
+    faqs: [
+      { q: "What is an Office Automation course?", a: "A practical computer course teaching office software and productivity tools for everyday workplace tasks." },
+      { q: "What software is taught in Office Automation?", a: "MS Word, Excel, PowerPoint, email, internet applications and file management." },
+      { q: "Can I do an Office Automation course after 12th?", a: "Yes. It develops practical computer and workplace skills." },
+      { q: "Can Office Automation help me get a job?", a: "Yes, for entry-level roles such as computer operator, office assistant, data entry operator and back-office executive." },
+      { q: "Does the course teach data entry?", a: "Yes. It can cover typing, spreadsheet data entry, formatting, sorting, filtering and maintaining digital records." },
+    ],
+  },
+  {
+    id: "financial-accounting",
+    label: "Financial Accounting",
+    faqs: [
+      { q: "What is Financial Accounting?", a: "Recording, classifying, summarising and reporting a business's financial transactions." },
+      { q: "Can Financial Accounting be learned by beginners?", a: "Yes. Start with concepts, journal entries, ledgers, trial balance, financial statements and accounting software." },
+      { q: "What is the accounting equation?", a: "Assets = Liabilities + Equity." },
+      { q: "What are the main financial statements?", a: "The Profit and Loss Account, Balance Sheet and Cash Flow Statement." },
+      { q: "What is Input Tax Credit (ITC) under GST?", a: "Credit of GST paid on eligible purchases that a registered taxpayer can use against GST payable on outward supplies, subject to conditions." },
+    ],
+  },
+  {
+    id: "product-design",
+    label: "AutoCAD & SolidWorks",
+    faqs: [
+      { q: "What is AutoCAD used for in product design?", a: "Creating accurate engineering drawings and layouts, with 2D mechanical components, dimensions and documentation." },
+      { q: "What is SolidWorks?", a: "A professional 3D CAD tool for mechanical design, assemblies, engineering drawings and product visualisation." },
+      { q: "Can I learn SolidWorks after AutoCAD?", a: "Yes. AutoCAD gives a useful foundation in drawings and CAD concepts before moving to 3D parts and assemblies." },
+      { q: "What is the difference between 2D drafting and 3D modeling?", a: "2D drafting creates flat technical drawings; 3D modeling creates a three-dimensional representation showing shape and volume." },
+      { q: "Who can join a Product Design & AutoCAD course?", a: "Mechanical, production and automobile engineering students, diploma holders, graduates, beginners and working professionals." },
+    ],
+  },
+];

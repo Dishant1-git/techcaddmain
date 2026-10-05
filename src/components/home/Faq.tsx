@@ -37,6 +37,7 @@ export function Faq() {
               <p className="-mt-2 px-6 pb-6 leading-relaxed text-ink-500">{f.a}</p>
             </details>
           ))}
+          <Link href="/faq" className="btn-ghost mt-4 inline-flex">See all questions by course</Link>
         </div>
       </div>
     </section>

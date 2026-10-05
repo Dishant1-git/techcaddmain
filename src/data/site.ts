@@ -163,12 +163,12 @@ export const nav: NavItem[] = [
     children: [
       { label: "About techcadd", href: "/about" },
       { label: "Mission and Vision", href: "/about/mission-vision" },
-      { label: "Our Founder", href: "/#about" },
+      { label: "Our Founder", href: "/about/founder" },
     ],
     featured: [
       { title: "About techcadd", href: "/about", badge: "Story", meta: "Since 2007", image: navAboutImg, alt: "TechCADD students in a seminar hall" },
       { title: "Mission and Vision", href: "/about/mission-vision", badge: "Purpose", meta: "Our Direction", image: navMissionImg, alt: "Students at a TechCADD auditorium session" },
-      { title: "Our Founder", href: "/#about", badge: "Profile", meta: "Gourav Gupta", image: navFounderImg, alt: "Founder Gourav Gupta presenting a robot dog on stage" },
+      { title: "Our Founder", href: "/about/founder", badge: "Profile", meta: "Gourav Gupta", image: navFounderImg, alt: "Founder Gourav Gupta presenting a robot dog on stage" },
     ],
   },
   {
@@ -375,7 +375,7 @@ export const nav: NavItem[] = [
             { label: "Training Matcher", href: "/training-matcher", badge: "New" },
             { label: "Salary Estimator", href: "/salary-estimator", badge: "New" },
             { label: "Placements & Salaries", href: "/placements", badge: "New" },
-            { label: "Compare Courses", href: "/#courses" },
+            { label: "Compare Courses", href: "/compare" },
           ],
         },
         {
@@ -392,28 +392,28 @@ export const nav: NavItem[] = [
           title: "Explore",
           text: "Stories, events and life at techcadd",
           links: [
-            { label: "Why techcadd", href: "/#why-us" },
-            { label: "Blogs", href: "/#blog" },
-            { label: "Pages", href: "/#blog" },
-            { label: "Events", href: "/#blog" },
-            { label: "Gallery", href: "/#about" },
+            { label: "Why techcadd", href: "/why-techcadd" },
+            { label: "Blogs", href: "/blogs" },
+            { label: "Pages", href: "/pages" },
+            { label: "Events", href: "/events" },
+            { label: "Gallery", href: "/gallery" },
           ],
         },
         {
           title: "Help & Community",
           text: "Answers, reviews and partners",
           links: [
-            { label: "FAQ", href: "/#faq" },
-            { label: "Reviews", href: "/#testimonials" },
-            { label: "College Partnerships", href: "/#programs" },
+            { label: "FAQ", href: "/faq" },
+            { label: "Reviews", href: "/reviews" },
+            { label: "College Partnerships", href: "/college-partnerships" },
           ],
         },
       ],
       quote: { text: "Everybody should learn to program a computer, because it teaches you how to think.", author: "Steve Jobs" },
-      browse: { label: "Ask us a question", href: "/#faq" },
+      browse: { label: "Ask us a question", href: "/faq" },
     },
   },
-  { label: "Contact Us", href: "/#contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 /** Home #about section (components/home/About.tsx). Photos are the small nav crops — replace with full-size originals. */
@@ -897,8 +897,8 @@ export const footerLinks = {
   Company: [
     { label: "About Us", href: "/#about" },
     { label: "Mission & Vision", href: "/#why-us" },
-    { label: "Our Founder", href: "/#about" },
-    { label: "Contact Us", href: "/#demo" },
+    { label: "Our Founder", href: "/about/founder" },
+    { label: "Contact Us", href: "/contact" },
   ],
   Guidance: [
     { label: "Free Career Counselling", href: "/guidance/career-counselling" },
@@ -908,8 +908,8 @@ export const footerLinks = {
   ],
   Support: [
     { label: "Placement Support", href: "/#placements" },
-    { label: "Student Reviews", href: "/#testimonials" },
-    { label: "FAQs", href: "/#faq" },
+    { label: "Student Reviews", href: "/reviews" },
+    { label: "FAQs", href: "/faq" },
     { label: "Enquire Now", href: "/#demo" },
   ],
 };

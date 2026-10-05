@@ -96,6 +96,12 @@ src/app/
   guidance/freelancing/page.tsx          Hero + Why + Skills (#skills anchor) + How It Works + Platforms
                                           (LogoGrid, no-affiliation disclaimer) + Build Your Profile + First
                                           Client roadmap + Mistakes to Avoid + FAQ + CTA.
+  faq/page.tsx              /faq: hero + FaqTabs (components/faq, "use client": category tabs + cross-category search) + CTA, FAQPage JSON-LD.
+                            Content in src/data/faq-page.ts (`faqCategories`, EXACTLY 5 Q&As per category). Linked from footer + home #faq "See all questions".
+  reviews/page.tsx          /reviews: dark hero (rating stats) + components/reviews/ReviewGrid ("use client": first 6 shown, "See more" reveals the rest) + CTA,
+                            Review JSON-LD. Content in src/data/reviews.ts (`reviews`, `reviewsInitial`, `reviewStats`). Linked from Resources▾ Help & Community + footer.
+  college-partnerships/page.tsx  /college-partnerships (Resources▾ Help & Community): dark hero + stats, hex initials grid of partner institutions
+                            (NO real logos — add images later), 6 partnership formats, 4-step process, CTA. Content in src/data/college-partners.ts (SAMPLE).
   sitemap.ts / robots.ts / not-found.tsx
 src/components/
   guidance/  Shared building blocks for every /guidance/* page (data-driven from src/data/guidance.ts):
