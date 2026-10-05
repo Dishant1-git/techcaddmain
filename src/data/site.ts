@@ -249,6 +249,9 @@ export const nav: NavItem[] = [
             { label: "WordPress", href: "/courses/wordpress" },
             { label: "Shopify", href: "/courses/shopify" },
             { label: "Meta Ads", href: "/courses/meta-ads", badge: "New" },
+            { label: "Dropshipping & E-Commerce", href: "/courses/dropshipping-ecommerce" },
+            { label: "GEO", href: "/courses/geo", badge: "New" },
+            { label: "AEO", href: "/courses/aeo", badge: "New" },
           ],
         },
         {

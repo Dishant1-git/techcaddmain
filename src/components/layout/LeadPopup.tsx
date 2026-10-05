@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import { usePathname } from "next/navigation";
 import { ArrowRight, CircleCheck, Quote, Star, X } from "lucide-react";
+import { submitLead } from "@/lib/lead";
 
 /** Any component can open the popup with `openLeadPopup()` (e.g. the header "Book Demo" button). */
 export const LEAD_POPUP_EVENT = "techcadd:open-lead-popup";
@@ -15,19 +17,26 @@ const field =
 
 type Props = {
   courses: string[];
+  /** Course name per course-page path, e.g. { "/courses/python": "Python" }. */
+  pageCourses: Record<string, string>;
   contact: { whatsapp: string; email: string; rating: { score: string; reviews: string } };
 };
 
 /**
  * Lead popup (native <dialog>: focus trap, Esc and backdrop for free). Opens once per browser session 5s after load,
- * and whenever `openLeadPopup()` is called. No backend yet — submit opens WhatsApp with the details pre-filled.
+ * and whenever `openLeadPopup()` is called. Submit saves the lead to MySQL (POST /api/lead → `leads` table) and a
+ * thank-you message replaces the form.
  * Kept compact (max-w-3xl, left panel hidden on phones) so it never needs its own scrollbar.
  */
-export function LeadPopup({ courses, contact }: Props) {
+export function LeadPopup({ courses, pageCourses, contact }: Props) {
   const dialog = useRef<HTMLDialogElement>(null);
   const [sum, setSum] = useState<[number, number]>([8, 8]);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  // On a course page the popup starts with that page's course selected; everywhere else the visitor picks one.
+  const pathname = usePathname();
+  const pageCourse = pageCourses[pathname] ?? "";
 
   useEffect(() => {
     const d = dialog.current;
@@ -60,7 +69,7 @@ export function LeadPopup({ courses, contact }: Props) {
 
   const close = () => dialog.current?.close();
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const course = String(data.get("course") ?? "");
@@ -79,9 +88,16 @@ export function LeadPopup({ courses, contact }: Props) {
       return;
     }
 
-    const msg = `Hi TechCADD, I'd like a counselling call.\nCourse: ${course}\nName: ${name}\nPhone: ${phone}`;
-    window.open(`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
-    setSent(true);
+    if (sending) return;
+    setSending(true);
+    try {
+      await submitLead({ form: "popup", course, name, phone });
+      setSent(true);
+    } catch {
+      setErrors({ answer: "We couldn't save your details. Please try again in a moment." });
+    } finally {
+      setSending(false);
+    }
   };
 
   const err = (name: string) =>
@@ -139,16 +155,17 @@ export function LeadPopup({ courses, contact }: Props) {
           {sent ? (
             <div className="mt-8 rounded-2xl bg-white/15 p-6 text-center" role="status">
               <CircleCheck className="mx-auto size-10 text-accent-400" aria-hidden />
-              <p className="mt-3 font-display text-lg font-bold">Almost done!</p>
-              <p className="mt-1 text-sm text-white/85">Send the WhatsApp message that just opened and a counsellor will call you back.</p>
+              <p className="mt-3 font-display text-lg font-bold">Thank you!</p>
+              <p className="mt-1 text-sm text-white/85">We have received your details. A counsellor will call you back the same working day.</p>
               <button type="button" onClick={close} className="btn-primary mt-5">Close</button>
             </div>
           ) : (
-            <form onSubmit={onSubmit} noValidate className="mt-5 space-y-3">
+            <form key={pathname} onSubmit={onSubmit} noValidate className="mt-5 space-y-3">
               <div>
                 <label htmlFor="lead-course" className="sr-only">Course of interest</label>
-                <select {...a11y("course")} defaultValue="" required className={`${field} [&>option]:text-ink-900`}>
+                <select {...a11y("course")} defaultValue={pageCourse} required className={`${field} [&>option]:text-ink-900`}>
                   <option value="" disabled>Select your course of interest*</option>
+                  {pageCourse && !courses.includes(pageCourse) && <option>{pageCourse}</option>}
                   {courses.map((c) => <option key={c}>{c}</option>)}
                 </select>
                 {err("course")}
@@ -171,8 +188,8 @@ export function LeadPopup({ courses, contact }: Props) {
               <p className="flex items-center gap-2 rounded-full bg-accent-400 px-4 py-2 text-xs font-bold">
                 <CircleCheck className="size-4 shrink-0" aria-hidden /> A counsellor calls you back the same working day.
               </p>
-              <button type="submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-white py-3 font-display font-bold text-brand-700 transition-colors hover:bg-brand-50">
-                Submit <ArrowRight className="size-4" aria-hidden />
+              <button type="submit" aria-disabled={sending || undefined} className="flex w-full items-center justify-center gap-2 rounded-full bg-white py-3 font-display font-bold text-brand-700 transition-colors hover:bg-brand-50">
+                {sending ? "Sending…" : "Submit"} <ArrowRight className="size-4" aria-hidden />
               </button>
             </form>
           )}

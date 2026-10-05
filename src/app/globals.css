@@ -515,3 +515,151 @@ details[open] .faq-icon { transform: rotate(45deg); }
   #career-plan, #career-plan * { visibility: visible; }
   #career-plan { position: absolute; inset: 0 auto auto 0; width: 100%; margin: 0; }
 }
+
+/* ───────── Founder page (/about/founder) — layout mirrors techcaddjalandhar.com/about/founder, colours from this theme ───────── */
+.fnd-blue {
+  background:
+    radial-gradient(52rem 40rem at 88% 12%, rgb(51 114 251 / 0.28), transparent 68%),
+    radial-gradient(44rem 36rem at 6% 92%, rgb(22 64 220 / 0.34), transparent 70%),
+    var(--color-ink-950);
+}
+/* Hero decoration: drifting rings + dot patches. */
+.fnd-ring {
+  position: absolute; border-radius: 50%; border: 2px solid rgb(51 114 251 / 0.55);
+  box-shadow: 0 0 0 10px rgb(51 114 251 / 0.08), 0 0 40px rgb(51 114 251 / 0.35);
+  --drift-x: 10px; --drift-y: -16px;
+}
+.fnd-dots {
+  position: absolute; width: 150px; height: 90px; opacity: 0.7;
+  background-image: radial-gradient(rgb(147 180 255 / 0.55) 1.4px, transparent 1.6px); background-size: 14px 14px;
+}
+.fnd-tags li + li::before {
+  content: ""; display: inline-block; width: 3px; height: 1.1em; margin: 0 1.1rem; border-radius: 2px; background: var(--color-accent-400);
+}
+@keyframes fnd-ring-float { to { transform: translate3d(var(--drift-x), var(--drift-y), 0); } }
+
+/* On-stage photo marquee: two rows, opposite directions; hovered photo zooms and the rest dim. */
+.fnd-gal { --gal-h: clamp(140px, 17vw, 240px); --gal-gap: clamp(10px, 1.2vw, 16px); position: relative; z-index: 2; display: grid; gap: var(--gal-gap); overflow-x: clip; }
+.fnd-gal-row { position: relative; }
+.fnd-gal-row:hover { z-index: 3; }
+.fnd-gal-track { display: flex; gap: var(--gal-gap); width: max-content; padding-right: var(--gal-gap); }
+.fnd-gal-tile {
+  position: relative; flex: none; height: var(--gal-h); border-radius: 14px; overflow: hidden; background: var(--color-ink-900);
+  box-shadow: 0 14px 30px -18px rgb(0 0 0 / 0.6);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease, filter 0.4s ease;
+}
+.fnd-gal-tile:hover { z-index: 5; transform: scale(1.75); box-shadow: 0 40px 90px -20px rgb(0 0 0 / 0.75); }
+.fnd-gal-track:hover .fnd-gal-tile:not(:hover) { filter: brightness(0.4) saturate(0.8); }
+@keyframes fnd-gal-left { to { transform: translateX(-50%); } }
+@media (max-width: 640px) { .fnd-gal-tile:hover { transform: scale(1.4); } }
+
+/* "Four roles" overlapping ribbons: each card tucks under the previous one and widens on hover. */
+.fnd-ribbons { --ribbon-overlap: 1.5rem; display: flex; align-items: stretch; padding-top: 3.25rem; }
+.fnd-ribbon {
+  position: relative; flex: 1 1 0; min-width: 0; display: flex; flex-direction: column;
+  padding: 2.4rem calc(1.4rem + var(--ribbon-overlap)) 2rem 1.5rem;
+  border: 1px solid rgb(10 19 48 / 0.06); border-radius: 22px; background: var(--ribbon-bg);
+  box-shadow: 10px 0 22px -12px rgb(10 19 48 / 0.28);
+}
+.fnd-ribbon[data-reveal] {
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0ms),
+    flex-grow 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+.fnd-ribbon + .fnd-ribbon { margin-left: calc(var(--ribbon-overlap) * -1); padding-left: calc(1.5rem + var(--ribbon-overlap)); }
+.fnd-ribbon:nth-child(4n + 1) { --ribbon-bg: linear-gradient(160deg, #e3ecff, #f5f8ff 55%, #fff); --ribbon-ink: var(--color-brand-600); }
+.fnd-ribbon:nth-child(4n + 2) { --ribbon-bg: linear-gradient(160deg, #fff4cf, #fffaeb 55%, #fff); --ribbon-ink: var(--color-accent-600); }
+.fnd-ribbon:nth-child(4n + 3) { --ribbon-bg: linear-gradient(160deg, #fff, #eef3ff 50%, #fff6d9); --ribbon-ink: var(--color-brand-700); }
+.fnd-ribbon:nth-child(4n + 4) { --ribbon-bg: linear-gradient(160deg, #fff7dc, #fff 45%, #e6eeff); --ribbon-ink: var(--color-accent-600); }
+.fnd-ribbon-num {
+  position: absolute; top: 0; left: 1.1rem; translate: 0 -58%; font-family: var(--font-display); font-size: clamp(4rem, 7vw, 5.75rem);
+  font-weight: 800; line-height: 1; color: var(--ribbon-ink); text-shadow: 3px 4px 0 rgb(10 19 48 / 0.08); pointer-events: none;
+}
+.fnd-ribbon + .fnd-ribbon .fnd-ribbon-num { left: calc(1.1rem + var(--ribbon-overlap)); }
+@media (hover: hover) and (min-width: 1100px) {
+  .fnd-ribbon:hover { flex-grow: 1.9; box-shadow: 14px 0 30px -12px rgb(10 19 48 / 0.38); }
+}
+@media (max-width: 1099px) {
+  .fnd-ribbons { flex-direction: column; padding-top: 2.5rem; }
+  .fnd-ribbon, .fnd-ribbon + .fnd-ribbon { margin-left: 0; padding: 2rem 1.4rem 1.6rem; }
+  .fnd-ribbon + .fnd-ribbon { margin-top: 2.25rem; }
+  .fnd-ribbon-num, .fnd-ribbon + .fnd-ribbon .fnd-ribbon-num { left: 1.1rem; font-size: 3.5rem; }
+}
+
+/* Journey: cross-fading background photos + travelling dot on the connectors. */
+.fnd-journey-photo { position: absolute; inset: 0; opacity: 0; transform: scale(1.06); transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.fnd-journey-photo[data-active] { opacity: 1; transform: none; }
+@keyframes fnd-caption-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes fnd-edge-dot { from { top: -10%; } to { top: 100%; } }
+
+/* Testimonials: one card at a time on a stack of two tilted "sheets". */
+.fnd-tst-stage { position: relative; display: grid; touch-action: pan-y; user-select: none; }
+.fnd-tst-stage::before, .fnd-tst-stage::after {
+  content: ""; grid-area: 1 / 1; border: 1px solid rgb(255 255 255 / 0.22); border-radius: 28px; background: rgb(255 255 255 / 0.12); backdrop-filter: blur(6px);
+}
+.fnd-tst-stage::before { transform: translate(22px, 22px) rotate(2.5deg); opacity: 0.55; }
+.fnd-tst-stage::after { transform: translate(11px, 11px) rotate(1.2deg); opacity: 0.8; }
+.fnd-tst-card {
+  grid-area: 1 / 1; position: relative; z-index: 1; opacity: 0; visibility: hidden; transform: translateX(28px);
+  transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.6s;
+}
+.fnd-tst-card[data-active] {
+  z-index: 2; opacity: 1; visibility: visible; transform: none;
+  transition: opacity 0.5s ease 0.1s, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s, visibility 0s linear 0s;
+}
+@media (max-width: 600px) {
+  .fnd-tst-stage::before { transform: translate(10px, 12px) rotate(1.5deg); }
+  .fnd-tst-stage::after { transform: translate(5px, 6px) rotate(0.8deg); }
+}
+
+/* Instagram reels cover-flow: --d = signed distance from the centre reel, --ad = |d| (set inline by FounderReels). */
+.fnd-reels {
+  --reel-w: clamp(230px, 62vw, 300px); --reel-h: calc(var(--reel-w) * 16 / 9); --reel-step: calc(var(--reel-w) * 1.04);
+  background: radial-gradient(rgb(10 19 48 / 0.13) 1.2px, transparent 1.6px) 0 0 / 22px 22px, #f6f8fd;
+}
+.fnd-reels-stage { position: relative; height: var(--reel-h); margin-top: clamp(2rem, 4vw, 3rem); touch-action: pan-y; user-select: none; cursor: grab; perspective: 1600px; }
+.fnd-reels-stage[data-dragging] { cursor: grabbing; }
+.fnd-reels-stage[data-dragging] .fnd-reel { transition: none; }
+.fnd-reel {
+  position: absolute; top: 0; left: 50%; width: var(--reel-w); height: var(--reel-h); margin-left: calc(var(--reel-w) / -2);
+  border-radius: 22px; overflow: hidden; background: #0b1020; box-shadow: 0 30px 60px -30px rgb(10 19 48 / 0.45);
+  transform: translateX(calc(var(--d) * var(--reel-step) - var(--d) * var(--ad) * var(--reel-w) * 0.08)) rotateY(calc(var(--d) * -14deg)) scale(max(0.3, calc(1 - var(--ad) * 0.2)));
+  opacity: clamp(0, calc((2.8 - var(--ad)) * 0.4), 1);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+}
+.fnd-reel[data-active] { box-shadow: 0 40px 90px -35px rgb(29 83 240 / 0.55); }
+.fnd-reel[data-ad="3"], .fnd-reel[data-ad="4"] { pointer-events: none; }
+.fnd-reel-clip { position: absolute; inset: 0; overflow: hidden; }
+/* The embed is oversized and shifted so Instagram's header (54px) and footer are cropped away, leaving only the video. */
+.fnd-reel iframe {
+  --bleed: 4px; --media-h: calc(var(--reel-h) + var(--bleed)); --frame-w: calc((var(--media-h) + 1px) / 1.25);
+  position: absolute; top: calc(-54px - var(--bleed) / 2); left: calc((var(--reel-w) - var(--frame-w)) / 2);
+  width: var(--frame-w); height: calc(var(--media-h) + 54px + 160px); border: 0; display: block;
+}
+/* Landscape reels: a 16:9 window centred in the portrait card. */
+.fnd-reel[data-shape="landscape"] { --frame-w: max(calc(var(--reel-w) + 4px), 326px); }
+.fnd-reel[data-shape="landscape"] .fnd-reel-clip { inset: auto 0; top: 50%; height: calc(var(--frame-w) * 9 / 16 - 2px); transform: translateY(-50%); }
+.fnd-reel[data-shape="landscape"] iframe {
+  --frame-w: inherit; top: -55px; left: calc((var(--reel-w) - var(--frame-w)) / 2); width: var(--frame-w); height: calc(var(--frame-w) * 9 / 16 + 54px + 200px);
+}
+.fnd-reel-cover { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; padding: 0; border: 0; background: transparent; cursor: inherit; }
+.fnd-reel-cover:focus-visible { outline: 3px solid var(--color-brand-500); outline-offset: -3px; }
+/* Frame-shaped drag handle on the centre reel: the hole in the middle keeps the video clickable. */
+.fnd-reel-grip { position: absolute; inset: 0; z-index: 1; clip-path: polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0, 22% 30%, 78% 30%, 78% 70%, 22% 70%, 22% 30%); }
+@media (max-width: 760px) {
+  .fnd-reel { opacity: clamp(0, calc((1.9 - var(--ad)) * 0.8), 1); }
+  .fnd-reel[data-ad="2"] { pointer-events: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fnd-ring { animation: fnd-ring-float 9s ease-in-out infinite alternate; }
+  .fnd-gal-track { animation: fnd-gal-left 70s linear infinite; }
+  .fnd-gal-row[data-dir="right"] .fnd-gal-track { animation-direction: reverse; }
+  .fnd-gal-row:hover .fnd-gal-track { animation-play-state: paused; }
+  .fnd-journey-caption { animation: fnd-caption-in 0.35s ease both; }
+  .fnd-journey-dot { animation: fnd-edge-dot 1.6s ease-in-out infinite; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fnd-gal-row { overflow-x: auto; }
+  .fnd-gal-tile, .fnd-reel, .fnd-journey-photo, .fnd-tst-card, .fnd-tst-card[data-active] { transition: none; }
+  .fnd-journey-photo, .fnd-tst-card { transform: none; }
+}

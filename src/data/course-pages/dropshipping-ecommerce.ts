@@ -1,0 +1,273 @@
+import type { CoursePage } from "./types";
+
+/* /courses/dropshipping-ecommerce — NEW page (Courses ▾ Digital Marketing). Long-form landing copy supplied by the client,
+   used as given, section by section.
+   - The supplied text gives no course duration → `duration` is a neutral placeholder. CONFIRM with the client.
+   - FAQ 18 (government recognition) uses the fallback answer the text supplied for "no documented recognition".
+   - The supplied FAQ numbering skips 5, 7, 8 and 9 (fee, duration, certificate…) — only the questions provided are shown.
+   - Reviews are the client's supplied text — confirm they are from real students before launch. */
+
+const roles = ["E-commerce executive", "Marketplace account manager", "Catalogue manager", "Performance marketing executive", "Freelance store setup"];
+
+export const dropshippingEcommerce: CoursePage = {
+  slug: "dropshipping-ecommerce",
+  title: "Dropshipping & E-Commerce Course",
+  navLabel: "Dropshipping & E-Commerce",
+  group: "marketing",
+  icon: "ShoppingCart",
+  tagline:
+    "Go from product research and store setup to paid ads, order fulfilment and customer handling: launch a Shopify store, work with suppliers, run Meta and Google campaigns, and sell on Amazon and Flipkart.",
+  level: "Beginner",
+  duration: "Duration on enquiry",
+  eligibility: "No technical background or prior business experience needed",
+  overview: [
+    "The Dropshipping & E-Commerce Course by techcadd is a practical, career-focused program for anyone who wants to build or grow an online business. If you are looking for a dropshipping and e-commerce course in India that goes beyond theory, this program takes you from product research and store setup to paid ads, order fulfilment and customer handling. You learn to launch a store on Shopify, work with suppliers, run campaigns on Meta and Google, and sell on marketplaces like Amazon and Flipkart.",
+    "The course is designed for graduates, working professionals, job switchers, freelancers and business owners who want skills the online retail market actually pays for. Whether your goal is a first e-commerce job, a side income alongside your job or a store of your own, every module is built around live projects rather than slides.",
+    "Learners from Punjab can attend classroom sessions at our Jalandhar centre, while students from other states join live online classes with the same curriculum. By the end, you will have a working store, a portfolio of real campaigns and a clear plan for your next career step.",
+  ],
+  // Not shown on this page (the overview is full width); used for the Course schema "teaches" list.
+  gains: [
+    "Explain the business model and calculate whether a product is worth selling",
+    "A product research sheet with at least three tested product ideas",
+    "A supplier comparison sheet and a clear fulfilment process",
+    "A live, working Shopify store that can take and ship orders",
+    "A test ad campaign with real data",
+    "A marketplace listing draft for Amazon or Flipkart",
+    "A final performance report covering traffic, cost per order and net margin",
+  ],
+  syllabus: [
+    {
+      title: "Module 1: E-Commerce and Dropshipping Foundations",
+      summary: "How online retail works in India, the dropshipping model versus inventory-based selling, margins, realistic expectations, and the legal basics: GST registration, business name and store policies.",
+      topics: ["How online retail works in India", "Dropshipping versus inventory-based selling", "Margins and realistic expectations", "Legal basics: GST registration, business name and store policies"],
+      outcome: "you can explain the business model and calculate whether a product is worth selling.",
+    },
+    {
+      title: "Module 2: Niche and Product Research",
+      summary: "Finding demand with Google Trends, competitor stores and marketplace listings. Checking seasonality, price points and shipping feasibility.",
+      topics: ["Finding demand with Google Trends", "Competitor stores and marketplace listings", "Seasonality and price points", "Shipping feasibility"],
+      outcome: "a product research sheet with at least three tested product ideas.",
+    },
+    {
+      title: "Module 3: Supplier Sourcing and Fulfilment",
+      summary: "Comparing Indian and overseas suppliers, checking delivery times, quality and return terms, ordering samples, and setting up order flow.",
+      topics: ["Comparing Indian and overseas suppliers", "Delivery times, quality and return terms", "Ordering samples", "Setting up order flow"],
+      outcome: "a supplier comparison sheet and a clear fulfilment process.",
+    },
+    {
+      title: "Module 4: Shopify Store Building",
+      summary: "Store setup, theme customisation, product pages, collections, policy pages, navigation and mobile-first design.",
+      topics: ["Store setup and theme customisation", "Product pages and collections", "Policy pages and navigation", "Mobile-first design"],
+      outcome: "a live, working Shopify store.",
+    },
+    {
+      title: "Module 5: Payments, Shipping and Order Management",
+      summary: "Payment gateway setup, cash on delivery handling, courier integration, tracking, and managing returns and RTO.",
+      topics: ["Payment gateway setup", "Cash on delivery handling", "Courier integration and tracking", "Managing returns and RTO"],
+      outcome: "a store that can take and ship orders.",
+    },
+    {
+      title: "Module 6: Content and Creatives",
+      summary: "Writing product descriptions, designing banners and ad creatives in Canva, and making short-form video and Reels.",
+      topics: ["Writing product descriptions", "Banners and ad creatives in Canva", "Short-form video and Reels"],
+      outcome: "a creative set for your top products.",
+    },
+    {
+      title: "Module 7: Paid Advertising",
+      summary: "Meta Ads campaign structure, audiences, budgets and testing, plus Google Ads basics, the break-even ROAS calculation and pixel setup.",
+      topics: ["Meta Ads campaign structure, audiences, budgets and testing", "Google Ads basics", "Break-even ROAS calculation", "Pixel setup"],
+      outcome: "a test campaign with real data.",
+    },
+    {
+      title: "Module 8: Organic Traffic and Influencer Marketing",
+      summary: "Store SEO basics, Instagram growth, working with micro-influencers and writing creator briefs.",
+      topics: ["Store SEO basics", "Instagram growth", "Working with micro-influencers", "Writing creator briefs"],
+      outcome: "a 30-day organic content plan.",
+    },
+    {
+      title: "Module 9: Marketplace Selling",
+      summary: "Account setup, listings, catalogue rules and fee structure on Amazon and Flipkart.",
+      topics: ["Account setup", "Listings", "Catalogue rules", "Fee structure on Amazon and Flipkart"],
+      outcome: "a marketplace listing draft.",
+    },
+    {
+      title: "Module 10: Analytics, Conversion and Scaling",
+      summary: "Reading Google Analytics and Shopify reports, improving conversion rate, email and WhatsApp follow-ups, and automating repeat tasks.",
+      topics: ["Reading Google Analytics and Shopify reports", "Improving conversion rate", "Email and WhatsApp follow-ups", "Automating repeat tasks"],
+      outcome: "a final performance report covering traffic, cost per order and net margin.",
+    },
+  ],
+  tools: [
+    "Shopify", "Canva", "CapCut", "Meta Ads Manager", "Google Ads", "Google Analytics 4", "Meta Pixel", "Google Trends",
+    "Amazon Seller Central", "Flipkart Seller Hub", "Razorpay", "Shiprocket", "Google Sheets",
+  ],
+  // The supplied copy has no project list, so the Projects section and its nav item are hidden on this page.
+  projects: [],
+  // Shown as role chips on the page (via copy.careers.roles); the compare pages read the role names from here.
+  careers: roles.map((role) => ({ role, work: "", hirers: "" })),
+  whyNow: [],
+  faqs: [
+    { q: "What is a dropshipping and e-commerce course?", a: "A dropshipping and e-commerce course teaches you to sell products online without holding stock, and to run an online store as a business or a job. At techcadd, you learn product research, supplier sourcing, Shopify store building, Meta and Google ads, marketplace selling on Amazon and Flipkart, and order handling." },
+    { q: "Who is eligible for this course?", a: "Anyone who can use a smartphone and laptop can join, with no fixed degree requirement. The course suits graduates, postgraduates, working professionals, job switchers, freelancers, business owners and 12th-pass students." },
+    { q: "Is this course suitable for beginners?", a: "Yes, the course starts from the basics of online selling and builds step by step toward ads, analytics and scaling. You don't need coding or design skills. A basic comfort with the internet and a willingness to practise is enough." },
+    { q: "What is covered in the syllabus?", a: "The syllabus covers e-commerce foundations, niche and product research, supplier sourcing, Shopify store building, payments and shipping, content creation, Meta and Google ads, organic traffic, marketplace selling and analytics. Each module ends with a task on your own store." },
+    { q: "Can I learn online, or is classroom attendance required?", a: "You can learn through live online classes from anywhere in India, and a classroom option is also available. Online learners follow the same curriculum and can access recordings for revision. Ask for the classroom location at enquiry." },
+    { q: "What jobs can I get after this course?", a: "You can apply for roles such as e-commerce executive, marketplace account manager, catalogue manager, performance marketing executive and store operations coordinator. You can also start your own store or offer freelance services. techcadd does not guarantee jobs, but the course helps you build a portfolio for applications." },
+    { q: "What is the salary after an e-commerce course in India?", a: "Entry-level e-commerce roles generally pay about ₹2.4 to ₹4.5 lakh per year, and experienced performance marketers and marketplace managers can earn more. These are approximate figures, and actual pay depends on your city, employer and skills." },
+    { q: "Can I do freelancing after this course?", a: "Yes, many learners offer services such as Shopify store setup, product listing, marketplace account management and ad management to small businesses. Your income depends on the clients you win and the quality of your work, and no fixed earnings are promised." },
+    { q: "Can I do dropshipping along with a full-time job?", a: "Yes, once your store is set up, daily tasks such as order checks, customer replies and ad monitoring can usually be handled in evenings and weekends. Early setup and testing take more time, so plan for a few focused hours each week." },
+    { q: "Can students from Himachal Pradesh join the dropshipping course online?", a: "Yes, students from Himachal Pradesh can join live online classes from towns like Shimla, Solan and Dharamshala. The sessions include recordings for revision, and the skills also work for remote freelancing for clients in other states." },
+    { q: "What are the dropshipping and e-commerce job opportunities in Punjab and Haryana?", a: "Punjab has openings with exporters in sports goods and hosiery and with IT and startup firms in Mohali, while Haryana, especially Gurugram and Faridabad, has e-commerce, logistics and D2C companies. Roles include marketplace coordinator, ads executive and catalogue manager." },
+    { q: "Is the e-commerce course available for learners in Delhi NCR and Uttar Pradesh?", a: "Yes, learners in Delhi, Noida, Ghaziabad, Lucknow and Meerut can attend the live online batches. Delhi NCR has the largest number of agency and e-commerce openings, and Uttar Pradesh offers retail, electronics and local-product selling opportunities." },
+    { q: "Can sellers from Jammu & Kashmir, Uttarakhand and Rajasthan use this course?", a: "Yes, sellers from Jammu & Kashmir, Uttarakhand and Rajasthan can learn online and apply the skills to local products. Examples include handicrafts and dry fruits from Srinagar, herbal and wellness items from Dehradun and jewellery or textiles from Jaipur." },
+    { q: "Is this course government-approved or recognised?", a: "This is a skill-based training program with a techcadd course completion certificate, not a government degree." },
+    { q: "Is dropshipping legal and profitable in India?", a: "Dropshipping is legal in India when you follow the rules for GST, consumer protection, product labelling and honest advertising. Profit depends on product choice, supplier reliability, ad costs and return rates, so many stores need several rounds of testing." },
+  ],
+  related: ["shopify", "meta-ads", "digital-marketing"],
+  copy: {
+    heading: { title: "Dropshipping & E-Commerce Course", highlight: "in India", meta: "Dropshipping & E-Commerce Course in India | techcadd" },
+    overview: { eyebrow: "Program Overview", title: "Dropshipping & E-Commerce Course in India" },
+    syllabus: {
+      eyebrow: "What You Will Learn & Tools Covered",
+      title: "What You Will Learn in the Dropshipping & E-Commerce Course",
+      text: "The course follows the path of a real online business: choose a product, build a store, bring traffic, fulfil orders and read the numbers. Each module ends with a task on your own store.",
+    },
+    audience: {
+      eyebrow: "Who Can Do This Course",
+      title: "Who Can Join the Dropshipping & E-Commerce Course?",
+      intro: "You don't need a technical background or prior business experience. The program is built for people at different stages of their careers.",
+      items: [
+        { icon: "GraduationCap", title: "Graduates and postgraduates", text: "(BA, B.Com, BBA, BCA, B.Tech, MBA and others) who want a job in e-commerce operations, digital marketing, marketplace management or catalogue handling. Most e-commerce roles value practical store experience more than the degree stream." },
+        { icon: "Briefcase", title: "Working professionals", text: "Who want a second income without leaving their job. Dropshipping needs no inventory, so you can manage a store in evening and weekend hours once the setup is done." },
+        { icon: "Shuffle", title: "Job switchers", text: "Moving from sales, banking, BPO, teaching or admin into the growing online retail sector. The course gives you a portfolio of live work to show in interviews." },
+        { icon: "PenTool", title: "Freelancers", text: "Who want to add store setup, product listing, ad management or marketplace services to their offerings and charge clients for them." },
+        { icon: "Building2", title: "Business owners and shopkeepers", text: "Who already sell offline and want to take their products online through their own website or marketplaces such as Amazon and Flipkart." },
+        { icon: "BookOpen", title: "Students after 12th", text: "Who are serious about learning a practical skill early. This is a smaller part of our batches, and these learners usually start by building a small store while continuing their college studies." },
+      ],
+      need: "If you are comfortable using a smartphone and a laptop, you can learn this skill.",
+      fit: {
+        title: "Is this course right for you?",
+        text: "It suits you if you:",
+        list: [
+          "want to start an online business with low investment",
+          "are looking for a career in e-commerce, marketplace or performance marketing",
+          "need a flexible skill that works alongside a job or studies",
+          "want guided, hands-on practice instead of random YouTube tutorials",
+        ],
+        after: "It may not suit you if you expect guaranteed income without effort. Dropshipping rewards testing, patience and consistent work.",
+      },
+    },
+    regions: {
+      eyebrow: "Learn from Anywhere",
+      title: "Learners from Across States",
+      intro: "techcadd's live online classes let learners from many states join the same batch. Each region has its own strengths, so the course connects the training to what works locally.",
+      items: [
+        { title: "Punjab", text: "A dropshipping course in Punjab suits sellers and exporters in hosiery, sports goods and handmade products around Ludhiana who want direct-to-customer sales beyond local wholesale." },
+        { title: "Haryana", text: "An e-commerce course in Haryana fits job seekers eyeing logistics, warehousing and marketplace operations roles in Gurugram and Faridabad." },
+        { title: "Himachal Pradesh", text: "An online dropshipping course for Himachal Pradesh students works well for those in Shimla and Solan who want to earn remotely, without relocating to a metro." },
+        { title: "Chandigarh", text: "An e-commerce course in Chandigarh helps professionals from IT and BPO backgrounds in Panchkula and Mohali shift toward digital commerce roles." },
+        { title: "Delhi NCR", text: "A dropshipping course in Delhi serves freshers and agency aspirants in Noida and Ghaziabad, where e-commerce brands and marketing agencies hire in large numbers." },
+        { title: "Jammu & Kashmir", text: "An online e-commerce course for J&K students supports artisans and small sellers in Jammu and Srinagar who want to market crafts, dry fruits and saffron to buyers across India." },
+        { title: "Uttarakhand", text: "A dropshipping course in Uttarakhand fits sellers in Dehradun and Haridwar looking at wellness, herbal and tourism-linked products." },
+        { title: "Rajasthan", text: "An e-commerce course in Rajasthan helps Jaipur's jewellery, textile and handicraft businesses sell online without heavy investment in stock." },
+        { title: "Uttar Pradesh", text: "A dropshipping course in Uttar Pradesh benefits learners in Lucknow and Meerut who want to work with local products such as chikankari and sports goods." },
+      ],
+    },
+    whyProgram: {
+      eyebrow: "Why This Program",
+      title: "Why Choose This Dropshipping and E-Commerce Course in India?",
+      intro: "India's online retail market keeps growing, and much of that growth comes from smaller towns and tier-2 cities. More buyers are comfortable ordering online, UPI payments are everywhere, and courier networks now reach most pin codes. Brands and sellers need people who can run stores, ads and operations. This program trains you for that work.",
+      points: [
+        { title: "Low-investment entry into online business", text: "Dropshipping lets you sell products without buying stock upfront. You list products, the supplier ships them to the customer, and you earn the margin. The course shows you how to choose reliable suppliers, set realistic pricing and avoid the mistakes beginners make, such as picking products by hype or ignoring shipping times and return costs." },
+        { title: "A skill set that works in jobs and business", text: "You learn Shopify store building, product research, copywriting for listings, Meta and Google Ads basics, marketplace selling on Amazon and Flipkart, payment gateway setup, and courier and returns handling. These skills apply whether you want an e-commerce job or your own store. Entry-level roles such as e-commerce executive, catalogue manager and marketplace coordinator typically pay roughly ₹2.4 to ₹4.5 lakh per year, while experienced performance marketers and marketplace managers can earn more. These figures are approximate and vary by city, company and skill level." },
+        { title: "Practical learning, not just theory", text: "Every module ends with a task you complete on a real store. You research products, build pages, set up a test ad campaign and track results in a dashboard. By the end, you have a working store and campaign data you can show to employers or clients." },
+        { title: "India-focused training", text: "Many online dropshipping tutorials are built for the US or UK market. This course covers Indian realities: cash on delivery (COD) risks, RTO (return-to-origin) losses, GST basics for online sellers, local courier options, and how to handle customers who expect fast delivery. You learn what works for Indian buyers and Indian supplier networks." },
+        { title: "Flexible learning for different schedules", text: "Live online classes let working professionals and learners from any state join without relocating. Recordings help you revise missed sessions. This suits people balancing a job, a family business or college." },
+        { title: "Honest expectations", text: "Dropshipping is a business skill, not a shortcut. Some stores succeed within months, and others need several rounds of testing before they become profitable. We do not promise guaranteed income or placement. We teach a repeatable method: research, test, measure and improve, so your decisions rest on data rather than guesswork." },
+        {
+          title: "Career paths beyond dropshipping",
+          text: "Even if you never run your own store, the course opens doors to roles in:",
+          list: ["e-commerce operations", "marketplace account management", "performance marketing", "catalogue and listing management", "freelance store setup for small businesses"],
+        },
+      ],
+    },
+    whyUs: {
+      eyebrow: "Why Choose techcadd",
+      title: "Why Learn Dropshipping and E-Commerce at techcadd?",
+      intro: "Plenty of institutes teach e-commerce in slides. techcadd teaches it by having you build, launch and fix a real store. Here is what sets the training apart.",
+      points: [
+        { title: "Trainers who work with the tools", text: "Our sessions are led by trainers who are comfortable with Shopify, Meta Ads Manager, Google Ads and marketplace seller dashboards. They explain why a campaign fails and what to change, not just which button to click. You can ask questions about your own store during class and get specific feedback." },
+        {
+          title: "Project-based learning",
+          text: "Every module ends with a deliverable on your own store:",
+          list: [
+            "a product research sheet with supplier comparison",
+            "a store with product pages, policies and payment setup",
+            "a test ad campaign with a small budget",
+            "a marketplace listing draft for Amazon or Flipkart",
+            "a final report showing traffic, cost per order and margin",
+          ],
+          after: "This work becomes your portfolio, which carries real weight in interviews and with freelance clients.",
+        },
+        { title: "Training built around Indian conditions", text: "We teach what Indian sellers face every day: COD orders, RTO losses, GST basics, courier selection, supplier delays and customer expectations in tier-2 and tier-3 towns. You learn how to protect your margin instead of copying a foreign dropshipping model that does not fit Indian buyers." },
+        { title: "Live online and classroom options", text: "Learners can attend live online classes from anywhere in India, with recordings available for revision. Classroom learning is available for those who prefer face-to-face guidance. Batch sizes are kept manageable so doubts get answered during the session." },
+        { title: "Step-by-step guidance for beginners", text: "You do not need prior experience. The course starts with how online selling works and builds toward ads, analytics and scaling. Revision sessions and doubt-clearing support help you keep pace, whether you are a fresher or a working professional studying in the evening." },
+        { title: "Honest career and business guidance", text: "We do not promise guaranteed income, jobs or placements. We give you a method for testing products, reading numbers and making sound decisions. We also help you decide whether to pursue an e-commerce job, freelance services or your own store, based on your goals and time." },
+        { title: "A learning community", text: "Batch mates share supplier experiences, ad results and problems they have solved. Learning alongside people from different cities and backgrounds shows you how products, pricing and customer behaviour differ across regions." },
+        { title: "Support beyond the classroom", text: "Learners get help with portfolio preparation, resume building for e-commerce roles and guidance on pitching store setup or ad management as a freelance service." },
+      ],
+    },
+    tools: {
+      title: "Tools and Software Covered",
+      columns: ["Purpose", "Tools"],
+      groups: [
+        { area: "Store building", tools: "Shopify, Shopify apps for product import and order sync" },
+        { area: "Design and video", tools: "Canva, CapCut or similar short-video editors" },
+        { area: "Advertising", tools: "Meta Ads Manager, Google Ads" },
+        { area: "Analytics and tracking", tools: "Google Analytics 4, Meta Pixel, Google Trends" },
+        { area: "Marketplaces", tools: "Amazon Seller Central, Flipkart Seller Hub" },
+        { area: "Payments and shipping", tools: "Razorpay or similar gateways, aggregator couriers such as Shiprocket" },
+        { area: "Research and operations", tools: "Google Sheets, AI writing assistants for first drafts of product copy" },
+      ],
+      note: "Tool versions and apps change often, so we review this list each batch.",
+    },
+    careers: {
+      eyebrow: "Careers",
+      title: "Career and Future Scope",
+      intro: "Skills from this course lead to e-commerce executive, marketplace account manager, catalogue manager, performance marketing executive and freelance store-setup roles. Entry-level salaries are typically around ₹2.4 to ₹4.5 lakh per year, and experienced performance marketers can earn more. These figures are approximate and depend on city, company and skill level. Freelancers and store owners earn according to their clients and sales, with no fixed range.",
+      roles,
+      jobsTitle: "Opportunities across states",
+      jobs: [
+        { title: "Punjab", text: "Dropshipping jobs in Punjab include running online stores for local exporters in sports goods and hosiery. Mohali's IT and startup cluster also hires digital marketing executives." },
+        { title: "Haryana", text: "Gurugram and Faridabad have e-commerce companies, logistics firms and D2C brands that need marketplace coordinators and ad executives." },
+        { title: "Delhi NCR", text: "This is the largest fresher market, with agencies in Noida and Delhi hiring for performance marketing, social media and marketplace roles." },
+        { title: "Himachal Pradesh", text: "Remote freelancing for outside clients is practical in Shimla and Dharamshala, and local sellers of apples, woollens and handicrafts can reach buyers across India." },
+        { title: "Rajasthan", text: "Jaipur's jewellery, textile and handicraft sellers need people who can list, advertise and fulfil orders online." },
+        { title: "Uttar Pradesh", text: "Lucknow and Noida offer retail and electronics e-commerce jobs, and Lucknow's chikankari sellers hire for online catalogue and ad work." },
+      ],
+      outro: "Metros such as Bengaluru, Hyderabad and Pune offer higher-paying roles in e-commerce and performance marketing, and many of these now allow remote or hybrid work.",
+    },
+    reviews: {
+      title: "What Our Learners Say",
+      items: [
+        { name: "Harpreet K.", role: "Business owner, hosiery", place: "Ludhiana, Punjab", rating: 5, text: "We sell hosiery wholesale, and I wanted to try selling directly to customers. The sessions explained product pricing and COD returns very clearly. My store is now live, and I understand my numbers much better than before." },
+        { name: "Neha S.", role: "Working professional, operations", place: "Gurugram, Haryana", rating: 5, text: "I work a regular job, so I needed evening classes. The trainer explained Meta ads step by step and never rushed. Recordings helped when I missed a session." },
+        { name: "Ankit T.", role: "Graduate, B.Com", place: "Solan, Himachal Pradesh", rating: 4, text: "Living in a small town, I was not sure online classes would work. They did. I could ask doubts live and got feedback on my store pages. The supplier comparison task was really useful." },
+        { name: "Simran B.", role: "Job switcher, from BPO", place: "Mohali, Chandigarh", rating: 5, text: "I wanted to move from BPO to something with more growth. The course gave me a live store and ad data I could discuss in interviews. The practical tasks made the difference for me." },
+        { name: "Rohit M.", role: "Freelancer", place: "Noida, Delhi NCR", rating: 5, text: "I was already doing social media posts for small clients. After this course I can also offer store setup and product listing. The marketplace module on Amazon and Flipkart was very clear." },
+        { name: "Zainab R.", role: "Business owner, handicrafts", place: "Srinagar, Jammu & Kashmir", rating: 4, text: "I wanted to sell our family's crafts outside Kashmir. The course taught me how to make product pages, handle shipping and answer customers. It is a lot of work, but now I know what to do each step." },
+        { name: "Mohit N.", role: "Postgraduate, MBA", place: "Dehradun, Uttarakhand", rating: 5, text: "The best part was learning break-even ROAS and checking numbers before spending more. It changed how I think about ads. The course is honest that results need testing and patience." },
+        { name: "Kavita J.", role: "Business owner, jewellery", place: "Jaipur, Rajasthan", rating: 4, text: "Our shop sells artificial jewellery, and I wanted an online channel. I liked the lessons on product photos, descriptions and Canva creatives. The doubt sessions were helpful." },
+        { name: "Aman Y.", role: "Graduate, BBA", place: "Lucknow, Uttar Pradesh", rating: 5, text: "I had tried YouTube videos before but could not put things together. This course gave a proper order: research, store, ads, orders. Group chats with batch mates were also useful." },
+        { name: "Gurleen D.", role: "12th pass student", place: "Amritsar, Punjab", rating: 4, text: "I am studying and wanted to learn a skill alongside college. The trainer explained things in simple language and in Hindi when needed. I built a small test store as my project." },
+        { name: "Vikas P.", role: "Freelancer, graphic designer", place: "Panchkula, Chandigarh", rating: 5, text: "As a designer, I wanted to add Shopify store work to my services. The store-building and policy modules were practical, and I now take small client projects." },
+      ],
+    },
+    faqTitle: "Frequently Asked Questions: Dropshipping & E-Commerce Course in India",
+    cta: {
+      title: "Start Your Online Business Journey",
+      highlight: "with techcadd",
+      text: "Build a real store. Run real ads. Learn by doing. Join the Dropshipping & E-Commerce Course and learn product research, Shopify store building, Meta and Google ads and marketplace selling with hands-on projects. Choose live online classes from anywhere in India or classroom learning, and finish with a working store and a portfolio to show.",
+    },
+  },
+};

@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { categories, site } from "@/data/site";
+import { aiCourses, categories, site } from "@/data/site";
+import { coursePages } from "@/data/course-pages";
+import { trainingPages } from "@/data/training";
+import { a12Pages } from "@/data/after-12th";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/layout/FloatingActions";
@@ -54,6 +57,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Footer />
         <FloatingActions />
         <LeadPopup
+          pageCourses={Object.fromEntries([
+            ...coursePages.map((c) => [`/courses/${c.slug}`, c.navLabel]),
+            ...aiCourses.map((c) => [`/ai-courses/${c.slug}`, c.title]),
+            ...trainingPages.map((c) => [`/training/${c.slug}`, c.navLabel]),
+            ...a12Pages.map((c) => [`/after-12th/${c.slug}`, c.label]),
+          ])}
           courses={[...categories.map((c) => c.title), "Industrial Training / Internship", "After 12th Program", "Not sure — need guidance"]}
           contact={{ whatsapp: site.whatsapp, email: site.email, rating: site.rating }}
         />

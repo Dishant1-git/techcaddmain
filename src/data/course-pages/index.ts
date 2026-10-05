@@ -191,6 +191,6 @@ export const coursePages: CoursePage[] = [
   ...cyberCloudCourses, ...cyberCloudMoreCourses, ...moreCourses,
 ];
 
-export type { CourseGroupId, CoursePage } from "./types";
+export type { CourseCopy, CourseGroupId, CoursePage } from "./types";
 
 export const courseGroup = (id: CourseGroupId) => courseGroups.find((g) => g.id === id) ?? courseGroups[0];

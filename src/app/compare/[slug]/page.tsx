@@ -31,7 +31,7 @@ const rows: { label: string; get: (c: CoursePage) => ReactNode }[] = [
   { label: "Who can join", get: (c) => c.eligibility },
   { label: "Key tools", get: (c) => c.tools.slice(0, 6).join(", ") },
   { label: "What you’ll learn", get: (c) => c.syllabus.slice(0, 4).map((s) => s.title).join(" · ") },
-  { label: "Portfolio projects", get: (c) => c.projects.slice(0, 3).map((x) => x.title).join(" · ") },
+  { label: "Portfolio projects", get: (c) => c.projects.slice(0, 3).map((x) => x.title).join(" · ") || "—" },
   { label: "Career roles", get: (c) => c.careers.slice(0, 3).map((x) => x.role).join(", ") },
 ];
 

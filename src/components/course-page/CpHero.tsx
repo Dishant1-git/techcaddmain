@@ -24,7 +24,7 @@ export function CpHero({ course, group }: { course: CoursePage; group: CourseGro
     { icon: BarChart3, label: course.level },
     { icon: MonitorPlay, label: "Classroom + Live Online" },
     { icon: FolderGit2, label: `${course.projects.length} portfolio projects` },
-  ];
+  ].filter((f) => !f.label.startsWith("0 "));
 
   return (
     <section className="relative isolate overflow-x-clip bg-neu pb-14 pt-10 md:pb-20 md:pt-14">
@@ -53,7 +53,7 @@ export function CpHero({ course, group }: { course: CoursePage; group: CourseGro
             {group.title} · {course.level}
           </p>
           <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-extrabold leading-[1.05] text-balance text-ink-900 sm:text-5xl lg:text-6xl">
-            {course.title} <span className="text-gradient">in Jalandhar</span>
+            {course.copy?.heading?.title ?? course.title} <span className="text-gradient">{course.copy?.heading?.highlight ?? "in Jalandhar"}</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-700">{course.tagline}</p>
 

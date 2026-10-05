@@ -13,7 +13,58 @@ import { CpEnquiryForm } from "./CpEnquiryForm";
 const th = "px-4 py-4 text-left text-sm font-bold text-ink-900 sm:px-6";
 const td = "px-4 py-4 text-sm text-ink-700 sm:px-6";
 
-export function CpWhy() {
+/** Numbered reason cards used by the long-form "Why this program" / "Why choose techcadd" copy. */
+function Points({ points }: { points: { title: string; text: string; list?: string[]; after?: string }[] }) {
+  return (
+    <ol className="mt-14 grid gap-6 md:grid-cols-2">
+      {points.map((p, i) => (
+        <li key={p.title} className="extrude">
+          <div className="neu neu-hover flex h-full gap-4 p-6">
+            <span aria-hidden className="neu-icon-brand size-11 shrink-0 !rounded-full font-display text-sm font-bold">{String(i + 1).padStart(2, "0")}</span>
+            <div>
+              <h3 className="font-bold text-ink-900">{p.title}</h3>
+              {p.text && <p className="mt-1.5 text-sm leading-relaxed text-ink-700">{p.text}</p>}
+              {p.list && (
+                <ul className="mt-3 space-y-2">
+                  {p.list.map((l) => (
+                    <li key={l} className="flex gap-2.5 text-sm leading-relaxed text-ink-700">
+                      <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden /> {l}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {p.after && <p className="mt-3 text-sm leading-relaxed text-ink-700">{p.after}</p>}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/** "Why this program" — only for courses whose `copy` has it. */
+export function CpWhyProgram({ course }: { course: CoursePage }) {
+  const copy = course.copy?.whyProgram;
+  if (!copy) return null;
+  return (
+    <CourseSection id="why-program" className="bg-neu" overflow="overflow-x-clip">
+      <SectionHeading id="why-program-title" eyebrow={copy.eyebrow} title={copy.title} text={copy.intro} />
+      <Points points={copy.points} />
+      {copy.outro && <p data-reveal="up" className="mx-auto mt-10 max-w-3xl text-center text-lg text-ink-700">{copy.outro}</p>}
+    </CourseSection>
+  );
+}
+
+export function CpWhy({ course }: { course: CoursePage }) {
+  const copy = course.copy?.whyUs;
+  if (copy) {
+    return (
+      <CourseSection id="why" className="bg-neu" overflow="overflow-x-clip">
+        <SectionHeading id="why-title" eyebrow={copy.eyebrow} title={copy.title} text={copy.intro} />
+        <Points points={copy.points} />
+      </CourseSection>
+    );
+  }
   return (
     <CourseSection id="why" className="bg-neu" overflow="overflow-x-clip">
       <SectionHeading
@@ -188,7 +239,44 @@ export function CpCertification({ course }: { course: CoursePage }) {
   );
 }
 
-export function CpReviews() {
+export function CpReviews({ course }: { course: CoursePage }) {
+  const copy = course.copy?.reviews;
+  if (copy) {
+    return (
+      <CourseSection id="reviews" className="bg-neu" overflow="overflow-x-clip">
+        <SectionHeading id="reviews-title" align="left" eyebrow="Student Reviews" title={copy.title} />
+        <div data-reveal="up" className="mt-4">
+          <SnapCarousel label="Student reviews" itemName="review">
+            {copy.items.map((t) => (
+              <li key={t.name} className="snap-focus w-[85%] shrink-0 snap-center sm:w-[55%] lg:w-[36%]">
+                <figure className="neu flex h-full flex-col p-7">
+                  <div className="flex items-center justify-between">
+                    {t.rating ? (
+                      <div className="flex gap-0.5" role="img" aria-label={`Rated ${t.rating} out of 5`}>
+                        {Array.from({ length: 5 }).map((_, k) => (
+                          <Star key={k} className={`size-4 ${k < (t.rating ?? 0) ? "fill-accent-500 text-accent-500" : "text-ink-300"}`} aria-hidden />
+                        ))}
+                      </div>
+                    ) : <span />}
+                    <Quote className="size-8 text-brand-200" aria-hidden />
+                  </div>
+                  {t.headline && <p className="mt-4 font-display font-bold text-ink-900">{t.headline}</p>}
+                  <blockquote className={`${t.headline ? "mt-2" : "mt-4"} flex-1 leading-relaxed text-ink-700`}>&ldquo;{t.text}&rdquo;</blockquote>
+                  <figcaption className="mt-6 flex items-center gap-3">
+                    <span aria-hidden className="neu-icon-brand size-11 shrink-0 !rounded-full text-sm font-bold">{initials(t.name)}</span>
+                    <div className="min-w-0">
+                      <p className="font-bold text-ink-900">{t.name}</p>
+                      <p className="text-sm text-ink-700">{t.role} · {t.place}</p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </li>
+            ))}
+          </SnapCarousel>
+        </div>
+      </CourseSection>
+    );
+  }
   if (testimonials.length === 0) return null;
   return (
     <CourseSection id="reviews" className="bg-neu" overflow="overflow-x-clip">
@@ -236,7 +324,7 @@ export function CpFaq({ course, faqs }: { course: CoursePage; faqs: { q: string;
             id="faq-title"
             align="left"
             eyebrow="FAQs"
-            title={<>Questions about <span className="text-gradient">{course.navLabel}</span>?</>}
+            title={course.copy?.faqTitle ?? <>Questions about <span className="text-gradient">{course.navLabel}</span>?</>}
             text="Straight answers on eligibility, batches, certification and placements."
           />
           <div className="extrude mt-8">
@@ -332,10 +420,10 @@ export function CpEnrol({ course, courses }: { course: CoursePage; courses: stri
           <div className="neu grid items-center gap-12 !rounded-[2.5rem] p-6 sm:p-10 lg:grid-cols-2 lg:p-14">
             <div>
               <h2 id="enrol-title" data-reveal="up" style={delay(1)} className="text-3xl font-extrabold leading-[1.1] text-ink-900 sm:text-4xl lg:text-5xl">
-                Start your {course.navLabel} journey <span className="text-gradient">this month.</span>
+                {course.copy?.cta ? course.copy.cta.title : `Start your ${course.navLabel} journey`} <span className="text-gradient">{course.copy?.cta?.highlight ?? "this month."}</span>
               </h2>
               <p data-reveal="up" style={delay(2)} className="mt-5 max-w-lg text-lg text-ink-700">
-                Book a free demo class, meet your mentor and get a personalised learning plan — no commitment.
+                {course.copy?.cta?.text ?? "Book a free demo class, meet your mentor and get a personalised learning plan — no commitment."}
               </p>
               <ul className="mt-8 grid gap-3 sm:grid-cols-2">
                 {perks.map((p, i) => (

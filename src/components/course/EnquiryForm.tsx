@@ -3,7 +3,7 @@
 import { useRef, useState, type FocusEvent, type FormEvent } from "react";
 import { AlertCircle, CheckCircle2, LoaderCircle, Send } from "lucide-react";
 import { aiCourseCommon, branches } from "@/data/site";
-import { waLink } from "@/lib/whatsapp";
+import { submitLead } from "@/lib/lead";
 
 type Field = "name" | "phone" | "location" | "batch";
 type Errors = Partial<Record<Field, string>>;
@@ -20,13 +20,11 @@ const validate = (d: Record<string, string>): Errors => {
 
 /**
  * Course enquiry form with visible labels and inline validation (on blur after first touch, and on submit).
- * No backend yet: submit opens WhatsApp with the enquiry pre-filled. To use a CRM, replace the body of `send`
- * with `await fetch("/api/lead", …)` — the loading / error states are already wired for an async request.
+ * Submit saves the enquiry to MySQL (POST /api/lead → `leads` table); on success a thank-you message replaces the form.
  */
 export function EnquiryForm({ course }: { course: string }) {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [fallback, setFallback] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
   const read = () => Object.fromEntries(new FormData(formRef.current!)) as Record<string, string>;
@@ -38,16 +36,8 @@ export function EnquiryForm({ course }: { course: string }) {
     setErrors((prev) => ({ ...prev, [name]: all[name as Field] }));
   };
 
-  const send = async (d: Record<string, string>) => {
-    const url = waLink(`Hi TechCADD, I'd like to enquire about the ${course}.\nName: ${d.name}\nPhone: ${d.phone}\nLocation: ${d.location}\nBatch: ${d.batch}`);
-    // window.open must run synchronously inside the submit handler or pop-up blockers will stop it.
-    const win = window.open(url, "_blank");
-    if (!win) {
-      setFallback(url);
-      throw new Error("popup-blocked");
-    }
-    win.opener = null;
-  };
+  const send = (d: Record<string, string>) =>
+    submitLead({ form: "ai-course", course, name: d.name, phone: d.phone, location: d.location, batch: d.batch });
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -90,6 +80,16 @@ export function EnquiryForm({ course }: { course: string }) {
     );
 
   const label = "mb-1.5 block text-sm font-semibold text-ink-900";
+
+  if (status === "success") {
+    return (
+      <div role="status" className="on-light glass !bg-white/90 p-6 text-center shadow-soft-lg sm:p-8">
+        <CheckCircle2 className="mx-auto size-12 text-emerald-600" aria-hidden />
+        <h3 className="mt-4 text-2xl font-bold text-ink-900">Thank you!</h3>
+        <p className="mt-2 text-sm text-ink-500">We have received your enquiry for the {course}. A counsellor will call you within 24 hours.</p>
+      </div>
+    );
+  }
 
   return (
     <form ref={formRef} noValidate onSubmit={onSubmit} onBlur={onBlur} aria-labelledby="enq-title" className="on-light glass space-y-5 !bg-white/90 p-6 text-left shadow-soft-lg sm:p-8">
@@ -139,17 +139,7 @@ export function EnquiryForm({ course }: { course: string }) {
       </button>
 
       <div aria-live="polite" className="min-h-5 text-center text-sm">
-        {status === "success" && (
-          <p className="flex items-center justify-center gap-2 font-medium text-emerald-700">
-            <CheckCircle2 className="size-4" aria-hidden /> Almost done — send the message in WhatsApp to confirm your slot.
-          </p>
-        )}
-        {status === "error" && (
-          <p className="text-red-700">
-            WhatsApp didn&apos;t open (your browser may have blocked the pop-up).{" "}
-            <a href={fallback} target="_blank" rel="noopener noreferrer" className="link !text-red-800">Open WhatsApp to send your enquiry</a>
-          </p>
-        )}
+        {status === "error" && <p className="text-red-700">We couldn&apos;t save your details. Please try again in a moment.</p>}
         {status === "idle" && <p className="text-ink-500">100% free · No spam · Your details stay private</p>}
       </div>
     </form>

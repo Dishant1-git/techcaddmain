@@ -10,15 +10,18 @@ import { CourseSection } from "@/components/course/CourseSection";
    Scroll motion: `.extrude` wrappers (CSS scroll-driven) + data-reveal on text. Never both on one element. */
 
 export function CpOverview({ course }: { course: CoursePage }) {
+  const copy = course.copy?.overview;
+  // Courses with their own long-form copy show the overview full width (no "What you'll gain" card).
+  const wide = !!copy;
   return (
     <CourseSection id="overview" className="bg-neu" overflow="overflow-x-clip">
-      <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+      <div className={wide ? "mx-auto max-w-4xl" : "grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16"}>
         <div className="min-w-0">
           <SectionHeading
             id="overview-title"
             align="left"
-            eyebrow="Course Overview"
-            title={<>What the <span className="text-gradient">{course.navLabel}</span> course covers</>}
+            eyebrow={copy?.eyebrow ?? "Course Overview"}
+            title={copy ? copy.title : <>What the <span className="text-gradient">{course.navLabel}</span> course covers</>}
           />
           <div className="mt-6 space-y-5 text-lg leading-relaxed text-ink-700">
             {course.overview.map((p, i) => <p key={i} data-reveal="blur" style={delay(i + 2)}>{p}</p>)}
@@ -42,7 +45,7 @@ export function CpOverview({ course }: { course: CoursePage }) {
           )}
         </div>
 
-        <div className="extrude h-fit">
+        {!wide && <div className="extrude h-fit">
           <aside aria-labelledby="gains-title" className="neu p-6 sm:p-8">
             <h3 id="gains-title" className="text-lg font-bold text-ink-900">What you&apos;ll gain</h3>
             <ul className="mt-6 space-y-4">
@@ -57,7 +60,7 @@ export function CpOverview({ course }: { course: CoursePage }) {
               Not sure it&apos;s the right fit? <Link href="#enrol" className="link">Talk to a counsellor for free</Link>.
             </p>
           </aside>
-        </div>
+        </div>}
       </div>
     </CourseSection>
   );
@@ -65,7 +68,13 @@ export function CpOverview({ course }: { course: CoursePage }) {
 
 /** Numbered module timeline. The rail fills and each dot lights up as you scroll (.timeline / .timeline-fill / .timeline-dot). */
 export function CpSyllabus({ course }: { course: CoursePage }) {
+  const copy = course.copy?.syllabus;
   const topics = course.syllabus.reduce((n, m) => n + m.topics.length, 0);
+  const stats = [
+    { label: "Modules", value: course.syllabus.length },
+    { label: "Topics", value: topics },
+    { label: "Projects", value: course.projects.length },
+  ].filter((s) => s.value > 0);
 
   return (
     <CourseSection id="syllabus" className="bg-neu" overflow="overflow-x-clip">
@@ -74,16 +83,12 @@ export function CpSyllabus({ course }: { course: CoursePage }) {
           <SectionHeading
             id="syllabus-title"
             align="left"
-            eyebrow="Syllabus"
-            title={<>Your <span className="text-gradient">module-by-module</span> roadmap</>}
-            text="Open any module to see exactly what you will learn. Every module ends with hands-on practice reviewed by your mentor."
+            eyebrow={copy?.eyebrow ?? "Syllabus"}
+            title={copy ? copy.title : <>Your <span className="text-gradient">module-by-module</span> roadmap</>}
+            text={copy?.text ?? "Open any module to see exactly what you will learn. Every module ends with hands-on practice reviewed by your mentor."}
           />
-          <dl data-reveal="up" style={delay(3)} className="mt-8 grid grid-cols-3 gap-3 text-center">
-            {[
-              { label: "Modules", value: course.syllabus.length },
-              { label: "Topics", value: topics },
-              { label: "Projects", value: course.projects.length },
-            ].map((s) => (
+          <dl data-reveal="up" style={{ ...delay(3), gridTemplateColumns: `repeat(${stats.length}, minmax(0, 1fr))` }} className={`mt-8 grid gap-3 text-center ${stats.length < 3 ? "max-w-[10rem]" : ""}`}>
+            {stats.map((s) => (
               <div key={s.label} className="neu-inset flex flex-col-reverse p-4">
                 <dt className="text-xs text-ink-700">{s.label}</dt>
                 <dd className="font-display text-2xl font-extrabold text-ink-900">{s.value}</dd>
@@ -116,22 +121,31 @@ export function CpSyllabus({ course }: { course: CoursePage }) {
                     <span className="min-w-0 flex-1">
                       <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-brand-700">Module {i + 1}</span>
                       <span className="mt-1 block font-display font-bold text-ink-900 transition-colors group-hover:text-brand-700 sm:text-lg">{m.title}</span>
-                      <span className="mt-1 block text-sm text-ink-700">{m.summary}</span>
+                      {m.summary && <span className="mt-1 block text-sm text-ink-700">{m.summary}</span>}
                     </span>
                     <span className="grid size-9 shrink-0 place-items-center rounded-full bg-neu text-brand-700 shadow-neu-sm transition-[rotate,box-shadow,background-color,color] duration-300 group-open:rotate-45 group-open:bg-brand-600 group-open:text-white group-open:shadow-neu-brand">
                       <Plus className="size-4" aria-hidden />
                     </span>
                   </summary>
-                  <ul className="grid gap-2.5 px-5 pb-6 sm:grid-cols-2 sm:px-6">
-                    {m.topics.map((t) => (
-                      <li key={t} className="flex gap-2.5 text-sm text-ink-700">
-                        <Check className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden /> {t}
-                      </li>
-                    ))}
-                  </ul>
+                  {m.topics.length > 0 && (
+                    <ul className="grid gap-2.5 px-5 pb-6 sm:grid-cols-2 sm:px-6">
+                      {m.topics.map((t) => (
+                        <li key={t} className="flex gap-2.5 text-sm text-ink-700">
+                          <Check className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden /> {t}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {m.outcome && (
+                    <p className="mx-5 mb-6 flex gap-2.5 rounded-2xl bg-neu p-4 text-sm text-ink-700 shadow-neu-inset-sm sm:mx-6">
+                      <Check className="mt-0.5 size-4 shrink-0 text-brand-600" aria-hidden />
+                      <span><strong className="text-ink-900">Outcome:</strong> {m.outcome}</span>
+                    </p>
+                  )}
                 </details>
               </li>
             ))}
+            {copy?.note && <li className="relative pl-16 text-ink-700">{copy.note}</li>}
           </ol>
         ) : (
           <p className="neu p-8 text-center text-ink-700">

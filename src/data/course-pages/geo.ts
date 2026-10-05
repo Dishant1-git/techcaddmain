@@ -1,0 +1,251 @@
+import type { CoursePage } from "./types";
+
+/* /courses/geo — NEW page (Courses ▾ Digital Marketing). Long-form landing copy supplied by the client, used as given,
+   section by section.
+   - The supplied text gives no course duration → `duration` is a neutral placeholder. CONFIRM with the client.
+   - "A Note on Recognition" (an editor's note asking which certificates/approvals can be stated) is left out, as are the
+     bracketed asks in the fee, duration and certificate FAQs.
+   - The supplied reviews carry no star ratings, so none are shown. Confirm they are from real students before launch. */
+
+const roles = ["GEO/AEO specialist", "AI search strategist", "SEO and content strategist", "Digital marketing manager", "Freelance AI visibility consultant"];
+
+export const geo: CoursePage = {
+  slug: "geo",
+  title: "Generative Engine Optimization (GEO) Course",
+  navLabel: "GEO (Generative Engine Optimization)",
+  group: "marketing",
+  icon: "Sparkles",
+  tagline:
+    "Learn how to make your brand, website and content visible inside AI-generated answers from ChatGPT, Google AI Overviews, Gemini, Perplexity and Microsoft Copilot.",
+  level: "All Levels",
+  duration: "Duration on enquiry",
+  eligibility: "No technical degree required; prior SEO knowledge is helpful but not mandatory",
+  overview: [
+    "The Generative Engine Optimization (GEO) course at techcadd teaches you how to make your brand, website and content visible inside AI-generated answers from ChatGPT, Google AI Overviews, Gemini, Perplexity and Microsoft Copilot. More people now ask AI tools questions instead of typing short searches. Businesses therefore need professionals who understand how these engines choose, summarise and cite sources. This program connects classic SEO with answer-engine thinking: entity building, structured data, E-E-A-T signals, citation-worthy content and AI visibility tracking.",
+    "Designed for graduates, working professionals, job switchers, freelancers and business owners, this GEO course in India runs through live online classes and classroom sessions at our Jalandhar centre. Learners across Punjab, from agency teams to startup founders, follow the same practical, project-based curriculum. By the end, you will be able to audit a brand's AI presence, plan content that AI engines can trust and quote, and report results to clients or management with confidence.",
+  ],
+  // Not shown on this page (the overview is full width); used for the Course schema "teaches" list.
+  gains: [
+    "Explain to a client or manager why AI visibility needs its own strategy",
+    "Review an AI answer and identify likely reasons a source was cited",
+    "Build an entity map for a brand and spot trust gaps",
+    "Rewrite a page so an AI engine can lift a clear, accurate answer from it",
+    "Implement and validate structured data without breaking a site",
+    "Plan visibility for a business serving specific regions",
+    "Create a repeatable measurement process and report honestly",
+  ],
+  syllabus: [
+    {
+      title: "Module 1: Search Fundamentals and the Shift to AI Answers",
+      summary: "How search engines crawl, index and rank pages. How AI answer engines differ, including retrieval, summarisation and citation. GEO vs SEO vs AEO, explained clearly.",
+      topics: ["How search engines crawl, index and rank pages", "How AI answer engines differ: retrieval, summarisation and citation", "GEO vs SEO vs AEO"],
+      outcome: "You can explain to a client or manager why AI visibility needs its own strategy.",
+    },
+    {
+      title: "Module 2: How AI Engines Choose Sources",
+      summary: "Training data vs live retrieval, how Google AI Overviews and Perplexity cite pages, and why some brands get named while others do not.",
+      topics: ["Training data vs live retrieval", "How Google AI Overviews and Perplexity cite pages", "Why some brands get named while others do not"],
+      outcome: "You can review an AI answer and identify likely reasons a source was cited.",
+    },
+    {
+      title: "Module 3: Entity SEO and Brand Authority",
+      summary: "Entities, knowledge graphs, brand mentions, consistent business information, author profiles and third-party references.",
+      topics: ["Entities and knowledge graphs", "Brand mentions", "Consistent business information", "Author profiles and third-party references"],
+      outcome: "You can build an entity map for a brand and spot trust gaps.",
+    },
+    {
+      title: "Module 4: Answer-First Content Writing",
+      summary: "Question-led headings, direct answers, original data and examples, comparison formats and content refreshes.",
+      topics: ["Question-led headings and direct answers", "Original data and examples", "Comparison formats", "Content refreshes"],
+      outcome: "You can rewrite a page so an AI engine can lift a clear, accurate answer from it.",
+    },
+    {
+      title: "Module 5: Technical GEO and Structured Data",
+      summary: "Crawlability, site speed, clean HTML, and FAQPage, Organization, Course, Article and Product schema. You also learn what robots.txt means for AI crawlers and where newer ideas such as llms.txt stand (still experimental, with no guaranteed benefit).",
+      topics: ["Crawlability, site speed and clean HTML", "FAQPage, Organization, Course, Article and Product schema", "robots.txt and AI crawlers", "Where llms.txt stands"],
+      outcome: "You can implement and validate structured data without breaking a site.",
+    },
+    {
+      title: "Module 6: E-E-A-T and Trust Signals",
+      summary: "Showing experience, expert authorship, reviews, citations to credible sources and transparent business details.",
+      topics: ["Showing experience and expert authorship", "Reviews", "Citations to credible sources", "Transparent business details"],
+      outcome: "You can strengthen a page's credibility with verifiable proof.",
+    },
+    {
+      title: "Module 7: Local and Regional GEO",
+      summary: "Google Business Profile, local citations, city and state targeting, multilingual and Hinglish queries for Indian users.",
+      topics: ["Google Business Profile", "Local citations", "City and state targeting", "Multilingual and Hinglish queries for Indian users"],
+      outcome: "You can plan visibility for a business serving specific regions.",
+    },
+    {
+      title: "Module 8: Prompt Research and AI Visibility Tracking",
+      summary: "Building prompt sets from real customer questions, tracking mentions, citations and sentiment across AI tools, and handling answer variability.",
+      topics: ["Building prompt sets from real customer questions", "Tracking mentions, citations and sentiment across AI tools", "Handling answer variability"],
+      outcome: "You can create a repeatable measurement process and report honestly.",
+    },
+    {
+      title: "Module 9: Capstone Project and Reporting",
+      summary: "A full audit and strategy for a real or sample brand, a 90-day action plan and a client-ready report.",
+      topics: ["A full audit and strategy for a real or sample brand", "A 90-day action plan", "A client-ready report"],
+      outcome: "A portfolio project you can show to employers or clients.",
+    },
+  ],
+  tools: [
+    "ChatGPT", "Google AI Overviews", "Gemini", "Perplexity", "Microsoft Copilot", "Claude", "Google Search Console", "Bing Webmaster Tools",
+    "Google Analytics 4", "Looker Studio", "Screaming Frog", "Google Rich Results Test", "Schema Markup Validator", "Semrush", "Ahrefs", "Google Sheets",
+  ],
+  // The supplied copy has no project list, so the Projects section and its nav item are hidden on this page.
+  projects: [],
+  // Shown as role chips on the page (via copy.careers.roles); the compare pages read the role names from here.
+  careers: roles.map((role) => ({ role, work: "", hirers: "" })),
+  whyNow: [],
+  faqs: [
+    { q: "What is a Generative Engine Optimization (GEO) course?", a: "A GEO course teaches you how to make a brand, website and content visible inside AI-generated answers from tools like ChatGPT, Google AI Overviews, Gemini, Perplexity and Copilot. It covers entity building, structured data, answer-first writing, E-E-A-T signals and AI visibility tracking." },
+    { q: "What is the difference between GEO and SEO?", a: "SEO focuses on ranking web pages in a list of search results, while GEO focuses on getting your brand named, summarised or cited inside AI-written answers. The two overlap, because AI engines still rely on crawlable, trustworthy pages, so strong SEO foundations remain useful." },
+    { q: "Who is eligible for the GEO course?", a: "Graduates, postgraduates, working professionals, job switchers, freelancers and business owners can join, and 12th-pass students with a strong interest in digital careers can start with the fundamentals. No coding degree is required, and prior SEO knowledge is helpful but not mandatory." },
+    { q: "Can beginners learn GEO without an SEO background?", a: "Yes, beginners can learn GEO because the program starts with search fundamentals before moving to AI search behaviour, entities and schema. Regular assignments help you build confidence step by step." },
+    { q: "What is the GEO course fee in India?", a: "Fees depend on the batch, mode (online or classroom) and any current offers, so please contact techcadd for the latest fee structure." },
+    { q: "What is the duration of the GEO course?", a: "The duration depends on the batch format and schedule you choose. The program is organised into nine modules ending with a capstone project." },
+    { q: "What does the GEO course syllabus include?", a: "The syllabus covers search fundamentals, how AI engines choose sources, entity SEO, answer-first content writing, technical GEO and structured data, E-E-A-T, local and regional GEO, prompt research and visibility tracking, and a capstone project with a 90-day action plan." },
+    { q: "Which tools are covered in the course?", a: "You work with AI engines such as ChatGPT, Gemini, Perplexity, Copilot and Google AI Overviews for testing. You also use Google Search Console, Google Analytics 4, Screaming Frog, the Rich Results Test, Schema Markup Validator, and suites like Semrush or Ahrefs, depending on plan availability." },
+    { q: "Can I learn GEO online, or do I have to attend classroom sessions?", a: "You can learn fully online through live classes with recordings, or attend classroom sessions at the techcadd centre in Jalandhar, Punjab. Online learners get the same curriculum and assignments as classroom learners." },
+    { q: "Will I get a certificate after completing the course?", a: "techcadd provides a course completion certificate. Employers and clients usually value your portfolio projects as much as the certificate." },
+    { q: "What jobs can I get after learning GEO, and what is the salary?", a: "You can work as a GEO/AEO specialist, AI search strategist, SEO and content strategist, digital marketing manager or freelance AI visibility consultant. Entry-level salaries in India often fall roughly between ₹3 and ₹6 lakh per year, but this is approximate and varies by city, employer and skill. techcadd cannot guarantee a job or a specific salary." },
+    { q: "Can I do freelancing after learning GEO?", a: "Yes, many learners offer services such as AI visibility audits, answer-first content rewrites, schema implementation and prompt-tracking reports to small businesses and agencies. The course helps you build a repeatable audit process and sample projects to show prospective clients." },
+    { q: "Can students from Himachal Pradesh join the GEO course online?", a: "Yes, students from Himachal Pradesh can join the live online batches from Shimla, Dharamshala, Solan or any other location with a stable internet connection. This suits freelancers, hotel and homestay owners and remote workers who want to serve clients outside the state." },
+    { q: "What are the GEO job opportunities in Punjab and Haryana?", a: "In Punjab, agencies and IT firms in Mohali, along with exporters and manufacturers in Ludhiana and Jalandhar, need AI visibility support. In Haryana, Gurugram's MNCs, e-commerce and logistics companies hire for content and search strategy roles that now include AI search." },
+    { q: "Is the GEO course useful for business owners in Rajasthan and Jammu & Kashmir?", a: "Yes, handicraft, jewellery, textile and tourism business owners in Rajasthan and Jammu & Kashmir can learn how to describe products and services so AI tools understand and recommend them. Remote-friendly online classes make it possible to learn without travelling." },
+    { q: "Can working professionals in Delhi NCR and Chandigarh learn GEO alongside a job?", a: "Yes, live online classes with recordings let working professionals in Delhi NCR and Chandigarh attend after office hours and revisit missed sessions. Weekly assignments are designed to fit around a full-time job." },
+    { q: "Is GEO a good career in India?", a: "GEO is an emerging field, and demand is growing as brands notice that customers ask AI tools for recommendations. Because the market is still forming, results and roles vary, so it works best as a skill that strengthens an existing marketing, content or business role." },
+  ],
+  related: ["aeo", "seo", "digital-marketing"],
+  copy: {
+    heading: { title: "Generative Engine Optimization (GEO) Course", highlight: "in India", meta: "Generative Engine Optimization (GEO) Course in India | techcadd" },
+    overview: { eyebrow: "Program Overview", title: "The Generative Engine Optimization (GEO) course at techcadd" },
+    syllabus: {
+      eyebrow: "What You Will Learn & Tools Covered",
+      title: "What You Will Learn in the Generative Engine Optimization Course",
+      text: "The curriculum moves from search fundamentals to AI visibility strategy, measurement and client reporting. Each module ends with a practical assignment.",
+    },
+    audience: {
+      eyebrow: "Who Can Do This Course",
+      title: "Who Can Do This Generative Engine Optimization Course?",
+      intro: "You do not need a technical degree to learn GEO. You need curiosity about how people now find information, and the willingness to practise. The program suits these learners:",
+      items: [
+        { icon: "GraduationCap", title: "Graduates and postgraduates", text: "From any stream (BA, B.Com, BBA, BCA, B.Tech, MBA, MCA) who want a skill employers are only starting to hire for." },
+        { icon: "TrendingUp", title: "Digital marketers and SEO executives", text: "Who see organic traffic changing as AI summaries answer queries directly." },
+        { icon: "PenTool", title: "Content writers and editors", text: "Who want their work cited by AI tools, not just ranked in a list of links." },
+        { icon: "Shuffle", title: "Working professionals and job switchers", text: "Moving into digital marketing, content strategy or AI-driven growth roles." },
+        { icon: "Briefcase", title: "Freelancers and consultants", text: "Who want to add AI visibility audits to their service list and charge for them." },
+        { icon: "Building2", title: "Business owners and founders", text: "Who want their brand named when customers ask ChatGPT or Gemini for recommendations." },
+        { icon: "BookOpen", title: "12th-pass students", text: "With a strong interest in digital careers. They can start with the fundamentals and build gradually, though the program is designed mainly for graduates and working learners." },
+      ],
+      need: "Prior SEO knowledge is helpful but not mandatory. Beginners start with search fundamentals before moving to AI search behaviour, entities, structured data and citation strategy.",
+    },
+    regions: {
+      eyebrow: "Learn from Anywhere",
+      title: "Learners from Across States",
+      intro: "Live online classes let learners from North India join the same batch without relocating. Each region has its own reasons to learn GEO.",
+      items: [
+        { title: "Punjab", text: "Anyone searching for a GEO course in Punjab is often an exporter, manufacturer or startup founder who wants overseas buyers to find the brand through AI answers, including teams in Mohali's IT sector." },
+        { title: "Haryana", text: "Professionals from Gurugram's corporate and e-commerce sector can take the generative engine optimization course in Haryana to move into content strategy and AI search roles inside agencies and logistics firms." },
+        { title: "Himachal Pradesh", text: "The online GEO course for Himachal Pradesh students suits freelancers, homestay and hotel owners, and remote workers who want global clients without leaving the hills." },
+        { title: "Chandigarh", text: "IT and BPO employees looking for a GEO course in Chandigarh can upskill from support or operations into digital visibility roles." },
+        { title: "Delhi NCR", text: "Anyone looking for a GEO course in Delhi, especially fresh graduates and agency staff, will find the largest concentration of marketing, media and fintech openings nearby." },
+        { title: "Jammu & Kashmir", text: "Handicraft sellers, tourism operators and online store owners can use a GEO course in Jammu and Kashmir to make their products appear in AI recommendations." },
+        { title: "Uttarakhand", text: "Hospitality and travel professionals can take a GEO course in Uttarakhand to get their properties and experiences named by AI trip planners." },
+        { title: "Rajasthan", text: "Jewellery, textile and handicraft businesses can use a GEO course in Rajasthan to reach international shoppers asking AI tools for authentic products." },
+        { title: "Uttar Pradesh", text: "Retail, electronics and government-sector aspirants can take a GEO course in Uttar Pradesh to build a profile that stands out in Noida and Lucknow job markets." },
+      ],
+      outro: "All learners get live sessions, recorded backups for revision, and hands-on assignments built around real brands.",
+    },
+    whyProgram: {
+      eyebrow: "Why This Program",
+      title: "Why Learn Generative Engine Optimization Now?",
+      intro: "Search is changing. Instead of scanning ten blue links, people increasingly read one AI-written answer and act on it. If your brand is not part of that answer, you are invisible at the moment a customer decides. GEO closes that gap, and few professionals in India have formal training in it yet. That makes this a good time to build the skill.",
+      points: [
+        { title: "It builds on SEO instead of discarding it.", text: "AI engines still rely on crawlable pages, clear structure and trustworthy sources. You learn which SEO foundations still matter and which new layers (entities, citations, answer-ready formatting) now decide visibility." },
+        { title: "It focuses on how AI engines choose sources.", text: "You study how ChatGPT, Google AI Overviews, Gemini, Perplexity and Copilot retrieve, summarise and cite content, so you stop guessing and start testing." },
+        { title: "It is practical from week one.", text: "Learners audit real brand pages, write answer-first content, add structured data such as FAQPage, Organization and Course schema, and check whether AI tools begin to mention the brand." },
+        { title: "It teaches E-E-A-T in action.", text: "Experience, expertise, authoritativeness and trust are not slogans here. You learn to show author credentials, original examples, reviews and verifiable facts, the signals that make a source safe for an AI engine to quote." },
+        { title: "It covers measurement.", text: "You learn to build prompt sets, track brand mentions and citations across AI tools, and report progress to clients or managers in simple, honest terms. AI answers vary, so you also learn to avoid promising fixed results." },
+        { title: "It fits working lives.", text: "Live online classes with recordings let professionals in Punjab, Haryana, Delhi NCR and beyond learn alongside a job, while Hindi explanations help learners who prefer them." },
+        { title: "Career Value", text: "A GEO skill set supports roles such as GEO/AEO specialist, AI search strategist, SEO and content strategist, digital marketing manager and freelance AI visibility consultant. Business owners gain a direct way to improve how customers discover them. Salaries vary by city, employer and experience, and the market is still forming, so treat any figure as approximate until you see current listings." },
+        { title: "Is This Program Right for You?", text: "Choose this program if you want a skill that connects marketing, content and AI, and you are ready to practise on real projects. If you only want theory, a short video series may be enough. If you want to apply GEO to a job, a client or your own business, this course gives you the structure and feedback to do it." },
+      ],
+    },
+    whyUs: {
+      eyebrow: "Why Choose techcadd",
+      title: "Why Choose techcadd for Your GEO Course?",
+      intro: "Choosing where to learn matters as much as choosing what to learn. GEO is new, and many courses simply repackage old SEO lessons with an AI label. At techcadd, the focus is on practical, tested skills you can apply to a job, a client project or your own business.",
+      points: [
+        { title: "Hands-On, Project-Based Learning", text: "Every module ends with an assignment on a real brand or website. You run AI visibility audits, rewrite pages in an answer-first format, add schema markup, and test whether ChatGPT, Gemini, Perplexity and Google AI Overviews change how they mention the brand. By the end, you have a portfolio of work to show employers or clients, not just notes." },
+        { title: "Mentors Who Work With Live Search", text: "GEO changes quickly, and AI engines update often. Your trainers work with current search and AI tools, so lessons reflect what is happening now rather than last year's playbook. Sessions include live demonstrations, so you see how a query behaves in real time and learn to explain why." },
+        { title: "Flexible Online and Classroom Learning", text: "techcadd offers both online and offline learning. You can attend live online classes from anywhere in India, with recordings for revision, or join classroom sessions at the Jalandhar centre in Punjab. Working professionals can pick a schedule that fits their job, and Hindi support is available for explanations." },
+        { title: "Honest, Ethical Training", text: "You will learn what GEO can and cannot do. AI answers vary from one prompt to the next, so no one can guarantee a fixed ranking or mention. techcadd teaches you to set realistic expectations, document your methods and report results transparently, which is exactly what clients and employers trust in an emerging field." },
+        {
+          title: "Support Beyond the Classroom",
+          text: "",
+          list: [
+            "Doubt-clearing sessions to review audits, drafts and prompt tests",
+            "Portfolio guidance so your projects are presentable to employers and clients",
+            "Career direction for freelancing, agency roles and in-house marketing positions",
+            "Community learning with peers from different states, industries and backgrounds",
+          ],
+        },
+        { title: "Built for Different Goals", text: "A job switcher from Haryana needs a portfolio and interview confidence. A freelancer in Himachal Pradesh needs a repeatable audit process to sell. A business owner in Rajasthan needs to understand what to ask an agency. The program lets each learner apply the same core method to a personal goal." },
+      ],
+    },
+    tools: {
+      title: "Tools and Platforms Covered",
+      columns: ["Category", "Tools"],
+      groups: [
+        { area: "AI engines for testing", tools: "ChatGPT, Google AI Overviews and AI Mode, Gemini, Perplexity, Microsoft Copilot, Claude" },
+        { area: "Search and analytics", tools: "Google Search Console, Bing Webmaster Tools, Google Analytics 4, Looker Studio" },
+        { area: "Technical and schema", tools: "Screaming Frog, Google Rich Results Test, Schema Markup Validator" },
+        { area: "SEO and visibility suites", tools: "Semrush and Ahrefs, including their AI visibility features where available on your plan" },
+        { area: "Workflow", tools: "Google Sheets for prompt tracking, plus AI writing assistants used responsibly for drafting and research" },
+      ],
+      note: "Tool features and plan limits change often, so trainers update this list as platforms evolve.",
+    },
+    careers: {
+      eyebrow: "Careers",
+      title: "Career and Future Scope",
+      intro: "Businesses are only beginning to budget for AI visibility, so roles are still taking shape. Typical paths include GEO/AEO specialist, AI search strategist, SEO and content strategist, digital marketing manager, and freelance AI visibility consultant. Entry-level pay in India often sits roughly in the ₹3-6 lakh per year range, with experienced specialists and consultants earning more. These figures are approximate and vary widely by city, employer and skill, so check current job listings.",
+      roles,
+      jobsTitle: "Opportunities Across North India",
+      jobs: [
+        { title: "GEO jobs in Punjab", text: "Mohali's IT firms and agencies, along with exporters and manufacturers in Ludhiana and Jalandhar, need people who can help overseas buyers discover them through AI answers." },
+        { title: "GEO jobs in Haryana", text: "Gurugram's MNCs, e-commerce and logistics companies hire for in-house content, SEO and search strategy teams that now include AI search." },
+        { title: "GEO jobs in Delhi NCR", text: "Agencies, media houses and fintech firms in Delhi, Noida and Ghaziabad offer the widest fresher intake and client-facing roles." },
+        { title: "GEO jobs in Chandigarh", text: "The Tricity's IT, BPO and startup ecosystem suits professionals moving from operations or support into digital strategy." },
+        { title: "GEO jobs in Himachal Pradesh", text: "Tourism, hospitality and horticulture brands offer freelance and remote-work opportunities, including international clients." },
+        { title: "GEO jobs in Uttar Pradesh", text: "Noida's tech sector and Lucknow's retail and service businesses create demand for local-plus-AI visibility work." },
+      ],
+      outro: "Many roles are also remote, so learners can work with teams in Bengaluru, Hyderabad, Pune or Mumbai, or with overseas clients, without relocating.",
+    },
+    reviews: {
+      title: "What Our Learners Say About the GEO Course",
+      items: [
+        { name: "Harpreet Singh", role: "Graduate, B.Com", place: "Jalandhar, Punjab", text: "I had no idea how AI tools pick which brands to mention. The classes started from basics and slowly moved to entities and schema. The Jalandhar classroom sessions helped me ask doubts directly. My capstone audit is now the main piece in my portfolio." },
+        { name: "Simranjeet Kaur", role: "Business owner, hosiery exports", place: "Ludhiana, Punjab", text: "I run a small export unit and wanted overseas buyers to find us on ChatGPT and Perplexity. I now understand what to fix on my website and what to ask my agency. The trainers also said clearly that no one can guarantee results, which I appreciated." },
+        { name: "Rohit Malhotra", role: "Working professional, e-commerce", place: "Gurugram, Haryana", text: "I joined the online batch after office hours. Recordings helped when I missed a session. The answer-first writing module changed how I structure our product pages." },
+        { name: "Neha Sharma", role: "Job switcher, from BPO operations", place: "Panchkula, Haryana", text: "I was moving from operations into digital marketing. The prompt tracking assignments gave me something practical to show in interviews. Explanations were simple, and Hindi support made difficult topics easy." },
+        { name: "Ankit Thakur", role: "Freelancer", place: "Shimla, Himachal Pradesh", text: "Being in the hills, online classes were the only practical option for me. I now offer AI visibility audits to small hotel and homestay clients. The audit checklist from the course is something I use again and again." },
+        { name: "Gurleen Bedi", role: "Postgraduate, MBA", place: "Chandigarh", text: "The best part was learning E-E-A-T with real examples instead of definitions. I liked that tools like Search Console and the Rich Results Test were taught hands-on." },
+        { name: "Aman Verma", role: "Digital marketing executive", place: "Noida, Delhi NCR", text: "I already knew SEO, but GEO was a different way of thinking. Entity building and citation strategy were new to me. My team now asks me to review AI mentions for our clients." },
+        { name: "Tariq Ahmad", role: "Online store owner, handicrafts", place: "Srinagar, Jammu & Kashmir", text: "I sell shawls and paper-mache items online. The local and regional GEO module showed me how to describe my products so AI tools understand them. The trainers were patient with every doubt." },
+        { name: "Pooja Rawat", role: "Hospitality professional", place: "Dehradun, Uttarakhand", text: "I work in a travel company and wanted to understand how AI trip planners suggest stays. Learning schema and Google Business Profile made our listings clearer. The live demos made everything easier to follow." },
+        { name: "Kavita Joshi", role: "Graduate, B.A., aspiring freelancer", place: "Jaipur, Rajasthan", text: "I started with almost no technical background. The step-by-step modules and weekly assignments kept me consistent. I am now building sample audits for jewellery sellers." },
+        { name: "Mohit Yadav", role: "12th pass, learning alongside college", place: "Meerut, Uttar Pradesh", text: "I joined after 12th because I wanted to start a digital career early. Some topics were challenging, but the trainers repeated concepts and gave simple examples. I am practising on my own blog." },
+        { name: "Sandeep Chauhan", role: "Working professional, retail", place: "Lucknow, Uttar Pradesh", text: "I wanted to bring AI search visibility into our retail business. The 90-day action plan from the capstone gave me a clear roadmap to present to my management." },
+      ],
+    },
+    faqTitle: "Frequently Asked Questions About the Generative Engine Optimization Course",
+    cta: {
+      title: "Ready to Make Your Brand Visible",
+      highlight: "in AI Answers?",
+      text: "Join the Generative Engine Optimization (GEO) Course at techcadd. Customers are asking ChatGPT, Gemini and Google AI Overviews for recommendations every day. Learn how to get your brand, your clients or your own career into those answers with hands-on projects, live mentoring and a portfolio you can show. Book a free callback and our team will walk you through the batches, schedule and next steps.",
+    },
+  },
+};

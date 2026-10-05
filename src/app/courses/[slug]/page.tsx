@@ -7,8 +7,8 @@ import { CourseNav, type CourseNavItem } from "@/components/course/CourseNav";
 import { CatalogHero, CatalogSections } from "@/components/course-page/CpCatalog";
 import { CpHero } from "@/components/course-page/CpHero";
 import { CpMethod, CpOverview, CpSyllabus } from "@/components/course-page/CpLearn";
-import { CpAudience, CpCareers, CpMentor, CpProjects, CpTools } from "@/components/course-page/CpShowcase";
-import { CpCertification, CpEnrol, CpFaq, CpRelated, CpReviews, CpTracks, CpWhy } from "@/components/course-page/CpTrust";
+import { CpAudience, CpCareers, CpMentor, CpProjects, CpRegions, CpTools } from "@/components/course-page/CpShowcase";
+import { CpCertification, CpEnrol, CpFaq, CpRelated, CpReviews, CpTracks, CpWhy, CpWhyProgram } from "@/components/course-page/CpTrust";
 
 /** One statically generated page per entry in `coursePages` (src/data/course-pages). Neumorphic design, no pricing.
  *  Slugs listed in `courseCatalog` ("More Courses") render a page of course CARDS instead of the single-course layout. */
@@ -26,14 +26,19 @@ export async function generateMetadata({ params }: PageProps<"/courses/[slug]">)
   const title = catalog
     ? `${c.navLabel} Courses in Jalandhar — Certification & Placement Support`
     : `${c.title} in Jalandhar — Live Projects & Placement Support`;
-  const description = catalog
+  // Courses with their own long-form copy describe themselves with their tagline only (their duration may be unconfirmed).
+  const description = c.copy
+    ? `${c.tagline} Classroom batches in Jalandhar and live online classes with ${site.name}.`
+    : catalog
     ? `${c.tagline} Choose from ${catalog.flatMap((s) => s.items).length} ${c.navLabel} courses at ${site.name} Jalandhar. Classroom & live online batches.`
-    : `${c.tagline} ${c.duration} ${c.title.toLowerCase()} at ${site.name} Jalandhar with ${c.projects.length} portfolio projects, certification and placement assistance. Classroom & live online batches.`;
+    : `${c.tagline} ${c.duration} ${c.title.toLowerCase()} at ${site.name} Jalandhar with ${c.projects.length > 0 ? `${c.projects.length} portfolio projects, ` : ""}certification and placement assistance. Classroom & live online batches.`;
+  const heading = c.copy?.heading;
   return {
-    title,
+    // A course with its own heading sets the whole browser title (no site-name suffix from the root template).
+    title: heading ? { absolute: heading.meta } : title,
     description,
     alternates: { canonical: `/courses/${c.slug}` },
-    openGraph: { title, description: c.tagline, url: `/courses/${c.slug}` },
+    openGraph: { title: heading?.meta ?? title, description: c.tagline, url: `/courses/${c.slug}` },
   };
 }
 
@@ -56,7 +61,8 @@ export default async function CoursePage({ params }: PageProps<"/courses/[slug]"
   if (!course) notFound();
 
   const group = courseGroup(course.group);
-  const faqs = [...course.faqs, ...courseCommon.faqs];
+  // Courses with their own long-form copy bring a complete FAQ list, so the shared FAQs are not appended.
+  const faqs = course.copy ? course.faqs : [...course.faqs, ...courseCommon.faqs];
   const related = course.related.map((s) => coursePages.find((c) => c.slug === s)).filter((c) => c !== undefined);
   const url = `${site.url}/courses/${course.slug}`;
 
@@ -122,19 +128,21 @@ export default async function CoursePage({ params }: PageProps<"/courses/[slug]"
       {/* Reading progress (CSS scroll-driven; hidden where unsupported or motion is reduced). */}
       <div aria-hidden className="scroll-progress pointer-events-none fixed inset-x-0 top-0 z-[60] hidden h-1 bg-accent-500 supports-[animation-timeline:scroll()]:motion-safe:block" />
       <CpHero course={course} group={group} />
-      <CourseNav items={sections} variant="neu" />
+      <CourseNav items={sections.filter((s) => s.id !== "projects" || course.projects.length > 0)} variant="neu" />
       <CpOverview course={course} />
       <CpSyllabus course={course} />
       <CpMethod />
       <CpTools course={course} />
       <CpProjects course={course} />
       <CpAudience course={course} group={group} />
+      <CpRegions course={course} />
       <CpCareers course={course} />
       <CpMentor group={group} />
-      <CpWhy />
+      <CpWhyProgram course={course} />
+      <CpWhy course={course} />
       <CpTracks course={course} />
       <CpCertification course={course} />
-      <CpReviews />
+      <CpReviews course={course} />
       <CpFaq course={course} faqs={faqs} />
       <CpRelated courses={related} />
       <CpEnrol course={course} courses={coursePages.map((c) => c.navLabel)} />

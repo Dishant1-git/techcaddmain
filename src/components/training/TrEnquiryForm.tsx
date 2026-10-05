@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FocusEvent, type FormEvent } from "react";
 import { AlertCircle, CheckCircle2, LoaderCircle, Send } from "lucide-react";
-import { waLink } from "@/lib/whatsapp";
+import { submitLead } from "@/lib/lead";
 
 type Field = "name" | "phone" | "course" | "message" | "check";
 type Errors = Partial<Record<Field, string>>;
@@ -11,13 +11,13 @@ type Status = "idle" | "loading" | "success" | "error";
 /**
  * 5-field enquiry form (name, phone, course, message, security check) with visible labels and inline validation
  * (on blur after first touch, and on submit). The security check is a simple sum derived from the course name so it
- * is stable between server and client render. No backend yet: submit opens WhatsApp pre-filled — swap `send` for
- * `await fetch("/api/lead", …)` (and a real CAPTCHA) when a CRM exists; loading / error / success states are wired.
+ * is stable between server and client render. Submit saves the enquiry to MySQL (POST /api/lead → `leads` table);
+ * on success a thank-you message replaces the form. The program select starts on the page's own program.
  */
 export function TrEnquiryForm({
   course, courses, context = "Internship & Training",
   placeholder = "e.g. I need 6-month industrial training for my B.Tech — which batch suits me?",
-}: { course: string; courses: string[]; /** Shown in the WhatsApp message, e.g. "After 12th". */ context?: string; placeholder?: string }) {
+}: { course: string; courses: string[]; /** Where the form sits, e.g. "After 12th, 6 months" (decides the `form` value saved with the lead). */ context?: string; placeholder?: string }) {
   const a = (course.length % 5) + 2;
   const b = (course.charCodeAt(0) % 4) + 3;
 
@@ -33,7 +33,6 @@ export function TrEnquiryForm({
 
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
-  const [fallback, setFallback] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
   const read = () => Object.fromEntries(new FormData(formRef.current!)) as Record<string, string>;
@@ -45,18 +44,8 @@ export function TrEnquiryForm({
     setErrors((prev) => ({ ...prev, [name]: all[name] }));
   };
 
-  const send = async (d: Record<string, string>) => {
-    const url = waLink(
-      `Hi TechCADD, I'd like to enquire about ${d.course} (${context}).\nName: ${d.name}\nPhone: ${d.phone}${d.message ? `\nMessage: ${d.message}` : ""}`,
-    );
-    // window.open must run synchronously inside the submit handler or pop-up blockers will stop it.
-    const win = window.open(url, "_blank");
-    if (!win) {
-      setFallback(url);
-      throw new Error("popup-blocked");
-    }
-    win.opener = null;
-  };
+  const send = (d: Record<string, string>) =>
+    submitLead({ form: context.startsWith("After 12th") ? "after-12th" : "training", course: d.course, name: d.name, phone: d.phone, message: d.message });
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -97,6 +86,16 @@ export function TrEnquiryForm({
     );
 
   const label = "mb-2 block text-sm font-semibold text-ink-900";
+
+  if (status === "success") {
+    return (
+      <div role="status" className="su-card on-light p-6 text-center text-ink-900 sm:p-8">
+        <CheckCircle2 className="mx-auto size-12 text-emerald-600" aria-hidden />
+        <h3 className="mt-4 text-2xl font-extrabold tracking-tight text-ink-900">Thank you!</h3>
+        <p className="mt-2 text-sm text-ink-500">We have received your enquiry. A counsellor will call you within 24 hours.</p>
+      </div>
+    );
+  }
 
   return (
     <form ref={formRef} noValidate onSubmit={onSubmit} onBlur={onBlur} aria-labelledby="trq-title" className="su-card on-light space-y-5 p-6 text-left text-ink-900 sm:p-8">
@@ -149,17 +148,7 @@ export function TrEnquiryForm({
       </button>
 
       <div aria-live="polite" className="min-h-5 text-center text-sm">
-        {status === "success" && (
-          <p className="flex items-center justify-center gap-2 font-semibold text-emerald-700">
-            <CheckCircle2 className="size-4" aria-hidden /> Almost done — send the message in WhatsApp to confirm your slot.
-          </p>
-        )}
-        {status === "error" && (
-          <p className="text-red-700">
-            WhatsApp didn&apos;t open (your browser may have blocked the pop-up).{" "}
-            <a href={fallback} target="_blank" rel="noopener noreferrer" className="link">Open WhatsApp to send your enquiry</a>
-          </p>
-        )}
+        {status === "error" && <p className="text-red-700">We couldn&apos;t save your details. Please try again in a moment.</p>}
         {status === "idle" && <p className="text-ink-500">100% free · No spam · Your details stay private</p>}
       </div>
     </form>

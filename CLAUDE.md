@@ -72,11 +72,19 @@ src/app/
   about/mission-vision/page.tsx  "Mission and Vision" (About Us dropdown): SITE THEME, 5 sections from components/about/MissionSections.tsx —
                             MvHero (dark, jump links) · MvMission (#mission, 5 numbered pillars) · MvVision (#vision, "Future-ready by 2030"
                             panel + goals) · MvFuture (#future, dark .tr-fill statement + fields) · about/AboutCta. Content: `missionVision` in data/about.ts.
+  about/founder/page.tsx    "Our Founder" (About Us dropdown → /about/founder): mirrors techcaddjalandhar.com/about/founder in the SITE THEME, 9 sections from
+                            components/founder/FounderSections.tsx in page order — FounderHero (dark, portrait, drifting rings) · FounderMeet (#meet, ghost "ABOUT",
+                            stat band) · FounderGallery (2-row on-stage photo marquee, hover zoom) · FounderRoles (4 overlapping ribbons) ·
+                            FounderJourneySection → FounderJourney ("use client": sticky cross-fading photo stage, chapter tabs, typed line + replay, 6 chapter
+                            cards; NO overflow-hidden on the section) · FounderClosing · FounderTestimonialsSection → FounderTestimonials ("use client"
+                            stacked-card carousel, auto 6s, swipe, ←/→) · FounderReelsSection (#reels) → FounderReels ("use client" Instagram embed cover-flow: live drag with momentum, auto-advance 5s, pauses on hover/playing, `shape: "landscape"` per reel in `founderReels.items`) ·
+                            FounderConnect (Instagram + LinkedIn). Content + photo imports: src/data/founder.ts; photos: src/assets/founder/; CSS: `.fnd-*` block in globals.css.
   ai-courses/page.tsx       AI hub (all AI course cards) — target of the AI pill + "Explore AI"
-  courses/page.tsx          ALL-COURSES page (light slate, NOT neumorphic): hero + course-page/CourseSearch ("use client": sticky search box,
-                            "/" shortcut, category chips with live counts, empty state, professional cards). Target of the header
-                            "Courses" item + "Browse all courses". Items built server-side: one card per course page, More Courses
-                            catalog pages expanded to one card per course name; badges read from the Courses nav
+  courses/page.tsx          ALL-COURSES page (layout mirrors techcaddjalandhar.com/courses, site theme): dark hero ("Courses" pill, h1, lead, "Book a free demo
+                            class" → lead popup) + course-page/CourseSearch ("use client": search box with "/" shortcut, then one section of compact tiles per
+                            group — brand logo or monogram, name, "Jalandhar · Live projects", arrow; empty groups hide while searching; empty state).
+                            Sections built server-side: one per courseGroup (a tile per course page) + one per More Courses catalog page (a tile per
+                            course name). Tile logos: `logoRules` in the page (simple-icons, resolved server-side; monogram fallback).
   courses/[slug]/page.tsx   SSG page per Courses-dropdown link (27): NEUMORPHIC, light hero (no side card), NO pricing,
                             17 sections + JSON-LD (Course w/o offers, BreadcrumbList, FAQPage)
   training/page.tsx + [slug]/page.tsx  Internship & Training hub + 12 SSG slug pages (dynamicParams=false) in the SITE THEME
@@ -182,6 +190,10 @@ src/components/
              no affiliation claims) · MentorGrid (avatar-initials + rating + "View Profile") · GuidanceFaq
              (topic-scoped accordion, same pattern as home Faq) · GuidanceCta (final banner, same gradient as DemoCta).
 src/lib/whatsapp.ts  waLink(text) → wa.me URL with pre-filled message
+src/lib/lead.ts      submitLead({form, phone, …}) — client helper every form calls → POST /api/lead
+src/lib/db.ts        mysql2 pool (server only), reads DB_HOST/DB_PORT/DB_USER/DB_PASSWORD/DB_NAME from .env
+src/app/api/lead/route.ts  POST: validates + inserts into the single MySQL table `leads`
+database/schema.sql  CREATE DATABASE techcaddmain + `leads` table (run once in MySQL Workbench)
 docs/ai-course-page.md  Design spec for AI course pages (tokens, states, a11y acceptance criteria, QA checklist)
 ```
 Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-program` → `#courses`
@@ -235,7 +247,10 @@ Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-pr
   university list are **sample content** — confirm real figures before launch.
 - Social URLs in `site.socials` are generic; email `info@techcaddjalandhar.com` is assumed.
 - Logo is an SVG placeholder (`ui/Logo.tsx`) → replace with official logo in `/public`.
-- DemoForm has no backend: opens WhatsApp with pre-filled text. For CRM, add `src/app/api/lead/route.ts` and fetch it.
+- ALL forms (LeadPopup, DemoForm, ContactForm, course/EnquiryForm, CpEnquiryForm, TrEnquiryForm) save to MySQL table `leads`
+  via `submitLead()` and show a thank-you message in place of the form; they no longer open WhatsApp. `form` column =
+  popup | demo | contact | course | ai-course | training | after-12th. LeadPopup preselects the course on course pages
+  (`pageCourses` path → name map built in layout.tsx). Hosting needs a reachable MySQL + the DB_* env vars.
 - Blog cards/"Download Curriculum" link to anchors; no blog/course detail pages yet.
 - Unused scaffold files in `/public` (next.svg, vercel.svg, etc.) can be deleted.
 - AI course pages show NO pricing (no fee/EMI/₹, no JSON-LD Offer) — fees go via counsellor. AI mentors (names/bios), AI student stories, batch timings are **sample content**. Tools use monogram
@@ -244,9 +259,20 @@ Home section order & anchor ids: Hero → `#about` → `#categories` → `#ai-pr
   brand decision (see docs/ai-course-page.md §7 "Open accessibility issues").
 
 - About page: journey timeline milestones (2007–2025) and recognition items (incl. "ISO 9001 Certified") are **sample content**.
-  "Our Founder" nav link still points at a home anchor (no page yet).
+- Founder page copy/photos come from the reference site: it says "2016 founded / 5,000+ students trained" and uses 2016–2026 chapter years, which CONFLICTS with
+  the 2007 / 50,000+ figures used elsewhere on this site — confirm with the client.
 
 ## Changelog
+- 2026-10-05: NEW course page /courses/aeo (src/data/course-pages/aeo.ts, client's long-form copy) → 41 course pages. Courses ▾ Digital Marketing links for the two new pages are the short labels "GEO" and "AEO" (New) because the full names overflow the dropdown column; their `navLabel` (tiles, breadcrumb, enquiry form) keeps the full name. `duration` is a placeholder — confirm.
+- 2026-10-05: NEW course page /courses/geo (src/data/course-pages/geo.ts, client's long-form copy) + "GEO (Generative Engine Optimization)" link (New) in Courses ▾ Digital Marketing → 40 course pages. `duration` is a placeholder — confirm. Review `rating` is now optional (GEO reviews came without stars); reason cards may have empty `text`.
+- 2026-10-05: NEW course page /courses/dropshipping-ecommerce (src/data/course-pages/dropshipping-ecommerce.ts, client's long-form copy) + "Dropshipping & E-Commerce" link in Courses ▾ Digital Marketing → 39 course pages. Its `duration` is a placeholder ("Duration on enquiry") — confirm. `CourseCopy.audience` gained optional `fit` ("Is this course right for you?" card); pages with `copy` use tagline-only meta descriptions.
+- 2026-10-05: /courses/google-ads now uses the client's long-form copy (src/data/course-pages/google-ads.ts). Module 2/5 titles and the Tag Manager / Merchant Center / Looker Studio tools were marked "confirm" in the supplied text — see the note at the top of that file. Review cards gained an optional bold `headline`.
+- 2026-10-05: /courses/social-media-marketing now uses the client's long-form copy (src/data/course-pages/social-media-marketing.ts, incl. 10 supplied reviews — confirm they are real before launch). Syllabus modules may now have an empty `summary`.
+- 2026-10-05: /courses/seo now uses the client's long-form copy (src/data/course-pages/seo.ts). `CourseCopy` gained optional `cta` (final banner heading + text), `tools.columns`, `whyProgram.outro`, and `list`/`after` on reason cards. The supplied SEO reviews were DRAFT TEMPLATES ("[Student Name]"), so they are NOT published — the page keeps the shared testimonials until real reviews arrive.
+- 2026-10-05: /courses/digital-marketing now uses the client's long-form copy (src/data/course-pages/digital-marketing.ts). New optional `CoursePage.copy` (type `CourseCopy` in types.ts) lets one course override section copy: heading (H1 + browser title), overview, syllabus (+ per-module `outcome`), audience, regions (CpRegions), whyProgram (CpWhyProgram), whyUs, tools table, careers + jobs by state, reviews, faqTitle; with `copy` set the shared FAQs are not appended and an empty `projects` list hides the Projects section. Other course pages are unchanged.
+- 2026-10-05: /courses rebuilt to mirror the reference courses page (dark hero, search bar, grouped course tiles with brand logos); category chips and the long cards are gone.
+- 2026-10-05: /about/founder rebuilt to mirror the reference founder page (hero, meet + stats, stage photo marquee, role ribbons, sticky scroll journey, closing card, testimonial carousel, Instagram reels cover-flow, connect CTA) in this site's theme; real photos added in src/assets/founder.
+- 2026-10-05: All forms now save to one MySQL table (`leads`, database/schema.sql) through POST /api/lead and show a thank-you message in place of the form; lead popup auto-selects the course on course pages.
 - 2026-10-02: Home #testimonials redesigned with a Google Reviews rating card.
 - 2026-10-02: Lead popup form (waving hand, 2-column dialog) — opens 5s after load (once per session) and from header Book Demo.
 - 2026-10-02: Typewriter text animation: heading highlight words are written on scroll site-wide; hero H1 cycles through 5 phrases.
