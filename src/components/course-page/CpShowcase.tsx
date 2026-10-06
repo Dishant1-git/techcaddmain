@@ -190,20 +190,36 @@ export function CpCareers({ course }: { course: CoursePage }) {
           ))}
         </ul>
         {copy.rolesNote && <p data-reveal="up" className="mx-auto mt-8 max-w-3xl text-center text-ink-700">{copy.rolesNote}</p>}
-        <h3 data-reveal="up" className="mt-16 text-center text-2xl font-bold text-ink-900">{copy.jobsTitle}</h3>
-        <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {copy.jobs.map((j, i) => (
-            <li key={j.title} data-reveal="flip" style={delay(i % 3, 110)}>
-              <div className="neu neu-hover flex h-full gap-4 p-6">
-                <span aria-hidden className="neu-icon size-11 shrink-0 !rounded-xl"><Building2 className="size-5" /></span>
-                <div>
-                  <h4 className="font-bold text-ink-900">{j.title}</h4>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink-700">{j.text}</p>
+        {copy.notes && (
+          <ul className="mt-12 grid gap-6 sm:grid-cols-2">
+            {copy.notes.map((n, i) => (
+              <li key={n.title} data-reveal="up" style={delay(i % 2, 110)}>
+                <div className="neu-inset h-full p-6">
+                  <h3 className="font-bold text-ink-900">{n.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink-700">{n.text}</p>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+              </li>
+            ))}
+          </ul>
+        )}
+        {copy.jobs.length > 0 && (
+          <>
+            <h3 data-reveal="up" className="mt-16 text-center text-2xl font-bold text-ink-900">{copy.jobsTitle}</h3>
+            <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {copy.jobs.map((j, i) => (
+                <li key={j.title} data-reveal="flip" style={delay(i % 3, 110)}>
+                  <div className="neu neu-hover flex h-full gap-4 p-6">
+                    <span aria-hidden className="neu-icon size-11 shrink-0 !rounded-xl"><Building2 className="size-5" /></span>
+                    <div>
+                      <h4 className="font-bold text-ink-900">{j.title}</h4>
+                      <p className="mt-1.5 text-sm leading-relaxed text-ink-700">{j.text}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
         {copy.outro && <p data-reveal="up" className="mx-auto mt-10 max-w-3xl text-center text-ink-700">{copy.outro}</p>}
       </CourseSection>
     );

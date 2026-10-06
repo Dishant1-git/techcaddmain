@@ -26,7 +26,7 @@ export type CourseCopy = {
   /** Replaces the tool tiles with an Area → Tools table. */
   tools?: { title: string; /** Column headings; default Area / Tools. */ columns?: [string, string]; groups: { area: string; tools: string }[]; note?: string };
   /** Replaces the role cards. */
-  careers?: { eyebrow: string; title: string; intro: string; roles: string[]; /** Paragraph under the role chips. */ rolesNote?: string; jobsTitle: string; jobs: TitledText[]; outro?: string };
+  careers?: { eyebrow: string; title: string; intro: string; roles: string[]; /** Paragraph under the role chips. */ rolesNote?: string; /** Titled paragraphs between the roles and the jobs grid (industries, progression…). */ notes?: TitledText[]; /** The jobs grid (and its heading) is hidden when `jobs` is empty. */ jobsTitle: string; jobs: TitledText[]; outro?: string };
   /** Replaces the site-wide testimonials. */
   reviews?: { title: string; items: { name: string; role: string; place: string; /** Stars out of 5; omit when the review has no rating. */ rating?: number; text: string; /** Bold one-line summary above the review. */ headline?: string }[] };
   /** FAQ heading; the shared course FAQs are not appended when `copy` is set. */

@@ -266,7 +266,7 @@ export const nav: NavItem[] = [
             { label: "Ethical Hacking", href: "/courses/ethical-hacking", badge: "Trending" },
             { label: "Cloud Computing", href: "/courses/cloud-computing" },
             { label: "Linux", href: "/courses/linux" },
-            { label: "Network Security", href: "/courses/network-security" },
+            { label: "Network Security & CCNA", href: "/courses/network-security" },
             { label: "SOC Analyst", href: "/courses/soc-analyst", badge: "New" },
             { label: "AWS", href: "/courses/aws", badge: "Hot" },
             { label: "Microsoft Azure", href: "/courses/microsoft-azure" },
