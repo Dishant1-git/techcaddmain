@@ -171,6 +171,7 @@ export const nav: NavItem[] = [
       { title: "Our Founder", href: "/about/founder", badge: "Profile", meta: "Gourav Gupta", image: navFounderImg, alt: "Founder Gourav Gupta presenting a robot dog on stage" },
     ],
   },
+  { label: "Founder", href: "/about/founder" },
   {
     label: "AI",
     href: "/ai-courses",
@@ -185,7 +186,7 @@ export const nav: NavItem[] = [
           links: [
             { label: "Generative AI", href: "/courses/generative-ai" },
             { label: "Artificial Intelligence (AI)", href: "/ai-courses/artificial-intelligence" },
-            { label: "Prompt Engineering", href: "/ai-courses/prompt-engineering" },
+            { label: "Prompt Engineering", href: "/courses/prompt-engineering" },
             { label: "ChatGPT & AI Tools", href: "/courses/chatgpt-ai-tools", hot: true },
           ],
         },
@@ -193,9 +194,9 @@ export const nav: NavItem[] = [
           title: "AI Development",
           icon: "Zap",
           links: [
-            { label: "Agentic AI", href: "/ai-courses/agentic-ai", hot: true },
-            { label: "AI-Powered Marketing", href: "/ai-courses/ai-powered-marketing", hot: true },
-            { label: "RAG (Retrieval-Augmented Generation)", href: "/ai-courses/rag" },
+            { label: "Agentic AI", href: "/courses/agentic-ai", hot: true },
+            { label: "AI-Powered Marketing", href: "/courses/ai-powered-marketing", hot: true },
+            { label: "RAG (Retrieval-Augmented Generation)", href: "/courses/rag" },
             { label: "Machine Learning", href: "/ai-courses/machine-learning" },
           ],
         },
@@ -420,6 +421,8 @@ export const nav: NavItem[] = [
       browse: { label: "Ask us a question", href: "/faq" },
     },
   },
+  // Simple dropdown, generated from `branches` (a new branch appears here automatically).
+  { label: "Branches", href: "/#branches", children: branches.map((b) => ({ label: b.city, href: `/branches/${b.slug}`, desc: b.hq ? `${b.state} · Head office` : b.state })) },
   { label: "Contact Us", href: "/contact" },
 ];
 
@@ -646,20 +649,39 @@ export const courses: Course[] = [
 
 export const aiProgram = {
   eyebrow: "Flagship Program",
-  title: "Applied Generative AI Engineering",
+  title: "Agentic AI Engineering",
+  /** h2 = lead + highlight (highlight is typed out on scroll) */
+  lead: "Build AI agents that",
+  highlight: "finish the job.",
   subtitle:
-    "North India's most hands-on AI program — build real products with LLMs, agents and automation, mentored by industry engineers.",
-  duration: "6 Months",
+    "Chatbots answer questions. Agents plan, call tools and complete the work. In our flagship program you design, build and deploy them, mentored by engineers who run agents in production.",
+  href: "/courses/agentic-ai",
   nextBatch: "New batches every month",
-  modules: [
-    "Python for AI & Data Handling",
-    "Machine Learning & Deep Learning",
-    "LLMs, Prompt Engineering & RAG",
-    "AI Agents & Workflow Automation",
-    "Deploying AI Apps to the Cloud",
-    "Capstone: Ship a Real AI Product",
+  /** Keep in sync with the `agentic-ai` entry in `aiCourses`. */
+  facts: [
+    { value: "4", label: "Months" },
+    { value: "160+", label: "Live hours" },
+    { value: "8", label: "Agents you build" },
   ],
-  tools: ["Python", "PyTorch", "LangChain", "OpenAI & Claude APIs", "Vector DBs", "Hugging Face"],
+  /** Conveyor: each job enters the agent as raw work (`in`) and leaves it finished (`out`). Illustrative examples. */
+  caption: "Work goes in. Finished work comes out. You learn to build the part in the middle.",
+  jobs: [
+    { in: "214 unread support emails", out: "214 replies drafted" },
+    { in: "12 new leads in the CRM", out: "3 demos booked" },
+    { in: "Messy sales spreadsheet", out: "Weekly report sent" },
+    { in: "40 CVs to screen", out: "Top 5 shortlisted" },
+    { in: "Bug report from a client", out: "Fix tested, PR opened" },
+    { in: "Competitor price list", out: "Price alert sent" },
+    { in: "Month-end invoices", out: "Invoices reconciled" },
+    { in: "Blog brief from marketing", out: "Draft ready for review" },
+  ],
+  tools: ["LangGraph", "OpenAI Agents SDK", "Claude Agent SDK", "MCP", "CrewAI", "n8n"],
+  stages: [
+    { when: "Month 1", title: "Foundations", text: "Async Python, LLM APIs, function calling and the core agent patterns.", build: "Research agent with web search" },
+    { when: "Month 2", title: "Agent frameworks", text: "LangGraph state machines, the OpenAI and Claude agent SDKs, multi-agent teams with CrewAI.", build: "Multi-agent content team" },
+    { when: "Month 3", title: "Tools & integrations", text: "Connect agents to databases, CRMs, browsers and workflows with MCP and n8n.", build: "Lead-qualification agent" },
+    { when: "Month 4", title: "Production", text: "Evaluation, guardrails, human approval steps, cost tracking and deployment.", build: "Your own agent, deployed and monitored" },
+  ],
 };
 
 export const steps = [
@@ -715,6 +737,38 @@ export const whyUs = [
     points: ["Free career counselling", "Free demo class", "No registration fee"],
   },
 ];
+
+/** Home #difference "flip the switch" stage: one row per check — `others` = what is common elsewhere, `us` = how TechCADD
+ *  does it, `cv` = the line it adds to the student's CV. SAMPLE claims, confirm with client. */
+export const difference = {
+  eyebrow: "The TechCADD difference",
+  text: "Two institutes can list the same course and send the same student home with very different results. Flip the switch and watch what changes.",
+  othersLabel: "Most institutes",
+  usLabel: "TechCADD",
+  rows: [
+    { label: "Trainers", icon: "UserCheck", others: "A full-time instructor with no current client work", us: "Practitioners who still ship client work every week", cv: "Trained by working practitioners" },
+    { label: "Projects", icon: "Rocket", others: "A tutorial-style demo copied from the slides", us: "A live project an employer can open and inspect", cv: "Live project, deployed and reviewable" },
+    { label: "Batch size", icon: "Users", others: "Crowded batches, rarely disclosed upfront", us: "Small batches with daily one-to-one feedback", cv: "Work reviewed one-to-one, every day" },
+    { label: "After the batch", icon: "Handshake", others: "Support ends the day the certificate is issued", us: "Placement support continues past the first rejection", cv: "Mock interviews and employer drives" },
+    { label: "Promises", icon: "ShieldCheck", others: "“100% job guaranteed” on the poster", us: "Honest: guaranteed support, never a fake job promise", cv: "Counselled into the right role" },
+    { label: "Proof", icon: "Award", others: "A certificate for having attended", us: "Certificate, internship letter and a portfolio", cv: "Certificate, internship letter, portfolio" },
+  ],
+  cv: {
+    title: "Curriculum Vitae",
+    name: "The same student",
+    othersRole: "Fresher, still searching",
+    usRole: "Job-ready junior professional",
+    heading: "What they can show an employer",
+    empty: "Nothing to show",
+    meter: "Profile strength",
+    othersMeter: "Thin",
+    usMeter: "Interview-ready",
+    othersStamp: "Attended",
+    usStamp: "Job-ready",
+  },
+  verdict: "Don’t take our word for it. Ask these six questions at every institute you visit, including ours.",
+  cta: { label: "See the full comparison", href: "/why-techcadd" },
+};
 
 /** Home #programs sticky stack (one full-width photo panel each). Photos are Unsplash stock in src/assets/programs — swap for real ones. */
 export const programs = [
@@ -919,6 +973,7 @@ export const footerLinks = {
     { label: "FAQs", href: "/faq" },
     { label: "Enquire Now", href: "/#demo" },
   ],
+  Branches: branches.map((b) => ({ label: b.city, href: `/branches/${b.slug}` })),
 };
 
 /** Bottom-row legal links in the footer. TODO: these pages don't exist yet — create the routes before launch. */

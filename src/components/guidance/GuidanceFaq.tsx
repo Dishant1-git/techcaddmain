@@ -7,7 +7,7 @@ import { SectionHeading, delay } from "@/components/ui/SectionHeading";
 /** Same accordion pattern as the home Faq section, parameterised per guidance topic. */
 export function GuidanceFaq({ topic, faqs }: { topic: string; faqs: FaqItem[] }) {
   return (
-    <section className="section bg-brand-50/50">
+    <section className="section defer-render bg-brand-50/50">
       <div className="container-x grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <SectionHeading align="left" eyebrow="FAQs" title={<>Questions about <span className="text-gradient">{topic}</span></>} />

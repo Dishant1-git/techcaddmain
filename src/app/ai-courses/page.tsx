@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { aiCourses } from "@/data/site";
+import { aiCourses, site } from "@/data/site";
+import { aiHub } from "@/data/ai-hub";
 import { delay } from "@/components/ui/SectionHeading";
 import { Breadcrumb } from "@/components/course/Breadcrumb";
 import { AiCourseCard } from "@/components/course/AiCourseCard";
 import { SoftBlobs } from "@/components/course/CourseSection";
+import { HubAudience, HubCareers, HubLearn, HubOverview, HubRegions, HubWhy, HubWhyUs } from "@/components/course/AiHubSections";
+import { GuidanceFaq } from "@/components/guidance/GuidanceFaq";
+import { GuidanceCta } from "@/components/guidance/GuidanceCta";
 
 export const metadata: Metadata = {
   title: "AI Courses in Jalandhar — Generative AI, Agentic AI, ML & More",
@@ -13,10 +17,28 @@ export const metadata: Metadata = {
   alternates: { canonical: "/ai-courses" },
 };
 
-/** Hub for the AI nav dropdown ("Explore AI") and the breadcrumb middle crumb. */
+/** Hub for the AI nav dropdown ("Explore AI") and the breadcrumb middle crumb: hero + course cards, then the client's
+ *  long-form copy (`aiHub` in src/data/ai-hub.ts → course/AiHubSections), FAQ (with FAQPage JSON-LD) and CTA. */
 export default function AiCoursesPage() {
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+        { "@type": "ListItem", position: 2, name: "AI Courses", item: `${site.url}/ai-courses` },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: aiHub.faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ];
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <section className="on-dark relative isolate overflow-hidden bg-ink-950 py-16 text-white md:py-24">
         <div className="bg-grid absolute inset-0 -z-10 opacity-60" aria-hidden />
         <div className="absolute -left-32 top-0 -z-10 size-[28rem] rounded-full bg-brand-600/30 blur-[120px]" aria-hidden />
@@ -43,6 +65,16 @@ export default function AiCoursesPage() {
           ))}
         </ul>
       </section>
+
+      <HubOverview />
+      <HubAudience />
+      <HubRegions />
+      <HubWhy />
+      <HubWhyUs />
+      <HubLearn />
+      <HubCareers />
+      <GuidanceFaq topic="AI courses in Jalandhar" faqs={aiHub.faqs} />
+      <GuidanceCta title={`${aiHub.cta.title} ${aiHub.cta.highlight}`} text={aiHub.cta.text} button="Book a Free Demo" />
     </>
   );
 }

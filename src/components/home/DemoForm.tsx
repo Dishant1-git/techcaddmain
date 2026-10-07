@@ -37,7 +37,7 @@ export function DemoForm() {
       <label htmlFor="demo-phone" className="sr-only">
         Your mobile number
       </label>
-      <div className="flex flex-col gap-4 sm:flex-row">
+      <div className="flex flex-col gap-3 sm:flex-row">
         <input
           id="demo-phone"
           name="phone"
@@ -49,12 +49,12 @@ export function DemoForm() {
           title="Enter a 10-digit mobile number"
           placeholder="Your mobile number"
           autoComplete="tel-national"
-          className="min-w-0 flex-1 rounded-full border border-ink-950/10 bg-white px-8 py-5 text-lg text-ink-900 shadow-[0_12px_30px_-12px_rgba(15,23,42,0.25)] outline-none transition-shadow placeholder:text-ink-500 focus:ring-4 focus:ring-brand-500/30"
+          className="min-w-0 flex-1 rounded-full border border-ink-950/10 bg-white px-8 py-4 text-base text-ink-900 shadow-[0_12px_30px_-12px_rgba(15,23,42,0.25)] outline-none transition-shadow placeholder:text-ink-500 focus:ring-4 focus:ring-brand-500/30"
         />
         <button
           type="submit"
           aria-disabled={status === "loading" || undefined}
-          className="shrink-0 rounded-full bg-ink-950 px-12 py-5 font-display text-lg font-bold text-white shadow-[0_20px_30px_-12px_rgba(15,23,42,0.5)] transition-colors hover:bg-brand-900 active:scale-[0.98]"
+          className="shrink-0 rounded-full bg-ink-950 px-10 py-4 font-display text-base font-bold text-white shadow-[0_20px_30px_-12px_rgba(15,23,42,0.5)] transition-colors hover:bg-brand-900 active:scale-[0.98]"
         >
           {status === "loading" ? "Sending…" : "Book Demo"}
         </button>

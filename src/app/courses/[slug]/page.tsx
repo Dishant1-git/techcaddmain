@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { site } from "@/data/site";
+import { clip, ogImages } from "@/lib/seo";
+import { comparePairs, shortName } from "@/lib/compare";
+import { fromCourse } from "@/data/long-form";
+import { trainingPages } from "@/data/training";
+import { a12Pages } from "@/data/after-12th";
 import { courseCommon, courseGroup, coursePages } from "@/data/course-pages";
 import { courseCatalog } from "@/data/course-pages/catalog";
 import { CourseNav, type CourseNavItem } from "@/components/course/CourseNav";
@@ -36,9 +41,9 @@ export async function generateMetadata({ params }: PageProps<"/courses/[slug]">)
   return {
     // A course with its own heading sets the whole browser title (no site-name suffix from the root template).
     title: heading ? { absolute: heading.meta } : title,
-    description,
+    description: clip(description),
     alternates: { canonical: `/courses/${c.slug}` },
-    openGraph: { title: heading?.meta ?? title, description: c.tagline, url: `/courses/${c.slug}` },
+    openGraph: { title: heading?.meta ?? title, description: c.tagline, url: `/courses/${c.slug}`, images: ogImages },
   };
 }
 
@@ -63,6 +68,15 @@ export default async function CoursePage({ params }: PageProps<"/courses/[slug]"
   const group = courseGroup(course.group);
   // Courses with their own long-form copy bring a complete FAQ list, so the shared FAQs are not appended.
   const faqs = course.copy ? course.faqs : [...course.faqs, ...courseCommon.faqs];
+  // Contextual links to the other pages about this subject: its training and After 12th programs and its comparison pages.
+  const program = Object.keys(fromCourse).find((k) => fromCourse[k] === course.slug);
+  const training = trainingPages.find((t) => t.slug === program);
+  const more = [
+    ...(training ? [{ label: `${training.navLabel} internship & training`, href: `/training/${training.slug}` }] : []),
+    ...a12Pages.filter((p) => p.subject.slug === program).map((p) => ({ label: p.label, href: `/after-12th/${p.slug}` })),
+    ...comparePairs.filter((p) => p.a.slug === course.slug || p.b.slug === course.slug).slice(0, 5)
+      .map((p) => ({ label: `${shortName(p.a)} vs ${shortName(p.b)}`, href: `/compare/${p.slug}` })),
+  ];
   const related = course.related.map((s) => coursePages.find((c) => c.slug === s)).filter((c) => c !== undefined);
   const url = `${site.url}/courses/${course.slug}`;
 
@@ -144,7 +158,7 @@ export default async function CoursePage({ params }: PageProps<"/courses/[slug]"
       <CpCertification course={course} />
       <CpReviews course={course} />
       <CpFaq course={course} faqs={faqs} />
-      <CpRelated courses={related} />
+      <CpRelated courses={related} more={more} />
       <CpEnrol course={course} courses={coursePages.map((c) => c.navLabel)} />
     </div>
   );

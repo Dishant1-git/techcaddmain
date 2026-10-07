@@ -13,7 +13,7 @@ import { TrEnquiryForm } from "@/components/training/TrEnquiryForm";
 export function A12Related({ pages }: { pages: A12Page[] }) {
   if (pages.length === 0) return null;
   return (
-    <CourseSection id="related" overflow="overflow-x-clip" className="bg-neu">
+    <CourseSection id="related" overflow="overflow-x-clip" className="defer-render bg-neu">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading id="related-title" align="left" eyebrow="Explore more" title={<>Popular <span className="text-brand-700">After 12th courses</span></>} />
         <Link href="/after-12th" className="btn-neu">All After 12th programs <ArrowRight className="size-4" aria-hidden /></Link>
@@ -56,7 +56,7 @@ export function A12Card({ page, headingLevel: H = "h3" }: { page: A12Page; headi
 /** FAQ — searchable soft accordion; the page emits the same list as FAQPage JSON-LD. */
 export function A12Faq({ page, faqs }: { page: A12Page; faqs: { q: string; a: string }[] }) {
   return (
-    <CourseSection id="faq" className="bg-white">
+    <CourseSection id="faq" className="defer-render bg-white">
       <SectionHeading id="faq-title" eyebrow="FAQ" title={<>Frequently asked <span className="text-gradient">questions</span></>} />
       <FaqSearch faqs={faqs} askHref={waLink(`Hi TechCADD, I have a question about the ${page.title}: `)} />
     </CourseSection>

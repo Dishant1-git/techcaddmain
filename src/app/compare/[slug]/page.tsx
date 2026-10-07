@@ -1,4 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
+import { ogImages } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -20,9 +21,9 @@ export async function generateMetadata({ params }: PageProps<"/compare/[slug]">)
   const { slug } = await params;
   const p = findPair(slug);
   if (!p) return {};
-  const title = `${shortName(p.a)} vs ${shortName(p.b)} — Which Course Should You Choose?`;
+  const title = `${shortName(p.a)} vs ${shortName(p.b)}: Which Course to Choose?`;
   const description = `Side-by-side comparison of ${p.a.title} and ${p.b.title}: duration, level, tools, projects and careers.`;
-  return { title, description, alternates: { canonical: `/compare/${p.slug}` }, openGraph: { title, description, url: `/compare/${p.slug}` } };
+  return { title, description, alternates: { canonical: `/compare/${p.slug}` }, openGraph: { title, description, url: `/compare/${p.slug}`, images: ogImages } };
 }
 
 const rows: { label: string; get: (c: CoursePage) => ReactNode }[] = [

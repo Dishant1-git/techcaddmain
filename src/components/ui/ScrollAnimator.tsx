@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * ONE global IntersectionObserver for the whole site (mounted in layout.tsx) — keeps client JS tiny.
@@ -9,10 +9,11 @@ import { useEffect } from "react";
  *  - [data-count]   → animated number counter (see ui/Counter.tsx)
  *  - Typewriter     → the highlighted words of every h1/h2 (.text-gradient) are "written" when scrolled into view;
  *                     [data-type-words="a|b|c"] types, deletes and cycles through phrases (home hero)
- *  - Sets --scroll-progress on <html> for the top progress bar
+ *  - Scales the top progress bar (written straight to the bar: a custom property on <html> would restyle the whole page every frame)
  */
 export function ScrollAnimator() {
   const pathname = usePathname();
+  const bar = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -127,7 +128,7 @@ export function ScrollAnimator() {
       ticking = true;
       requestAnimationFrame(() => {
         const max = root.scrollHeight - window.innerHeight;
-        root.style.setProperty("--scroll-progress", String(max > 0 ? window.scrollY / max : 0));
+        if (bar.current) bar.current.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
         ticking = false;
       });
     };
@@ -143,9 +144,10 @@ export function ScrollAnimator() {
 
   return (
     <div
+      ref={bar}
       aria-hidden
       className="pointer-events-none fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-accent-500"
-      style={{ transform: "scaleX(var(--scroll-progress, 0))" }}
+      style={{ transform: "scaleX(0)" }}
     />
   );
 }

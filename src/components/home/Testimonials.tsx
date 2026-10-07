@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { BadgeCheck, Quote, Star } from "lucide-react";
+import { BadgeCheck, Quote } from "lucide-react";
 import { site, testimonials } from "@/data/site";
 import { delay } from "@/components/ui/SectionHeading";
 
@@ -17,10 +17,8 @@ function GoogleG({ className }: { className?: string }) {
   );
 }
 
-const Stars = ({ className = "size-4" }: { className?: string }) => (
-  <span className="flex gap-0.5 text-accent-500" aria-hidden>
-    {Array.from({ length: 5 }, (_, k) => <Star key={k} className={`${className} fill-current`} />)}
-  </span>
+const Stars = ({ className = "text-base" }: { className?: string }) => (
+  <span className={`${className} leading-none tracking-[0.12em] text-accent-500`} aria-hidden>★★★★★</span>
 );
 
 type Story = (typeof testimonials)[number];
@@ -71,7 +69,7 @@ const rowB = [...testimonials.slice(half), ...testimonials.slice(0, half)];
 /** Student stories: centred heading + Google rating pill, then two full-width rows sliding in opposite directions. */
 export function Testimonials() {
   return (
-    <section id="testimonials" className="section bg-slate-50">
+    <section id="testimonials" className="section defer-render bg-slate-50">
       <div className="container-x text-center">
         <p data-reveal="up" className="flex items-center justify-center gap-3 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-brand-600">
           <span className="h-px w-8 bg-brand-600" aria-hidden /> Student stories

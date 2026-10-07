@@ -47,7 +47,7 @@ export function CpWhyProgram({ course }: { course: CoursePage }) {
   const copy = course.copy?.whyProgram;
   if (!copy) return null;
   return (
-    <CourseSection id="why-program" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="why-program" className="defer-render bg-neu" overflow="overflow-x-clip">
       <SectionHeading id="why-program-title" eyebrow={copy.eyebrow} title={copy.title} text={copy.intro} />
       <Points points={copy.points} />
       {copy.outro && <p data-reveal="up" className="mx-auto mt-10 max-w-3xl text-center text-lg text-ink-700">{copy.outro}</p>}
@@ -59,7 +59,7 @@ export function CpWhy({ course }: { course: CoursePage }) {
   const copy = course.copy?.whyUs;
   if (copy) {
     return (
-      <CourseSection id="why" className="bg-neu" overflow="overflow-x-clip">
+      <CourseSection id="why" className="defer-render bg-neu" overflow="overflow-x-clip">
         <SectionHeading id="why-title" eyebrow={copy.eyebrow} title={copy.title} text={copy.intro} />
         <Points points={copy.points} />
         {copy.outro && <p data-reveal="up" className="mx-auto mt-10 max-w-3xl text-center text-lg text-ink-700">{copy.outro}</p>}
@@ -67,7 +67,7 @@ export function CpWhy({ course }: { course: CoursePage }) {
     );
   }
   return (
-    <CourseSection id="why" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="why" className="defer-render bg-neu" overflow="overflow-x-clip">
       <SectionHeading
         id="why-title"
         eyebrow="Why TechCADD"
@@ -135,7 +135,7 @@ const cell = (v: boolean | string) =>
 export function CpTracks({ course }: { course: CoursePage }) {
   const { columns, rows } = courseCommon.tracks;
   return (
-    <CourseSection id="tracks" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="tracks" className="defer-render bg-neu" overflow="overflow-x-clip">
       <SectionHeading
         id="tracks-title"
         eyebrow="Duration, Mode & Batches"
@@ -201,7 +201,7 @@ export function CpTracks({ course }: { course: CoursePage }) {
 
 export function CpCertification({ course }: { course: CoursePage }) {
   return (
-    <CourseSection id="certification" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="certification" className="defer-render bg-neu" overflow="overflow-x-clip">
       <div className="grid items-center gap-14 lg:grid-cols-2">
         <div className="min-w-0">
           <SectionHeading
@@ -244,7 +244,7 @@ export function CpReviews({ course }: { course: CoursePage }) {
   const copy = course.copy?.reviews;
   if (copy) {
     return (
-      <CourseSection id="reviews" className="bg-neu" overflow="overflow-x-clip">
+      <CourseSection id="reviews" className="defer-render bg-neu" overflow="overflow-x-clip">
         <SectionHeading id="reviews-title" align="left" eyebrow="Student Reviews" title={copy.title} />
         <div data-reveal="up" className="mt-4">
           <SnapCarousel label="Student reviews" itemName="review">
@@ -280,7 +280,7 @@ export function CpReviews({ course }: { course: CoursePage }) {
   }
   if (testimonials.length === 0) return null;
   return (
-    <CourseSection id="reviews" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="reviews" className="defer-render bg-neu" overflow="overflow-x-clip">
       <SectionHeading
         id="reviews-title"
         align="left"
@@ -318,7 +318,7 @@ export function CpReviews({ course }: { course: CoursePage }) {
 
 export function CpFaq({ course, faqs }: { course: CoursePage; faqs: { q: string; a: string }[] }) {
   return (
-    <CourseSection id="faq" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="faq" className="defer-render bg-neu" overflow="overflow-x-clip">
       <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <SectionHeading
@@ -363,10 +363,10 @@ export function CpFaq({ course, faqs }: { course: CoursePage; faqs: { q: string;
   );
 }
 
-export function CpRelated({ courses }: { courses: CoursePage[] }) {
+export function CpRelated({ courses, more = [] }: { courses: CoursePage[]; /** Links to the training / After 12th programs and comparison pages of this subject. */ more?: { label: string; href: string }[] }) {
   if (courses.length === 0) return null;
   return (
-    <CourseSection id="related" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="related" className="defer-render bg-neu" overflow="overflow-x-clip">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
           id="related-title"
@@ -383,6 +383,14 @@ export function CpRelated({ courses }: { courses: CoursePage[] }) {
           </li>
         ))}
       </ul>
+      {more.length > 0 && (
+        <nav aria-label="More on this subject" className="mt-10 flex flex-wrap items-center gap-3 text-sm">
+          <span className="font-semibold text-ink-900">Also see:</span>
+          {more.map((l) => (
+            <Link key={l.href} href={l.href} className="neu-sm !rounded-full px-4 py-2 text-ink-700 transition-colors hover:text-brand-700">{l.label}</Link>
+          ))}
+        </nav>
+      )}
     </CourseSection>
   );
 }

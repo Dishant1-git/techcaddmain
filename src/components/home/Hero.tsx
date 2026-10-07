@@ -76,7 +76,7 @@ export function Hero() {
           </div>
 
           {/* Terminal strip: the command types itself, then the result line appears */}
-          <div style={at(450)} className={`${enter} mt-10 max-w-md rounded-xl border border-white/10 bg-white/[0.04] p-4 font-mono text-[13px] backdrop-blur-sm`} aria-hidden>
+          <div style={at(450)} className={`${enter} mt-10 max-w-md rounded-xl border border-white/10 bg-white/[0.04] p-4 font-mono text-[13px]`} aria-hidden>
             <p className="flex items-center text-ink-300">
               <span className="mr-2 text-emerald-300">~ $</span>
               <span className="hero-type" style={{ "--n": command.length } as CSSProperties}>{command}</span>
@@ -142,7 +142,7 @@ export function Hero() {
               <Link
                 href={n.cat.href}
                 style={at(i * 700)}
-                className="group flex animate-float items-center gap-2 whitespace-nowrap rounded-xl border border-white/10 bg-ink-900/90 p-1.5 pr-3 shadow-xl backdrop-blur-md transition-colors hover:border-brand-400/60 motion-reduce:animate-none sm:gap-3 sm:p-2 sm:pr-4"
+                className="group flex animate-float items-center gap-2 whitespace-nowrap rounded-xl border border-white/10 bg-ink-900/95 p-1.5 pr-3 shadow-xl transition-colors hover:border-brand-400/60 motion-reduce:animate-none sm:gap-3 sm:p-2 sm:pr-4"
               >
                 <span className="grid size-8 place-items-center rounded-lg bg-brand-600/20 text-brand-300 transition-colors group-hover:bg-brand-600 group-hover:text-white sm:size-10">
                   <Icon name={n.cat.icon} className="size-4 sm:size-5" />

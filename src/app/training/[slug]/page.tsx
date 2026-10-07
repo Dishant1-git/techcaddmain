@@ -6,6 +6,9 @@ import { TrNav, type TrNavItem } from "@/components/training/TrNav";
 import { TrHero } from "@/components/training/TrHero";
 import { TrEligibility, TrOverview, TrStats, TrSyllabus, TrTools, TrTracks, TrWhyNow } from "@/components/training/TrLearn";
 import { TrCertification, TrCompare, TrLoop, TrProjects, TrScope, TrWhy } from "@/components/training/TrProof";
+import { longFormFor } from "@/data/long-form";
+import { clip, ogImages } from "@/lib/seo";
+import { LfRegions, LfWhy } from "@/components/long-form/LongFormSections";
 import { TrEnquire, TrFaq, TrModes, TrRelated, TrReviews, TrStart } from "@/components/training/TrConnect";
 
 /**
@@ -23,13 +26,13 @@ export async function generateMetadata({ params }: PageProps<"/training/[slug]">
   const { slug } = await params;
   const c = trainingPages.find((x) => x.slug === slug);
   if (!c) return {};
-  const title = `${c.title} in Jalandhar — Live Projects, Internship & Placement`;
+  const title = `${c.title} in Jalandhar: Projects & Internship`;
   const description = `${c.tagline} Industrial training at ${site.name} Jalandhar with live client projects, an internship letter and placement assistance. 3, 6 and 9-month tracks; classroom & live online.`;
   return {
     title,
-    description,
+    description: clip(description),
     alternates: { canonical: `/training/${c.slug}` },
-    openGraph: { title, description: c.tagline, url: `/training/${c.slug}` },
+    openGraph: { title, description: c.tagline, url: `/training/${c.slug}`, images: ogImages },
   };
 }
 
@@ -55,7 +58,9 @@ export default async function TrainingPage({ params }: PageProps<"/training/[slu
   const course = trainingPages.find((c) => c.slug === slug);
   if (!course) notFound();
 
-  const faqs = [...course.faqs, ...trainingCommon.faqs].filter((f, i, all) => all.findIndex((x) => x.q === f.q) === i);
+  // Client long-form copy for this subject (states, why this program, extra FAQs); undefined for programs without one.
+  const longForm = longFormFor(course.slug);
+  const faqs = [...course.faqs, ...(longForm?.faqs ?? []), ...trainingCommon.faqs].filter((f, i, all) => all.findIndex((x) => x.q === f.q) === i);
   // Six related cards: this program's `related` list first, then other programs to fill.
   const picked = course.related.map((s) => trainingPages.find((c) => c.slug === s)).filter((c) => c !== undefined);
   const related = [...picked, ...trainingPages.filter((c) => c.slug !== course.slug && !picked.includes(c))].slice(0, 6);
@@ -111,6 +116,8 @@ export default async function TrainingPage({ params }: PageProps<"/training/[slu
       <TrLoop />
       <TrWhy />
       <TrCompare />
+      {longForm && <LfWhy data={longForm} />}
+      {longForm && <LfRegions data={longForm} />}
       <TrReviews />
       <TrModes />
       <TrFaq course={course} faqs={faqs} />

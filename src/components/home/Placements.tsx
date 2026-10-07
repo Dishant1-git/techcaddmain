@@ -12,7 +12,7 @@ const support = [
 
 export function Placements() {
   return (
-    <section id="placements" className="section relative overflow-hidden bg-ink-950 text-white">
+    <section id="placements" className="section defer-render relative overflow-hidden bg-ink-950 text-white">
       <div className="absolute -right-40 top-20 size-[30rem] rounded-full bg-accent-500/15 blur-[120px]" aria-hidden />
       <div className="absolute -left-40 bottom-0 size-[30rem] rounded-full bg-brand-600/25 blur-[120px]" aria-hidden />
       <div className="container-x relative">

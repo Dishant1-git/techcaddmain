@@ -2,11 +2,30 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { categories } from "@/data/site";
 import { Icon } from "@/components/ui/Icon";
+import type { CSSProperties } from "react";
 import { delay } from "@/components/ui/SectionHeading";
 
 const total = categories.reduce((n, c) => n + c.courses, 0);
 
-/** Learning tracks as a hairline "console" grid: numbered cells, mono paths, stack tags; a cell inverts to navy on hover. */
+/** Where card `i` sits relative to the deck's resting spot, in card widths/heights: grid centre at lg (4 columns), top-centre at sm (2 columns). */
+const deck = (i: number): CSSProperties => {
+  const rows4 = Math.ceil(categories.length / 4);
+  return {
+    ...delay(i % 4),
+    "--i": i,
+    "--mid": (categories.length - 1) / 2,
+    "--x4": 1.5 - (i % 4),
+    "--y4": (rows4 - 1) / 2 - Math.floor(i / 4),
+    "--x2": 0.5 - (i % 2),
+    "--y2": -Math.floor(i / 2),
+  } as CSSProperties;
+};
+
+/**
+ * Learning tracks as a hairline "console" grid: numbered cells, mono paths, stack tags; a cell inverts to navy on hover.
+ * Scroll-driven entrance (`.deck` / `.deck-card` in globals.css): the cells start as one tilted 3D deck and are dealt
+ * out to their grid positions as the section scrolls in; browsers without scroll timelines fall back to data-reveal.
+ */
 export function Categories() {
   return (
     <section id="categories" className="section relative isolate bg-white">
@@ -41,9 +60,9 @@ export function Categories() {
         </div>
 
         {/* gap-px over a tinted background draws the shared hairlines between cells */}
-        <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-ink-950/10 bg-ink-950/10 shadow-[0_30px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="deck mt-12 grid gap-px overflow-hidden rounded-3xl border border-ink-950/10 bg-ink-950/10 shadow-[0_30px_60px_-30px_rgba(15,23,42,0.25)] sm:grid-cols-2 lg:grid-cols-4">
           {categories.map((c, i) => (
-            <div key={c.id} data-reveal="up" style={delay(i % 4)} className="bg-white">
+            <div key={c.id} data-reveal="up" style={deck(i)} className="deck-card bg-white">
               <Link
                 href={c.href}
                 className="group relative flex h-full flex-col p-7 transition-colors duration-300 hover:bg-ink-950 focus-visible:bg-ink-950"

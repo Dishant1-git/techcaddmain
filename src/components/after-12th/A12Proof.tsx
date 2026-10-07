@@ -12,7 +12,7 @@ const num = (i: number) => String(i + 1).padStart(2, "0");
 export function A12Certification({ page }: { page: A12Page }) {
   const { tier, subject } = page;
   return (
-    <CourseSection id="certification" overflow="overflow-x-clip" className="bg-soft" decor={<SoftBlobs flip />}>
+    <CourseSection id="certification" overflow="overflow-x-clip" className="defer-render bg-soft" decor={<SoftBlobs flip />}>
       <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
         <div className="a12-tilt-l">
           {/* Decorative mock-up — the real facts are in the list beside it. */}
@@ -153,7 +153,7 @@ export function A12Loop() {
 /** Why techcadd — neumorphic bento: one tall intro tile + four reason tiles. */
 export function A12Why() {
   return (
-    <CourseSection id="why" overflow="overflow-x-clip" className="bg-neu">
+    <CourseSection id="why" overflow="overflow-x-clip" className="defer-render bg-neu">
       <div className="grid gap-7 lg:grid-cols-3">
         <div className="extrude">
           <div className="neu flex h-full flex-col justify-between p-8">

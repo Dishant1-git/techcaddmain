@@ -17,7 +17,7 @@ export function GuidanceSection({
 }: { headingLevel?: "h1" | "h2"; showViewAll?: boolean }) {
   const Heading = headingLevel;
   return (
-    <section id="guidance" className="section relative isolate bg-brand-50/50">
+    <section id="guidance" className="section defer-render relative isolate bg-brand-50/50">
       <div className="bg-grid-light absolute inset-0 -z-10 opacity-50" aria-hidden />
 
       <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">

@@ -15,7 +15,7 @@ const gradients = [
 
 export function Blog() {
   return (
-    <section id="blog" className="section bg-white">
+    <section id="blog" className="section defer-render bg-white">
       <div className="container-x">
         <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
           <SectionHeading

@@ -5,6 +5,7 @@ import { AiProgram } from "@/components/home/AiProgram";
 import { Courses } from "@/components/home/Courses";
 import { HowItWorks } from "@/components/home/HowItWorks";
 import { WhyUs } from "@/components/home/WhyUs";
+import { Difference } from "@/components/home/Difference";
 import { Programs } from "@/components/home/Programs";
 import { Placements } from "@/components/home/Placements";
 import { Branches } from "@/components/home/Branches";
@@ -49,6 +50,7 @@ export default function HomePage() {
       <Courses />
       <HowItWorks />
       <WhyUs />
+      <Difference />
       <Programs />
       <Placements />
       <Branches />

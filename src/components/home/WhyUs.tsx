@@ -7,7 +7,7 @@ import { delay } from "@/components/ui/SectionHeading";
 /** Why TechCADD: sticky intro column (left) + numbered reason rows with hairlines (right). */
 export function WhyUs() {
   return (
-    <section id="why-us" className="section bg-white">
+    <section id="why-us" className="section defer-render bg-white">
       <div className="container-x grid gap-14 lg:grid-cols-12 lg:gap-16">
         {/* Intro — sticks while the reasons scroll past (desktop) */}
         <div className="lg:col-span-5">

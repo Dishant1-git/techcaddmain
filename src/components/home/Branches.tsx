@@ -6,7 +6,7 @@ import { BranchExplorer } from "./BranchExplorer";
 /** Branch network: heading + BranchExplorer (detail card on the left follows the branch picked in the directory on the right). */
 export function Branches() {
   return (
-    <section id="branches" className="section relative isolate bg-white">
+    <section id="branches" className="section defer-render relative isolate bg-white">
       <div className="bg-grid-light absolute inset-0 -z-10 opacity-50" aria-hidden />
 
       <div className="container-x">

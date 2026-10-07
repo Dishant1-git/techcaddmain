@@ -22,14 +22,14 @@ const tabs: OrbitTab[] = techStack.map((cat) => ({
 
 export function Technologies() {
   return (
-    <section id="technologies" className="section overflow-hidden bg-brand-50/50">
+    <section id="technologies" className="section defer-render overflow-hidden bg-brand-50/50">
       <div className="container-x">
         <SectionHeading
           eyebrow="Tools & Technologies"
           title={<>Technologies We <span className="text-gradient">Master</span></>}
           text="From AI to Cloud, from Web Development to CAD/CAM — we train you on the latest, most in-demand technologies employers hire for."
         />
-        <div className="mt-8 flex justify-center" data-reveal="up">
+        <div className="mt-6 flex justify-center" data-reveal="up">
           <Link href="/#courses" className="btn-brand group !py-2.5 !pl-6 !pr-2.5">
             Explore all technologies
             <span className="grid size-8 place-items-center rounded-full bg-white/20 transition-transform group-hover:translate-x-0.5">

@@ -10,7 +10,7 @@ const [titleLead] = about.title.split(about.highlight);
 /** Corporate-style About: editorial intro, statement + photo panel, hairline stat band, numbered pillars. */
 export function About() {
   return (
-    <section id="about" className="section bg-white">
+    <section id="about" className="section defer-render bg-white">
       <div className="container-x">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Copy */}

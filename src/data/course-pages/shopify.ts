@@ -1,0 +1,291 @@
+import type { CoursePage } from "./types";
+
+/* /courses/shopify — long-form landing copy supplied by the client (Google Doc "…courses" file), used as given.
+   Left out on purpose: the student reviews (the document marks them as sample / illustrative drafts, so this page keeps
+   the shared testimonials — add `copy.reviews` when real, consented reviews exist), the SEO/GEO strategy stage, the
+   optional trust line outside the "Why Choose Techcadd" section, and the CTA's course-details table and form fields.
+   Fields the document does not cover (tagline, level, duration, eligibility, projects, whyNow, related) are the previous
+   values — the document says to confirm duration and fees with Techcadd. The "North India's first AI-powered and Robotics
+   learning centre" line is a first/only claim: keep only if it can be supported. */
+
+const roles = ["Shopify Store Manager", "E-commerce Executive", "Shopify Store Setup Specialist", "Shopify Theme Customisation Specialist", "Junior Shopify Developer", "E-commerce Website Assistant", "Freelance Shopify Specialist", "E-commerce Operations Executive", "Digital Commerce Assistant"];
+
+export const shopify: CoursePage = {
+  slug: "shopify",
+  title: "Shopify E-commerce Course",
+  navLabel: "Shopify",
+  group: "marketing",
+  icon: "ShoppingCart",
+  tagline:
+    "Set up, design and grow online stores with Shopify, from products, payments and themes to ads, SEO and dropshipping or export selling.",
+  level: "Beginner",
+  duration: "2–3 Months",
+  eligibility: "12th pass or above; entrepreneurs and business owners welcome",
+  overview: [
+    "A Shopify Course introduces learners to the practical skills needed to create, customise, manage, and maintain e-commerce stores using Shopify. The learning journey can cover Shopify store setup, themes, product management, collections, navigation, payments, shipping settings, basic store customisation, apps, and essential e-commerce practices.",
+    "The course can be useful for graduates, students, working professionals, freelancers, business owners, aspiring e-commerce professionals, and career changers who want to develop practical online-store skills. Beginners can also start with fundamental Shopify concepts before progressing towards store customisation and more advanced workflows.",
+    "For learners in Punjab, Shopify can be particularly relevant to people interested in e-commerce, retail, exports, digital businesses, and online entrepreneurship. Learners looking for offline learning can explore the Techcadd centre in Jalandhar, Punjab, while online learning can provide access for students and professionals in other locations.",
+    "The exact course duration, fees, curriculum depth, certification arrangements, and tools covered should be confirmed before enrolment.",
+  ],
+  gains: [
+    "The ability to build a complete, professional Shopify store from scratch",
+    "Skills in product setup, themes, apps, payments, shipping and taxes",
+    "Store marketing with Google Shopping, Meta Ads, email and SEO",
+    "Understanding of dropshipping, print on demand and export selling models",
+    "TechCADD certification, a live store portfolio and placement assistance",
+  ],
+  syllabus: [
+    {
+      title: "Module 1: E-Commerce and Shopify Fundamentals",
+      summary: "Learners begin by understanding what e-commerce websites are, how online stores operate, and where Shopify fits into the e-commerce ecosystem. This foundation helps students understand the relationship between storefronts, products, customers, orders, payments, shipping, marketing, and store management.",
+      topics: [],
+    },
+    {
+      title: "Module 2: Shopify Store Setup",
+      summary: "Learners can understand the basic process of setting up a Shopify store, navigating the initial configuration, organising essential settings, and preparing the store structure. The focus is on understanding how an online store moves from initial setup toward a functional customer-facing website.",
+      topics: [],
+    },
+    {
+      title: "Module 3: Shopify Admin Dashboard",
+      summary: "The Shopify Admin area is central to store management. Learners can become familiar with its navigation and understand where products, orders, customers, content, themes, applications, settings, and reports are managed.",
+      topics: [],
+    },
+    {
+      title: "Module 4: Product and Collection Management",
+      summary: "Product organisation is an important Shopify skill. Learners can work with product information, images, descriptions, pricing, inventory-related information, variants, and collections. They can also understand how logical product organisation improves the browsing experience.",
+      topics: [],
+    },
+    {
+      title: "Module 5: Pages, Menus and Navigation",
+      summary: "A professional online store needs clear information architecture. Learners can understand how pages, menus, categories, and navigation elements help visitors move through a store. This includes organising important information so customers can find products and supporting content more easily.",
+      topics: [],
+    },
+    {
+      title: "Module 6: Shopify Themes and Storefront Design",
+      summary: "Themes determine much of a Shopify storefront's visual structure. Learners can explore theme selection, layout, sections, templates, typography, images, content blocks, and responsive presentation. The objective is to understand how design choices influence usability and the overall shopping experience.",
+      topics: [],
+    },
+    {
+      title: "Module 7: Theme Customisation",
+      summary: "Basic theme customisation can include modifying sections, layouts, content, images, colours, typography, and other available theme settings. Learners interested in a more technical path can progress towards deeper theme development using Shopify Liquid along with HTML, CSS, and JavaScript.",
+      topics: [],
+    },
+    {
+      title: "Module 8: Domain, Shipping and Payment Configuration",
+      summary: "A Shopify learning path can introduce the configuration concepts behind domains, shipping settings, and payment options. Learners should understand that available payment and shipping options can depend on the business, location, provider, and Shopify configuration rather than assuming that every option is available in every situation.",
+      topics: [],
+    },
+    {
+      title: "Module 9: Orders and Customer Management",
+      summary: "Learners can understand how orders move through an e-commerce workflow and how customer information is managed. This provides practical knowledge of the operational side of running an online store rather than focusing only on website design.",
+      topics: [],
+    },
+    {
+      title: "Module 10: Shopify Apps and Integrations",
+      summary: "Shopify Apps can extend store functionality. Learners can understand how applications may be used for areas such as marketing, customer support, reviews, inventory, analytics, fulfilment, and other business requirements. App selection should be based on actual business needs, compatibility, cost, and performance considerations.",
+      topics: [],
+    },
+    {
+      title: "Module 11: Shopify SEO and E-Commerce Content Basics",
+      summary: "Learners can develop an understanding of SEO fundamentals relevant to online stores, including product titles, descriptions, page structure, collection organisation, useful content, and search-friendly information. Shopify SEO can be strengthened further by combining platform knowledge with broader SEO and content-marketing skills.",
+      topics: [],
+    },
+    {
+      title: "Module 12: Analytics and Store Performance Basics",
+      summary: "Understanding store performance is important for e-commerce decision-making. Learners can become familiar with Shopify analytics and reports and learn how basic performance information can help evaluate products, orders, customer behaviour, and store activity.",
+      topics: [],
+    },
+    {
+      title: "Module 13: Basic Shopify Development and Customisation",
+      summary: "Students who want to follow a technical Shopify career path can explore Liquid and supporting web technologies. Shopify Liquid, HTML, CSS, and JavaScript can be useful for deeper theme customisation and development. The amount of programming required depends on whether the learner is targeting store management, theme customisation, or development-oriented roles.",
+      topics: [],
+    },
+    {
+      title: "Module 14: Store Testing and Launch Preparation",
+      summary: "Before making a store operational, learners should understand the importance of testing navigation, product information, forms, checkout-related processes, responsive layouts, links, content, and other customer-facing elements. A launch checklist helps reduce avoidable errors and improves the overall store experience.",
+      topics: [],
+    },
+  ],
+  tools: [
+    "Shopify Admin",
+    "Shopify Themes",
+    "Shopify Theme Editor",
+    "Shopify Liquid",
+    "HTML and CSS",
+    "JavaScript",
+    "Shopify Apps",
+    "Shopify Analytics and Reports",
+    "Domain management tools",
+    "Shipping and payment configuration interfaces",
+  ],
+  projects: [
+    {
+      title: "Fashion or Lifestyle Store",
+      text: "Build a complete branded store with collections, variants, custom theme sections and policies.",
+      tags: ["Shopify", "Theme", "Branding"],
+    },
+    {
+      title: "Dropshipping Store",
+      text: "Set up a supplier-connected store using DSers and automate order forwarding.",
+      tags: ["Dropshipping", "Automation", "Apps"],
+    },
+    {
+      title: "Export-Ready Store",
+      text: "Configure multi-currency selling and international shipping for a Punjab-made product line.",
+      tags: ["Export", "Markets", "Shipping"],
+    },
+    {
+      title: "Checkout and Payment Setup",
+      text: "Integrate Razorpay, UPI and cash on delivery with GST-ready invoices and tested orders.",
+      tags: ["Payments", "GST", "Checkout"],
+    },
+    {
+      title: "Store Ad Campaigns",
+      text: "Connect the catalogue to Google Merchant Center and Meta, then launch Shopping and Advantage+ campaigns.",
+      tags: ["Google Shopping", "Meta Ads", "Catalogue"],
+    },
+    {
+      title: "Email Retention Flows",
+      text: "Create welcome, abandoned cart and post-purchase flows in Klaviyo and review their results.",
+      tags: ["Klaviyo", "Email", "Retention"],
+    },
+  ],
+  // Shown as role chips on the page (via copy.careers.roles); the compare pages read the role names from here.
+  careers: roles.map((role) => ({ role, work: "", hirers: "" })),
+  whyNow: [
+    "Punjab's textile, sports goods, hosiery and handicraft makers can now sell directly to customers in India and abroad, and Shopify gives them a ready platform if they have someone who can run it.",
+    "Shopify Markets and social commerce tools like Meta catalogues have made cross-border and mobile-first selling easier than ever, which raises demand for trained store builders.",
+  ],
+  faqs: [
+    { q: "What is a Shopify course?", a: "A Shopify course teaches learners how to create, customise, manage, and maintain an online store using Shopify. Depending on the curriculum, it can cover store setup, products, collections, themes, navigation, apps, e-commerce operations, SEO basics, analytics, and technical customisation." },
+    { q: "Is Shopify suitable for beginners?", a: "Yes. Beginners can start with Shopify fundamentals without necessarily having advanced programming knowledge. They can first learn store management and gradually move toward themes, customisation, Liquid, HTML, CSS, and JavaScript if they want a more technical career path." },
+    { q: "What can I learn in a Shopify course?", a: "A Shopify learning path can cover: Shopify store setup, Admin dashboard, Products and collections, Store pages and navigation, Themes and storefront design, Theme customisation, Orders and customer management, Apps and integrations, Shipping and payment configuration, SEO fundamentals, Analytics and reports, Shopify Liquid, Basic web technologies, Store testing and launch preparation. The exact depth of each topic depends on the final course curriculum." },
+    { q: "Do I need coding knowledge to learn Shopify?", a: "No, basic Shopify store management does not require advanced coding knowledge. However, learners who want to specialise in Shopify theme development or technical customisation can benefit from HTML, CSS, JavaScript, and Shopify Liquid." },
+    { q: "Can I learn Shopify online?", a: "Yes. The Shopify course is available in Online + Offline learning mode. Online learning can be useful for students and professionals who are not able to attend classes physically." },
+    { q: "Is Shopify useful for freelancing?", a: "Yes, Shopify skills can be used for freelance services such as store setup, product management, theme customisation, app configuration, maintenance, and e-commerce support. However, freelancing success depends on practical skills, portfolio quality, communication, client acquisition, and service quality." },
+    { q: "What career opportunities are available after learning Shopify?", a: "Possible career directions include: Shopify Store Manager, E-commerce Executive, Shopify Store Setup Specialist, Shopify Theme Customisation Specialist, Junior Shopify Developer, E-commerce Website Assistant, Freelance Shopify Specialist, E-commerce Operations Executive, Digital Commerce Assistant. Career progression depends on the learner's practical skills and specialisation." },
+    { q: "What is the career scope of Shopify in Punjab?", a: "Shopify skills can be relevant to retail businesses, exporters, D2C brands, local businesses, e-commerce companies, agencies, and businesses that want to develop or manage online stores. Learners can combine Shopify with SEO, digital marketing, design, and analytics to build a broader skill set." },
+    { q: "Is a Shopify course useful for learners in Haryana?", a: "Yes. Shopify knowledge can be useful for learners interested in e-commerce, digital businesses, agencies, retail, logistics-related businesses, and online brands. Commercial areas such as Gurugram can also offer opportunities connected with digital commerce and technology services." },
+    { q: "Can students in Chandigarh learn Shopify online?", a: "Yes. Learners in Chandigarh can choose online learning if attending an offline centre is inconvenient. Shopify can be useful alongside skills such as digital marketing, SEO, web design, and e-commerce operations." },
+    { q: "What are Shopify opportunities in Delhi NCR?", a: "Delhi NCR has a broad ecosystem of e-commerce companies, D2C brands, agencies, retailers, and digital businesses. Shopify skills can be relevant to store management, e-commerce operations, theme customisation, and technical Shopify roles." },
+    { q: "Can learners from Rajasthan use Shopify skills for local businesses?", a: "Yes. Shopify can be useful for businesses selling products such as jewellery, handicrafts, textiles, lifestyle products, and specialty goods. A strong online storefront can provide a digital sales channel, although business results depend on product quality, marketing, customer demand, operations, and other factors." },
+    { q: "Is Shopify useful for learners in Uttar Pradesh?", a: "Yes. Shopify skills can support learners interested in e-commerce, retail, electronics, online brands, agencies, and digital businesses. Cities such as Noida and Lucknow can provide different opportunities related to digital commerce and technology." },
+    { q: "What tools are used when learning Shopify?", a: "Depending on the course depth, learners may work with: Shopify Admin, Shopify Theme Editor, Shopify Themes, Shopify Liquid, Shopify Apps, Shopify Analytics, HTML, CSS, JavaScript, Domain and store configuration tools. Not every learner needs all of these tools; the requirements depend on the chosen Shopify career path." },
+    { q: "Can Shopify skills be combined with SEO and digital marketing?", a: "Yes. Shopify and digital marketing can complement each other. A learner who understands both areas can work on store structure, product content, SEO, online visibility, customer acquisition, and e-commerce performance." },
+    { q: "Does learning Shopify guarantee a job or salary?", a: "No. A Shopify course cannot guarantee a job, salary, clients, or business income. Career outcomes depend on practical ability, experience, portfolio quality, location, employer requirements, communication skills, and the learner's ability to continue developing relevant skills." },
+    { q: "Can a Shopify learner become a Shopify developer?", a: "Yes, but a development-focused career requires deeper technical skills. Learners can progress from Shopify fundamentals into theme customisation and then develop stronger knowledge of Liquid, HTML, CSS, JavaScript, and related web-development concepts." },
+    { q: "Is Shopify useful for business owners?", a: "Yes. Business owners can use Shopify knowledge to better understand their online store, product organisation, storefront structure, customer experience, applications, and basic e-commerce operations. They can also use this knowledge when working with developers, designers, marketers, or agencies." },
+    { q: "Can 12th-pass students learn Shopify?", a: "Yes. A 12th-pass learner can begin with Shopify fundamentals and build practical e-commerce skills. Stronger technical roles may require additional learning in web development and related technologies." },
+    { q: "What should I learn after completing a Shopify course?", a: "After developing Shopify fundamentals, learners can specialise according to their goals. Possible next steps include: Advanced Shopify theme customisation, Shopify Liquid, HTML, CSS and JavaScript, SEO, Digital marketing, E-commerce analytics, Conversion optimisation, E-commerce operations, Freelancing and portfolio development. A combination of Shopify with complementary digital skills can create a stronger professional profile." },
+  ],
+  related: ["wordpress", "digital-marketing", "google-ads"],
+  copy: {
+    heading: { title: "Shopify Course", highlight: "Online + Jalandhar", meta: "Shopify Course: Learn to Build and Manage Online Stores | techcadd" },
+    overview: { eyebrow: "Program Overview", title: "What the Shopify Course covers" },
+    syllabus: { eyebrow: "What You Will Learn & Tools Covered", title: "What You Will Learn in the Shopify Course" },
+    audience: {
+      eyebrow: "Who Can Do This Course",
+      title: "Who Can Do This Shopify Course?",
+      intro: "A Shopify course can be useful for people from different educational and professional backgrounds because Shopify combines website management, e-commerce, digital business, and online selling rather than requiring advanced programming as a starting point.",
+      items: [
+        { icon: "GraduationCap", title: "Graduates", text: "Graduates from commerce, management, computer applications, business, marketing, design, or other disciplines can learn Shopify to add an e-commerce skill to their existing profile. Shopify knowledge can complement interests in digital business, online retail, marketing, and website management." },
+        { icon: "Award", title: "Postgraduates", text: "Postgraduates who want to move towards digital commerce or strengthen their professional profile can use Shopify as a practical skill. Learners with backgrounds in management or business may find it particularly useful for understanding how online stores are structured and operated." },
+        { icon: "Briefcase", title: "Working Professionals", text: "Professionals already working in marketing, sales, retail, design, web services, or business operations can learn Shopify to expand their responsibilities. Understanding store management and e-commerce workflows can help professionals work more effectively with online business projects." },
+        { icon: "Shuffle", title: "Job Switchers", text: "People considering a move into e-commerce or web-related roles can use Shopify as one part of their upskilling journey. Learning store creation, product management, themes, apps, and basic customisation can provide a practical foundation before moving towards more specialised roles." },
+        { icon: "PenTool", title: "Freelancers", text: "Shopify can be relevant for freelancers who want to provide services to businesses that need online stores. Depending on their skill level, freelancers can develop services around store setup, theme customisation, product uploading, store management, basic optimisation, and ongoing e-commerce support." },
+        { icon: "Building2", title: "Business Owners", text: "Business owners can learn Shopify to better understand how their online store operates. Instead of relying entirely on others for routine store management, they can develop knowledge of products, collections, navigation, themes, orders, and other essential e-commerce workflows." },
+        { icon: "Rocket", title: "Career Changers", text: "A person moving from a non-technical or unrelated career can explore Shopify as an entry point into the digital commerce ecosystem. Because Shopify provides a structured platform for creating online stores, beginners can focus initially on store-building concepts before deciding whether to develop deeper technical skills." },
+        { icon: "Laptop", title: "Beginners", text: "Shopify can be suitable for beginners who want to understand e-commerce and online-store creation." },
+        { icon: "BookOpen", title: "12th-Pass Students", text: "Students who have completed 12th standard and have an interest in e-commerce, online businesses, digital marketing, or website creation can consider Shopify as an additional practical skill. However, building a strong long-term career may require combining Shopify with communication, business, marketing, design, or technical skills." },
+      ],
+      need: "Learners can start with basic concepts such as Shopify store structure, products, collections, themes, navigation, and settings before moving towards customisation and more advanced tasks.",
+    },
+    regions: {
+      eyebrow: "Learn from Anywhere",
+      title: "Learners From Across States",
+      intro: "",
+      items: [
+        { title: "Punjab", text: "Punjab has a strong business and trading environment, including retail, exports, manufacturing, and growing digital businesses. Learners can explore Shopify to understand how traditional businesses can establish or manage online selling channels." },
+        { title: "Haryana", text: "Learners from Haryana can connect Shopify skills with the region's e-commerce, logistics, automobile, retail, and technology-related business environment. The skill can be useful for people interested in supporting online businesses or building their own stores." },
+        { title: "Himachal Pradesh", text: "For learners in Himachal Pradesh, Shopify can be relevant to tourism-related products, local businesses, handicrafts, specialty products, and entrepreneurs who want to reach customers beyond their immediate geographical market through e-commerce." },
+        { title: "Chandigarh", text: "Learners from Chandigarh can explore Shopify alongside interests in IT, startups, marketing, BPO, and digital business. The platform can provide a practical route into e-commerce store management and online business operations." },
+        { title: "Delhi NCR", text: "Delhi NCR has a broad ecosystem of e-commerce, agencies, retail businesses, startups, media, and technology companies. Shopify skills can therefore complement learners interested in e-commerce services, online-store management, digital agencies, or entrepreneurial projects." },
+        { title: "Jammu & Kashmir", text: "Learners from Jammu & Kashmir can explore Shopify as a way to understand online selling for products such as handicrafts, specialty goods, and locally produced products. E-commerce skills can help learners understand how businesses can reach customers outside their local market." },
+        { title: "Uttarakhand", text: "Learners from Uttarakhand can apply Shopify knowledge to online business ideas connected with tourism, hospitality, local products, education, and other small-business opportunities. Online learning also makes the course accessible without requiring regular travel." },
+        { title: "Rajasthan", text: "Rajasthan has strong sectors such as handicrafts, jewellery, textiles, and tourism. Shopify skills can be relevant to learners interested in understanding how product-based businesses can present and sell products through online stores." },
+        { title: "Uttar Pradesh", text: "Learners from Uttar Pradesh can explore Shopify in connection with retail, e-commerce, electronics, small businesses, and digital entrepreneurship. The skill can also complement broader interests in digital marketing and website management." },
+      ],
+    },
+    whyProgram: {
+      eyebrow: "Why This Program",
+      title: "Why This Shopify Program?",
+      intro: "",
+      points: [
+        { title: "Build Practical E-Commerce Skills", text: "Shopify provides a practical environment for understanding how an online store is structured. Learners can become familiar with products, collections, navigation, themes, pages, store settings, and other components that form part of an e-commerce website." },
+        { title: "Understand Online Store Creation", text: "Learning Shopify can help learners understand the process of moving from an initial store idea towards a functioning online storefront. This includes organising products, selecting an appropriate theme, creating important pages, setting up navigation, and managing store content." },
+        { title: "Develop a Business-Oriented Technical Skill", text: "Shopify sits at the intersection of technology and business. Learners do not only work with a website interface; they also need to understand products, customers, online selling, store structure, and the overall e-commerce experience." },
+        { title: "Useful for Freelancing", text: "Shopify skills can create opportunities for freelancers to offer services to small businesses, entrepreneurs, and online sellers. Potential services may include store setup, product management, theme adjustments, store maintenance, and basic customisation, depending on the freelancer's expertise." },
+        { title: "Support E-Commerce Entrepreneurship", text: "Business owners and aspiring entrepreneurs can learn Shopify to better understand the technology behind their online store. This can make it easier to manage routine tasks and communicate effectively with designers, developers, marketers, and other professionals." },
+        { title: "Expand Existing Digital Skills", text: "Shopify becomes more valuable when combined with related skills such as digital marketing, SEO, content creation, graphic design, analytics, customer experience, and basic web technologies. Learners can therefore use Shopify as part of a broader digital skill set." },
+        { title: "Develop Website Customisation Knowledge", text: "As learners progress, they can explore themes, store layouts, sections, templates, and basic customisation. Those who want a more technical pathway can eventually explore Shopify-specific development concepts and technologies." },
+        { title: "Relevant to Multiple Industries", text: "Online selling is not limited to one industry. Shopify knowledge can be relevant to fashion, retail, handicrafts, jewellery, beauty products, home products, specialty goods, education-related businesses, and many other product-oriented businesses." },
+        { title: "Support Career Switching", text: "For someone moving towards digital commerce, Shopify offers a practical skill around which additional capabilities can be built. Learners can combine Shopify with marketing, SEO, design, analytics, customer service, or technical development depending on their preferred career direction." },
+        { title: "Build a Portfolio", text: "A practical Shopify learning journey can provide opportunities to create sample stores, product pages, navigation structures, theme customisations, and other e-commerce exercises. Such work can help learners demonstrate practical ability when applying for jobs, freelance projects, or business opportunities." },
+        { title: "Future Relevance of E-Commerce Skills", text: "E-commerce continues to connect technology with retail and entrepreneurship. Learning Shopify does not guarantee a particular job or income, but it can provide a useful foundation for people who want to develop skills around online stores and digital commerce. The strongest results generally come when Shopify knowledge is combined with practical experience and complementary skills such as digital marketing, SEO, design, analytics, customer experience, and basic web development." },
+      ],
+    },
+    whyUs: {
+      eyebrow: "Why Choose Techcadd",
+      title: "Why Choose Techcadd for the Shopify Course?",
+      intro: "",
+      points: [
+        { title: "Modern Technology Learning Environment", text: "North India's first AI-powered and Robotics learning centre provides a modern technology-oriented learning environment. For Shopify learners, this can complement practical digital-commerce education by encouraging exposure to current technology, structured learning, and hands-on digital skills. The focus remains on developing useful Shopify and e-commerce capabilities rather than treating the platform as only a theoretical subject." },
+        { title: "Practical Store-Building Approach", text: "Shopify is best understood by actually working with an online store structure. Learning can involve understanding store setup, adding products, creating collections, organising navigation, working with themes, and preparing a storefront for customers. This practical approach helps learners understand how different parts of an e-commerce website work together." },
+        { title: "E-Commerce-Focused Skill Development", text: "A Shopify course connects website management with e-commerce operations. Learners can develop an understanding of products, collections, storefront presentation, customer journeys, orders, shipping, payments, apps, and basic store performance. These skills can be useful for students who want to work with online businesses as well as people interested in developing their own e-commerce projects." },
+        { title: "Beginner-Friendly Learning Path", text: "Learners do not necessarily need advanced programming knowledge to begin learning Shopify. A structured learning path can start with Shopify fundamentals and gradually introduce store configuration, themes, customisation, apps, SEO basics, analytics, and more technical concepts. Learners interested in development can progress towards Liquid, HTML, CSS, and JavaScript-based customisation." },
+        { title: "Online + Offline Learning Flexibility", text: "The learning mode is Online + Offline, making the Shopify course suitable for learners with different schedules and locations. Students who can attend in person can learn at the Techcadd centre in Jalandhar, Punjab, while online learning can provide an option for learners located elsewhere." },
+        { title: "Practical Understanding of Store Management", text: "Shopify skills are not limited to creating a storefront. Learners can understand day-to-day activities such as managing products, collections, orders, customers, store content, applications, and basic performance information. This broader understanding can help learners approach e-commerce projects from an operational as well as website perspective." },
+        { title: "Useful Foundation for Digital Commerce", text: "Shopify skills can work alongside other digital skills such as SEO, content creation, digital marketing, analytics, graphic design, and customer experience. Developing a broader digital-commerce skill set can make Shopify knowledge more useful for agencies, online businesses, D2C brands, freelancers, and entrepreneurs." },
+        { title: "Foundation for Freelancing and E-Commerce Work", text: "Shopify knowledge can provide a foundation for freelance services such as store setup, product uploading, theme customisation, app configuration, store maintenance, and e-commerce support. Freelancing results depend on practical ability, portfolio quality, communication, pricing, and client acquisition, so learning Shopify should be viewed as a skill foundation rather than a guaranteed source of income." },
+      ],
+    },
+    tools: {
+      title: "Tools and Technologies",
+      columns: ["Tool", "What it is used for"],
+      groups: [
+        { area: "Shopify Admin", tools: "Managing the store and its core operations." },
+        { area: "Shopify Themes", tools: "Controlling the storefront structure and appearance." },
+        { area: "Shopify Theme Editor", tools: "Making visual and structural customisations." },
+        { area: "Shopify Liquid", tools: "Useful for deeper theme development and customisation." },
+        { area: "HTML and CSS", tools: "Useful for webpage structure and styling." },
+        { area: "JavaScript", tools: "Useful for more advanced front-end interactions." },
+        { area: "Shopify Apps", tools: "Extending store functionality." },
+        { area: "Shopify Analytics and Reports", tools: "Understanding store performance." },
+        { area: "Domain management tools", tools: "Connecting and managing store domains." },
+        { area: "Shipping and payment configuration interfaces", tools: "Setting up relevant commerce operations." },
+      ],
+    },
+    careers: {
+      eyebrow: "Careers",
+      title: "Career Scope After Learning Shopify",
+      intro: "A learner interested in development may progress from Shopify fundamentals into theme customisation and then towards stronger Liquid, HTML, CSS, and JavaScript skills. Someone interested in business operations may instead focus on store management, products, orders, customer experience, analytics, and e-commerce operations.",
+      roles,
+      notes: [
+        { title: "Freelancing Opportunities", text: "Shopify can also support freelance services such as: Shopify store setup, Product uploading and organisation, Theme customisation, Store content updates, App setup and configuration, Store maintenance, Basic SEO implementation, E-commerce website support. Freelancing success depends on practical skills, portfolio quality, communication, client acquisition, and the ability to deliver useful solutions. Shopify knowledge alone does not guarantee clients or income." },
+        { title: "Industry Applications", text: "Shopify skills can be relevant across industries including: Fashion and apparel, Retail, Jewellery, Handicrafts, Beauty and personal care, Home and lifestyle products, Specialty products, D2C brands, Export businesses, E-commerce agencies." },
+        { title: "Salary and Future Scope", text: "Shopify-related salaries vary according to role, technical depth, experience, location, employer, and portfolio quality. A person managing a store may follow a different career path from someone specialising in Shopify development. Rather than relying only on Shopify, learners can strengthen their future scope by combining it with SEO, digital marketing, analytics, design, e-commerce operations, and web-development skills." },
+      ],
+      jobsTitle: "Career Opportunities Across North Indian Markets",
+      jobs: [
+        { title: "Punjab", text: "Shopify skills can be relevant to retail businesses, exporters, local brands, D2C businesses, and companies looking to expand their online sales presence." },
+        { title: "Haryana", text: "Areas such as Gurugram and other commercial centres offer opportunities connected with e-commerce businesses, logistics, agencies, retail, and digital operations." },
+        { title: "Chandigarh", text: "Shopify knowledge can complement careers involving IT services, startups, digital agencies, online businesses, and e-commerce operations." },
+        { title: "Delhi NCR", text: "The region's broad e-commerce, agency, D2C, retail, and digital-business ecosystem can create different opportunities for Shopify store management and development skills." },
+        { title: "Rajasthan", text: "Businesses dealing in jewellery, handicrafts, textiles, lifestyle products, and tourism-related products can benefit from strong online-store capabilities." },
+        { title: "Uttar Pradesh", text: "E-commerce, retail, electronics, digital businesses, and growing online brands can create demand for people who understand Shopify and online-store operations, particularly around major commercial and technology hubs." },
+      ],
+    },
+    faqTitle: "Shopify Course FAQs",
+    cta: { title: "Start Learning Shopify Skills", highlight: "for E-Commerce", text: "Looking to build practical skills in Shopify and e-commerce website management? A Shopify course can help you understand how online stores are structured, managed, customised, and prepared for real-world e-commerce requirements. Whether you are a student, graduate, working professional, freelancer, business owner, or career changer, learning Shopify can provide a foundation for exploring e-commerce operations, store management, theme customisation, freelancing, and Shopify development. The course is available in Online + Offline learning mode, giving learners flexibility based on their location and learning preferences." },
+  },
+};

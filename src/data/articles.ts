@@ -47,7 +47,7 @@ export const articles: Article[] = [
       { title: "Build an agent", text: "A multi-step agent with retrieval and external tools." },
       { title: "Make it reliable", text: "Testing, guardrails and deployment." },
     ],
-    related: { label: "Agentic AI course", href: "/ai-courses/agentic-ai" },
+    related: { label: "Agentic AI course", href: "/courses/agentic-ai" },
   },
   {
     slug: "web-design-basics-training-in-maqsudan-techcadd",

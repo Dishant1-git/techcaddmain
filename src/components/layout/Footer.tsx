@@ -6,7 +6,7 @@ import { footerLegal, footerLinks, site } from "@/data/site";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer id="contact" className="relative isolate overflow-hidden bg-slate-50 text-ink-700">
+    <footer id="contact" className="defer-render relative isolate overflow-hidden bg-slate-50 text-ink-700">
       {/* Giant wordmark watermark */}
       <Image
         src="/logo/techcadd-wordmark.png"

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import { clip, ogImages } from "@/lib/seo";
 import { notFound, redirect } from "next/navigation";
 import { aiCourseCommon, aiCourses, aiMentors, site } from "@/data/site";
+import { aiMovedTo } from "@/data/ai-moved";
 import { CourseHero } from "@/components/course/CourseHero";
 import { CourseNav, type CourseNavItem } from "@/components/course/CourseNav";
 import { CourseOverview } from "@/components/course/CourseOverview";
@@ -16,13 +18,6 @@ import { CourseFaq } from "@/components/course/CourseFaq";
 import { RelatedCourses } from "@/components/course/RelatedCourses";
 import { CourseEnrol } from "@/components/course/CourseEnrol";
 
-/** AI courses whose page now lives under /courses (long-form copy in src/data/course-pages). The old URL redirects there,
- *  so AI hub cards, related-course cards and old links all land on the new page. */
-const movedTo: Record<string, string> = {
-  "generative-ai": "/courses/generative-ai",
-  "chatgpt-ai-tools": "/courses/chatgpt-ai-tools",
-};
-
 /** One statically generated page per entry in `aiCourses` (src/data/site.ts). */
 export const dynamicParams = false;
 
@@ -37,9 +32,9 @@ export async function generateMetadata({ params }: PageProps<"/ai-courses/[slug]
   const title = `${c.title} in Jalandhar — ${c.duration}, Placement Support`;
   return {
     title,
-    description: `${c.tagline} ${c.duration} ${c.title.toLowerCase()} at ${site.name} Jalandhar with ${c.projects}+ projects, certification and placement assistance. Classroom & live online batches across North India.`,
+    description: clip(`${c.tagline} ${c.duration} ${c.title.toLowerCase()} at ${site.name} Jalandhar with ${c.projects}+ projects, certification and placement assistance. Classroom & live online batches across North India.`),
     alternates: { canonical: `/ai-courses/${c.slug}` },
-    openGraph: { title, description: c.tagline, url: `/ai-courses/${c.slug}` },
+    openGraph: { title, description: c.tagline, url: `/ai-courses/${c.slug}`, images: ogImages },
   };
 }
 
@@ -59,7 +54,7 @@ const sections: CourseNavItem[] = [
 
 export default async function AiCoursePage({ params }: PageProps<"/ai-courses/[slug]">) {
   const { slug } = await params;
-  if (movedTo[slug]) redirect(movedTo[slug]);
+  if (aiMovedTo[slug]) redirect(aiMovedTo[slug]);
   const course = aiCourses.find((c) => c.slug === slug);
   if (!course) notFound();
 

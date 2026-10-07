@@ -11,7 +11,7 @@ const num = (i: number) => String(i + 1).padStart(2, "0");
 /** Certification — certificates rest in a pressed tray (raised paper on top) + four raised credential cards. */
 export function TrCertification({ course }: { course: TrainingPage }) {
   return (
-    <CourseSection id="certification" className="bg-soft" decor={<SoftBlobs flip />}>
+    <CourseSection id="certification" className="defer-render bg-soft" decor={<SoftBlobs flip />}>
       <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="tr-left order-2 lg:order-1">
           <ul aria-label="Certificates you receive" className="su-inset relative grid gap-6 !rounded-[2rem] p-5 sm:block sm:h-[40rem] sm:p-0">
@@ -143,7 +143,7 @@ export function TrLoop() {
 /** Why TechCADD — dark bento of soft dark cards (first tile large, brand gradient). */
 export function TrWhy() {
   return (
-    <CourseSection id="why" className="on-dark bg-ink-950 text-white" decor={<><div aria-hidden className="bg-grid absolute inset-0 -z-10 opacity-60" /><div aria-hidden className="absolute -right-40 top-0 -z-10 size-[30rem] rounded-full bg-brand-600/25 blur-[120px]" /></>}>
+    <CourseSection id="why" className="defer-render on-dark bg-ink-950 text-white" decor={<><div aria-hidden className="bg-grid absolute inset-0 -z-10 opacity-60" /><div aria-hidden className="absolute -right-40 top-0 -z-10 size-[30rem] rounded-full bg-brand-600/25 blur-[120px]" /></>}>
       <SectionHeading id="why-title" dark eyebrow="Why TechCADD" title={<>Why students pick <span className="text-gradient">{site.name}</span></>} />
       <ul className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {trainingCommon.why.map((w, i) => (
@@ -172,7 +172,7 @@ export function TrWhy() {
 /** Comparison — raised table card; TechCADD column is a pressed brand well. Scrolls sideways on small screens. */
 export function TrCompare() {
   return (
-    <CourseSection id="compare" className="bg-soft">
+    <CourseSection id="compare" className="defer-render bg-soft">
       <SectionHeading id="compare-title" eyebrow="Compare" title={<>TechCADD vs <span className="text-gradient">other institutes</span></>} text="What changes when training is built around live work." />
       <div className="tr-unfold mx-auto mt-14 max-w-5xl">
         <div tabIndex={0} role="region" aria-label="Comparison table (scrolls sideways on small screens)" className="su-card overflow-x-auto p-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500 sm:p-3">

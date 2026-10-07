@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { aiCourseHref } from "@/data/ai-moved";
 import { ArrowRight, BarChart3, Clock } from "lucide-react";
 import type { AiCourse } from "@/data/site";
 
@@ -14,7 +15,7 @@ export function AiCourseCard({ course, headingLevel: H = "h3" }: { course: AiCou
         <span className="flex items-center gap-1.5 text-xs text-ink-500"><Clock className="size-3.5" aria-hidden /> {course.duration}</span>
       </div>
       <H className="mt-5 text-xl font-bold leading-snug text-ink-900">
-        <Link href={`/ai-courses/${course.slug}`} className="outline-none after:absolute after:inset-0 after:rounded-[1.75rem] group-hover:text-brand-700">
+        <Link href={aiCourseHref(course.slug)} className="outline-none after:absolute after:inset-0 after:rounded-[1.75rem] group-hover:text-brand-700">
           {course.title}
         </Link>
       </H>

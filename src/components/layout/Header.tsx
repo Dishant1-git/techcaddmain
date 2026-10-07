@@ -21,7 +21,7 @@ const mobileLinks = (i: NavItem): NavLink[] =>
   i.children ?? i.skills?.groups.flatMap((g) => g.links) ?? i.columns?.columns.flatMap((c) => c.links) ?? i.tiles?.tiles ?? [];
 
 const itemBase =
-  "flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 text-[14px] font-medium transition-colors 2xl:px-3 2xl:text-[16px]";
+  "flex items-center gap-1 whitespace-nowrap rounded-full px-1.5 py-2 text-[13.5px] font-medium transition-colors 2xl:px-3 2xl:text-[16px]";
 
 /** AI pill mark: one large + one small four-point sparkle in accent yellow, pulsing in opposite phase (.ai-star in globals.css). */
 function AiSpark() {
@@ -53,6 +53,7 @@ function TopItem({ item, light, active }: { item: NavItem; light: boolean; activ
 function isActiveTop(item: NavItem, pathname: string) {
   if (item.href === "/") return pathname === "/";
   if (item.label === "Resources") return pathname.startsWith("/guidance");
+  if (item.label === "Branches") return pathname.startsWith("/branches");
   return !item.href.includes("#") && pathname.startsWith(item.href);
 }
 
@@ -141,14 +142,14 @@ function FeaturedPanel({ item }: { item: NavItem }) {
 /** Quote strip + right-aligned "browse" link shared by the Courses and Internship panels. */
 function QuoteFooter({ quote, browse, className = "" }: { quote: { text: string; author: string }; browse: { label: string; href: string }; className?: string }) {
   return (
-    <div className={`flex items-center justify-between gap-6 border-t border-ink-900/5 px-8 py-3.5 ${className}`}>
-      <p className="flex items-center gap-3 text-sm text-ink-700">
-        <Quote className="size-5 shrink-0 rotate-180 fill-brand-200 text-brand-200" aria-hidden />
+    <div className={`flex items-center justify-between gap-6 border-t border-ink-900/5 px-6 py-2.5 ${className}`}>
+      <p className="flex items-center gap-3 text-[13px] text-ink-700">
+        <Quote className="size-4 shrink-0 rotate-180 fill-brand-200 text-brand-200" aria-hidden />
         <span>
           <em>{quote.text}</em> <span className="font-medium not-italic text-ink-900">— {quote.author}</span>
         </span>
       </p>
-      <Link href={browse.href} className="group/br inline-flex shrink-0 items-center gap-2 text-[15px] font-medium text-brand-600 hover:text-brand-700">
+      <Link href={browse.href} className="group/br inline-flex shrink-0 items-center gap-2 text-sm font-medium text-brand-600 hover:text-brand-700">
         {browse.label} <ArrowRight className="size-4 transition-transform group-hover/br:translate-x-1" aria-hidden />
       </Link>
     </div>
@@ -194,29 +195,29 @@ function ColumnsPanel({ item, activePath }: { item: NavItem; activePath: string 
   return (
     <div className={`absolute inset-x-2 top-full pt-3 sm:inset-x-4 lg:inset-x-6 ${reveal}`}>
       <div
-        className={`max-h-[calc(100dvh-7rem)] overflow-y-auto rounded-3xl shadow-[0_30px_80px_-20px_rgba(5,11,31,0.45)] ${
+        className={`max-h-[calc(100dvh-6.5rem)] overflow-y-auto overflow-x-hidden rounded-3xl shadow-[0_30px_80px_-20px_rgba(5,11,31,0.45)] ${
           glass ? "border border-white/60 bg-white/85 backdrop-blur-2xl" : "border border-ink-900/5 bg-white"
         }`}
       >
         <div
-          className="grid gap-8 px-8 pb-6 pt-6"
+          className="grid gap-x-5 px-6 pb-4 pt-5"
           style={{ gridTemplateColumns: `repeat(${p.columns.length}, minmax(0, 1fr))` }}
         >
           {p.columns.map((col, i) => (
             <div key={col.title}>
-              <p className="text-sm tabular-nums text-ink-500">{String(i + 1).padStart(2, "0")}</p>
+              <p className="text-xs tabular-nums text-ink-500">{String(i + 1).padStart(2, "0")}</p>
               {glass ? (
                 <>
-                  <p className="mt-1.5 text-xl text-ink-900 2xl:text-[1.4rem]">{col.title}</p>
-                  <p className="mt-2 border-b border-ink-900/10 pb-4 text-sm text-ink-500 2xl:text-[15px]">{col.text}</p>
+                  <p className="mt-0.5 text-lg text-ink-900">{col.title}</p>
+                  <p className="mt-1 border-b border-ink-900/10 pb-2.5 text-[13px] leading-snug text-ink-500">{col.text}</p>
                 </>
               ) : (
                 <>
-                  <p className="mt-1 font-display text-xl font-bold text-ink-900">{col.title}</p>
-                  <p className="mt-1.5 min-h-10 border-b border-ink-900/10 pb-3 text-sm leading-snug text-ink-500">{col.text}</p>
+                  <p className="mt-0.5 font-display text-lg font-bold text-ink-900">{col.title}</p>
+                  <p className="mt-1 min-h-9 border-b border-ink-900/10 pb-2.5 text-[13px] leading-snug text-ink-500">{col.text}</p>
                 </>
               )}
-              <ul className="mt-2.5">
+              <ul className="mt-2">
                 {col.links.map((l) => {
                   const active = l.href === activePath;
                   return (
@@ -224,13 +225,13 @@ function ColumnsPanel({ item, activePath }: { item: NavItem; activePath: string 
                       <Link
                         href={l.href}
                         aria-current={active ? "page" : undefined}
-                        className={`flex items-center gap-2.5 rounded-lg px-2.5 transition-colors hover:bg-brand-50 hover:text-brand-700 ${
+                        className={`flex items-center gap-2 rounded-lg px-2 transition-colors hover:bg-brand-50 hover:text-brand-700 ${
                           active ? "bg-brand-50 font-semibold text-brand-700" : "text-ink-700"
-                        } ${glass ? "py-1 text-[15px] 2xl:text-base" : "whitespace-nowrap py-1 text-[15px]"}`}
+                        } ${glass ? "py-[3px] text-sm" : "whitespace-nowrap py-[3px] text-sm"}`}
                       >
                         {l.label}
                         {l.badge && (
-                          <span className="rounded-full bg-brand-100 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-700">{l.badge}</span>
+                          <span className="shrink-0 rounded-full bg-brand-100 px-1.5 py-px text-[9px] font-bold uppercase tracking-wide text-brand-700">{l.badge}</span>
                         )}
                       </Link>
                     </li>
@@ -331,6 +332,8 @@ export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  // The drawer (130+ links) is not rendered until the menu button is first touched/focused: keeps it out of every page's HTML and DOM.
+  const [drawer, setDrawer] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -367,7 +370,7 @@ export function Header() {
           {/* Pill background as its own layer: a backdrop-filter on the row itself would stop dropdown panels from blurring the page */}
           <div
             aria-hidden
-            className={`absolute inset-0 -z-10 rounded-full bg-white/90 backdrop-blur-xl transition-opacity duration-500 ${scrolled ? "opacity-100" : "opacity-0"}`}
+            className={`absolute inset-0 -z-10 rounded-full bg-white/90 transition-opacity duration-500 ${scrolled ? "opacity-100 backdrop-blur-xl" : "opacity-0"}`}
           />
           <Logo dark={!scrolled} />
 
@@ -391,7 +394,10 @@ export function Header() {
             </button>
             <button
               type="button"
-              onClick={() => setOpen(true)}
+              onPointerEnter={() => setDrawer(true)}
+              onTouchStart={() => setDrawer(true)}
+              onFocus={() => setDrawer(true)}
+              onClick={() => { setDrawer(true); setOpen(true); }}
               aria-label="Open menu"
               className={`grid size-11 place-items-center rounded-full border xl:hidden ${scrolled ? "border-ink-900/15 text-ink-900" : "border-white/20 text-white"}`}
             >
@@ -402,6 +408,7 @@ export function Header() {
       </header>
 
       {/* Mobile drawer — kept outside <header> because backdrop-filter would trap position:fixed */}
+      {drawer && (
       <div className={`fixed inset-0 z-50 xl:hidden ${open ? "" : "pointer-events-none"}`} aria-hidden={!open}>
         <div onClick={close} className={`absolute inset-0 bg-ink-950/60 backdrop-blur-sm transition-opacity ${open ? "opacity-100" : "opacity-0"}`} />
         <aside
@@ -470,6 +477,7 @@ export function Header() {
           </div>
         </aside>
       </div>
+      )}
     </>
   );
 }

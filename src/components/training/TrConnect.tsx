@@ -14,7 +14,7 @@ import { TrEnquiryForm } from "./TrEnquiryForm";
 export function TrReviews() {
   if (testimonials.length === 0) return null;
   return (
-    <CourseSection id="reviews" overflow="overflow-x-clip" className="bg-white">
+    <CourseSection id="reviews" overflow="overflow-x-clip" className="defer-render bg-white">
       <div className="grid items-end gap-6 lg:grid-cols-[1fr_auto]">
         <SectionHeading id="reviews-title" align="left" eyebrow="Student reviews" title={<>From people who <span className="text-gradient">trained here</span></>} />
         <p data-reveal="up" className="su-inset flex items-center gap-4 px-5 py-4">
@@ -56,7 +56,7 @@ export function TrReviews() {
 /** Learning modes — four raised cards; the icon well presses in on hover. */
 export function TrModes() {
   return (
-    <CourseSection id="modes" className="bg-soft" decor={<SoftBlobs flip />}>
+    <CourseSection id="modes" className="defer-render bg-soft" decor={<SoftBlobs flip />}>
       <SectionHeading id="modes-title" eyebrow="Learning modes" title={<>Learn the way <span className="text-gradient">that fits your week</span></>} text="Switch modes if your schedule changes — your projects and progress move with you." />
       <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {trainingCommon.modes.map((m, i) => (
@@ -78,7 +78,7 @@ export function TrModes() {
 /** FAQ — searchable soft accordion; the page emits the same list as FAQPage JSON-LD. */
 export function TrFaq({ course, faqs }: { course: TrainingPage; faqs: { q: string; a: string }[] }) {
   return (
-    <CourseSection id="faq" className="bg-white">
+    <CourseSection id="faq" className="defer-render bg-white">
       <SectionHeading id="faq-title" eyebrow="FAQ" title={<>Questions about <span className="text-gradient">{course.navLabel}</span></>} />
       <FaqSearch faqs={faqs} askHref={waLink(`Hi TechCADD, I have a question about ${course.title}: `)} />
     </CourseSection>
@@ -116,7 +116,7 @@ export function TrStart({ course }: { course: TrainingPage }) {
 export function TrRelated({ courses }: { courses: TrainingPage[] }) {
   if (courses.length === 0) return null;
   return (
-    <CourseSection id="related" overflow="overflow-x-clip" className="bg-white">
+    <CourseSection id="related" overflow="overflow-x-clip" className="defer-render bg-white">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <SectionHeading id="related-title" align="left" eyebrow="Keep exploring" title={<>Related <span className="text-gradient">training programs</span></>} />
         <Link href="/training" className="su-btn-ghost">All programs <ArrowRight className="size-4" aria-hidden /></Link>

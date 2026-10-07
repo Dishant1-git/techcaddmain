@@ -6,7 +6,7 @@ import { SectionHeading, delay } from "@/components/ui/SectionHeading";
 /** Native <details> accordion — zero JS. FAQ JSON-LD is emitted in app/page.tsx. */
 export function Faq() {
   return (
-    <section id="faq" className="section bg-brand-50/50">
+    <section id="faq" className="section defer-render bg-brand-50/50">
       <div className="container-x grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
         <div>
           <SectionHeading

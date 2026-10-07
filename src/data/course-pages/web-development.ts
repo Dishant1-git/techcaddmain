@@ -1,0 +1,262 @@
+import type { CoursePage } from "./types";
+
+/* /courses/web-development — long-form landing copy supplied by the client (Google Doc "…courses" file), used as given.
+   Left out on purpose: the student reviews (the document marks them as sample / illustrative drafts, so this page keeps
+   the shared testimonials — add `copy.reviews` when real, consented reviews exist), the SEO/GEO strategy stage, the
+   optional trust line outside the "Why Choose Techcadd" section, and the CTA's course-details table and form fields.
+   Fields the document does not cover (tagline, level, duration, eligibility, projects, whyNow, related, tools) are the previous
+   values — the document says to confirm duration and fees with Techcadd. The "North India's first AI-powered and Robotics
+   learning centre" line is a first/only claim: keep only if it can be supported. */
+
+const roles = ["Frontend Developer", "Backend Developer", "Full-Stack Developer", "Web Developer", "Junior Web Developer", "Web Application Developer"];
+
+export const webDevelopment: CoursePage = {
+  slug: "web-development",
+  title: "Web Development Course",
+  navLabel: "Web Development",
+  group: "programming",
+  icon: "Globe",
+  tagline:
+    "Learn front-end and back-end web development with HTML, CSS, JavaScript, React, Node.js and databases, and deploy full working applications.",
+  level: "Intermediate",
+  duration: "5–6 Months",
+  eligibility: "12th pass or above; basic computer skills",
+  overview: [
+    "A Web Development Course helps learners understand how websites and web applications are planned, designed, developed, tested and maintained. It is relevant for students, graduates, working professionals and career changers who want to build practical programming and web technology skills.",
+    "The field covers the technologies used to create the visible parts of websites as well as the programming and server-side logic that can power more functional web applications. Depending on the learning path, students can work with areas such as HTML, CSS, JavaScript, databases, server-side programming, APIs and modern development workflows.",
+    "For learners in Punjab, web development can be particularly relevant to the growing digital needs of businesses, startups, agencies and technology-oriented organizations. Students who prefer classroom learning can explore the learning environment at the Jalandhar centre, while learners from other locations can use online learning options.",
+    "The course is designed to help learners progress from foundational concepts toward practical development work, problem-solving and project creation. It can also provide a foundation for further specialization in frontend development, backend development or full-stack web development.",
+  ],
+  gains: [
+    "Understand fundamental web technologies",
+    "Build structured webpages",
+    "Style responsive interfaces",
+    "Add interactive behaviour using programming",
+    "Understand frontend development workflows",
+    "Work with basic backend concepts",
+    "Understand databases and data handling",
+    "Work with APIs",
+    "Debug common development problems",
+    "Organize web development projects",
+    "Use relevant development tools",
+    "Build projects that demonstrate practical skills",
+  ],
+  syllabus: [
+    {
+      title: "Module 1: Web Development Fundamentals",
+      summary: "The first stage introduces how websites and web applications work. The goal is to give beginners enough context to understand what happens when a user opens and interacts with a website.",
+      topics: ["Client and server concepts", "How browsers process webpages", "Basic website architecture", "Static versus dynamic websites", "Development workflow", "Basic web terminology", "File and project structure"],
+    },
+    {
+      title: "Module 2: HTML and Webpage Structure",
+      summary: "HTML provides the structural foundation of webpages. By the end of this stage, learners should be able to create properly structured webpages rather than relying on pre-built templates.",
+      topics: ["HTML document structure", "Headings and paragraphs", "Links", "Images", "Lists", "Tables", "Forms", "Semantic elements", "Multimedia elements", "Basic accessibility considerations"],
+    },
+    {
+      title: "Module 3: CSS and Web Styling",
+      summary: "CSS is used to control the appearance and layout of webpages. Learners can use these concepts to turn basic HTML structures into more organized and responsive interfaces.",
+      topics: ["Selectors", "Properties", "Typography", "Colours", "Spacing", "Borders", "Box model", "Flexbox", "Grid", "Responsive layouts", "Basic animations and transitions"],
+    },
+    {
+      title: "Module 4: Responsive Web Design",
+      summary: "Websites are accessed from desktops, laptops, tablets and smartphones, so learners need to understand how layouts adapt to different screen sizes. The focus should be on creating websites that remain usable across different screen sizes rather than designing only for one desktop resolution.",
+      topics: ["Responsive layouts", "Media queries", "Flexible dimensions", "Mobile-first concepts", "Responsive navigation", "Device-friendly interfaces"],
+    },
+    {
+      title: "Module 5: JavaScript and Web Interactivity",
+      summary: "JavaScript introduces programming logic into web development. This allows learners to move from static pages toward interactive web experiences.",
+      topics: ["Variables", "Data types", "Operators", "Conditional statements", "Loops", "Functions", "Arrays", "Objects", "Events", "DOM manipulation", "Basic form interaction"],
+    },
+    {
+      title: "Module 6: Frontend Development",
+      summary: "After understanding HTML, CSS and JavaScript fundamentals, learners can explore how these technologies work together in frontend development. Depending on the curriculum, this may include modern frontend development concepts and relevant frameworks or libraries. The emphasis should remain on understanding the underlying web technologies before depending heavily on frameworks.",
+      topics: [],
+    },
+    {
+      title: "Module 7: Backend Development Concepts",
+      summary: "Backend development handles server-side processing and application logic. The exact backend language or framework should be confirmed according to the current Techcadd curriculum before publishing specific technology claims.",
+      topics: ["Server-side programming", "Routing", "Request and response handling", "APIs", "Authentication concepts", "Server-side validation", "Application architecture"],
+    },
+    {
+      title: "Module 8: Databases and Data Handling",
+      summary: "Many web applications need to store and retrieve information. The specific database technology should be presented only if it is confirmed as part of the current course curriculum.",
+      topics: ["Database concepts", "Tables or collections", "Records and fields", "CRUD operations", "Connecting applications with databases", "Basic data management"],
+    },
+    {
+      title: "Module 9: APIs and Application Integration",
+      summary: "Modern websites often communicate with external services through APIs. This helps learners understand how separate parts of a web application communicate.",
+      topics: ["What APIs are", "HTTP requests", "Sending and receiving data", "JSON", "Connecting frontend and backend systems", "Basic API integration"],
+    },
+    {
+      title: "Module 10: Version Control and Development Workflow",
+      summary: "Version control is an important part of modern software development. These tools can help with code management, debugging, collaboration and maintaining development history.",
+      topics: ["Git", "GitHub", "Code editors such as Visual Studio Code", "Browser developer tools"],
+    },
+  ],
+  tools: [
+    "HTML5 & CSS3",
+    "JavaScript / TypeScript",
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "MySQL / PostgreSQL",
+    "Tailwind CSS",
+    "Postman",
+    "Git & GitHub",
+    "Vercel",
+  ],
+  projects: [
+    {
+      title: "Responsive Business Website",
+      text: "A multi-page marketing site with contact form and mobile-first layout.",
+      tags: ["HTML5", "Tailwind CSS", "JavaScript"],
+    },
+    {
+      title: "Task and Project Manager",
+      text: "A React app with login, task boards and a Node.js API storing data in a database.",
+      tags: ["React", "Node.js", "MongoDB"],
+    },
+    {
+      title: "Online Store",
+      text: "Product listings, cart, checkout flow and an admin dashboard for managing orders.",
+      tags: ["React", "Express", "JWT"],
+    },
+    {
+      title: "Blog and CMS Platform",
+      text: "Write, edit and publish posts with user roles, image upload and search.",
+      tags: ["REST API", "SQL", "Auth"],
+    },
+    {
+      title: "Job Portal",
+      text: "Employers post jobs and candidates apply, with filters and role-based dashboards.",
+      tags: ["React", "PostgreSQL", "RBAC"],
+    },
+    {
+      title: "Live Weather and Maps Dashboard",
+      text: "Combine third-party APIs into an interactive dashboard with caching on the server.",
+      tags: ["API Integration", "Async", "Deployment"],
+    },
+  ],
+  // Shown as role chips on the page (via copy.careers.roles); the compare pages read the role names from here.
+  careers: roles.map((role) => ({ role, work: "", hirers: "" })),
+  whyNow: [
+    "Nearly every business needs web applications, and React with Node.js is one of the most requested skill combinations in developer job listings.",
+    "Deployment platforms now make it simple to publish real projects, so your portfolio can be live and verifiable.",
+  ],
+  faqs: [
+    { q: "What is a Web Development Course?", a: "A Web Development Course teaches the concepts and technologies used to create websites and web applications, including areas such as HTML, CSS, JavaScript and other relevant development technologies." },
+    { q: "Is web development suitable for beginners?", a: "Yes, web development can be suitable for beginners because the fundamentals can be learned progressively, starting with webpage structure and styling before moving into programming and more advanced development concepts." },
+    { q: "What is included in a Web Development Course syllabus?", a: "A typical syllabus can include HTML, CSS, responsive design, JavaScript, frontend development, backend concepts, databases, APIs, development tools and practical projects, although the exact syllabus should be confirmed with the current course curriculum." },
+    { q: "How long does a Web Development Course take?", a: "The duration depends on the curriculum, learning depth, class schedule and learner's pace. For the current course duration and batch schedule, learners should confirm the latest details with Techcadd." },
+    { q: "What are the fees for a Web Development Course?", a: "Web development course fees can vary according to the curriculum, duration, learning format and other course-specific factors. The current fee structure should be confirmed directly with Techcadd rather than relying on an outdated figure." },
+    { q: "Can I learn web development online?", a: "Yes, web development can be learned online because coding, development tools and project work can be practiced using a computer and suitable development environment. Online learning can also make structured training accessible to learners outside Jalandhar." },
+    { q: "Is offline web development training available?", a: "Yes, Techcadd offers an Online + Offline learning format, with the physical centre located in Jalandhar, Punjab. Learners should confirm current classroom schedules and availability before enrolling." },
+    { q: "What jobs can I pursue after learning web development?", a: "Web development skills can support career paths such as Web Developer, Frontend Developer, Backend Developer and, with broader skills, Full-Stack Developer. Actual job opportunities depend on technical ability, projects, experience and employer requirements." },
+    { q: "What is the salary after a web development course in India?", a: "Web developer salaries in India vary according to experience, location, technical skills, specialization, organization and role. A course itself does not guarantee a particular salary, so salary expectations should be based on the wider job market and the learner's actual skills." },
+    { q: "Can I freelance after learning web development?", a: "Yes, web development can be used for freelance services such as website creation, landing pages, frontend work, maintenance and custom web functionality. Freelancing also requires client communication, project planning, requirement analysis and business skills." },
+    { q: "Which tools are used in web development?", a: "Common web development tools include code editors such as Visual Studio Code, web browsers and browser developer tools. Depending on the curriculum, learners may also work with Git, GitHub, JavaScript environments, frameworks, databases and API tools." },
+    { q: "Can I learn web development without prior programming experience?", a: "Yes, beginners can start web development without prior programming experience because foundational concepts can be introduced gradually. Consistent coding practice is important as learners move from HTML and CSS toward JavaScript and application development." },
+    { q: "Is web development a good career option?", a: "Web development can be a useful career direction for people who enjoy programming, problem-solving and creating digital products. Its applications span websites, e-commerce, software products, agencies and web-based business systems." },
+    { q: "Can working professionals learn web development?", a: "Yes, working professionals can learn web development through a structured program and flexible learning format. Online classes can be particularly useful for professionals who need to balance training with existing work commitments." },
+    { q: "Can students from Punjab join a Web Development Course?", a: "Yes, students from Punjab can join web development training through available online or offline learning options. Learners near Jalandhar can explore the physical centre, while online learning can provide access from other parts of the state." },
+    { q: "Can students from Himachal Pradesh learn web development online?", a: "Yes, students from Himachal Pradesh can learn web development online and practice development projects from their own location. This can be useful for learners in areas where regular classroom-based technology training may be less convenient." },
+    { q: "What web development opportunities are available in Haryana?", a: "Haryana's technology and business ecosystem, particularly around Gurugram, creates relevance for web development in IT services, e-commerce, logistics, digital businesses and other technology-driven organizations. Learners should evaluate opportunities based on their actual skills and experience." },
+    { q: "Can students from Rajasthan learn web development online?", a: "Yes, students from Rajasthan can learn web development online and build projects remotely. Learners can use the training as a foundation for exploring software development, digital agencies, e-commerce and freelance web development." },
+    { q: "Can students from Uttar Pradesh join web development training online?", a: "Yes, students from Uttar Pradesh can join online web development training and practice the same core development concepts from their location. This can be useful for learners in cities such as Noida, Lucknow and other parts of the state." },
+    { q: "Can web development help me move into AI or other advanced technologies?", a: "Yes, web development can provide useful software and programming foundations for exploring advanced areas later. However, moving into AI, machine learning or other specialized fields requires additional subject-specific learning beyond web development fundamentals." },
+  ],
+  related: ["mern-stack", "web-designing", "php-full-stack"],
+  copy: {
+    heading: { title: "Web Development Course", highlight: "Online + Jalandhar", meta: "Web Development Course: Learn Frontend, Backend and Databases | techcadd" },
+    overview: { eyebrow: "Program Overview", title: "What the Web Development Course covers" },
+    syllabus: { eyebrow: "What You Will Learn & Tools Covered", title: "What You Will Learn in the Web Development Course" },
+    audience: {
+      eyebrow: "Who Can Do This Course",
+      title: "Who Can Do This Web Development Course?",
+      intro: "Web development is a relatively accessible technology field because learners can begin with foundational concepts before progressing toward more advanced programming and application development. The course can therefore suit people with different educational and professional backgrounds, provided they are willing to practice regularly.",
+      items: [
+        { icon: "GraduationCap", title: "Graduates", text: "Graduates from computer science, information technology, engineering, mathematics, commerce or other disciplines can use web development training to build practical technical skills alongside their academic qualification. For someone looking to enter the technology sector, learning how websites and web applications are developed can provide a practical direction for building projects and demonstrating technical ability." },
+        { icon: "Award", title: "Postgraduates", text: "Postgraduate learners may use web development as an additional technical skill or as a way to strengthen their existing specialization. Someone with a non-development background can also use structured learning to understand programming and web technologies before exploring more specialized roles." },
+        { icon: "Briefcase", title: "Working Professionals", text: "Professionals already working in IT, digital marketing, design, content, business operations or related areas may benefit from understanding how websites and web applications are built. Web development knowledge can also make communication easier when working with developers, designers, agencies or technology teams. For professionals considering a technical career transition, a structured course can provide a more organized path than trying to learn unrelated technologies independently." },
+        { icon: "Shuffle", title: "Job Switchers", text: "People planning a career change can consider web development if they enjoy technology, logical problem-solving and building digital products. The learning process can begin with fundamental web technologies and gradually move toward more practical projects. The important consideration is not simply completing a course but developing enough understanding to create and explain working projects." },
+        { icon: "PenTool", title: "Freelancers", text: "Web development can also be relevant to learners interested in freelance work. Businesses frequently need websites, landing pages, web interfaces, maintenance and other digital development services. A learner who develops strong technical and communication skills can eventually explore independent project work. Freelancers should also understand requirements gathering, project estimation, version control, testing and client communication alongside technical development." },
+        { icon: "Building2", title: "Business Owners", text: "Business owners and entrepreneurs can benefit from understanding web development even if they do not intend to become full-time developers. Technical knowledge can help them communicate requirements more effectively when planning a website, web application or online business. It can also provide a better understanding of what is involved in maintaining and improving a digital product." },
+        { icon: "Rocket", title: "Career Changers", text: "Someone moving from a non-technical career does not necessarily need an advanced programming background to start learning web development. The important foundations are logical thinking, consistency and willingness to practice. A structured progression from basic markup and styling to programming, databases and application development can make the transition easier to manage." },
+        { icon: "Laptop", title: "Beginners", text: "Beginners can start with fundamental concepts such as how webpages work, HTML structure, CSS styling and basic JavaScript before moving into more complex development concepts. They do not need to understand every web technology before beginning." },
+        { icon: "BookOpen", title: "12th-Pass Students", text: "Students who have completed Class 12 and are interested in technology can also consider web development, particularly if they are comfortable with computers and want to explore programming. They should view the course as a skill-building pathway rather than assuming that completing training alone guarantees employment. Regular coding practice, project work and continued learning remain important." },
+      ],
+      need: "What matters is learning concepts in the correct sequence and applying them through small practical exercises and projects.",
+    },
+    regions: {
+      eyebrow: "Learn from Anywhere",
+      title: "Learners From Across States",
+      intro: "",
+      items: [
+        { title: "Punjab", text: "Learners from Punjab can use online web development training to build skills relevant to local businesses, startups, digital agencies and technology-oriented organizations. Students who are close to Jalandhar can also consider available offline learning options." },
+        { title: "Haryana", text: "For learners in Haryana, web development can complement the technology ecosystem around Gurugram, Faridabad and other commercial centres. Online learning can be useful for professionals who want to build technical skills alongside their existing work." },
+        { title: "Himachal Pradesh", text: "Learners from Himachal Pradesh may find online training particularly practical because it allows them to develop technology skills without depending entirely on local classroom availability. Web development can also support remote work and freelance-oriented career exploration." },
+        { title: "Chandigarh", text: "Students and professionals in Chandigarh and the wider Tricity area can use web development skills in technology, BPO, startup, education and digital-service environments. Online learning provides flexibility for learners managing studies or employment." },
+        { title: "Delhi NCR", text: "Delhi NCR offers a broad digital and technology ecosystem, making web development relevant to learners interested in agencies, IT services, e-commerce, media and technology businesses. Online training can also fit the schedules of working professionals." },
+        { title: "Jammu & Kashmir", text: "Learners from Jammu and Kashmir can access web development training online and develop skills that can be applied to websites, digital businesses, e-commerce and remote technology work. This can be useful for learners looking beyond locally available technology roles." },
+        { title: "Uttarakhand", text: "For students and professionals in Uttarakhand, web development can provide a practical digital skill that complements education, business and remote-work opportunities. Online learning can make structured training accessible alongside existing commitments." },
+        { title: "Rajasthan", text: "Learners from Rajasthan, particularly around Jaipur, can explore web development as a technical skill relevant to digital businesses, agencies, tourism-related businesses, e-commerce and other organizations that depend on an online presence." },
+        { title: "Uttar Pradesh", text: "Learners from Uttar Pradesh can use web development training to prepare for opportunities connected with IT, digital services, e-commerce and technology businesses. Online learning is particularly useful for students outside major technology centres." },
+      ],
+    },
+    whyProgram: {
+      eyebrow: "Why This Program",
+      title: "Why This Web Development Program?",
+      intro: "",
+      points: [
+        { title: "Build a Practical Technology Skill", text: "Web development is not limited to understanding programming theory. Learners work toward understanding how individual technologies combine to create functioning websites and web applications. This makes the subject suitable for people who prefer learning by building and experimenting." },
+        { title: "Understand How Modern Websites Work", text: "A structured program can help learners understand the relationship between webpage structure, visual presentation, programming logic, server-side processing and data. This broader understanding is useful when progressing from simple webpages to more interactive applications." },
+        { title: "Develop Programming and Problem-Solving Skills", text: "Web development introduces learners to programming concepts such as variables, conditions, functions, data handling and logical problem-solving. These skills can also create a foundation for learning other programming technologies later." },
+        { title: "Create a Portfolio", text: "One of the practical advantages of web development is the ability to demonstrate skills through projects. A learner can build webpages, interactive interfaces, websites or web applications and use suitable projects as evidence of their development ability. A portfolio can be especially useful for beginners who do not yet have extensive professional experience." },
+        { title: "Explore Multiple Career Directions", text: "Web development can lead toward different technical paths rather than a single job role. Depending on the skills developed, learners can explore frontend development, backend development or full-stack development. They can later specialize in particular frameworks, programming languages, databases or development workflows." },
+        { title: "Useful for Career Switching", text: "For someone moving from a non-technical field, web development provides a structured way to begin learning technology. Instead of trying to study every programming concept at once, learners can progress from basic webpage development toward more complex applications. The transition still requires practice and continued learning, but structured training can provide a clearer starting point." },
+        { title: "Supports Freelancing and Independent Work", text: "Web development skills can also be relevant for freelance projects. Small businesses, professionals, startups and organizations may require websites, landing pages, updates or custom web functionality. Learners interested in freelancing need more than coding skills, however. Client communication, requirement analysis, deadlines, testing and project management are also important." },
+        { title: "Relevant Across Different Industries", text: "Websites and web applications are used across industries including education, retail, e-commerce, finance, hospitality, media, healthcare, manufacturing and professional services. This broad application makes web development a transferable technical skill rather than one limited to a single business sector." },
+        { title: "A Foundation for Further Learning", text: "Web development can serve as a foundation for exploring more advanced areas such as full-stack development, cloud deployment, APIs, databases, web security and modern application frameworks. Learners do not need to master all of these areas at the beginning. A strong foundation allows them to decide which direction best matches their interests and career goals." },
+        { title: "Accessible to Beginners With Consistent Practice", text: "Web development can be started without an advanced technical background. Beginners can first understand how webpages are structured and styled before gradually moving into programming and application development. The key is consistent practice. Writing code, debugging errors, completing projects and understanding why a solution works are more valuable than simply memorizing syntax." },
+        { title: "Relevant to India's Digital Economy", text: "Businesses across India increasingly depend on websites and web-based systems for communication, customer interaction, marketing, commerce and internal operations. This creates continued relevance for people who understand web technologies. For learners researching a Web Development Course as a career option, the most useful approach is to focus on practical skills, project experience and a clear development pathway rather than relying only on a course certificate. Ultimately, web development can be a useful choice for learners who enjoy technology, problem-solving and creating digital products. The skills developed through the course can provide a foundation for employment, freelancing, further specialization and continued growth in the web technology field." },
+      ],
+    },
+    whyUs: {
+      eyebrow: "Why Choose Techcadd",
+      title: "Why Choose Techcadd for the Web Development Course?",
+      intro: "",
+      points: [
+        { title: "Learn in a Technology-Focused Environment", text: "North India's first AI-powered and Robotics learning centre For a Web Development learner, exposure to a technology-focused learning environment can help connect programming concepts with the wider world of modern technology. While web development has its own tools and workflows, understanding how software interacts with emerging technologies can broaden a learner's perspective and encourage practical experimentation. Learners from Punjab, Haryana, Himachal Pradesh, Chandigarh, Delhi NCR, Jammu & Kashmir, Uttarakhand, Rajasthan and Uttar Pradesh can access the program through the available online learning format, while learners who can attend in person can explore the Jalandhar learning environment." },
+        { title: "Practical, Project-Oriented Learning", text: "Web development becomes easier to understand when concepts are applied rather than studied only theoretically. A practical learning approach can involve writing code, creating webpages, working with interactive elements, debugging problems and gradually developing complete web projects. This helps learners understand not only what a technology does, but also how different components work together in a real development workflow." },
+        { title: "A Structured Learning Path", text: "Web development includes many technologies, and beginners can easily become overwhelmed when trying to learn everything simultaneously. A structured course can provide a logical progression from foundational web concepts to programming, data handling and application development. Starting with fundamentals before moving toward more advanced concepts can make the learning process easier to follow and gives learners a stronger base for later specialization." },
+        { title: "Skills Relevant to Multiple Web Development Paths", text: "Web development is a broad field rather than a single technology. Depending on the curriculum and the learner's interests, the skills developed can support progression toward frontend, backend or full-stack development. This gives learners the flexibility to continue developing in the direction that best matches their interests, existing knowledge and career plans." },
+        { title: "Suitable for Beginners and Existing Learners", text: "A well-structured Web Development Course can accommodate learners starting from the basics as well as people who already have some programming or technology experience. Beginners can focus on understanding core concepts and development fundamentals, while existing learners can use structured training to strengthen gaps in their knowledge and improve how they approach projects." },
+        { title: "Online + Offline Learning Options", text: "Learners have different schedules and circumstances, so flexibility matters. The program supports Online + Offline learning, allowing learners to choose the format that fits their situation. For learners outside Punjab, online learning provides a way to access structured web development education without requiring a physical Techcadd centre in their city. Learners near Jalandhar can consider the available offline learning option." },
+        { title: "Career-Focused Skill Development", text: "The purpose of learning web development should extend beyond memorizing HTML tags or programming syntax. Learners should gradually develop the ability to understand requirements, write code, troubleshoot issues and create functional digital experiences. These practical abilities can support future preparation for development roles, freelance work, internships or further technical specialization." },
+        { title: "Foundation for Advanced Technology Learning", text: "Web development can become a starting point for learning additional technologies such as APIs, databases, cloud deployment, web security, development frameworks and other modern software practices. Building strong fundamentals first can make it easier to understand these advanced areas later rather than attempting to learn them without a clear foundation." },
+      ],
+    },
+    careers: {
+      eyebrow: "Careers",
+      title: "Career & Future Scope",
+      intro: "Web development can support several career directions depending on the depth of skills developed.",
+      roles,
+      rolesNote: "Learners can also explore related areas such as: E-commerce development, Digital agency work, Software services, Startup technology teams, Website maintenance, Freelance web development, Independent website projects. With additional learning, developers can move toward more specialized areas involving modern frameworks, APIs, cloud platforms, databases, application security and scalable web applications.",
+      notes: [
+        { title: "Freelancing Opportunities", text: "Web development can be relevant to freelance services such as website creation, landing pages, frontend development, website maintenance, feature development and custom web applications. However, successful freelancing requires more than technical knowledge. Learners also need communication skills, requirement understanding, project planning, pricing awareness and the ability to maintain client relationships." },
+        { title: "Salary Context", text: "Web development salaries in India vary significantly according to experience, technical specialization, location, organization, project complexity and portfolio strength. Entry-level roles generally differ considerably from experienced development positions, so salary should be treated as an approximate market-dependent outcome rather than a guaranteed result of completing a course." },
+      ],
+      jobsTitle: "State-Wise Career Opportunities",
+      jobs: [
+        { title: "Punjab", text: "Punjab learners can explore web development opportunities connected with IT services, startups, digital agencies, e-commerce and businesses increasingly dependent on websites and online platforms. The skill can also complement existing knowledge in areas such as digital marketing or business operations." },
+        { title: "Haryana", text: "Haryana offers a strong technology and business ecosystem, particularly around Gurugram and other commercial centres. Web development can be relevant to software services, e-commerce, logistics, automobile-related businesses and digital organizations." },
+        { title: "Chandigarh", text: "The Chandigarh-Tricity ecosystem includes IT services, BPO, education, startups and digital businesses. Web development can therefore be useful for learners seeking technical roles or looking to combine development with another digital skill." },
+        { title: "Delhi NCR", text: "Delhi NCR provides exposure to a wide range of technology-oriented businesses, agencies, media companies, e-commerce organizations and startups. Learners can use web development as a foundation for pursuing frontend, backend or broader software-development paths." },
+        { title: "Uttar Pradesh", text: "Cities such as Noida have a significant technology and services ecosystem, while Lucknow and other urban centres also provide opportunities connected with digital services and businesses. Web development skills can be applied across company websites, software products, e-commerce and web applications." },
+      ],
+    },
+    faqTitle: "Web Development Course FAQs",
+    cta: { title: "Build Practical Web Development Skills", highlight: "for Your Career", text: "Turn your interest in websites and programming into practical web development skills. Learn through a structured approach covering core web technologies, programming concepts and project-based development, with flexible learning options for students and professionals." },
+  },
+};

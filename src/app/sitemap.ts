@@ -7,6 +7,8 @@ import { articles } from "@/data/articles";
 import { comparePairs } from "@/lib/compare";
 import { a12Pages } from "@/data/after-12th";
 import { guidanceSummaries } from "@/data/guidance";
+import { aiMovedTo } from "@/data/ai-moved";
+import { legalPages } from "@/data/legal";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -15,8 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/about/founder`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/about/mission-vision`, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/ai-courses`, changeFrequency: "weekly", priority: 0.9 },
-    // These two redirect to their /courses/<slug> page (already listed with the course pages).
-    ...aiCourses.filter((c) => !["generative-ai", "chatgpt-ai-tools"].includes(c.slug)).map((c) => ({ url: `${site.url}/ai-courses/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.9 })),
+    // AI courses that moved redirect to their /courses/<slug> page (already listed with the course pages).
+    ...aiCourses.filter((c) => !aiMovedTo[c.slug]).map((c) => ({ url: `${site.url}/ai-courses/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.9 })),
     { url: `${site.url}/courses`, changeFrequency: "weekly", priority: 0.9 },
     ...coursePages.map((c) => ({ url: `${site.url}/courses/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.9 })),
     { url: `${site.url}/training`, changeFrequency: "weekly", priority: 0.9 },
@@ -42,6 +44,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/reviews`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${site.url}/college-partnerships`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${site.url}/guidance`, changeFrequency: "monthly", priority: 0.7 },
+    ...legalPages.map((p) => ({ url: `${site.url}/${p.slug}`, changeFrequency: "yearly" as const, priority: 0.3 })),
     ...guidanceSummaries.map((g) => ({ url: `${site.url}/guidance/${g.slug}`, changeFrequency: "monthly" as const, priority: 0.6 })),
   ];
 }

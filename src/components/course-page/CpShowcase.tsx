@@ -156,7 +156,7 @@ export function CpRegions({ course }: { course: CoursePage }) {
   const copy = course.copy?.regions;
   if (!copy) return null;
   return (
-    <CourseSection id="regions" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="regions" className="defer-render bg-neu" overflow="overflow-x-clip">
       <SectionHeading id="regions-title" eyebrow={copy.eyebrow} title={copy.title} text={copy.intro} />
       <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {copy.items.map((r) => (
@@ -180,7 +180,7 @@ export function CpCareers({ course }: { course: CoursePage }) {
   const copy = course.copy?.careers;
   if (copy) {
     return (
-      <CourseSection id="careers" className="bg-neu" overflow="overflow-x-clip">
+      <CourseSection id="careers" className="defer-render bg-neu" overflow="overflow-x-clip">
         <SectionHeading id="careers-title" eyebrow={copy.eyebrow} title={copy.title} text={copy.intro} />
         <ul aria-label="Typical roles" data-reveal="up" className="mx-auto mt-8 flex max-w-4xl flex-wrap justify-center gap-3">
           {copy.roles.map((r) => (
@@ -226,7 +226,7 @@ export function CpCareers({ course }: { course: CoursePage }) {
   }
   if (course.careers.length === 0) return null;
   return (
-    <CourseSection id="careers" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="careers" className="defer-render bg-neu" overflow="overflow-x-clip">
       <SectionHeading
         id="careers-title"
         eyebrow="Career Scope"
@@ -260,7 +260,7 @@ export function CpMentor({ group }: { group: CourseGroup }) {
     { label: "Doubt support", value: "Same day" },
   ];
   return (
-    <CourseSection id="mentor" className="bg-neu" overflow="overflow-x-clip">
+    <CourseSection id="mentor" className="defer-render bg-neu" overflow="overflow-x-clip">
       <div className="grid items-center gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <SectionHeading
           id="mentor-title"
